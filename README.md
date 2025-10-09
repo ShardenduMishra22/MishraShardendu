@@ -4,7 +4,7 @@
 > Advanced content management • Dual-database architecture • AI-powered features
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/ShardenduMishra22/MishraShardendu22/refs/heads/main/GopherMishra.png" alt="Shardendu Avatar" width="200" />
+  <img src="https://raw.githubusercontent.com/MishraShardendu22/MishraShardendu/refs/heads/main/GopherShardenduMishra.png" alt="Shardendu Avatar" width="200" />
   
   <h3>A modern, full-stack portfolio website built with Next.js 15</h3>
   <p><em>Featuring a blog system, admin panel, and dual backend architecture with load balancing</em></p>
