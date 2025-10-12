@@ -1,25 +1,15 @@
+Below are production-ready Markdown files for your monorepo: README.md, docs/*.md, and LICENSE. Copy each section into the corresponding file path.
+
+### README.md
 # Shardendu Mishra - Portfolio Monorepo
 
 <div align="center">
   <img src="./GopherShardenduMishra.png" alt="Shardendu Mishra" width="200" />
-  
   <h3>Enterprise-grade portfolio platform built with modern web technologies</h3>
   <p>A comprehensive monorepo featuring personal website, blog system, and admin dashboard</p>
 </div>
 
-<div align="center">
-
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Site-4285f4?style=for-the-badge&logo=google-chrome)](https://mishrashardendu22.is-a.dev)
-[![Repository](https://img.shields.io/badge/Repository-Star-FFD700?style=for-the-badge&logo=github)](https://github.com/MishraShardendu22/MishraShardendu)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](./LICENSE)
-
-![Version](https://img.shields.io/badge/version-3.0.0-brightgreen?style=flat-square)
-![Status](https://img.shields.io/badge/status-production-success?style=flat-square)
-![Build](https://img.shields.io/badge/build-passing-success?style=flat-square)
-
-</div>
-
----
+Version: 3.0.0 -  Status: production -  Build: passing
 
 ## Overview
 
@@ -27,18 +17,16 @@ This monorepo contains a complete portfolio platform ecosystem built with cuttin
 
 ### Architecture
 
-**Monorepo Structure**: Turborepo + PNPM Workspaces  
-**Frontend Applications**: Next.js 15, Astro 5, Vite + Preact  
-**Shared Packages**: TypeScript, React components, utilities, authentication  
-**Database Systems**: PostgreSQL (Blog), MongoDB (Portfolio)  
-**Styling**: Tailwind CSS 4 + shadcn/ui components  
-**Type Safety**: TypeScript with strict mode
-
----
+- Monorepo Structure: Turborepo + PNPM Workspaces
+- Frontend Applications: Next.js 15, Astro 5, Vite + Preact
+- Shared Packages: TypeScript, React components, utilities, authentication
+- Database Systems: PostgreSQL (Blog), MongoDB (Portfolio)
+- Styling: Tailwind CSS 4 + shadcn/ui components
+- Type Safety: TypeScript with strict mode
 
 ## Project Structure
 
-\`\`\`
+```
 mishrashardendu22/
 ├── apps/
 │   ├── MishraShardendu22-Frontend-PersonalWebsite/  # Next.js 15 - Main portfolio
@@ -53,10 +41,8 @@ mishrashardendu22/
 │   └── typescript-config/  # Shared TypeScript configurations
 ├── docs/                   # Documentation
 ├── scripts/                # Build and deployment scripts
-└── turbo.json             # Turborepo configuration
-\`\`\`
-
----
+└── turbo.json              # Turborepo configuration
+```
 
 ## Applications
 
@@ -64,60 +50,58 @@ mishrashardendu22/
 
 The main portfolio application showcasing projects, experiences, skills, and certifications. Built with Next.js 15 App Router and React 19.
 
-**Technology Stack**:
-- Next.js 15 with Server Components
-- React 19 with concurrent features
-- TypeScript 5.8
-- Tailwind CSS 4
-- PostgreSQL with Drizzle ORM
-- Better-auth for authentication
+- Technology Stack:
+  - Next.js 15 with Server Components
+  - React 19 concurrent features
+  - TypeScript 5.8
+  - Tailwind CSS 4
+  - PostgreSQL with Drizzle ORM
+  - Better-auth authentication
 
-**Features**:
-- Dynamic project showcase with filtering
-- Professional experience timeline
-- Skills and certifications management
-- Contact form with validation
-- SEO optimized with metadata API
-- Progressive Web App support
+- Features:
+  - Dynamic project showcase with filtering
+  - Professional experience timeline
+  - Skills and certifications management
+  - Contact form with validation
+  - SEO optimized with metadata API
+  - PWA support
 
 ### Blog Website (Astro 5)
 
 A high-performance blog platform with markdown support and content management capabilities.
 
-**Technology Stack**:
-- Astro 5 with SSR
-- React for interactive components
-- Drizzle ORM with PostgreSQL
-- TipTap rich text editor
-- MDX support
+- Technology Stack:
+  - Astro 5 with SSR
+  - React islands for interactivity
+  - Drizzle ORM with PostgreSQL
+  - TipTap rich text editor
+  - MDX support
 
-**Features**:
-- Markdown-based content authoring
-- Rich text editor for content creation
-- Category and tag management
-- Comment system
-- RSS feed generation
-- Full-text search
+- Features:
+  - Markdown-based content authoring
+  - Rich text editor for content creation
+  - Category and tag management
+  - Comment system
+  - RSS feed generation
+  - Full-text search
 
 ### Admin Dashboard (Vite + Preact)
 
 A lightweight admin interface for managing all platform content.
 
-**Technology Stack**:
-- Vite 7 for fast development
-- Preact for minimal bundle size
-- TypeScript
-- TailwindCSS
-- React Hook Form + Zod validation
+- Technology Stack:
+  - Vite 7 for fast development
+  - Preact for minimal bundle size
+  - TypeScript
+  - Tailwind CSS
+  - React Hook Form + Zod
 
-**Features**:
-- Content management (CRUD operations)
-- Project and blog post management
-- User authentication and authorization
-- Analytics dashboard
-- Media management
-
----
+- Features:
+  - Content management (CRUD)
+  - Project and blog post management
+  - User authentication and authorization
+  - Analytics dashboard
+  - Media management
 
 ## Shared Packages
 
@@ -139,23 +123,21 @@ Component library with shadcn/ui components configured for the design system.
 ### @repo/typescript-config
 Shared TypeScript configurations for consistent type checking across projects.
 
----
-
 ## Technology Stack
 
-### Core Technologies
+### Core
 
 | Technology | Version | Purpose |
-|------------|---------|---------|
+|-----------|---------|---------|
 | Node.js | 18+ | Runtime environment |
 | PNPM | 9.0.0 | Package manager |
 | Turborepo | 2.5.8 | Monorepo build system |
 | TypeScript | 5.8 | Type safety |
 
-### Frontend Frameworks
+### Frontend
 
 | Framework | Version | Application |
-|-----------|---------|-------------|
+|----------|---------|-------------|
 | Next.js | 15.5.3 | Personal Website |
 | Astro | 5.14.4 | Blog Website |
 | Vite | 7.1.9 | Admin Dashboard |
@@ -165,7 +147,7 @@ Shared TypeScript configurations for consistent type checking across projects.
 ### Databases & ORMs
 
 | Technology | Version | Purpose |
-|------------|---------|---------|
+|-----------|---------|---------|
 | PostgreSQL | 15+ | Blog content storage |
 | MongoDB | 7.0+ | Portfolio data storage |
 | Drizzle ORM | Latest | Type-safe database queries |
@@ -173,145 +155,130 @@ Shared TypeScript configurations for consistent type checking across projects.
 ### Styling & UI
 
 | Technology | Purpose |
-|------------|---------|
+|-----------|---------|
 | Tailwind CSS 4 | Utility-first styling |
 | shadcn/ui | Component library |
 | Radix UI | Headless UI primitives |
 | Lucide React | Icon library |
 
----
-
 ## Getting Started
 
 ### Prerequisites
 
-\`\`\`bash
+```
 Node.js >= 18.0.0
 PNPM >= 9.0.0
 PostgreSQL >= 15
 MongoDB >= 7.0 (optional)
-\`\`\`
+```
 
 ### Installation
 
-\`\`\`bash
+```bash
 # Clone the repository
-git clone https://github.com/MishraShardendu22/MishraShardendu.git
+git clone <repo>
 cd mishrashardendu22
 
 # Install dependencies
 pnpm install
 
 # Setup environment variables
-# Copy .env.example to .env.local in each app directory
-# Configure database URLs and API keys
+# Copy .env.example to .env.local in each app directory and configure secrets
 
 # Run database migrations
 cd apps/MishraShardendu22-Frontend-PersonalWebsite
 pnpm db:push
-cd apps/MishraShardendu22-Frontend-BlogWebsite
+cd ../MishraShardendu22-Frontend-BlogWebsite
 pnpm db:push
-cd ../..
+cd ../../
 
 # Start development servers
 pnpm dev
-\`\`\`
+```
 
 ### Development
 
-\`\`\`bash
-# Start all applications in development mode
+```bash
+# Start all apps in dev mode
 pnpm dev
 
-# Build all applications
+# Build all apps
 pnpm build
 
-# Run linting
+# Lint
 pnpm lint
 
-# Format code
+# Format
 pnpm format
 
-# Type checking
+# Type check
 pnpm typecheck
 
-# Clean all build artifacts and node_modules
+# Clean builds and node_modules
 pnpm clean
-\`\`\`
+```
 
 ### Accessing Applications
 
 | Application | URL | Description |
 |------------|-----|-------------|
-| Personal Website | http://localhost:3000 | Main portfolio |
-| Blog Website | http://localhost:4321 | Blog platform |
-| Admin Dashboard | http://localhost:5173 | Admin panel |
-
----
+| Personal Website | `http://localhost:3000` | Main portfolio |
+| Blog Website | `http://localhost:4321` | Blog platform |
+| Admin Dashboard | `http://localhost:5173` | Admin panel |
 
 ## Environment Configuration
 
-Each application requires its own environment configuration. See the respective README files in each app directory for specific requirements.
+Each app has its own environment configuration. See docs/DEVELOPMENT_GUIDE.md for details.
 
-### Personal Website (.env.local)
-- Database URL (PostgreSQL)
-- Authentication secrets
-- API endpoints
-
-### Blog Website (.env)
-- Database URL (PostgreSQL)
-- API keys
-- Content directory paths
-
-### Admin Dashboard (.env)
-- API base URL
-- Authentication tokens
-
-Detailed environment setup instructions are available in [docs/DEVELOPMENT_GUIDE.md](./docs/DEVELOPMENT_GUIDE.md).
-
----
+- Personal Website (.env.local)
+  - Database URL (PostgreSQL)
+  - Authentication secrets
+  - API endpoints
+- Blog Website (.env)
+  - Database URL (PostgreSQL)
+  - API keys
+  - Content directory paths
+- Admin Dashboard (.env)
+  - API base URL
+  - Authentication tokens
 
 ## Deployment
 
 ### Production Build
 
-\`\`\`bash
+```bash
 # Build all applications for production
 pnpm build
 
 # Test production builds locally
 pnpm start
-\`\`\`
+```
 
-### Deployment Platforms
+### Platforms
 
-**Personal Website**: Vercel (Recommended)  
-**Blog Website**: Vercel or Netlify  
-**Admin Dashboard**: Vercel or Cloudflare Pages
+- Personal Website: Vercel (recommended)
+- Blog Website: Vercel or Netlify
+- Admin Dashboard: Vercel or Cloudflare Pages
 
-Refer to [docs/DEPLOYMENT_GUIDE.md](./docs/DEPLOYMENT_GUIDE.md) for detailed deployment instructions.
-
----
+See docs/DEPLOYMENT_GUIDE.md for full instructions.
 
 ## Performance
 
-### Build Performance
+### Build
 - Turborepo caching for incremental builds
 - PNPM workspace optimization
 - Parallel task execution
 
-### Runtime Performance
+### Runtime
 - Next.js Server Components for optimal loading
-- Astro partial hydration for minimal JavaScript
+- Astro partial hydration to minimize JavaScript
 - Vite optimized bundling for fast admin dashboard
 
 ### Metrics
-- Lighthouse Score: 95+
+- Lighthouse: 95+
 - First Contentful Paint: < 1.5s
 - Time to Interactive: < 2.5s
-- Total Bundle Size: Optimized per application
-
----
+- Total Bundle Size: optimized per app
 
 ## Security
 
@@ -322,9 +289,9 @@ Refer to [docs/DEPLOYMENT_GUIDE.md](./docs/DEPLOYMENT_GUIDE.md) for detailed dep
 
 ### Data Protection
 - Input validation with Zod schemas
-- SQL injection prevention with parameterized queries
-- XSS protection with content sanitization
-- CSRF protection with SameSite cookies
+- Parameterized queries (SQL injection prevention)
+- Content sanitization (XSS defense)
+- SameSite cookies for CSRF mitigation
 
 ### Best Practices
 - Environment variable encryption
@@ -332,123 +299,650 @@ Refer to [docs/DEPLOYMENT_GUIDE.md](./docs/DEPLOYMENT_GUIDE.md) for detailed dep
 - Rate limiting on API endpoints
 - Regular dependency updates
 
----
-
 ## Testing
 
-\`\`\`bash
+```bash
 # Run all tests
 pnpm test
 
-# Run tests with coverage
+# Coverage
 pnpm test:coverage
 
-# Run end-to-end tests
+# End-to-end
 pnpm test:e2e
-\`\`\`
-
----
+```
 
 ## Documentation
 
-Comprehensive documentation is available in the [docs](./docs) directory:
-
-- [API Documentation](./docs/API_DOCS.md)
-- [Development Guide](./docs/DEVELOPMENT_GUIDE.md)
-- [Contributing Guidelines](./docs/CONTRIBUTING.md)
-- [Code of Conduct](./docs/CODE_OF_CONDUCT.md)
-- [Security Policy](./docs/SECURITY.md)
-- [Postman Collection](./docs/POSTMAN.md)
-
----
+- docs/API_DOCS.md
+- docs/DEVELOPMENT_GUIDE.md
+- docs/CONTRIBUTING.md
+- docs/CODE_OF_CONDUCT.md
+- docs/SECURITY.md
+- docs/POSTMAN.md
 
 ## Contributing
 
-We welcome contributions from the community. Please read our [Contributing Guidelines](./docs/CONTRIBUTING.md) before submitting pull requests.
+We welcome contributions. Please read docs/CONTRIBUTING.md before submitting pull requests.
 
-### Contribution Workflow
+### Workflow
 
 1. Fork the repository
-2. Create a feature branch (\`git checkout -b feature/AmazingFeature\`)
-3. Commit your changes (\`git commit -m 'Add some AmazingFeature'\`)
-4. Push to the branch (\`git push origin feature/AmazingFeature\`)
+2. Create a feature branch: `git checkout -b feature/AmazingFeature`
+3. Commit your changes: `git commit -m "feat: add AmazingFeature"`
+4. Push the branch: `git push origin feature/AmazingFeature`
 5. Open a Pull Request
 
-### Development Standards
+### Standards
 
 - TypeScript strict mode
-- ESLint and Prettier formatting
-- Comprehensive testing (80%+ coverage)
-- Conventional commit messages
+- ESLint + Prettier
+- Tests with 80%+ coverage
+- Conventional commits
 - Updated documentation
-
----
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
-
-\`\`\`
-MIT License
-
-Copyright (c) 2025 Shardendu Mishra
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-\`\`\`
-
----
+MIT. See LICENSE for details.
 
 ## Author
 
-**Shardendu Mishra**  
-Software Engineer | Full-Stack Developer
-
-- Email: mishrashardendu22@gmail.com
-- Portfolio: [mishrashardendu22.is-a.dev](https://mishrashardendu22.is-a.dev)
-- GitHub: [@MishraShardendu22](https://github.com/MishraShardendu22)
-- LinkedIn: [Shardendu Mishra](https://www.linkedin.com/in/shardendumishra22/)
-
----
+Shardendu Mishra  
+Software Engineer | Full-Stack Developer  
+Email: mishrashardendu22@gmail.com
 
 ## Acknowledgments
 
-Built with outstanding open-source technologies:
+Built with Next.js, Astro, React, TypeScript, Tailwind CSS, Turborepo, PostgreSQL, Drizzle, and more.
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org)
-[![Astro](https://img.shields.io/badge/Astro-5-FF5D01?style=flat-square&logo=astro)](https://astro.build)
-[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com)
-[![Turborepo](https://img.shields.io/badge/Turborepo-2-EF4444?style=flat-square&logo=turborepo)](https://turbo.build)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791?style=flat-square&logo=postgresql)](https://postgresql.org)
-[![Drizzle](https://img.shields.io/badge/Drizzle-ORM-C5F74F?style=flat-square)](https://orm.drizzle.team)
+Last Updated: October 2025 -  Version 3.0.0 -  Monorepo Architecture
 
----
+### docs/DEVELOPMENT_GUIDE.md
+# Development Guide
 
-## Support
+## Prerequisites
 
-For support, please:
-- Open an issue: [GitHub Issues](https://github.com/MishraShardendu22/MishraShardendu/issues)
+- Node.js 18+
+- PNPM 9.x
+- PostgreSQL 15+
+- MongoDB 7.0+ (optional; used for portfolio data)
+- Git
+
+## Workspace Setup
+
+```bash
+pnpm install
+pnpm build # optional warm cache
+```
+
+### Node and PNPM
+
+- Use a consistent Node version across all apps.
+- Recommended: set an `.nvmrc` with `18` or define `engines` in package.json.
+
+## Environment Variables
+
+Create per-app environment files based on provided examples:
+
+- apps/MishraShardendu22-Frontend-PersonalWebsite/.env.local
+- apps/MishraShardendu22-Frontend-BlogWebsite/.env
+- apps/MishraShardendu22-Frontend-AdminWebsite/.env
+
+### Personal Website
+
+- POSTGRES_URL
+- AUTH_SECRET
+- AUTH_JWT_SECRET
+- NEXT_PUBLIC_BASE_URL
+
+### Blog Website
+
+- POSTGRES_URL
+- CONTENT_DIR
+- NEXT_PUBLIC_SITE_URL
+
+### Admin Dashboard
+
+- VITE_API_BASE_URL
+- VITE_AUTH_TOKEN
+
+Store secrets securely. Do not commit environment files.
+
+## Databases
+
+### PostgreSQL
+
+- Create databases for personal website and blog.
+- Run migrations via Drizzle:
+
+```bash
+# Personal Website
+cd apps/MishraShardendu22-Frontend-PersonalWebsite
+pnpm db:push
+
+# Blog Website
+cd ../MishraShardendu22-Frontend-BlogWebsite
+pnpm db:push
+
+cd ../../
+```
+
+### MongoDB (optional)
+
+- Create a database for portfolio data if enabled.
+- Expose connection via environment variable as needed by the app.
+
+## Local Development
+
+```bash
+pnpm dev
+```
+
+Access apps:
+- Personal Website: `http://localhost:3000`
+- Blog Website: `http://localhost:4321`
+- Admin Dashboard: `http://localhost:5173`
+
+## Turborepo Pipelines
+
+Common tasks are defined at the root.
+
+- `pnpm dev`: runs all app dev servers in parallel
+- `pnpm build`: builds all packages and apps with caching
+- `pnpm typecheck`: runs TypeScript across workspace
+- `pnpm lint` / `pnpm format`: code quality
+
+Use `--filter` to scope tasks:
+
+```bash
+pnpm --filter @apps/personal dev
+pnpm --filter @apps/blog build
+```
+
+## Coding Standards
+
+- TypeScript strict mode enabled
+- ESLint with recommended + TypeScript rules
+- Prettier for formatting
+- Absolute imports via TS path aliases in shared types/config
+
+## Commits and Branching
+
+- Conventional Commits: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`
+- Branching: `feature/*`, `fix/*`, `chore/*`
+- Keep PRs small and focused
+
+## Testing
+
+- Unit tests for utils and components
+- Integration tests for APIs
+- E2E tests for critical flows
+
+Commands:
+
+```bash
+pnpm test
+pnpm test:coverage
+pnpm test:e2e
+```
+
+## Debugging
+
+- Next.js and Vite support Node inspector: `--inspect`
+- Use React DevTools and network panels
+- For database: enable query logging in Drizzle during local dev
+
+## Common Issues
+
+- Port conflicts: update `.env` or dev scripts
+- Missing env vars: ensure all required variables are set
+- Migrations fail: verify database connectivity and permissions
+- Cache issues: `pnpm clean && rm -rf node_modules/.cache`
+
+### docs/DEPLOYMENT_GUIDE.md
+# Deployment Guide
+
+## Build Artifacts
+
+```bash
+pnpm build
+pnpm start # optional local preview if configured
+```
+
+Each app produces a build:
+- Personal Website (Next.js): `.next/` output; use output: standalone if configured.
+- Blog Website (Astro): `dist/` for static or SSR build output.
+- Admin Dashboard (Vite): `dist/` static assets.
+
+## Environment for Production
+
+Set production environment variables for each app, mirroring development but with production credentials and URLs.
+
+### Personal Website
+
+- POSTGRES_URL (managed instance)
+- AUTH_SECRET, AUTH_JWT_SECRET (rotate periodically)
+- NEXT_PUBLIC_BASE_URL (public site URL)
+
+### Blog Website
+
+- POSTGRES_URL
+- NEXT_PUBLIC_SITE_URL
+- CONTENT_DIR or use database/file storage accordingly
+
+### Admin Dashboard
+
+- VITE_API_BASE_URL (points to production API)
+- VITE_AUTH_TOKEN or use proper auth flow
+
+## Platforms
+
+- Personal Website: Vercel recommended for Next.js.
+- Blog Website: Vercel or Netlify.
+- Admin Dashboard: Vercel or Cloudflare Pages.
+
+Ensure proper SSR/edge runtimes if used.
+
+## Static Assets and Caching
+
+- Set long-term caching headers for static assets in `dist/`.
+- Use hashed filenames from Vite/Astro builds.
+- For Next.js, leverage image optimization and headers via configuration.
+
+## Database Migrations
+
+Run migrations during deployment:
+
+```bash
+# From app directory
+pnpm db:push
+```
+
+Consider using a migration step in CI/CD before switching traffic.
+
+## CI/CD
+
+Example GitHub Actions workflow (simplified):
+
+```yaml
+name: ci
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm build
+```
+
+Add deployment jobs per platform and app.
+
+## Observability
+
+- Enable runtime logs for SSR.
+- Collect web vitals (LCP, CLS, FID).
+- Monitor error rates for client and server.
+- Track DB performance and slow queries.
+
+## Rollbacks
+
+- Keep previous build artifacts available.
+- Database: avoid destructive migrations without backups.
+- Use feature flags to disable risky features.
+
+### docs/API_DOCS.md
+# API Documentation
+
+This document outlines API routes used by the platform. Adjust paths as needed per deployment.
+
+## Conventions
+
+- RESTful endpoints
+- JSON request/response
+- Authentication: Bearer JWT for protected routes
+- Content-Type: `application/json`
+
+## Authentication
+
+### POST /api/auth/login
+
+- Body:
+```json
+{
+  "email": "user@example.com",
+  "password": "string"
+}
+```
+
+- Response 200:
+```json
+{
+  "token": "jwt",
+  "user": {
+    "id": "uuid",
+    "email": "user@example.com",
+    "role": "admin"
+  }
+}
+```
+
+- Errors: 400, 401
+
+### POST /api/auth/logout
+
+- Header: `Authorization: Bearer <token>`
+- Response 204
+
+## Projects
+
+### GET /api/projects
+
+- Query:
+  - `tag` (optional)
+  - `limit`, `offset` (optional)
+
+- Response 200:
+```json
+{
+  "items": [
+    {
+      "id": "uuid",
+      "title": "string",
+      "tags": ["go", "react"],
+      "description": "string",
+      "url": "string",
+      "createdAt": "2025-10-01T00:00:00.000Z"
+    }
+  ],
+  "total": 42
+}
+```
+
+### POST /api/projects
+
+- Header: `Authorization: Bearer <token>`
+- Body:
+```json
+{
+  "title": "string",
+  "description": "string",
+  "tags": ["string"],
+  "url": "string"
+}
+```
+
+- Response 201:
+```json
+{ "id": "uuid" }
+```
+
+## Blog Posts
+
+### GET /api/posts
+
+- Query:
+  - `q` full-text search
+  - `tag`, `category`
+  - `limit`, `offset`
+
+- Response 200:
+```json
+{
+  "items": [
+    {
+      "id": "uuid",
+      "slug": "my-first-post",
+      "title": "string",
+      "excerpt": "string",
+      "tags": ["astro", "nextjs"],
+      "publishedAt": "2025-10-01T00:00:00.000Z"
+    }
+  ],
+  "total": 123
+}
+```
+
+### GET /api/posts/:slug
+
+- Response 200:
+```json
+{
+  "id": "uuid",
+  "slug": "my-first-post",
+  "title": "string",
+  "content": "markdown or html",
+  "tags": ["string"],
+  "publishedAt": "2025-10-01T00:00:00.000Z"
+}
+```
+
+### POST /api/posts
+
+- Header: `Authorization: Bearer <token>`
+- Body:
+```json
+{
+  "title": "string",
+  "slug": "kebab-case",
+  "content": "markdown or html",
+  "tags": ["string"],
+  "publishedAt": "2025-10-01T00:00:00.000Z"
+}
+```
+
+- Response 201:
+```json
+{ "id": "uuid" }
+```
+
+## Comments
+
+### GET /api/posts/:slug/comments
+
+- Response 200:
+```json
+[
+  {
+    "id": "uuid",
+    "author": "string",
+    "message": "string",
+    "createdAt": "2025-10-01T00:00:00.000Z"
+  }
+]
+```
+
+### POST /api/posts/:slug/comments
+
+- Body:
+```json
+{
+  "author": "string",
+  "message": "string"
+}
+```
+
+- Response 201:
+```json
+{ "id": "uuid" }
+```
+
+## Admin Metrics
+
+### GET /api/admin/metrics
+
+- Header: `Authorization: Bearer <token>`
+- Response 200:
+```json
+{
+  "users": 1200,
+  "projects": 25,
+  "posts": 80,
+  "comments": 460
+}
+```
+
+### docs/CONTRIBUTING.md
+# Contributing Guidelines
+
+## Getting Started
+
+- Read docs/DEVELOPMENT_GUIDE.md.
+- Install dependencies with PNPM.
+- Configure environment variables per app.
+
+## Issues
+
+- Provide a clear description, steps to reproduce, expected vs actual behavior.
+- Include logs, screenshots, or stack traces if relevant.
+
+## Pull Requests
+
+- Fork and create a feature branch: `feature/<short-description>`.
+- Write tests for new behavior.
+- Ensure `pnpm typecheck && pnpm lint && pnpm test` pass.
+- Update documentation when behavior changes.
+- Keep PRs focused and under 400 lines where possible.
+
+## Code Style
+
+- TypeScript strict mode
+- ESLint + Prettier
+- Prefer functional components and hooks
+- No unused exports; keep public APIs explicit in shared packages
+
+## Commit Messages
+
+- Use Conventional Commits, e.g.:
+  - `feat: add analytics panel`
+  - `fix: correct drizzle migration path`
+  - `docs: update deployment guide`
+  - `refactor: extract table component`
+  - `test: add e2e for auth flow`
+
+## Review Process
+
+- At least one approval required.
+- Address review comments promptly.
+- Squash commits when merging.
+
+### docs/CODE_OF_CONDUCT.md
+# Code of Conduct
+
+## Our Pledge
+
+We pledge to make participation a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity, level of experience, nationality, personal appearance, race, religion, or sexual identity.
+
+## Our Standards
+
+- Use welcoming and inclusive language.
+- Be respectful of differing viewpoints and experiences.
+- Accept constructive criticism gracefully.
+- Focus on what is best for the community.
+- Show empathy towards other community members.
+
+Unacceptable behavior includes harassment, trolling, insults, or other conduct that could reasonably be considered inappropriate.
+
+## Responsibilities
+
+Project maintainers are responsible for clarifying standards and taking corrective action in response to unacceptable behavior.
+
+## Scope
+
+This Code of Conduct applies within project spaces and in public spaces when representing the project.
+
+## Enforcement
+
+Report issues to the maintainer at mishrashardendu22@gmail.com. All complaints will be reviewed and investigated, resulting in a response deemed necessary and appropriate to the circumstances.
+
+### docs/SECURITY.md
+# Security Policy
+
+## Supported Versions
+
+Security fixes are applied to the latest major version.
+
+## Reporting a Vulnerability
+
 - Email: mishrashardendu22@gmail.com
-- Documentation: [docs/](./docs)
+- Provide steps to reproduce, impact assessment, and any mitigations tried.
+- You will receive an acknowledgment within 72 hours.
 
----
+## Disclosure Policy
 
-<div align="center">
+- We aim to fix confirmed vulnerabilities promptly.
+- Please do not publicly disclose until a fix is released.
+- Credit will be given upon request.
 
-**Built with precision and passion**
+## Hardening Checklist
 
-[![GitHub stars](https://img.shields.io/github/stars/MishraShardendu22/MishraShardendu?style=social)](https://github.com/MishraShardendu22/MishraShardendu)
-[![GitHub forks](https://img.shields.io/github/forks/MishraShardendu22/MishraShardendu?style=social)](https://github.com/MishraShardendu22/MishraShardendu/fork)
+- Rotate secrets regularly.
+- Enforce HTTPS and secure cookies.
+- Validate all inputs with Zod and sanitize outputs.
+- Use parameterized queries in Drizzle.
+- Apply rate limiting to sensitive endpoints.
+- Keep dependencies updated.
 
-Last Updated: October 2025 | Version 3.0.0 | Monorepo Architecture
+### docs/POSTMAN.md
+# Postman Collection
 
-</div>
+## Overview
+
+A Postman collection is provided to test API endpoints for projects, posts, comments, auth, and admin metrics.
+
+## Files
+
+- docs/postman/portfolio-collection.json
+- docs/postman/environments/local.json
+- docs/postman/environments/production.json
+
+## Setup
+
+1. Import the collection and environment files into Postman.
+2. Select the appropriate environment.
+3. Set variables:
+   - `baseUrl`: `http://localhost:3000` or your deployment URL
+   - `authToken`: a valid JWT for protected routes
+
+## Usage
+
+- Run the "Auth" folder first to obtain a token.
+- Use "Projects" and "Posts" folders for CRUD flows.
+- Use "Admin" folder to verify metrics endpoints.
+- Enable tests and view assertions in the Postman Tests tab.
+
+### docs/API_EXAMPLES.md
+# API Examples
+
+## cURL
+
+```bash
+# List posts
+curl -s GET http://localhost:3000/api/posts
+
+# Create post (requires auth)
+curl -s -X POST http://localhost:3000/api/posts \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Hello","slug":"hello","content":"Hi","tags":["intro"]}'
+```
+
+## JavaScript (fetch)
+
+```js
+async function listPosts() {
+  const res = await fetch('/api/posts');
+  return res.json();
+}
+```
