@@ -1,6 +1,11 @@
 {
-  "buildCommand": "cd ../.. && pnpm turbo run build --filter=mishrashardendu22",
-  "installCommand": "cd ../.. && pnpm install",
+  "buildCommand": "bash build.sh",
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
   "framework": "nextjs",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "build": {
+    "env": {
+      "NEXT_TELEMETRY_DISABLED": "1"
+    }
+  }
 }
