@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd ../.. && pnpm install && pnpm turbo run build --filter=mishrashardendu22",
+  "installCommand": "echo 'Skipping default install'",
+  "framework": "nextjs"
+}
