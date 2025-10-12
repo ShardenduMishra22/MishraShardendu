@@ -1,20 +1,33 @@
 {
   "$schema": "https://openapi.vercel.sh/microfrontends.json",
   "applications": {
-    "mishrashardendu22": {
+    "ms22-main": {
       "development": {
         "local": 3000,
-        "fallback": "https://mishrashardendu22.is-a.dev"
+        "fallback": "ms22-main.vercel.app"
       }
     },
-    "mishrashardendu22-admin": {
+    "ms22-admin": {
       "development": {
-        "local": 5173
+        "local": 5173,
+        "fallback": "ms22-admin.vercel.app"
       },
       "routing": [
         {
           "group": "admin",
-          "paths": ["/admin", "/admin/:path*", "/vc-ap-mishrashardendu22-admin/:path*"]
+          "paths": [
+            "/admin",
+            "/admin/login",
+            "/admin/dashboard",
+            "/admin/profile",
+            "/admin/projects",
+            "/admin/experiences",
+            "/admin/skills",
+            "/admin/certifications",
+            "/admin/kanban",
+            "/admin/:path*",
+            "/vc-ap-ms22-admin/:path*"
+          ]
         }
       ]
     }
