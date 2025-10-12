@@ -10,7 +10,7 @@
     "ms22-admin": {
       "development": {
         "local": 5173,
-        "fallback": "ms22-main.vercel.app"
+        "fallback": "ms22-admin.vercel.app"
       },
       "routing": [
         {
