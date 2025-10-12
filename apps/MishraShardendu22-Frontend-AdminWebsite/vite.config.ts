@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       preact(),
       tailwindcss(),
-      microfrontends({ basePath: '/vc-ap-mishrashardendu22-admin/' }),
+      microfrontends({ basePath: '/vc-ap-mishrashardendu22-admin' }),
     ],
     resolve: {
       alias: {
