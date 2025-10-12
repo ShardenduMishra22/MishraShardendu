@@ -64,7 +64,6 @@ export const metadata: Metadata = {
     'Open Source Contributor',
     'LeetCode',
     'Competitive Programming',
-    'Tech Blog',
     'Developer Portfolio',
     'Software Projects',
     'Programming Projects',

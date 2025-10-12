@@ -17,17 +17,6 @@
           "paths": ["/admin", "/admin/:path*", "/vc-ap-mishrashardendu22-admin/:path*"]
         }
       ]
-    },
-    "mishrashardendu22-blog": {
-      "development": {
-        "local": 4321
-      },
-      "routing": [
-        {
-          "group": "blog",
-          "paths": ["/blog", "/blog/:path*", "/vc-ap-mishrashardendu22-blog/:path*"]
-        }
-      ]
     }
   }
 }

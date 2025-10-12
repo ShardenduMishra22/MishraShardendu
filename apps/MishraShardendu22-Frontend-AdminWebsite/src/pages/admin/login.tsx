@@ -95,6 +95,7 @@ export default function LoginPage() {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword((e.target as HTMLInputElement).value)}
+                    placeholder="Enter your password"
                     required
                   />
                   <button
@@ -115,6 +116,7 @@ export default function LoginPage() {
                     type={showAdminPass ? 'text' : 'password'}
                     value={adminPass}
                     onChange={(e) => setAdminPass((e.target as HTMLInputElement).value)}
+                    placeholder="Enter admin password"
                     required
                   />
                   <button

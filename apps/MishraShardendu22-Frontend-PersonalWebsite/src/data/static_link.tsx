@@ -19,7 +19,6 @@ import {
   Heart,
   Award,
   Clock,
-  Glasses,
   Briefcase,
   GraduationCap,
 } from 'lucide-react'
@@ -34,7 +33,6 @@ export const navItems = [
   { href: '#volunteer', label: 'Volunteer', icon: Heart },
   { href: '#certifications', label: 'Certifications', icon: Award },
   { href: '#contact', label: 'Contact', icon: Mail },
-  { href: '/blog', label: 'Blog', icon: Glasses },
 ]
 
 export const GoLangIcon = ({ className = 'h-16 w-16 text-blue-500 m-2' }) => (
