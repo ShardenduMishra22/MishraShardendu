@@ -1,731 +1,454 @@
-# 🚀 Shardendu Mishra - Professional Portfolio & Blog Platform
-
-> **Enterprise-grade full-stack web platform** built with Next.js 15 & Go Fiber
-> Advanced content management • Dual-database architecture • AI-powered features
+# Shardendu Mishra - Portfolio Monorepo
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/MishraShardendu22/MishraShardendu/refs/heads/main/GopherShardenduMishra.png" alt="Shardendu Avatar" width="200" />
+  <img src="./GopherShardenduMishra.png" alt="Shardendu Mishra" width="200" />
   
-  <h3>A modern, full-stack portfolio website built with Next.js 15</h3>
-  <p><em>Featuring a blog system, admin panel, and dual backend architecture with load balancing</em></p>
+  <h3>Enterprise-grade portfolio platform built with modern web technologies</h3>
+  <p>A comprehensive monorepo featuring personal website, blog system, and admin dashboard</p>
 </div>
 
 <div align="center">
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Site-4285f4?style=for-the-badge&logo=google-chrome)](https://mishrashardendu22.is-a.dev)
-[![⭐ Main Repository](https://img.shields.io/badge/⭐_MAIN_REPO-Star_for_Support-FFD700?style=for-the-badge&logo=github)](https://github.com/MishraShardendu22/MishraShardendu)
-[![Frontend Development](https://img.shields.io/badge/📱_Frontend-Next.js_15-black?style=for-the-badge&logo=next.js)](https://github.com/ShardenduMishra22/MishraShardendu22)
-[![Backend Development](https://img.shields.io/badge/⚡_Backend-Go_Fiber-00ADD8?style=for-the-badge&logo=go)](https://github.com/ShardenduMishra22/MishraShardendu22-Updation)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Site-4285f4?style=for-the-badge&logo=google-chrome)](https://mishrashardendu22.is-a.dev)
+[![Repository](https://img.shields.io/badge/Repository-Star-FFD700?style=for-the-badge&logo=github)](https://github.com/MishraShardendu22/MishraShardendu)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](./LICENSE)
 
-![Version](https://img.shields.io/badge/version-2.0-brightgreen?style=flat-square)
+![Version](https://img.shields.io/badge/version-3.0.0-brightgreen?style=flat-square)
 ![Status](https://img.shields.io/badge/status-production-success?style=flat-square)
-![Uptime](https://img.shields.io/badge/uptime-99.9%25-success?style=flat-square)
+![Build](https://img.shields.io/badge/build-passing-success?style=flat-square)
 
 </div>
 
 ---
 
-## 🎯 Project Overview
+## Overview
 
-This is a modern, scalable professional platform that combines a **portfolio showcase** and **content management system** using cutting-edge technologies. The architecture leverages a dual-database approach with specialized backends for optimal performance and maintainability.
+This monorepo contains a complete portfolio platform ecosystem built with cutting-edge technologies. The architecture leverages Turborepo for efficient builds, PNPM workspaces for dependency management, and a modular design with shared packages for maximum code reuse.
 
-### 🏗️ Architecture Highlights
+### Architecture
 
-- **🎨 Frontend**: Next.js 15 with React 19 & TypeScript for type-safe development
-- **⚡ Backend**: Go Fiber microservice for high-performance API operations
-- **🗄️ Dual Database**: PostgreSQL for blog content + MongoDB for portfolio data
-- **🔐 Security**: JWT authentication with role-based access control
-- **📊 Analytics**: Real-time metrics with Recharts visualizations
-- **🤖 AI Integration**: OpenAI-powered content enhancement features
-
----
-
-## 🛠️ Technology Stack
-
-### Frontend Architecture (Next.js Ecosystem)
-
-<div align="center">
-
-![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=for-the-badge&logo=tailwind-css)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791?style=for-the-badge&logo=postgresql)
-![Drizzle](https://img.shields.io/badge/Drizzle_ORM-Latest-C5F74F?style=for-the-badge)
-
-</div>
-
-**Core Technologies**
-- **Framework**: Next.js 15 with App Router and Server Components
-- **Language**: TypeScript for type-safe development
-- **UI Library**: React 19 with concurrent features
-- **Styling**: Tailwind CSS 4 + shadcn/ui premium components
-- **Database**: PostgreSQL 15 with Drizzle ORM for type-safe operations
-- **Content**: TipTap rich editor + ReactMarkdown rendering
-- **Charts**: Recharts for beautiful data visualizations
-
-**Key Libraries**
-```typescript
-// UI & Styling
-@shadcn/ui              // Premium component library
-tailwindcss             // Utility-first CSS framework
-lucide-react            // Beautiful icon system
-
-// Database & ORM
-drizzle-orm             // Type-safe PostgreSQL ORM
-pg                      // PostgreSQL client
-
-// Content Management
-@tiptap/react           // Rich text editor
-react-markdown          // Markdown rendering
-@tiptap/starter-kit     // Essential editor extensions
-
-// State & Forms
-zustand                 // Lightweight state management
-react-hook-form         // Form management with validation
-zod                     // Schema validation
-```
-
-### Backend Architecture (Go Microservice)
-
-<div align="center">
-
-![Go](https://img.shields.io/badge/Go-1.21-00ADD8?style=for-the-badge&logo=go)
-![Fiber](https://img.shields.io/badge/Fiber-2.0-00ADD8?style=for-the-badge&logo=go)
-![MongoDB](https://img.shields.io/badge/MongoDB-7.0-47A248?style=for-the-badge&logo=mongodb)
-![Redis](https://img.shields.io/badge/Redis-7-DC382D?style=for-the-badge&logo=redis)
-![JWT](https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=json-web-tokens)
-
-</div>
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-- If you have a suggestion that would make this better, please fork the repo and create a pull request.
-- You can also simply open an issue with the tag "enhancement".
-- Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## Contact
-
-Shardendu Mishra - [@shardendu_m](https://twitter.com/shardendu_m) - shardendumishra22@gmail.com
-
-Project Link: [https://github.com/MishraShardendu22/MishraShardendu](https://github.com/MishraShardendu22/MishraShardendu)
-
-
-**Core Technologies**
-- **Language**: Go 1.21+ for high-performance, concurrent operations
-- **Framework**: GoFiber - Express.js-inspired with optimized speed
-- **Database**: MongoDB 7.0+ for flexible portfolio document storage
-- **ODM**: MGM (MongoDB Model for Go) for simplified interactions
-- **Authentication**: JWT with secure, stateless token management
-- **Cache**: Redis for high-performance data caching
-
-**Dependencies**
-```go
-// Core Framework & Database
-github.com/gofiber/fiber/v2     // High-performance web framework
-go.mongodb.org/mongo-driver     // Official MongoDB driver
-github.com/kamva/mgm            // MongoDB ODM for Go
-
-// Security & Auth
-github.com/golang-jwt/jwt       // JWT implementation
-golang.org/x/crypto             // Cryptography for password hashing
-
-// Configuration
-github.com/joho/godotenv        // Environment variable management
-```
+**Monorepo Structure**: Turborepo + PNPM Workspaces  
+**Frontend Applications**: Next.js 15, Astro 5, Vite + Preact  
+**Shared Packages**: TypeScript, React components, utilities, authentication  
+**Database Systems**: PostgreSQL (Blog), MongoDB (Portfolio)  
+**Styling**: Tailwind CSS 4 + shadcn/ui components  
+**Type Safety**: TypeScript with strict mode
 
 ---
 
-## 🏛️ Dual Database Architecture
+## Project Structure
 
-```mermaid
-graph TB
-    A[👤 Client Browser] --> B[📱 Next.js Frontend]
-    B --> C[🔄 Next.js API Routes]
-    B --> D[⚡ Go Fiber Backend]
-    
-    C --> E[🐘 PostgreSQL<br/>Blog System]
-    C --> F[🔧 Drizzle ORM]
-    
-    D --> G[🍃 MongoDB<br/>Portfolio Data]
-    D --> H[📊 MGM ODM]
-    
-    I[⚡ Redis Cache] --> C
-    I --> D
-    
-    J[🔗 External APIs<br/>GitHub • LeetCode] --> D
-    
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#fff3e0
-    style D fill:#e8f5e8
-    style E fill:#e3f2fd
-    style G fill:#f1f8e9
-    style I fill:#ffebee
-```
-
-### 🐘 PostgreSQL + Drizzle ORM
-**Purpose**: Blog System & Content Management
-
-```typescript
-// Type-safe blog schema with comprehensive relationships
-export const blogs = pgTable('blogs', {
-  id: serial('id').primaryKey(),
-  title: varchar('title', { length: 255 }).notNull(),
-  slug: varchar('slug', { length: 255 }).unique().notNull(),
-  content: text('content').notNull(),
-  excerpt: text('excerpt'),
-  authorId: integer('author_id').references(() => users.id),
-  categories: text('categories').array(),
-  tags: text('tags').array(),
-  status: blogStatusEnum('status').default('draft'),
-  featured: boolean('featured').default(false),
-  seoTitle: varchar('seo_title', { length: 255 }),
-  seoDescription: text('seo_description'),
-  publishedAt: timestamp('published_at'),
-  createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow()
-});
-```
-
-### 🍃 MongoDB + Go Backend
-**Purpose**: Portfolio Data & Professional Information
-
-```javascript
-// Flexible document structure for dynamic portfolio content
-projects: {
-  _id: ObjectId,
-  title: String,
-  description: String,
-  longDescription: String,
-  technologies: [String],
-  category: String, // "web", "mobile", "ai-ml", "backend"
-  links: {
-    demo: String,
-    repository: String,
-    documentation: String,
-    caseStudy: String
-  },
-  githubStats: {
-    stars: Number,
-    forks: Number,
-    language: String,
-    lastUpdated: Date
-  },
-  featured: Boolean,
-  status: String, // "active", "archived", "in-development"
-  metrics: {
-    liveUsers: Number,
-    performanceScore: Number
-  }
-}
-```
+\`\`\`
+mishrashardendu22/
+├── apps/
+│   ├── MishraShardendu22-Frontend-PersonalWebsite/  # Next.js 15 - Main portfolio
+│   ├── MishraShardendu22-Frontend-BlogWebsite/      # Astro 5 - Blog system
+│   └── MishraShardendu22-Frontend-AdminWebsite/     # Vite + Preact - Admin panel
+├── packages/
+│   ├── shared-ui/          # Shared React components
+│   ├── shared-utils/       # Common utilities
+│   ├── shared-types/       # TypeScript type definitions
+│   ├── auth-shared/        # Authentication logic
+│   ├── ui/                 # UI component library
+│   └── typescript-config/  # Shared TypeScript configurations
+├── docs/                   # Documentation
+├── scripts/                # Build and deployment scripts
+└── turbo.json             # Turborepo configuration
+\`\`\`
 
 ---
 
-## ✨ Platform Features
+## Applications
 
-### 💼 Professional Showcase (MongoDB Backend)
-- 🚀 **Dynamic Hero Section** - Real-time GitHub statistics integration
-- 🛠️ **Interactive Project Gallery** - Filterable showcase with live metrics
-- 📈 **Career Timeline** - Professional experience with achievements
-- 💡 **Skills Matrix** - Technology proficiency with visual charts
-- 🏆 **Certifications Hub** - Verified credentials with validation
-- 📊 **GitHub Integration** - Live repository statistics and contributions
+### Personal Website (Next.js 15)
 
-### 📚 Content Management System (PostgreSQL Frontend)
-- ✏️ **TipTap Rich Editor** - Advanced WYSIWYG with markdown support
-- 📝 **ReactMarkdown Rendering** - Beautiful content with syntax highlighting
-- 🏷️ **Advanced Taxonomy** - Sophisticated categorization and tagging
-- 💬 **Engagement System** - Comments with nested thread support
-- 🔍 **Full-text Search** - Powerful content discovery
-- 📊 **Analytics Dashboard** - Performance metrics with Recharts
-- 🤖 **AI Enhancement** - OpenAI-powered content suggestions
+The main portfolio application showcasing projects, experiences, skills, and certifications. Built with Next.js 15 App Router and React 19.
 
-### 👨‍💻 Administrative Interface
-- 🔐 **JWT Authentication** - Secure admin access with role management
-- 📈 **Business Intelligence** - Comprehensive analytics dashboard
-- 📝 **Content Operations** - Full CRUD for all content types
-- 👥 **User Management** - Account administration and permissions
-- 🛡️ **Security Management** - Content moderation and oversight
-- 📊 **Database Operations** - Multi-database management interface
+**Technology Stack**:
+- Next.js 15 with Server Components
+- React 19 with concurrent features
+- TypeScript 5.8
+- Tailwind CSS 4
+- PostgreSQL with Drizzle ORM
+- Better-auth for authentication
 
-### ⚡ Technical Excellence
-- 🏗️ **Hybrid Architecture** - Next.js API routes + Go microservices
-- 🔄 **Real-time Sync** - Live updates across platform components
-- 📱 **Progressive Web App** - Mobile-first with offline support
-- 🌓 **Advanced Theming** - Dynamic theme switching with system detection
-- 🔍 **SEO Optimization** - Advanced search engine optimization
-- 🚀 **Performance First** - Optimized loading and delivery strategies
+**Features**:
+- Dynamic project showcase with filtering
+- Professional experience timeline
+- Skills and certifications management
+- Contact form with validation
+- SEO optimized with metadata API
+- Progressive Web App support
+
+### Blog Website (Astro 5)
+
+A high-performance blog platform with markdown support and content management capabilities.
+
+**Technology Stack**:
+- Astro 5 with SSR
+- React for interactive components
+- Drizzle ORM with PostgreSQL
+- TipTap rich text editor
+- MDX support
+
+**Features**:
+- Markdown-based content authoring
+- Rich text editor for content creation
+- Category and tag management
+- Comment system
+- RSS feed generation
+- Full-text search
+
+### Admin Dashboard (Vite + Preact)
+
+A lightweight admin interface for managing all platform content.
+
+**Technology Stack**:
+- Vite 7 for fast development
+- Preact for minimal bundle size
+- TypeScript
+- TailwindCSS
+- React Hook Form + Zod validation
+
+**Features**:
+- Content management (CRUD operations)
+- Project and blog post management
+- User authentication and authorization
+- Analytics dashboard
+- Media management
 
 ---
 
-## 🚀 Quick Start Guide
+## Shared Packages
 
-### 📋 System Requirements
+### @repo/shared-ui
+Reusable React components used across all applications. Built with Radix UI primitives and Tailwind CSS.
 
-<div align="center">
+### @repo/shared-utils
+Common utility functions for data manipulation, formatting, and validation.
+
+### @repo/shared-types
+TypeScript type definitions and interfaces shared across the monorepo.
+
+### @repo/auth-shared
+Authentication logic and utilities using Better-auth.
+
+### @repo/ui
+Component library with shadcn/ui components configured for the design system.
+
+### @repo/typescript-config
+Shared TypeScript configurations for consistent type checking across projects.
+
+---
+
+## Technology Stack
+
+### Core Technologies
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| 📦 **Node.js** | `18.17.0+` | Frontend runtime |
-| 🐹 **Go** | `1.21+` | Backend development |
-| 🐘 **PostgreSQL** | `15+` | Blog database |
-| 🍃 **MongoDB** | `7.0+` | Portfolio data |
-| 🔄 **Redis** | `7.0+` | Caching (optional) |
+| Node.js | 18+ | Runtime environment |
+| PNPM | 9.0.0 | Package manager |
+| Turborepo | 2.5.8 | Monorepo build system |
+| TypeScript | 5.8 | Type safety |
 
-</div>
+### Frontend Frameworks
 
-### ⚡ Quick Installation
+| Framework | Version | Application |
+|-----------|---------|-------------|
+| Next.js | 15.5.3 | Personal Website |
+| Astro | 5.14.4 | Blog Website |
+| Vite | 7.1.9 | Admin Dashboard |
+| React | 19.2.0 | UI Library |
+| Preact | 10.27.2 | Admin Dashboard |
 
-```bash
-# 1️⃣ Clone and setup frontend
-git clone https://github.com/ShardenduMishra22/MishraShardendu22.git
-cd MishraShardendu22
-npm install
+### Databases & ORMs
 
-# 2️⃣ Setup PostgreSQL database
-createdb blog_system_db
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| PostgreSQL | 15+ | Blog content storage |
+| MongoDB | 7.0+ | Portfolio data storage |
+| Drizzle ORM | Latest | Type-safe database queries |
 
-# 3️⃣ Configure environment variables
-cp .env.example .env.local
-# Edit .env.local with your configuration
+### Styling & UI
 
-# 4️⃣ Initialize database
-npm run db:generate && npm run db:push
-
-# 5️⃣ Clone and setup Go backend
-git clone https://github.com/ShardenduMishra22/MishraShardendu22-Updation.git
-cd ../MishraShardendu22-Updation
-go mod download
-
-# 6️⃣ Configure Go environment
-cp .env.example .env
-# Edit .env with your MongoDB and other settings
-
-# 7️⃣ Start services (in separate terminals)
-# Terminal 1: Go Backend
-go run main.go
-
-# Terminal 2: Frontend
-cd ../MishraShardendu22
-npm run dev
-```
-
-### 🌐 Service Access Points
-
-| Service | URL | Purpose |
-|---------|-----|---------|
-| 🎯 **Main Platform** | http://localhost:3000 | Professional website & blog |
-| 👨‍💼 **Admin Panel** | http://localhost:3000/admin | Content management |
-| 🐹 **API Server** | http://localhost:5000 | Backend microservice |
-| 🗄️ **Database Studio** | http://localhost:4983 | PostgreSQL management |
+| Technology | Purpose |
+|------------|---------|
+| Tailwind CSS 4 | Utility-first styling |
+| shadcn/ui | Component library |
+| Radix UI | Headless UI primitives |
+| Lucide React | Icon library |
 
 ---
 
-## ⚙️ Environment Configuration
+## Getting Started
 
-### 🎯 Frontend Environment (`.env.local`)
+### Prerequisites
 
-```env
-# 🐘 PostgreSQL Database (Blog System)
-DATABASE_URL="postgresql://username:password@localhost:5432/blog_system_db"
-DIRECT_URL="postgresql://username:password@localhost:5432/blog_system_db"
+\`\`\`bash
+Node.js >= 18.0.0
+PNPM >= 9.0.0
+PostgreSQL >= 15
+MongoDB >= 7.0 (optional)
+\`\`\`
 
-# 🍃 Portfolio API (Go Backend)
-NEXT_PUBLIC_API_BASE_URL="http://localhost:5000"
-NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+### Installation
 
-# 🔐 Authentication & Security
-NEXTAUTH_SECRET="your-nextauth-secret-minimum-32-characters"
-NEXTAUTH_URL="http://localhost:3000"
-JWT_SECRET="your-jwt-secret-matching-backend"
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/MishraShardendu22/MishraShardendu.git
+cd mishrashardendu22
 
-# 🤖 AI Integration
-OPENAI_API_KEY="sk-your-openai-api-key"
-AI_MODEL="gpt-4-turbo-preview"
+# Install dependencies
+pnpm install
 
-# 📧 Email Services
-RESEND_API_KEY="re_your-resend-api-key"
-SMTP_FROM="contact@mishrashardendu22.is-a.dev"
+# Setup environment variables
+# Copy .env.example to .env.local in each app directory
+# Configure database URLs and API keys
 
-# 🔄 Cache & Performance
-REDIS_URL="redis://localhost:6379"
-CACHE_TTL="3600"
+# Run database migrations
+cd apps/MishraShardendu22-Frontend-PersonalWebsite
+pnpm db:push
+cd apps/MishraShardendu22-Frontend-BlogWebsite
+pnpm db:push
+cd ../..
 
-# 📊 Analytics
-VERCEL_ANALYTICS_ID="your-vercel-analytics-id"
-GOOGLE_ANALYTICS_ID="G-YOUR-GA-MEASUREMENT-ID"
-```
+# Start development servers
+pnpm dev
+\`\`\`
 
-### 🐹 Go Backend Environment (`.env`)
+### Development
 
-```env
-# 🍃 MongoDB Configuration
-MONGODB_URI="mongodb+srv://username:password@cluster0.mongodb.net/?retryWrites=true&w=majority"
-MONGODB_DATABASE="portfolio_professional_db"
+\`\`\`bash
+# Start all applications in development mode
+pnpm dev
 
-# 🔐 Security
-JWT_SECRET="your-jwt-secret-matching-frontend"
-ADMIN_USERNAME="admin"
-ADMIN_PASSWORD="your-secure-admin-password"
+# Build all applications
+pnpm build
 
-# 🌐 Server Configuration
-PORT="5000"
-GIN_MODE="debug"  # Use "release" for production
+# Run linting
+pnpm lint
 
-# 🔗 CORS Configuration
-CORS_ALLOWED_ORIGINS="http://localhost:3000,https://mishrashardendu22.is-a.dev"
-CORS_ALLOWED_METHODS="GET,POST,PUT,DELETE,OPTIONS,PATCH"
+# Format code
+pnpm format
 
-# 📊 Rate Limiting
-RATE_LIMIT_REQUESTS="100"
-RATE_LIMIT_WINDOW="60"
+# Type checking
+pnpm typecheck
 
-# 🤖 AI & External APIs
-OPENAI_API_KEY="sk-your-openai-api-key"
-GITHUB_TOKEN="ghp_your-github-token"
-GITHUB_USERNAME="ShardenduMishra22"
-```
+# Clean all build artifacts and node_modules
+pnpm clean
+\`\`\`
 
----
+### Accessing Applications
 
-## 🛠️ Development Commands
-
-### 📜 Frontend Development
-
-```bash
-# Development & Building
-npm run dev          # 🚀 Development server
-npm run build        # 🏗️ Production build
-npm run start        # ▶️ Start production server
-npm run lint         # 🔍 Code linting
-npm run format       # 🎨 Code formatting
-
-# Database Operations
-npm run db:generate  # 🏗️ Generate migrations
-npm run db:push      # 📤 Push schema changes
-npm run db:studio    # 🎨 Open Drizzle Studio
-npm run db:seed      # 🌱 Seed sample data
-```
-
-### 🐹 Backend Development
-
-```bash
-# Development & Testing
-go run main.go       # 🚀 Start development server
-go build -o app      # 🏗️ Build production binary
-go test ./...        # 🧪 Run test suite
-go mod tidy          # 📦 Update dependencies
-
-# Code Quality
-go fmt ./...         # 🎨 Format code
-go vet ./...         # 🔍 Static analysis
-golangci-lint run    # 🔎 Comprehensive linting
-```
+| Application | URL | Description |
+|------------|-----|-------------|
+| Personal Website | http://localhost:3000 | Main portfolio |
+| Blog Website | http://localhost:4321 | Blog platform |
+| Admin Dashboard | http://localhost:5173 | Admin panel |
 
 ---
 
-## 🎨 Design System
+## Environment Configuration
 
-### 🌊 Modern Design Framework
-- 🎨 **Tailwind CSS 4** - Utility-first with JIT compilation
-- 🧩 **shadcn/ui** - Premium component library on Radix UI
-- ✨ **Lucide React** - Beautiful, customizable icon library
-- 📝 **TipTap Editor** - Extensible rich text editing
-- 📄 **ReactMarkdown** - Enhanced markdown rendering
-- 📊 **Recharts** - Composable data visualization
+Each application requires its own environment configuration. See the respective README files in each app directory for specific requirements.
 
-### 🌓 Advanced Theming
-- ☀️ **Light Mode** - Clean, professional appearance
-- 🌙 **Dark Mode** - Developer-optimized dark interface
-- 🔄 **System Detection** - Automatic OS preference matching
-- 🎨 **CSS Variables** - Dynamic theming system
-- 📱 **Responsive Design** - Mobile-first breakpoint system
-- ♿ **WCAG 2.1 AA** - Full accessibility compliance
+### Personal Website (.env.local)
+- Database URL (PostgreSQL)
+- Authentication secrets
+- API endpoints
 
----
+### Blog Website (.env)
+- Database URL (PostgreSQL)
+- API keys
+- Content directory paths
 
-## 🚀 Performance & Security
+### Admin Dashboard (.env)
+- API base URL
+- Authentication tokens
 
-### ⚡ Performance Optimization
-- 🚀 **Next.js 15** - Server Components with streaming
-- ⚡ **Turbopack** - Ultra-fast development builds
-- 🖼️ **Image Optimization** - WebP/AVIF with lazy loading
-- 📦 **Smart Bundling** - Tree shaking and code splitting
-- 💾 **Multi-layer Caching** - Redis + browser + CDN
-- 🌐 **Edge Deployment** - Global CDN with low latency
-
-### 🔒 Enterprise Security
-- 🔐 **JWT Authentication** - Stateless with refresh rotation
-- 🛡️ **Input Validation** - Comprehensive Zod schemas
-- 🚫 **SQL Injection Prevention** - Parameterized queries
-- 🛡️ **XSS Protection** - Content sanitization
-- 🔒 **CSRF Protection** - SameSite cookies
-- 🎯 **Rate Limiting** - Sliding window protection
-- 📝 **Security Headers** - HSTS, CSP, and more
+Detailed environment setup instructions are available in [docs/DEVELOPMENT_GUIDE.md](./docs/DEVELOPMENT_GUIDE.md).
 
 ---
 
-## 📊 Analytics & Monitoring
+## Deployment
 
-### 📈 Performance Tracking
-- **Vercel Analytics** - Real-time user insights
-- **Speed Insights** - Core Web Vitals monitoring
-- **Custom Metrics** - Blog engagement tracking
-- **Error Monitoring** - Real-time error tracking
-- **Database Performance** - Query optimization
-- **API Metrics** - Response time analysis
+### Production Build
 
-### 📊 Data Visualization Example
+\`\`\`bash
+# Build all applications for production
+pnpm build
 
-```typescript
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+# Test production builds locally
+pnpm start
+\`\`\`
 
-interface EngagementData {
-  date: string
-  views: number
-  likes: number
-  comments: number
-}
+### Deployment Platforms
 
-export function EngagementChart({ data }: { data: EngagementData[] }) {
-  return (
-    <div className="w-full h-96">
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis />
-          <Tooltip />
-          <Line type="monotone" dataKey="views" stroke="#8884d8" strokeWidth={2} />
-          <Line type="monotone" dataKey="likes" stroke="#82ca9d" strokeWidth={2} />
-          <Line type="monotone" dataKey="comments" stroke="#ffc658" strokeWidth={2} />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  )
-}
-```
+**Personal Website**: Vercel (Recommended)  
+**Blog Website**: Vercel or Netlify  
+**Admin Dashboard**: Vercel or Cloudflare Pages
+
+Refer to [docs/DEPLOYMENT_GUIDE.md](./docs/DEPLOYMENT_GUIDE.md) for detailed deployment instructions.
 
 ---
 
-## 🌐 Production Deployment
+## Performance
 
-### 🚀 Frontend Deployment (Vercel)
+### Build Performance
+- Turborepo caching for incremental builds
+- PNPM workspace optimization
+- Parallel task execution
 
-```bash
-# Install and deploy
-npm install -g vercel
-vercel login
-vercel --prod
+### Runtime Performance
+- Next.js Server Components for optimal loading
+- Astro partial hydration for minimal JavaScript
+- Vite optimized bundling for fast admin dashboard
 
-# Environment management
-vercel env add PRODUCTION
-vercel env pull .env.production
-```
-
-### 🐹 Backend Deployment Options
-
-**Railway Deployment**
-```bash
-npm install -g @railway/cli
-railway login
-railway link
-railway up
-```
-
-**Docker Containerization**
-```dockerfile
-FROM golang:1.21-alpine AS builder
-WORKDIR /app
-COPY go.mod go.sum ./
-RUN go mod download
-COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -o main .
-
-FROM alpine:latest
-RUN apk --no-cache add ca-certificates tzdata
-WORKDIR /root/
-COPY --from=builder /app/main .
-EXPOSE 5000
-CMD ["./main"]
-```
-
-### ✅ Production Checklist
-
-#### 🔧 Infrastructure
-- [ ] Frontend deployed on Vercel with custom domain
-- [ ] Backend on Railway/DigitalOcean with load balancer
-- [ ] PostgreSQL on Neon/Supabase with connection pooling
-- [ ] MongoDB Atlas with replica sets
-- [ ] Redis Cloud with persistence
-- [ ] CDN setup (Cloudflare/CloudFront)
-- [ ] SSL certificates with auto-renewal
-
-#### 🔒 Security & Monitoring
-- [ ] Environment variables encrypted and secured
-- [ ] Database security and firewall rules
-- [ ] API security (rate limiting, CORS, headers)
-- [ ] Error tracking integration
-- [ ] Performance monitoring setup
-- [ ] Automated backup strategy
-- [ ] Health check endpoints
-
-#### 📊 Performance
-- [ ] Core Web Vitals optimization (LCP < 2.5s, FID < 100ms, CLS < 0.1)
-- [ ] Image optimization and CDN
-- [ ] Database query optimization
-- [ ] Caching strategy implementation
-- [ ] Performance monitoring alerts
+### Metrics
+- Lighthouse Score: 95+
+- First Contentful Paint: < 1.5s
+- Time to Interactive: < 2.5s
+- Total Bundle Size: Optimized per application
 
 ---
 
-## 🧪 Testing Strategy
+## Security
 
-### Frontend Testing
-```bash
-npm run test              # Jest + React Testing Library
-npm run test:coverage     # Coverage report
-npm run test:e2e         # Playwright E2E tests
-```
+### Authentication
+- JWT-based authentication with Better-auth
+- Secure session management
+- Role-based access control
 
-### Backend Testing (Go)
-```bash
-go test ./...            # Unit tests
-go test -cover ./...     # Test coverage
-go test -race ./...      # Race condition detection
-go test -bench ./...     # Benchmark tests
-```
+### Data Protection
+- Input validation with Zod schemas
+- SQL injection prevention with parameterized queries
+- XSS protection with content sanitization
+- CSRF protection with SameSite cookies
 
----
-
-## 🤝 Contributing Guidelines
-
-### 🔄 Contribution Workflow
-1. 🍴 **Fork** the development repositories
-2. 🌿 **Create Feature Branch** with descriptive name
-3. ✅ **Implement** with comprehensive testing
-4. 📝 **Document** changes and add comments
-5. 🧪 **Test** ensure all functionality works
-6. 📤 **Submit PR** with detailed description
-7. 🔍 **Code Review** and address feedback
-
-### 📋 Development Standards
-- 📝 **TypeScript** strict mode with comprehensive typing
-- 🐹 **Go** following official conventions and idioms
-- 🎨 **Formatting** Prettier + ESLint for frontend, gofmt for backend
-- 📏 **Commits** Conventional commits for automated changelog
-- 🧪 **Testing** Minimum 80% code coverage for new features
-- 📚 **Documentation** Comprehensive inline and API documentation
-
-### Pull Request Requirements
-- ✅ All existing tests pass
-- 📝 Clear description of changes
-- 🖼️ Screenshots for visual changes
-- 📊 No performance regression
-- 🔒 Security implications addressed
-- 📖 Documentation updated
+### Best Practices
+- Environment variable encryption
+- Secure HTTP headers
+- Rate limiting on API endpoints
+- Regular dependency updates
 
 ---
 
-## 👨‍💻 Author & Leadership
+## Testing
 
-<div align="center">
+\`\`\`bash
+# Run all tests
+pnpm test
 
-### **Shardendu Mishra**
-**Senior Software Engineer | Full-Stack Architect | AI/ML Specialist**
+# Run tests with coverage
+pnpm test:coverage
 
-*Building scalable, performant web applications with cutting-edge technologies*
-
-[![Email](https://img.shields.io/badge/📧_Email-mishrashardendu22%40gmail.com-red?style=for-the-badge&logo=gmail)](mailto:mishrashardendu22@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Shardendu_Mishra-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/shardendu-mishra)
-[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-mishrashardendu22.is--a.dev-green?style=for-the-badge&logo=google-chrome)](https://mishrashardendu22.is-a.dev)
-
-**🚀 Expertise**: Next.js • TypeScript • Go • AI/ML • Cloud Architecture • Database Design
-
-</div>
+# Run end-to-end tests
+pnpm test:e2e
+\`\`\`
 
 ---
 
-## 🙏 Acknowledgments
+## Documentation
 
-<div align="center">
+Comprehensive documentation is available in the [docs](./docs) directory:
 
-**Built with exceptional open-source technologies:**
-
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org)
-[![Go](https://img.shields.io/badge/Go-1.21-00ADD8?style=flat-square&logo=go)](https://golang.org)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791?style=flat-square&logo=postgresql)](https://postgresql.org)
-[![MongoDB](https://img.shields.io/badge/MongoDB-7.0-47A248?style=flat-square&logo=mongodb)](https://mongodb.com)
-[![Fiber](https://img.shields.io/badge/Fiber-2.0-00ADD8?style=flat-square&logo=go)](https://gofiber.io)
-[![Drizzle](https://img.shields.io/badge/Drizzle-ORM-C5F74F?style=flat-square)](https://orm.drizzle.team)
-[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-Components-black?style=flat-square)](https://ui.shadcn.com)
-[![Tailwind](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com)
-[![Vercel](https://img.shields.io/badge/Vercel-Deployment-black?style=flat-square&logo=vercel)](https://vercel.com)
-
-</div>
+- [API Documentation](./docs/API_DOCS.md)
+- [Development Guide](./docs/DEVELOPMENT_GUIDE.md)
+- [Contributing Guidelines](./docs/CONTRIBUTING.md)
+- [Code of Conduct](./docs/CODE_OF_CONDUCT.md)
+- [Security Policy](./docs/SECURITY.md)
+- [Postman Collection](./docs/POSTMAN.md)
 
 ---
 
-## 📞 Support & Consultation
+## Contributing
 
-<div align="center">
+We welcome contributions from the community. Please read our [Contributing Guidelines](./docs/CONTRIBUTING.md) before submitting pull requests.
 
-**Available for technical consultation, collaboration opportunities, and development inquiries**
+### Contribution Workflow
 
-[![Main Repository](https://img.shields.io/badge/⭐_STAR_MAIN_REPO-Support_Project-FFD700?style=for-the-badge&logo=github)](https://github.com/MishraShardendu22/MishraShardendu)
-[![Frontend Issues](https://img.shields.io/badge/🐛_Frontend_Issues-Report_Here-red?style=for-the-badge&logo=github)](https://github.com/ShardenduMishra22/MishraShardendu22/issues)
-[![Backend Issues](https://img.shields.io/badge/🔧_Backend_Issues-Report_Here-orange?style=for-the-badge&logo=github)](https://github.com/ShardenduMishra22/MishraShardendu22-Updation/issues)
-[![Email Support](https://img.shields.io/badge/📧_Email_Support-Professional_Inquiry-blue?style=for-the-badge&logo=gmail)](mailto:mishrashardendu22@gmail.com?subject=Professional%20Platform%20Inquiry)
+1. Fork the repository
+2. Create a feature branch (\`git checkout -b feature/AmazingFeature\`)
+3. Commit your changes (\`git commit -m 'Add some AmazingFeature'\`)
+4. Push to the branch (\`git push origin feature/AmazingFeature\`)
+5. Open a Pull Request
 
-</div>
+### Development Standards
+
+- TypeScript strict mode
+- ESLint and Prettier formatting
+- Comprehensive testing (80%+ coverage)
+- Conventional commit messages
+- Updated documentation
 
 ---
 
-## 📄 License & Legal
+## License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for complete terms.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
-```
-MIT License - Copyright (c) 2025 Shardendu Mishra
+\`\`\`
+MIT License
+
+Copyright (c) 2025 Shardendu Mishra
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software...
-```
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+\`\`\`
+
+---
+
+## Author
+
+**Shardendu Mishra**  
+Software Engineer | Full-Stack Developer
+
+- Email: mishrashardendu22@gmail.com
+- Portfolio: [mishrashardendu22.is-a.dev](https://mishrashardendu22.is-a.dev)
+- GitHub: [@MishraShardendu22](https://github.com/MishraShardendu22)
+- LinkedIn: [Shardendu Mishra](https://www.linkedin.com/in/shardendumishra22/)
+
+---
+
+## Acknowledgments
+
+Built with outstanding open-source technologies:
+
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![Astro](https://img.shields.io/badge/Astro-5-FF5D01?style=flat-square&logo=astro)](https://astro.build)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com)
+[![Turborepo](https://img.shields.io/badge/Turborepo-2-EF4444?style=flat-square&logo=turborepo)](https://turbo.build)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791?style=flat-square&logo=postgresql)](https://postgresql.org)
+[![Drizzle](https://img.shields.io/badge/Drizzle-ORM-C5F74F?style=flat-square)](https://orm.drizzle.team)
+
+---
+
+## Support
+
+For support, please:
+- Open an issue: [GitHub Issues](https://github.com/MishraShardendu22/MishraShardendu/issues)
+- Email: mishrashardendu22@gmail.com
+- Documentation: [docs/](./docs)
 
 ---
 
 <div align="center">
 
-### ⭐ Support This Project
+**Built with precision and passion**
 
-*If this comprehensive full-stack architecture helps your development journey,  
-please consider starring the main repository to show your support!*
+[![GitHub stars](https://img.shields.io/github/stars/MishraShardendu22/MishraShardendu?style=social)](https://github.com/MishraShardendu22/MishraShardendu)
+[![GitHub forks](https://img.shields.io/github/forks/MishraShardendu22/MishraShardendu?style=social)](https://github.com/MishraShardendu22/MishraShardendu/fork)
 
-[![⭐ Star Main Repository](https://img.shields.io/badge/⭐_STAR_THIS_PROJECT-Main_Repository-FFD700?style=for-the-badge&logo=github)](https://github.com/MishraShardendu22/MishraShardendu)
-
-[![GitHub stars](https://img.shields.io/github/stars/MishraShardendu22/MishraShardendu?style=social&label=Star%20Main%20Repo)](https://github.com/MishraShardendu22/MishraShardendu)
-[![GitHub forks](https://img.shields.io/github/forks/MishraShardendu22/MishraShardendu?style=social&label=Fork%20Main%20Repo)](https://github.com/MishraShardendu22/MishraShardendu/network/members)
-
-**🚀 Built by [Shardendu Mishra](https://mishrashardendu22.is-a.dev)**  
-*Committed to excellence in software architecture, performance optimization, and developer experience*
-
-*Last Updated: July 2025 • Version 2.0 • Next.js 15 + Go Fiber Architecture*
+Last Updated: October 2025 | Version 3.0.0 | Monorepo Architecture
 
 </div>

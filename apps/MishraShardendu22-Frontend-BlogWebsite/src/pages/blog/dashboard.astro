@@ -1,0 +1,27 @@
+---
+import BlogDashboardPage from '../../components/blog/BlogDashboardPage'
+import BlogNavigation from '../../components/blog/BlogNavigation'
+import '../../styles/global.css'
+
+export const prerender = false
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Blog Dashboard - Shardendu Mishra</title>
+  </head>
+  <body>
+    <div class="min-h-screen bg-background">
+      <BlogNavigation client:load />
+      <div class="lg:pl-64">
+        <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
+          <BlogDashboardPage client:load />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

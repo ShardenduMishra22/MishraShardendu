@@ -1,5 +1,57 @@
 {
-  "dependencies": {
-    "axios": "^1.10.0"
-  }
+  "name": "mishrashardendu22",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Monorepo for Shardendu Mishra's portfolio ecosystem - Personal website, blog, and admin dashboard.",
+  "author": {
+    "name": "Shardendu Mishra",
+    "email": "mishrashardendu22@gmail.com",
+    "url": "https://github.com/MishraShardendu22"
+  },
+  "homepage": "https://github.com/MishraShardendu22/mishrashardendu22",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MishraShardendu22/mishrashardendu22.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MishraShardendu22/mishrashardendu22/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "monorepo",
+    "portfolio",
+    "turborepo",
+    "pnpm",
+    "nextjs",
+    "astro",
+    "vite",
+    "typescript",
+    "react",
+    "preact"
+  ],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "clean:turbo": "rm -rf .turbo",
+    "clean:all": "pnpm clean && pnpm clean:turbo"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.8"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.0.0"
 }

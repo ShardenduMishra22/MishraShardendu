@@ -1,0 +1,24 @@
+---
+import BlogEditPage from '../../../components/blog/BlogEditPage'
+import BlogNavigation from '../../../components/blog/BlogNavigation'
+import '../../../styles/global.css'
+
+export const prerender = false
+
+const { id } = Astro.params
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Post - Blog</title>
+    <meta name="description" content="Edit your blog post" />
+  </head>
+  <body class="bg-background text-foreground">
+    <BlogNavigation client:load />
+    <div class="lg:pl-64">
+      <BlogEditPage client:load blogId={id as string} />
+    </div>
+  </body>
+</html>

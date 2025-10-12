@@ -1,0 +1,32 @@
+{
+  "name": "@repo/shared-utils",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/utils.ts",
+  "types": "./src/utils.ts",
+  "exports": {
+    ".": "./src/utils.ts",
+    "./api": "./src/api.ts",
+    "./api-response": "./src/apiResponse.util.ts",
+    "./utils": "./src/utils.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/shared-types": "workspace:*",
+    "axios": "^1.12.2",
+    "clsx": "^2.1.1",
+    "class-variance-authority": "^0.7.1",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22.15.3",
+    "eslint": "^9.34.0",
+    "typescript": "5.9.2"
+  }
+}
