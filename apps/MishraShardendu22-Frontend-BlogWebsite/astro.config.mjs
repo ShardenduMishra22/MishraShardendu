@@ -7,7 +7,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/vc-ap-mishrashardendu22-blog' : '/blog',
+  base: process.env.NODE_ENV === 'production' ? '/vc-ap-mishrashardendu22-blog' : '/',
   output: 'server',
   adapter: vercel({
     webAnalytics: { enabled: false }
