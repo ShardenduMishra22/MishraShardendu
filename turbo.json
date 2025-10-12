@@ -7,14 +7,20 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*",
+        "!**/.next/cache/**",
+        "!**/node_modules/**"
+      ],
       "outputs": [
         ".next/**",
         "!.next/cache/**",
         "dist/**",
         ".astro/**"
       ],
-      "cache": true
+      "cache": true,
+      "outputLogs": "hash-only"
     },
     "dev": {
       "dependsOn": ["^build"],
