@@ -43,7 +43,7 @@
   "scripts": {
     "dev": "next dev --port 3000",
     "dev:mfe": "next dev --port $(microfrontends port 2>/dev/null || echo 3000)",
-    "proxy": "microfrontends proxy --local-apps mishrashardendu22",
+    "proxy": "microfrontends proxy",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",

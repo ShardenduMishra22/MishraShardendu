@@ -3,10 +3,14 @@
   "applications": {
     "mishrashardendu22": {
       "development": {
+        "local": 3000,
         "fallback": "https://mishrashardendu22.is-a.dev"
       }
     },
     "mishrashardendu22-admin": {
+      "development": {
+        "local": 5173
+      },
       "routing": [
         {
           "group": "admin",
@@ -15,6 +19,9 @@
       ]
     },
     "mishrashardendu22-blog": {
+      "development": {
+        "local": 4321
+      },
       "routing": [
         {
           "group": "blog",
