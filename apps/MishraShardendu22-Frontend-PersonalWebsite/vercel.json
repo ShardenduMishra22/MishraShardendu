@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd ../.. && pnpm install && pnpm turbo run build --filter=mishrashardendu22",
+  "buildCommand": "cd ../.. && pnpm turbo run build --filter=mishrashardendu22",
   "installCommand": "cd ../.. && pnpm install",
   "framework": "nextjs",
   "outputDirectory": ".next"
