@@ -1,13 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/microfrontends.json",
   "applications": {
-    "ms22-main": {
+    "mishrashardendu22": {
       "development": {
         "local": 3000,
         "fallback": "ms22-main.vercel.app"
       }
     },
-    "ms22-admin": {
+    "mishrashardendu22-admin": {
       "development": {
         "local": 5173,
         "fallback": "ms22-admin.vercel.app"
@@ -26,7 +26,7 @@
             "/admin/certifications",
             "/admin/kanban",
             "/admin/:path*",
-            "/vc-ap-ms22-admin/:path*"
+            "/vc-ap-mishrashardendu22-admin/:path*"
           ]
         }
       ]
