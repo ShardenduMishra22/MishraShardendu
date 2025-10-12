@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next'
+import { withMicrofrontends } from '@vercel/microfrontends/next/config'
 
 const nextConfig: NextConfig = {
   eslint: {
@@ -25,4 +26,4 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: require('path').join(__dirname, '../../'),
 }
 
-export default nextConfig
+export default withMicrofrontends(nextConfig)

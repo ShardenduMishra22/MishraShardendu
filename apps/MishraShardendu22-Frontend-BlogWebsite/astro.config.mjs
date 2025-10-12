@@ -1,13 +1,13 @@
 // @ts-check
 
+import react from '@astrojs/react';
+import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 
-import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';
-
 // https://astro.build/config
 export default defineConfig({
+  base: '/vc-ap-mishrashardendu22-blog/',
   output: 'server',
   adapter: vercel({
     webAnalytics: { enabled: false }

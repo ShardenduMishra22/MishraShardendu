@@ -82,6 +82,8 @@
     "@tiptap/starter-kit": "^3.6.6",
     "@types/canvas-confetti": "^1.9.0",
     "@types/react": "^19.2.2",
+    "@vercel/microfrontends": "^1.2.4",
+    "@vercel/toolbar": "^0.1.36",
     "@types/react-dom": "^19.2.1",
     "astro": "^5.14.4",
     "axios": "^1.12.2",
