@@ -1,3 +1,8 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist/admin",
+  "rewrites": [
+    { "source": "/admin/(.*)", "destination": "/admin/$1" },
+    { "source": "/(.*)", "destination": "/admin/index.html" }
+  ]
 }

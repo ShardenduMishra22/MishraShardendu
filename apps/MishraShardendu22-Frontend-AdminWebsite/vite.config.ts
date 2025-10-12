@@ -7,9 +7,10 @@ import { microfrontends } from '@vercel/microfrontends/experimental/vite'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const basePath = mode === 'production' ? '/vc-ap-mishrashardendu22-admin' : '/admin'
+  const basePath = '/admin'
 
   return {
+    base: basePath,
     plugins: [
       preact(),
       tailwindcss(),
