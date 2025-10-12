@@ -1,4 +1,4 @@
-# Shardendu Mishra - mishrashardendu22.is-a.dev
+# Shardendu Mishra - MishraShardendu22
 
 <div align="center">
   <img src="./GopherShardenduMishra.png" alt="Shardendu Mishra" width="200" />
