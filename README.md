@@ -1,7 +1,4 @@
-Below are production-ready Markdown files for your monorepo: README.md, docs/*.md, and LICENSE. Copy each section into the corresponding file path.
-
-### README.md
-# Shardendu Mishra - Portfolio Monorepo
+# Shardendu Mishra - mishrashardendu22.is-a.dev
 
 <div align="center">
   <img src="./GopherShardenduMishra.png" alt="Shardendu Mishra" width="200" />
