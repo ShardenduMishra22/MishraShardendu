@@ -28,7 +28,6 @@ const nextConfig: NextConfig = {
     maxDuration: 120,
   },
   outputFileTracingRoot: require('path').join(__dirname, '../../'),
-  swcMinify: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? {
       exclude: ['error', 'warn']
