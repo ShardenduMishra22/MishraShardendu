@@ -7,14 +7,17 @@ import { microfrontends } from '@vercel/microfrontends/experimental/vite'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const basePath = '/admin'
+  // Use root base path for standalone deployment, /admin for microfrontend
+  const isStandalone = process.env.VERCEL === '1' || mode === 'production'
+  const basePath = isStandalone ? '/' : '/admin'
 
   return {
     base: basePath,
     plugins: [
       preact(),
       tailwindcss(),
-      microfrontends({ basePath }),
+      // Only use microfrontends plugin in development
+      ...(!isStandalone ? [microfrontends({ basePath })] : []),
     ],
     resolve: {
       alias: {
