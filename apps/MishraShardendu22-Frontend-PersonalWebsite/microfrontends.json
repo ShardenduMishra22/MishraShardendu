@@ -7,10 +7,10 @@
         "fallback": "ms22-main.vercel.app"
       }
     },
-    "ms22-blog": {
+    "ms22-admin": {
       "development": {
         "local": 5173,
-        "fallback": "ms22-blog.vercel.app"
+        "fallback": "ms22-admin.vercel.app"
       },
       "routing": [
         {
@@ -26,7 +26,7 @@
             "/admin/certifications",
             "/admin/kanban",
             "/admin/:path*",
-            "/vc-ap-ms22-blog/:path*"
+            "/vc-ap-ms22-admin/:path*"
           ]
         }
       ]
