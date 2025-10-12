@@ -345,7 +345,7 @@ MIT. See LICENSE for details.
 ## Author
 
 Shardendu Mishra  
-Software Engineer | Full-Stack Developer  
+Software Engineer | Software Engineer  
 Email: mishrashardendu22@gmail.com
 
 ## Acknowledgments
