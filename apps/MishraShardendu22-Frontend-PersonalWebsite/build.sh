@@ -21,6 +21,6 @@ fi
 
 # Run build with detailed output
 echo "🔨 Building with Turbo..."
-pnpm turbo build --filter=mishrashardendu22 --summarize
+pnpm turbo build --filter=ms22-main --summarize
 
 echo "✅ Build complete!"

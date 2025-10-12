@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/microfrontends.json",
   "applications": {
-    "mishrashardendu22": {
+    "ms22-main": {
       "development": {
         "local": 3000,
         "fallback": "ms22-main.vercel.app"
