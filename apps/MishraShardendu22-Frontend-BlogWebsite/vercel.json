@@ -2,7 +2,8 @@
   "buildCommand": "pnpm build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/blog", "destination": "/blog/index.html" },
+    { "source": "/blog/:path*", "destination": "/blog/index.html" }
   ],
   "headers": [
     {
