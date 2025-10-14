@@ -30,6 +30,27 @@
           ]
         }
       ]
+    },
+    "ms22-blog": {
+      "development": {
+        "local": 5174,
+        "fallback": "ms22-blog.vercel.app"
+      },
+      "routing": [
+        {
+          "group": "blog",
+          "paths": [
+            "/blog",
+            "/blog/login",
+            "/blog/dashboard",
+            "/blog/create",
+            "/blog/verify-email",
+            "/blog/verify-otp",
+            "/blog/:path*",
+            "/vc-ap-ms22-blog/:path*"
+          ]
+        }
+      ]
     }
   }
 }

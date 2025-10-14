@@ -50,7 +50,7 @@
   // Redirect if trying to access protected route without auth
   $effect(() => {
     if (!isLoading && requiresAuth() && !isAuthenticated) {
-      window.location.href = "/login";
+      window.location.href = "/blog/login";
     } else if (!isLoading && requiresAuth() && isAuthenticated && !isOwner && 
                (currentPath === "/blog/create" || currentPath === "/blog/dashboard" || currentPath.endsWith("/edit"))) {
       // Only owner can create/edit/dashboard
@@ -60,7 +60,7 @@
 
   // Determine which page to show
   const pageComponent = $derived(() => {
-    if (currentPath === "/login" || currentPath === "/register") {
+    if (currentPath === "/blog/login" || currentPath === "/blog/register") {
       return "login";
     } else if (currentPath === "/" || currentPath === "/blog" || currentPath === "/blog/") {
       return "list";
@@ -90,7 +90,7 @@
         updateSEO({
           title: 'Login - Shardendu Mishra Blog',
           description: 'Sign in to access your blog dashboard and create new posts.',
-          url: `${baseUrl}/login`,
+          url: `${baseUrl}/blog/login`,
         });
         break;
       case 'list':

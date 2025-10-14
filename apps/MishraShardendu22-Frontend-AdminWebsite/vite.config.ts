@@ -1,6 +1,6 @@
 import path from 'path'
-import { defineConfig, loadEnv } from 'vite'
 import preact from '@preact/preset-vite'
+import { defineConfig, loadEnv } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import { microfrontends } from '@vercel/microfrontends/experimental/vite'
 

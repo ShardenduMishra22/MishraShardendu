@@ -180,7 +180,7 @@
         <div class="w-full max-w-md">
           <Button
             className="w-full h-12 shadow-lg"
-            onclick={() => window.location.href = "/login"}
+            onclick={() => window.location.href = "/blog/login"}
           >
             <LogIn class="h-5 w-5 mr-2" />
             <span class="font-semibold">Sign In to Continue</span>
@@ -299,7 +299,7 @@
         <Button 
           size="default" 
           className="w-full h-10 shadow-sm" 
-          onclick={() => window.location.href = "/login"}
+          onclick={() => window.location.href = "/blog/login"}
         >
           <LogIn class="w-4 h-4 mr-2" />
           Sign In to Continue
