@@ -1,5 +1,4 @@
 <script lang="ts">
-  import "./app.css";
   import BlogNavigation from "./lib/components/BlogNavigation.svelte";
   import BlogListPage from "./lib/components/BlogListPage.svelte";
   import BlogCreatePage from "./lib/components/BlogCreatePage.svelte";
@@ -10,6 +9,7 @@
   import ThemeToggle from "./lib/components/ThemeToggle.svelte";
   import { authStore } from "./lib/auth";
   import { updateSEO } from "./lib/seo";
+  import { themeStore } from "./lib/theme";
   import { onMount } from "svelte";
 
   let currentPath = $state(window.location.pathname);
@@ -17,8 +17,9 @@
   let isOwner = $state(false);
   let isLoading = $state(true);
 
-  // Initialize auth on mount
+  // Initialize theme and auth on mount
   onMount(async () => {
+    themeStore.init();
     await authStore.init();
     updatePageSEO();
   });

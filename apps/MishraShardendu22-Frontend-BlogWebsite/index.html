@@ -61,6 +61,60 @@
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Theme initialization script - prevents FOUC (Flash of Unstyled Content) -->
+    <script>
+      (function() {
+        try {
+          const theme = localStorage.getItem('blog-theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          
+          const root = document.documentElement;
+          
+          if (theme === 'dark') {
+            root.classList.add('dark');
+          } else {
+            root.classList.remove('dark');
+          }
+          
+          // Apply immediate background to prevent white flash
+          root.style.backgroundColor = theme === 'dark' ? '#000000' : '#fef7f0';
+          root.style.color = theme === 'dark' ? '#ffffff' : '#1c1c1e';
+          
+          // Set theme-color meta tag
+          const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+          if (metaThemeColor) {
+            metaThemeColor.setAttribute('content', theme === 'dark' ? '#000000' : '#fef7f0');
+          }
+        } catch (e) {
+          // Fallback to light theme
+          document.documentElement.style.backgroundColor = '#fef7f0';
+          document.documentElement.style.color = '#1c1c1e';
+        }
+      })();
+    </script>
+    
+    <!-- Inline critical styles to prevent FOUC -->
+    <style>
+      /* Critical styles loaded inline before main CSS */
+      html, body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+      }
+      #app {
+        min-height: 100vh;
+      }
+      /* Prevent white flash */
+      html {
+        background-color: #fef7f0;
+        color: #1c1c1e;
+      }
+      html.dark {
+        background-color: #000000;
+        color: #ffffff;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>

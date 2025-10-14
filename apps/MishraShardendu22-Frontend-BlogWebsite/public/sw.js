@@ -71,6 +71,12 @@ self.addEventListener('fetch', (event) => {
           return response
         }
 
+        // Only cache http/https requests, skip chrome-extension and other schemes
+        const url = new URL(request.url)
+        if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+          return response
+        }
+
         const responseToCache = response.clone()
 
         caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
