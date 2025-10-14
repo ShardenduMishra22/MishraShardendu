@@ -19,9 +19,16 @@
 
   // Initialize theme and auth on mount
   onMount(async () => {
-    themeStore.init();
-    await authStore.init();
-    updatePageSEO();
+    try {
+      console.log('[Blog App] Initializing...');
+      console.log('[Blog App] Current path:', window.location.pathname);
+      themeStore.init();
+      await authStore.init();
+      updatePageSEO();
+      console.log('[Blog App] Initialization complete');
+    } catch (error) {
+      console.error('[Blog App] Initialization error:', error);
+    }
   });
 
   // Subscribe to auth changes
@@ -43,10 +50,13 @@
       }
     };
 
-    // Check on initial load
-    if (currentPath === '/blog' || currentPath === '/blog/') {
+    // Check on initial load - Fix for production deployment
+    const checkPath = window.location.pathname;
+    if (checkPath === '/blog' || checkPath === '/blog/' || checkPath === '' || checkPath === '/') {
       window.history.replaceState(null, '', '/blog/read');
       currentPath = '/blog/read';
+    } else {
+      currentPath = checkPath;
     }
 
     window.addEventListener("popstate", handleLocationChange);
@@ -55,10 +65,15 @@
 
   // Normalize path - remove /blog prefix if it exists
   const normalizedPath = $derived(() => {
-    if (currentPath.startsWith('/blog')) {
-      return currentPath.substring(5) || '/read';
+    let path = currentPath;
+    if (path.startsWith('/blog')) {
+      path = path.substring(5) || '/read';
     }
-    return currentPath;
+    // If path is empty or just /, default to /read
+    if (!path || path === '/') {
+      path = '/read';
+    }
+    return path;
   });
 
   // Check if route requires authentication
@@ -169,7 +184,7 @@
   });
 </script>
 
-<div class="min-h-screen bg-background">
+<div class="min-h-screen bg-background" style="min-height: 100vh;">
   <!-- Toast Notifications -->
   <Toast />
   
@@ -177,7 +192,7 @@
   <ThemeToggle />
   
   {#if isLoading}
-    <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-background via-background to-background-secondary">
+    <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-background via-background to-background-secondary" style="min-height: 100vh;">
       <div class="text-center animate-slide-up">
         <div class="relative w-20 h-20 mx-auto mb-6">
           <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full blur-xl animate-pulse"></div>

@@ -37,13 +37,14 @@ function createAuthStore() {
     
     // Initialize auth state from localStorage
     init: async () => {
+      console.log('[Auth] Initializing auth store...');
       const token = localStorage.getItem('authToken');
       const userStr = localStorage.getItem('user');
       
       if (token && userStr) {
         // Check if token is expired
         if (isTokenExpired(token)) {
-          console.warn('Token expired, clearing auth state');
+          console.warn('[Auth] Token expired, clearing auth state');
           localStorage.removeItem('authToken');
           localStorage.removeItem('user');
           update(state => ({ ...state, isLoading: false, error: 'Session expired' }));
@@ -52,6 +53,7 @@ function createAuthStore() {
 
         try {
           const user = JSON.parse(userStr);
+          console.log('[Auth] Restored user from localStorage:', user.email);
           update(state => ({
             ...state,
             token,
@@ -61,10 +63,19 @@ function createAuthStore() {
             error: null,
           }));
           
-          // Verify token with backend
+          // Verify token with backend (with timeout to prevent blocking)
+          const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Verification timeout')), 5000)
+          );
+          
           try {
-            const response = await authApi.getCurrentUser();
+            const response = await Promise.race([
+              authApi.getCurrentUser(),
+              timeoutPromise
+            ]) as any;
+            
             if (response.success && response.data) {
+              console.log('[Auth] Token verified successfully');
               update(state => ({
                 ...state,
                 user: response.data!.user,
@@ -72,14 +83,12 @@ function createAuthStore() {
               }));
             }
           } catch (error: any) {
-            console.error('Failed to verify token:', error);
-            // Token might be invalid, clear it
-            if (error.statusCode === 401) {
-              authStore.logout();
-            }
+            console.warn('[Auth] Token verification failed (non-blocking):', error.message);
+            // Don't logout on verification failure - just log it
+            // User can still browse without auth features
           }
         } catch (error) {
-          console.error('Failed to parse stored user:', error);
+          console.error('[Auth] Failed to parse stored user:', error);
           localStorage.removeItem('authToken');
           localStorage.removeItem('user');
           update(state => ({ 
@@ -89,6 +98,7 @@ function createAuthStore() {
           }));
         }
       } else {
+        console.log('[Auth] No stored auth, continuing as guest');
         update(state => ({ ...state, isLoading: false }));
       }
     },

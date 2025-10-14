@@ -242,21 +242,7 @@
           </div>
         {/if}
 
-        <!-- Comments Summary Card -->
-        <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
-          <h3 class="text-sm font-bold uppercase tracking-wide text-muted-foreground mb-4">
-            Comments ({comments.length})
-          </h3>
-          <p class="text-sm text-muted-foreground">
-            {#if comments.length === 0}
-              No comments yet. Be the first!
-            {:else if comments.length === 1}
-              1 person has commented
-            {:else}
-              {comments.length} people have commented
-            {/if}
-          </p>
-        </div>
+
       </aside>
 
       <!-- Main Content -->

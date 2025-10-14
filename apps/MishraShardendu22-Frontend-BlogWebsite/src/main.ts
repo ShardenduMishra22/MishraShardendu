@@ -2,11 +2,18 @@ import { mount } from 'svelte'
 import './app.css'
 import App from './App.svelte'
 
+console.log('[Blog Main] Starting application...');
+console.log('[Blog Main] Current URL:', window.location.href);
+console.log('[Blog Main] Base path:', import.meta.env.BASE_URL);
+
 // Initialize theme before mounting to prevent FOUC
 function initTheme() {
   try {
+    console.log('[Blog Main] Initializing theme...');
     const theme = localStorage.getItem('blog-theme') || 
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    console.log('[Blog Main] Theme:', theme);
     
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -14,15 +21,44 @@ function initTheme() {
       document.documentElement.classList.remove('dark');
     }
   } catch (e) {
-    console.error('Failed to initialize theme:', e);
+    console.error('[Blog Main] Failed to initialize theme:', e);
   }
 }
 
 // Initialize theme immediately
 initTheme();
 
-const app = mount(App, {
-  target: document.getElementById('app')!,
-})
+// Mount app with error handling
+let app;
 
-export default app
+try {
+  const appElement = document.getElementById('app');
+  if (!appElement) {
+    throw new Error('App container element not found');
+  }
+  
+  console.log('[Blog Main] Mounting app...');
+  app = mount(App, {
+    target: appElement,
+  });
+  
+  console.log('[Blog Main] App mounted successfully');
+} catch (error) {
+  console.error('[Blog Main] Failed to mount app:', error);
+  // Show error message to user
+  const appElement = document.getElementById('app');
+  if (appElement) {
+    appElement.innerHTML = `
+      <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; background: #000; color: #fff;">
+        <div style="text-align: center; max-width: 600px;">
+          <h1 style="font-size: 2rem; margin-bottom: 1rem;">Failed to load blog</h1>
+          <p style="margin-bottom: 1rem;">An error occurred while loading the application.</p>
+          <pre style="background: #111; padding: 1rem; border-radius: 8px; overflow: auto; text-align: left;">${error}</pre>
+          <button onclick="window.location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Reload Page</button>
+        </div>
+      </div>
+    `;
+  }
+}
+
+export default app;
