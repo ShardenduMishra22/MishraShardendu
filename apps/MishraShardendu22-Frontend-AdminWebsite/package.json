@@ -46,8 +46,7 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check-all": "pnpm type-check && pnpm lint && pnpm format:check",
-    "prepare": "husky"
+    "check-all": "pnpm type-check && pnpm lint && pnpm format:check"
   },
   "dependencies": {
     "@repo/shared-ui": "workspace:*",
@@ -78,7 +77,6 @@
     "@tiptap/extension-underline": "^3.6.6",
     "@tiptap/react": "^3.6.6",
     "@tiptap/starter-kit": "^3.6.6",
-    "@vercel/microfrontends": "^1.2.4",
     "@vercel/toolbar": "^0.1.36",
     "axios": "^1.12.2",
     "class-variance-authority": "^0.7.1",

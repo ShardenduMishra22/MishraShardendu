@@ -51,8 +51,7 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check-all": "pnpm type-check && pnpm lint && pnpm format:check",
-    "prepare": "husky"
+    "check-all": "pnpm type-check && pnpm lint && pnpm format:check"
   },
   "dependencies": {
     "@repo/shared-ui": "workspace:*",
