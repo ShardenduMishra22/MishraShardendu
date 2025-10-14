@@ -41,7 +41,6 @@
   "scripts": {
     "dev": "vite --port 5174",
     "dev:mfe": "vite --port $(microfrontends port 2>/dev/null || echo 5174)",
-    "proxy": "microfrontends proxy --local-apps mishrashardendu22-blog",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
