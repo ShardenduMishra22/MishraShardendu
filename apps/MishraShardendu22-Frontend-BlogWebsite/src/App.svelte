@@ -109,7 +109,7 @@
 
   // Update SEO based on current page
   function updatePageSEO() {
-    const baseUrl = 'https://blog.mishrashardendu22.is-a.dev';
+    const baseUrl = 'https://mishrashardendu22.is-a.dev/blog';
     
     switch (pageComponent()) {
       case 'login':

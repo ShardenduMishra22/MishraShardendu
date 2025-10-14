@@ -20,8 +20,8 @@ const DEFAULT_SEO: SEOConfig = {
   title: 'Blogs By Shardendu Mishra | Tech Articles & Programming Insights',
   description: 'Explore in-depth technical articles about web development, software engineering, programming best practices, and modern tech stack insights by Shardendu Mishra.',
   keywords: 'Shardendu Mishra blog, technical blog, web development articles, programming tutorials, software engineering, Go programming, React tutorials, TypeScript guides, tech insights, developer blog',
-  image: 'https://blog.mishrashardendu22.is-a.dev/og-image.png',
-  url: 'https://blog.mishrashardendu22.is-a.dev',
+  image: 'mishrashardendu22.is-a.dev/blogog-image.png',
+  url: 'https://mishrashardendu22.is-a.dev/blog',
   type: 'website',
   author: 'Shardendu Mishra',
 };
@@ -168,14 +168,14 @@ export function generateBlogPostStructuredData(data: {
     },
     datePublished: data.datePublished,
     dateModified: data.dateModified || data.datePublished,
-    image: data.image || 'https://blog.mishrashardendu22.is-a.dev/og-image.png',
+    image: data.image || 'mishrashardendu22.is-a.dev/blogog-image.png',
     url: data.url,
     publisher: {
       '@type': 'Person',
       name: 'Shardendu Mishra',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://blog.mishrashardendu22.is-a.dev/icons/icon-512.png',
+        url: 'mishrashardendu22.is-a.dev/blogicons/icon-512.png',
       },
     },
     mainEntityOfPage: {

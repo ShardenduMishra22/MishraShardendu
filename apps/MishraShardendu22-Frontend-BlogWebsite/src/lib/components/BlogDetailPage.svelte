@@ -2,10 +2,9 @@
   import Button from "./ui/button.svelte";
   import Badge from "./ui/badge.svelte";
   import Avatar from "./ui/avatar.svelte";
-  import Input from "./ui/input.svelte";
+
   import Textarea from "./ui/textarea.svelte";
   import { Calendar, User, Share2, Check, ArrowLeft, MessageCircle, Send, Trash } from "lucide-svelte";
-  import { cn } from "../utils";
   import { blogApi, commentApi, type Blog, type Comment } from "../api";
   import { authStore } from "../auth";
   import { toast } from "../toast";
@@ -47,7 +46,7 @@
         blog = response.data;
         
         // Update SEO with blog data
-        const baseUrl = 'https://blog.mishrashardendu22.is-a.dev';
+        const baseUrl = 'https://mishrashardendu22.is-a.dev/blog';
         const blogUrl = `${baseUrl}/blog/${blogId}`;
         const description = truncateDescription(blog.content, 160);
         const authorName = blog.author?.name || 'Shardendu Mishra';
