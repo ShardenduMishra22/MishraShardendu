@@ -40,44 +40,54 @@
     return () => window.removeEventListener("popstate", handleLocationChange);
   });
 
+  // Normalize path - works for both /blog prefix (microfrontend) and root (standalone)
+  const normalizedPath = $derived(() => {
+    // Remove /blog prefix if it exists
+    return currentPath.startsWith('/blog') ? currentPath.substring(5) || '/' : currentPath;
+  });
+
   // Check if route requires authentication
   const requiresAuth = $derived(() => {
-    return currentPath === "/blog/create" || 
-           currentPath === "/blog/dashboard" || 
-           currentPath.endsWith("/edit");
+    const path = normalizedPath();
+    return path === "/create" || 
+           path === "/dashboard" || 
+           path.endsWith("/edit");
   });
 
   // Redirect if trying to access protected route without auth
   $effect(() => {
+    const basePath = currentPath.startsWith('/blog') ? '/blog' : '';
     if (!isLoading && requiresAuth() && !isAuthenticated) {
-      window.location.href = "/blog/login";
+      window.location.href = `${basePath}/login`;
     } else if (!isLoading && requiresAuth() && isAuthenticated && !isOwner && 
-               (currentPath === "/blog/create" || currentPath === "/blog/dashboard" || currentPath.endsWith("/edit"))) {
+               (normalizedPath() === "/create" || normalizedPath() === "/dashboard" || normalizedPath().endsWith("/edit"))) {
       // Only owner can create/edit/dashboard
-      window.location.href = "/blog";
+      window.location.href = basePath || '/';
     }
   });
 
   // Determine which page to show
   const pageComponent = $derived(() => {
-    if (currentPath === "/blog/login" || currentPath === "/blog/register") {
+    const path = normalizedPath();
+    if (path === "/login" || path === "/register") {
       return "login";
-    } else if (currentPath === "/" || currentPath === "/blog" || currentPath === "/blog/") {
+    } else if (path === "/" || path === "") {
       return "list";
-    } else if (currentPath === "/blog/create") {
+    } else if (path === "/create") {
       return "create";
-    } else if (currentPath === "/blog/dashboard") {
+    } else if (path === "/dashboard") {
       return "dashboard";
-    } else if (currentPath.startsWith("/blog/") && currentPath.endsWith("/edit")) {
+    } else if (path.endsWith("/edit")) {
       return "edit";
-    } else if (currentPath.startsWith("/blog/")) {
+    } else if (path.match(/^\/\d+/)) {
       return "detail";
     }
     return "list";
   });
 
   const blogId = $derived(() => {
-    const match = currentPath.match(/\/blog\/(\d+)/);
+    const path = normalizedPath();
+    const match = path.match(/^\/(\d+)/);
     return match ? match[1] : null;
   });
 

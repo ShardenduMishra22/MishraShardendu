@@ -1,5 +1,6 @@
 <script lang="ts">
   import { cn } from "../utils";
+  import { getBasePath } from "../navigation";
   import Button from "./ui/button.svelte";
   import Avatar from "./ui/avatar.svelte";
   import CompactEmailVerification from "./CompactEmailVerification.svelte";
@@ -25,31 +26,34 @@
     currentPath = window.location.pathname;
   });
 
+  // Determine base path (works for both standalone and microfrontend)
+  const basePath = getBasePath();
+
   const navigationItems = [
     {
       name: "Read Blogs",
-      href: "/blog",
+      href: basePath || "/",
       icon: Glasses,
       description: "Read the latest blog posts",
       showForAll: true,
     },
     {
       name: "Dashboard",
-      href: "/blog/dashboard",
+      href: `${basePath}/dashboard`,
       icon: LayoutDashboard,
       description: "Manage your blog posts",
       showForAll: false,
     },
     {
       name: "Create Post",
-      href: "/blog/create",
+      href: `${basePath}/create`,
       icon: Plus,
       description: "Write a new blog post",
       showForAll: false,
     },
     {
       name: "Main Website",
-      href: "/",
+      href: basePath ? "/" : "https://mishrashardendu22.is-a.dev",
       icon: User2,
       description: "Go back to the main website",
       showForAll: true,
@@ -62,26 +66,36 @@
   });
 
   const isRouteActive = (href: string) => {
-    if (href === "/blog") {
-      if (currentPath === "/blog/dashboard" || currentPath === "/blog/create") {
+    // Normalize both paths for comparison
+    const normalizedCurrent = currentPath.startsWith('/blog') 
+      ? currentPath.substring(5) || '/' 
+      : currentPath;
+    const normalizedHref = href.startsWith('/blog') 
+      ? href.substring(5) || '/' 
+      : href;
+
+    // Home/List page
+    if (normalizedHref === "/" || normalizedHref === "") {
+      if (normalizedCurrent === "/dashboard" || normalizedCurrent === "/create") {
         return false;
       }
       return (
-        currentPath === "/blog" ||
-        (currentPath.startsWith("/blog/") &&
-          !currentPath.includes("/dashboard") &&
-          !currentPath.includes("/create"))
+        normalizedCurrent === "/" ||
+        normalizedCurrent === "" ||
+        (normalizedCurrent.match(/^\/\d+/) &&
+          !normalizedCurrent.includes("/dashboard") &&
+          !normalizedCurrent.includes("/create"))
       );
     }
 
-    if (href === "/blog/dashboard") {
-      return currentPath === "/blog/dashboard";
+    if (normalizedHref === "/dashboard") {
+      return normalizedCurrent === "/dashboard";
     }
-    if (href === "/blog/create") {
-      return currentPath === "/blog/create";
+    if (normalizedHref === "/create") {
+      return normalizedCurrent === "/create";
     }
 
-    return currentPath === href;
+    return normalizedCurrent === normalizedHref;
   };
 </script>
 
@@ -190,7 +204,7 @@
         <div class="w-full max-w-md">
           <Button
             className="w-full h-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-gradient-to-r from-primary to-primary/90"
-            onclick={() => window.location.href = "/blog/login"}
+            onclick={() => window.location.href = `${basePath}/login`}
           >
             <LogIn class="h-5 w-5 mr-2" />
             <span class="font-semibold">Sign In to Continue</span>
@@ -313,7 +327,7 @@
         <Button 
           size="default" 
           className="w-full h-10 shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-primary to-primary/90" 
-          onclick={() => window.location.href = "/blog/login"}
+          onclick={() => window.location.href = `${basePath}/login`}
         >
           <LogIn class="w-4 h-4 mr-2" />
           Sign In to Continue

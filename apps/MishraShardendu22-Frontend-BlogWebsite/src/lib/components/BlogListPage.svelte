@@ -14,6 +14,9 @@
   let loading = $state(true);
   let searchTerm = $state("");
   let error = $state("");
+  
+  // Determine base path for navigation
+  const basePath = typeof window !== 'undefined' && window.location.pathname.startsWith('/blog') ? '/blog' : '';
 
   // Subscribe to auth store
   authStore.subscribe((state) => {
@@ -81,7 +84,7 @@
 
     {#if isOwner}
       <Button
-        onclick={() => (window.location.href = "/blog/create")}
+        onclick={() => (window.location.href = `${basePath}/create`)}
         className="h-12 sm:h-13 px-5 sm:px-7 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground font-bold shadow-lg hover:shadow-xl shadow-primary/30 transition-all duration-300 gap-2 rounded-xl text-sm sm:text-base flex-shrink-0 w-full sm:w-auto hover:scale-[1.02]"
       >
         <Plus class="w-4 h-4 sm:w-5 sm:h-5" />
@@ -129,7 +132,7 @@
       </p>
       {#if !searchTerm && isOwner}
         <Button
-          onclick={() => (window.location.href = "/blog/create")}
+          onclick={() => (window.location.href = `${basePath}/create`)}
           className="h-12 sm:h-13 px-7 sm:px-9 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground font-bold shadow-xl hover:shadow-2xl shadow-primary/30 transition-all duration-300 gap-2 sm:gap-2.5 rounded-xl text-sm sm:text-base hover:scale-105"
         >
           <Plus class="w-5 h-5 sm:w-6 sm:h-6" />
@@ -140,7 +143,7 @@
   {:else}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
       {#each filteredBlogs as blog (blog.id)}
-        <BlogCard {blog} onReadMore={(blogId) => (window.location.href = `/blog/${blogId}`)} />
+        <BlogCard {blog} onReadMore={(blogId) => (window.location.href = `${basePath}/${blogId}`)} />
       {/each}
     </div>
   {/if}

@@ -5,8 +5,9 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 // https://vite.dev/config/
 export default defineConfig(() => {
-  // Always use /blog base path since it's accessed through microfrontends
-  const basePath = '/blog'
+  // Use root path for standalone deployment, /blog for microfrontend
+  // Set VITE_BASE_PATH=blog when building for microfrontend integration
+  const basePath = process.env.VITE_BASE_PATH ? `/${process.env.VITE_BASE_PATH}` : '/'
 
   return {
     base: basePath,
