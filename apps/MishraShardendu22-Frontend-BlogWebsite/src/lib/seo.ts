@@ -17,11 +17,11 @@ export interface SEOConfig {
 }
 
 const DEFAULT_SEO: SEOConfig = {
-  title: 'Blog - Shardendu Mishra | Tech Articles & Programming Insights',
+  title: 'Blogs By Shardendu Mishra | Tech Articles & Programming Insights',
   description: 'Explore in-depth technical articles about web development, software engineering, programming best practices, and modern tech stack insights by Shardendu Mishra.',
   keywords: 'Shardendu Mishra blog, technical blog, web development articles, programming tutorials, software engineering, Go programming, React tutorials, TypeScript guides, tech insights, developer blog',
   image: 'https://blog.mishrashardendu22.is-a.dev/og-image.png',
-  url: 'https://blog.mishrashardendu22.is-a.dev/',
+  url: 'https://blog.mishrashardendu22.is-a.dev',
   type: 'website',
   author: 'Shardendu Mishra',
 };

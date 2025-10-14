@@ -105,7 +105,7 @@
         break;
       case 'list':
         updateSEO({
-          title: 'Blog - Shardendu Mishra | Tech Articles & Programming Insights',
+          title: 'Blogs By Shardendu Mishra | Tech Articles & Programming Insights',
           description: 'Explore in-depth technical articles about web development, software engineering, programming best practices, and modern tech stack insights.',
           url: `${baseUrl}/blog`,
         });
