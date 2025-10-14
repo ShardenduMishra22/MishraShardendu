@@ -151,10 +151,13 @@
   <ThemeToggle />
   
   {#if isLoading}
-    <div class="flex items-center justify-center min-h-screen">
-      <div class="text-center">
-        <div class="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <p class="text-muted-foreground">Loading...</p>
+    <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-background via-background to-background-secondary">
+      <div class="text-center animate-slide-up">
+        <div class="relative w-20 h-20 mx-auto mb-6">
+          <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full blur-xl animate-pulse"></div>
+          <div class="relative w-20 h-20 border-4 border-primary/30 border-t-primary rounded-full animate-spin shadow-lg"></div>
+        </div>
+        <p class="text-muted-foreground font-semibold text-lg">Loading...</p>
       </div>
     </div>
   {:else if pageComponent() === "login"}
@@ -164,38 +167,38 @@
     <main class="lg:ml-64">
       <div class="mx-auto pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-6 sm:py-8 max-w-7xl">
         {#if pageComponent() === "list"}
-        <div class="space-y-4 sm:space-y-6">
-          <div class="space-y-2">
+        <div class="space-y-6 sm:space-y-8 animate-slide-up">
+          <div class="space-y-3 pb-4 border-b-2 border-border/50">
             <h1
-              class="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
+              class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent drop-shadow-sm"
             >
               Blog Posts
             </h1>
-            <p class="text-base sm:text-lg text-muted-foreground">
+            <p class="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
               Explore articles about web development, programming, and tech insights
             </p>
           </div>
           <BlogListPage />
         </div>
       {:else if pageComponent() === "create"}
-        <div class="space-y-4 sm:space-y-6">
-          <div class="space-y-2">
-            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+        <div class="space-y-6 sm:space-y-8 animate-slide-up">
+          <div class="space-y-3 pb-4 border-b-2 border-border/50">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
               Create New Post
             </h1>
-            <p class="text-base sm:text-lg text-muted-foreground">
+            <p class="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
               Share your thoughts and insights with the world
             </p>
           </div>
           <BlogCreatePage />
         </div>
       {:else if pageComponent() === "dashboard"}
-        <div class="space-y-4 sm:space-y-6">
-          <div class="space-y-2">
-            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+        <div class="space-y-6 sm:space-y-8 animate-slide-up">
+          <div class="space-y-3 pb-4 border-b-2 border-border/50">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
               Dashboard
             </h1>
-            <p class="text-base sm:text-lg text-muted-foreground">
+            <p class="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
               Manage your blog posts and view analytics
             </p>
           </div>
@@ -204,12 +207,12 @@
       {:else if pageComponent() === "detail" && blogId()}
         <BlogDetailPage blogId={blogId() || "1"} />
       {:else if pageComponent() === "edit" && blogId()}
-        <div class="space-y-4 sm:space-y-6">
-          <div class="space-y-2">
-            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+        <div class="space-y-6 sm:space-y-8 animate-slide-up">
+          <div class="space-y-3 pb-4 border-b-2 border-border/50">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
               Edit Post
             </h1>
-            <p class="text-base sm:text-lg text-muted-foreground">
+            <p class="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
               Update your blog post content
             </p>
           </div>

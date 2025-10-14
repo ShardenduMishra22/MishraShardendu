@@ -91,7 +91,7 @@
     variant="outline"
     size="sm"
     onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}
-    className="bg-background border-border"
+    className="bg-card/95 backdrop-blur-sm border-border shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
   >
     {#if isMobileMenuOpen}
       <X class="h-4 w-4" />
@@ -103,20 +103,20 @@
 
 <!-- Mobile Menu -->
 {#if isMobileMenuOpen}
-  <div class="lg:hidden fixed inset-0 z-40 bg-background">
-    <div class="flex flex-col justify-center items-center h-full space-y-3 p-6">
+  <div class="lg:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-md">
+    <div class="flex flex-col justify-center items-center h-full space-y-3 p-6 animate-slide-up">
       {#if isAuthenticated && user}
         <!-- Unified User Card - Mobile -->
-        <div class="w-full max-w-md bg-gradient-to-br from-card to-muted/30 rounded-xl p-4 border border-border shadow-xl mb-2">
+        <div class="w-full max-w-md bg-gradient-to-br from-card to-muted/30 rounded-xl p-4 border border-border shadow-2xl mb-2">
           <div class="flex items-center gap-3 mb-3">
             <div class="relative">
               <Avatar
                 src={undefined}
                 fallback={user.name?.charAt(0) || "U"}
-                class="w-12 h-12 border-2 border-primary/20"
+                class="w-12 h-12 border-2 border-primary/20 shadow-md"
               />
               {#if user.isVerified}
-                <div class="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-background flex items-center justify-center">
+                <div class="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-background flex items-center justify-center shadow-sm">
                   <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                   </svg>
@@ -127,7 +127,7 @@
               <p class="text-sm font-bold truncate">{user.name}</p>
               <p class="text-xs text-muted-foreground truncate">{user.email}</p>
               {#if !user.isVerified}
-                <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/50 px-1.5 py-0.5 rounded-md mt-1">
+                <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/50 px-1.5 py-0.5 rounded-md mt-1 shadow-sm">
                   <span class="w-1 h-1 rounded-full bg-amber-500 animate-pulse"></span>
                   Email not verified
                 </span>
@@ -148,19 +148,29 @@
           href={item.href}
           onclick={() => (isMobileMenuOpen = false)}
           class={cn(
-            "flex items-center gap-3 w-full max-w-md p-4 rounded-lg border transition-colors duration-200",
+            "flex items-center gap-3 w-full max-w-md p-4 rounded-xl border transition-all duration-300 group relative overflow-hidden",
             isActive
-              ? "bg-primary text-primary-foreground border-primary"
-              : "bg-card border-border hover:border-primary/50"
+              ? "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground border-primary shadow-lg shadow-primary/20"
+              : "bg-card/80 backdrop-blur-sm border-border hover:border-primary/50 hover:shadow-md hover:scale-[1.02]"
           )}
         >
+          <span class={cn(
+            "absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-700",
+            isActive && "opacity-0"
+          )}></span>
           {#if item.icon}
             {@const Icon = item.icon}
-            <Icon class="h-5 w-5 flex-shrink-0" />
+            <Icon class={cn(
+              "h-5 w-5 flex-shrink-0 relative z-10 transition-all duration-300",
+              isActive ? "scale-110" : "group-hover:scale-110 group-hover:text-primary"
+            )} />
           {/if}
-          <div class="flex-1 min-w-0">
+          <div class="flex-1 min-w-0 relative z-10">
             <div class="font-semibold text-sm">{item.name}</div>
-            <div class="text-xs opacity-80 truncate">{item.description}</div>
+            <div class={cn(
+              "text-xs truncate transition-colors",
+              isActive ? "opacity-90" : "opacity-80 group-hover:opacity-100"
+            )}>{item.description}</div>
           </div>
         </a>
       {/each}
@@ -169,7 +179,7 @@
         <div class="w-full max-w-md">
           <Button
             variant="outline"
-            className="w-full h-12 hover:bg-red-50 dark:hover:bg-red-950/20 hover:text-red-600 dark:hover:text-red-400 hover:border-red-300 dark:hover:border-red-800 transition-all group"
+            className="w-full h-12 hover:bg-red-50 dark:hover:bg-red-950/20 hover:text-red-600 dark:hover:text-red-400 hover:border-red-300 dark:hover:border-red-800 transition-all duration-300 group shadow-md hover:shadow-lg"
             onclick={() => authStore.logout()}
           >
             <LogOut class="h-5 w-5 mr-2 group-hover:animate-pulse" />
@@ -179,7 +189,7 @@
       {:else}
         <div class="w-full max-w-md">
           <Button
-            className="w-full h-12 shadow-lg"
+            className="w-full h-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-gradient-to-r from-primary to-primary/90"
             onclick={() => window.location.href = "/blog/login"}
           >
             <LogIn class="h-5 w-5 mr-2" />
@@ -193,47 +203,51 @@
 
 <!-- Desktop Sidebar -->
 <aside
-  class="hidden lg:flex fixed left-0 top-0 bottom-0 w-64 border-r border-border bg-card flex-col z-30"
+  class="hidden lg:flex fixed left-0 top-0 bottom-0 w-64 border-r border-border bg-card/95 backdrop-blur-sm flex-col z-30 shadow-lg"
 >
-  <div class="p-6 border-b border-border">
+  <div class="p-6 border-b border-border bg-gradient-to-b from-background/50 to-transparent">
     <div class="flex items-center gap-3">
-      <div class="p-2 rounded-xl bg-primary/10">
+      <div class="p-2.5 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 shadow-sm">
         <BookOpen class="h-6 w-6 text-primary" />
       </div>
       <div>
-        <h1 class="font-bold text-lg">Blog</h1>
-        <p class="text-xs text-muted-foreground">Shardendu Mishra</p>
+        <h1 class="font-bold text-lg bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">Blog</h1>
+        <p class="text-xs text-muted-foreground font-medium">Shardendu Mishra</p>
       </div>
     </div>
   </div>
 
-  <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+  <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto custom-scrollbar">
     {#each visibleNavItems as item}
       {@const isActive = isRouteActive(item.href)}
       <a
         href={item.href}
         class={cn(
-          "flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group",
+          "flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-300 group relative overflow-hidden",
           isActive
-            ? "bg-primary text-primary-foreground shadow-md"
-            : "hover:bg-accent text-foreground hover:text-accent-foreground"
+            ? "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground shadow-lg shadow-primary/25"
+            : "hover:bg-gradient-to-r hover:from-accent/10 hover:to-accent/5 text-foreground hover:shadow-md border border-transparent hover:border-border/50"
         )}
       >
+        <span class={cn(
+          "absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-700",
+          isActive && "opacity-0"
+        )}></span>
         {#if item.icon}
           {@const Icon = item.icon}
           <Icon
             class={cn(
-              "h-5 w-5 flex-shrink-0 transition-transform duration-200",
-              isActive ? "scale-110" : "group-hover:scale-110"
+              "h-5 w-5 flex-shrink-0 transition-all duration-300 relative z-10",
+              isActive ? "scale-110 drop-shadow-sm" : "group-hover:scale-110 group-hover:text-primary"
             )}
           />
         {/if}
-        <div class="flex-1 min-w-0">
-          <div class="font-medium text-sm">{item.name}</div>
+        <div class="flex-1 min-w-0 relative z-10">
+          <div class={cn("font-semibold text-sm transition-colors", isActive && "drop-shadow-sm")}>{item.name}</div>
           <div
             class={cn(
-              "text-xs truncate",
-              isActive ? "text-primary-foreground/80" : "text-muted-foreground"
+              "text-xs truncate transition-colors",
+              isActive ? "text-primary-foreground/80" : "text-muted-foreground group-hover:text-foreground/70"
             )}
           >
             {item.description}
@@ -243,20 +257,20 @@
     {/each}
   </nav>
 
-  <div class="p-3 border-t border-border">
+  <div class="p-3 border-t border-border bg-gradient-to-t from-background/50 to-transparent">
     {#if isAuthenticated && user}
       <!-- Unified User Card -->
-      <div class="bg-gradient-to-br from-card to-muted/30 rounded-xl p-4 border border-border shadow-lg">
+      <div class="bg-gradient-to-br from-card to-muted/30 rounded-xl p-4 border border-border shadow-xl hover:shadow-2xl transition-shadow duration-300">
         <!-- User Info Section -->
         <div class="flex items-center gap-3 mb-3">
           <div class="relative">
             <Avatar
               src={undefined}
               fallback={user.name?.charAt(0) || "U"}
-              class="w-12 h-12 border-2 border-primary/20"
+              class="w-12 h-12 border-2 border-primary/20 shadow-md"
             />
             {#if user.isVerified}
-              <div class="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-background flex items-center justify-center">
+              <div class="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-background flex items-center justify-center shadow-sm">
                 <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                 </svg>
@@ -267,7 +281,7 @@
             <p class="text-sm font-bold truncate text-foreground">{user.name}</p>
             <p class="text-xs text-muted-foreground truncate">{user.email}</p>
             {#if !user.isVerified}
-              <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/50 px-1.5 py-0.5 rounded-md mt-1">
+              <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/50 px-1.5 py-0.5 rounded-md mt-1 shadow-sm">
                 <span class="w-1 h-1 rounded-full bg-amber-500 animate-pulse"></span>
                 Email not verified
               </span>
@@ -286,7 +300,7 @@
         <Button 
           size="sm" 
           variant="outline" 
-          className="w-full h-9 hover:bg-red-50 dark:hover:bg-red-950/20 hover:text-red-600 dark:hover:text-red-400 hover:border-red-300 dark:hover:border-red-800 transition-all group" 
+          className="w-full h-9 hover:bg-red-50 dark:hover:bg-red-950/20 hover:text-red-600 dark:hover:text-red-400 hover:border-red-300 dark:hover:border-red-800 transition-all duration-300 group shadow-sm hover:shadow-md" 
           onclick={() => authStore.logout()}
         >
           <LogOut class="w-4 h-4 mr-2 group-hover:animate-pulse" />
@@ -295,10 +309,10 @@
       </div>
     {:else}
       <!-- Sign In Card -->
-      <div class="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-4 border border-primary/20 shadow-md">
+      <div class="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-4 border border-primary/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
         <Button 
           size="default" 
-          className="w-full h-10 shadow-sm" 
+          className="w-full h-10 shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-primary to-primary/90" 
           onclick={() => window.location.href = "/blog/login"}
         >
           <LogIn class="w-4 h-4 mr-2" />
