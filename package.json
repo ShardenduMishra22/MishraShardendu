@@ -35,8 +35,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "concurrently -n main,blog,admin,proxy -c blue,green,yellow,magenta \"cd apps/MishraShardendu22-Frontend-PersonalWebsite && pnpm dev\" \"cd apps/MishraShardendu22-Frontend-BlogWebsite && pnpm dev\" \"cd apps/MishraShardendu22-Frontend-AdminWebsite && pnpm dev\" \"cd apps/MishraShardendu22-Frontend-PersonalWebsite && pnpm proxy\"",
-    "dev:turbo": "turbo run dev",
+    "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
@@ -47,9 +46,8 @@
     "clean:all": "pnpm clean && pnpm clean:turbo"
   },
   "devDependencies": {
-    "concurrently": "9.2.1",
     "prettier": "^3.6.2",
-    "turbo": "2.5.8"
+    "turbo": "^2.5.8"
   },
   "engines": {
     "node": ">=18.0.0",

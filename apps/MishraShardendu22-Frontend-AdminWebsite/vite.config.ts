@@ -1,7 +1,8 @@
 import path from 'path'
-import preact from '@preact/preset-vite'
 import { defineConfig, loadEnv } from 'vite'
+import preact from '@preact/preset-vite'
 import tailwindcss from '@tailwindcss/vite'
+import { microfrontends } from '@vercel/microfrontends/experimental/vite'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
@@ -14,6 +15,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       preact(),
       tailwindcss(),
+      microfrontends({ basePath }),
     ],
     resolve: {
       alias: {
