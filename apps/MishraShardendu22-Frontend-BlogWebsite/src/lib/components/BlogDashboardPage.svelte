@@ -87,10 +87,10 @@
   };
 </script>
 
-<div class="space-y-6 md:space-y-8">
+<div class="space-y-3 md:space-y-4">
   <!-- Stats Cards -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <Card class="p-6">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+    <Card class="p-12">
       <div class="flex items-center justify-between">
         <div>
           <p class="text-sm text-muted-foreground">Total Posts</p>

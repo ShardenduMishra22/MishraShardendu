@@ -11,6 +11,8 @@
   import { toast } from "../toast";
   import { validateBlogTitle, validateBlogContent, validateTag } from "../validation";
 
+  let { blogId }: { blogId?: string | null } = $props();
+
   let title = $state("");
   let content = $state("");
   let tags = $state<string[]>([]);
@@ -57,6 +59,21 @@
 
   const handleRemoveTag = (tagToRemove: string) => {
     tags = tags.filter((tag) => tag !== tagToRemove);
+  };
+
+  const loadExistingBlog = async (id: number) => {
+    try {
+      const response = await blogApi.getBlogById(id);
+      if (response.success && response.data) {
+        const b = response.data;
+        title = b.title || "";
+        content = b.content || "";
+        tags = Array.isArray(b.tags) ? b.tags : [];
+        image = b.image || "";
+      }
+    } catch (err) {
+      console.error('Failed to load blog for editing', err);
+    }
   };
 
   const validateForm = (): boolean => {
@@ -117,13 +134,21 @@
 
       if (image && image.trim()) payload.image = image.trim();
 
-      const response = await blogApi.createBlog(payload);
-
-      if (response.success) {
-        toast.success("Blog post created successfully!");
-        setTimeout(() => {
-          window.location.href = "/blog/read";
-        }, 1000);
+      if (blogId) {
+        // Update existing blog
+        const response = await blogApi.updateBlog(parseInt(blogId), payload);
+        if (response.success) {
+          toast.success("Blog post updated successfully!");
+          setTimeout(() => (window.location.href = `/blog/read/${blogId}`), 800);
+        }
+      } else {
+        const response = await blogApi.createBlog(payload);
+        if (response.success) {
+          toast.success("Blog post created successfully!");
+          setTimeout(() => {
+            window.location.href = "/blog/read";
+          }, 1000);
+        }
       }
     } catch (err: any) {
       console.error("Failed to create blog:", err);
@@ -131,6 +156,23 @@
       isSubmitting = false;
     }
   };
+
+  // Reactively load existing blog when blogId prop changes (prevents stale data)
+  $effect(() => {
+    if (!blogId) {
+      // Clear form when not editing
+      title = "";
+      content = "";
+      tags = [];
+      image = "";
+      return;
+    }
+
+    const id = parseInt(blogId as string);
+    if (!isNaN(id)) {
+      loadExistingBlog(id);
+    }
+  });
 </script>
 
 <div>
@@ -158,21 +200,30 @@
       <div class="space-y-3">
         <Label for="tags" class="text-base font-semibold">Tags</Label>
         <div class="flex gap-2">
-          <Input
-            id="tags"
-            placeholder="Add a tag..."
-            bind:value={newTag}
-            onkeypress={(e: KeyboardEvent) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                handleAddTag();
-              }
-            }}
-            class="flex-1 {tagError ? 'border-destructive' : ''}"
-          />
-          <Button className="" type="button" onclick={handleAddTag} size="sm" variant="secondary">
-            <Plus class="w-4 h-4" />
-          </Button>
+            <div class="flex items-center gap-2 w-full">
+              <div class="flex-1 flex items-center gap-2 bg-card/40 border border-border rounded-md px-3 py-2 focus-within:ring-2 focus-within:ring-primary/30 transition-shadow">
+                <Input
+                  id="tags"
+                  placeholder="Add a tag..."
+                  bind:value={newTag}
+                  onkeypress={(e: KeyboardEvent) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleAddTag();
+                    }
+                  }}
+                  class="w-full bg-transparent placeholder:text-muted-foreground border-0 focus:outline-none {tagError ? 'border-destructive' : ''}"
+                />
+                <button
+                  type="button"
+                  aria-label="Add tag"
+                  onclick={handleAddTag}
+                  class="w-9 h-9 inline-flex items-center justify-center rounded-md bg-primary/10 text-primary hover:bg-primary/20 transition-colors border border-transparent"
+                >
+                  <Plus class="w-4 h-4" />
+                </button>
+              </div>
+            </div>
         </div>
 
         {#if tagError}
@@ -182,16 +233,17 @@
         {#if tags.length > 0}
           <div class="flex flex-wrap gap-2 mt-3">
             {#each tags as tag}
-              <Badge variant="secondary" class="flex items-center gap-1 px-3 py-1.5">
-                {tag}
+              <div class="inline-flex items-center gap-2 bg-muted/30 text-muted-foreground px-3 py-1.5 rounded-full text-sm font-medium shadow-sm border border-border">
+                <span class="truncate max-w-[12rem]">{tag}</span>
                 <button
                   type="button"
                   onclick={() => handleRemoveTag(tag)}
-                  class="ml-1 hover:text-destructive transition-colors"
+                  class="-mr-1 -ml-1 inline-flex items-center justify-center w-6 h-6 rounded-full hover:bg-destructive/10 transition-colors"
+                  aria-label={`Remove tag ${tag}`}
                 >
-                  <X class="w-3 h-3" />
+                  <X class="w-3 h-3 text-muted-foreground" />
                 </button>
-              </Badge>
+              </div>
             {/each}
           </div>
         {/if}
@@ -252,10 +304,12 @@
 
     <!-- Actions -->
     <div class="flex gap-3 justify-end">
-  <Button className="" type="button" variant="outline" onclick={() => (window.location.href = "/blog/read")}>Cancel</Button>
+  <Button className="" type="button" variant="outline" onclick={() => (window.location.href = blogId ? `/blog/read/${blogId}` : "/blog/read")}>
+    Cancel
+  </Button>
   <Button className="" type="submit" disabled={isSubmitting} onclick={() => {}}>
         <Save class="w-4 h-4 mr-2" />
-        {isSubmitting ? "Creating..." : "Create Post"}
+        {isSubmitting ? (blogId ? "Updating..." : "Creating...") : (blogId ? "Update Post" : "Create Post")}
       </Button>
     </div>
   </form>

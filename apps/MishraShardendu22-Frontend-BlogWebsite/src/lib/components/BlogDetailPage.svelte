@@ -14,7 +14,7 @@
   import { onMount } from "svelte";
 
   const basePath = getBasePath();
-  const API_URL = import.meta.env.VITE_API_URL || '';
+  import { resolveImageUrl } from "../utils/image";
 
   let { blogId }: { blogId: string } = $props();
 
@@ -28,6 +28,7 @@
   let isSubmittingComment = $state(false);
   let currentUser = $state<any>(null);
   let commentError = $state("");
+  let showTags = $state(false);
 
   authStore.subscribe((state) => {
     currentUser = state.user;
@@ -159,13 +160,7 @@
     });
   };
 
-  const resolveImageUrl = (path?: string | null | undefined) => {
-    if (!path) return undefined;
-    // If already absolute, return as-is
-    if (/^(https?:)?\/\//i.test(path)) return path;
-    const base = API_URL.replace(/\/$/, '');
-    return `${base}/${path.replace(/^\//, '')}`;
-  };
+  // using shared resolveImageUrl from utils/image.ts
 
   const handleShare = async () => {
     try {
@@ -177,9 +172,14 @@
       toast.error("Failed to copy link");
     }
   };
+
+  const editUrl = $derived(() => {
+    if (!blog) return '';
+    return `${basePath}/read/${blog.id}/edit`;
+  });
 </script>
 
-<div class="max-w-7xl mx-auto px-4">
+<div class="w-[100%]">
   {#if loading}
     <div class="space-y-4">
       <div class="h-10 bg-muted/50 rounded animate-pulse"></div>
@@ -187,22 +187,25 @@
       <div class="h-96 bg-muted/50 rounded animate-pulse"></div>
     </div>
   {:else if blog}
-    <!-- Back button intentionally removed per UI update -->
 
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
+
+  <div class="grid grid-cols-2 lg:grid-cols-[2fr_320px] gap-3 xl:gap-4">
   <!-- Main Content -->
-  <main class="w-full">
-        <div class="mb-8">
+      <main class="max-w-[100%]">
+        <div class="mb-2">
           {#if blog.image}
-            <div class="mb-6 rounded-lg overflow-hidden">
-              <img src={resolveImageUrl(blog.image)} alt={blog.title} class="w-full h-64 sm:h-80 md:h-96 object-contain object-top shadow-lg" />
+            <div class="mb-2 rounded-lg overflow-hidden">
+              <img src={resolveImageUrl(blog.image)} alt={blog.title} class="w-full h-64 sm:h-80 md:h-96 object-cover object-left shadow-lg" />
             </div>
           {/if}
           <h1 class="text-4xl sm:text-5xl font-bold mb-4 text-foreground leading-tight">{blog.title}</h1>
         </div>
 
-        <div class="prose prose-lg dark:prose-invert max-w-none mb-12">
-          {@html renderedContent}
+  <!-- Article content -->
+  <div class="w-full">
+          <div class="prose prose-lg dark:prose-invert max-w-none mb-12">
+            {@html renderedContent}
+          </div>
         </div>
 
         <!-- Comments Section -->
@@ -297,26 +300,25 @@
       </main>
 
       <!-- Sidebar -->
-      <aside class="space-y-6 lg:sticky lg:top-24 lg:self-start">
-        <!-- Author Card -->
-        <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
-          <h3 class="text-sm font-bold uppercase tracking-wide text-muted-foreground mb-4">Author</h3>
-          <div class="flex flex-col items-center text-center space-y-3">
+      <aside class="space-y-4 lg:sticky lg:top-8 lg:self-start min-w-[280px] max-w-[320px]">
+        <div class="bg-card border border-border rounded-xl p-4 shadow-sm">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">Author</h3>
+          <div class="flex flex-col items-center text-center space-y-2">
             <Avatar
               src={resolveImageUrl(blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined)}
               fallback={blog.author?.name?.charAt(0) || "U"}
-              class="w-20 h-20 border-2 border-primary/20"
+              class="w-14 h-14 border-2 border-primary/20"
             />
             <div>
-              <p class="font-bold text-foreground">{blog.author?.name || "Unknown"}</p>
-              <p class="text-xs text-muted-foreground">{blog.author?.email || ""}</p>
+              <p class="font-semibold text-foreground text-sm">{blog.author?.name || "Unknown"}</p>
+              <p class="text-[11px] text-muted-foreground">{blog.author?.email || ""}</p>
             </div>
           </div>
         </div>
 
         <!-- Meta Info Card -->
-        <div class="bg-card border border-border rounded-xl p-6 shadow-sm space-y-4">
-          <h3 class="text-sm font-bold uppercase tracking-wide text-muted-foreground mb-4">Details</h3>
+        <div class="bg-card border border-border rounded-xl p-4 shadow-sm space-y-3">
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Details</h3>
           
           <div class="flex items-center gap-3 text-sm">
             <Calendar class="w-4 h-4 text-muted-foreground flex-shrink-0" />
@@ -334,7 +336,7 @@
             </div>
           </div>
 
-          <Button variant="outline" onclick={handleShare} className="w-full mt-4">
+          <Button variant="outline" onclick={handleShare} className="w-full mt-3">
             {#if shareSuccess}
               <Check class="w-4 h-4 mr-2" />
               Copied!
@@ -343,27 +345,75 @@
               Share Article
             {/if}
           </Button>
+          {#if blog && currentUser && (currentUser.isOwner || currentUser.id === blog.authorId) && editUrl()}
+            <Button variant="secondary" onclick={() => (window.location.href = editUrl())} className="w-full mt-2">
+              Edit Article
+            </Button>
+          {/if}
         </div>
 
-        <!-- Tags Card -->
+
         {#if blog.tags && blog.tags.length > 0}
-          <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
-            <h3 class="text-sm font-bold uppercase tracking-wide text-muted-foreground mb-4">
-              Tags ({blog.tags.length})
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              {#each blog.tags as tag}
-                <Badge variant="secondary" class="px-3 py-1">{tag}</Badge>
-              {/each}
-            </div>
+          <div class="bg-card border border-border rounded-xl p-2 shadow-sm">
+            <button
+              type="button"
+              class="w-full flex items-center justify-between px-3 py-2"
+              aria-expanded={showTags}
+              onclick={() => (showTags = !showTags)}
+            >
+              <h3 class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Tags ({blog.tags.length})</h3>
+              <span class="text-xs text-muted-foreground">{showTags ? '▴' : '▾'}</span>
+            </button>
+
+            {#if showTags}
+              <div class="px-3 pb-3 pt-1">
+                <div class="flex flex-wrap gap-2">
+                  {#each blog.tags as tag}
+                    <Badge variant="secondary" class="text-xs px-2 py-0.5">{tag}</Badge>
+                  {/each}
+                </div>
+              </div>
+            {/if}
           </div>
         {/if}
       </aside>
     </div>
-  {:else}
-    <div class="text-center py-12">
+  {:else}     
+    <div class="text-center py-4">
       <h2 class="text-2xl font-bold mb-4">Blog not found</h2>
       <Button onclick={() => (window.location.href = `${basePath}/read`)}>Back to Blogs</Button>
     </div>
   {/if}
 </div>
+
+<style>
+  /* Prevent markdown content from causing horizontal overflow */
+  :global(.prose) {
+    /* allow long words to break and wrap */
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+    -ms-word-break: break-word;
+  }
+
+  /* Make pre/code blocks wrap long lines and remain scrollable if needed */
+  :global(.prose pre) {
+    white-space: pre-wrap; /* wrap long lines */
+    word-break: break-word;
+    overflow: auto;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+  }
+
+  :global(.prose code) {
+    word-break: break-word;
+  }
+
+  /* Ensure images and iframes inside prose scale within the constrained column */
+  :global(.prose img),
+  :global(.prose iframe) {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

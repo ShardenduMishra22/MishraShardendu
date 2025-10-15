@@ -3,6 +3,7 @@
   import { getBasePath } from "../navigation";
   import Button from "./ui/button.svelte";
   import Avatar from "./ui/avatar.svelte";
+  import { resolveImageUrl } from "../utils/image";
   import CompactEmailVerification from "./CompactEmailVerification.svelte";
   import { BookOpen, Plus, LogOut, Menu, X, Glasses, LayoutDashboard, User2, LogIn } from "lucide-svelte";
   import { authStore } from "../auth";
@@ -131,7 +132,7 @@
           <div class="flex items-center gap-3 mb-3">
             <div class="relative">
               <Avatar
-                src={user.profileImage || user.image || user.avatar || user.profile?.avatar || undefined}
+                src={resolveImageUrl(user.profileImage || user.image || user.avatar || user.profile?.avatar || undefined)}
                 fallback={user.name?.charAt(0) || "U"}
                 class="w-12 h-12 border-2 border-primary/20 shadow-md"
               />
@@ -291,7 +292,7 @@
         <div class="flex items-center gap-3 mb-3">
           <div class="relative">
             <Avatar
-              src={user.profileImage || user.image || user.avatar || user.profile?.avatar || undefined}
+              src={resolveImageUrl(user.profileImage || user.image || user.avatar || user.profile?.avatar || undefined)}
               fallback={user.name?.charAt(0) || "U"}
               class="w-12 h-12 border-2 border-primary/20 shadow-md"
             />

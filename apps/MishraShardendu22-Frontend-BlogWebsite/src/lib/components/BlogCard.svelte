@@ -6,6 +6,7 @@
   import { marked } from "marked";
   import DOMPurify from "dompurify";
   import type { Blog as ApiBlog } from "../api";
+  import { resolveImageUrl } from "../utils/image";
 
   type Blog = ApiBlog;
 
@@ -70,7 +71,7 @@
     {#if blog.image}
         <div class="mb-4 rounded-lg overflow-hidden aspect-video bg-muted">
         <img 
-          src={blog.image} 
+          src={resolveImageUrl(blog.image)} 
           alt={blog.title} 
           class="w-full h-full object-cover" 
         />
@@ -81,7 +82,7 @@
       <div class="flex items-center gap-2 flex-1 min-w-0">
         <Avatar
           class="w-8 h-8 flex-shrink-0 ring-2 ring-primary/10 transition-all duration-300"
-          src={blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined}
+          src={resolveImageUrl(blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined)}
           fallback={blog.author?.name
             ? getInitials(blog.author.name, blog.author.name)
             : blog.author?.email?.charAt(0).toUpperCase() || "U"}

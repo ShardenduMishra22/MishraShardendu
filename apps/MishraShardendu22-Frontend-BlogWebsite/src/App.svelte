@@ -211,7 +211,7 @@
     <LoginPage />
   {:else}
     <BlogNavigation />
-    <main class="lg:ml-64">
+    <main class="lg:ml-8">
       <div class="mx-auto pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-6 sm:py-8 max-w-7xl">
         {#if pageComponent() === "list"}
         <div class="space-y-6 sm:space-y-8 animate-slide-up">
@@ -239,7 +239,7 @@
               Share your thoughts and insights with the world
             </p>
           </div>
-          <BlogCreatePage />
+          <BlogCreatePage blogId={blogId()} />
         </div>
       {:else if pageComponent() === "dashboard"}
         <div class="space-y-6 sm:space-y-8 animate-slide-up">
@@ -267,7 +267,7 @@
               Update your blog post content
             </p>
           </div>
-          <BlogCreatePage />
+          <BlogCreatePage blogId={blogId()} />
         </div>
         {/if}
       </div>
