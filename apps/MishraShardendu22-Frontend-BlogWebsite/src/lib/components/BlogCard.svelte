@@ -62,18 +62,17 @@
 
 <article
   class="group relative rounded-xl border border-border bg-card/50 backdrop-blur-sm p-5 lg:p-6 
-         hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1 
-         hover:border-primary/40 hover:bg-card/80 overflow-hidden"
+         transition-all duration-300 overflow-hidden"
 >
   <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
   
   <div class="relative z-10">
     {#if blog.image}
-      <div class="mb-4 rounded-lg overflow-hidden aspect-video bg-muted">
+        <div class="mb-4 rounded-lg overflow-hidden aspect-video bg-muted">
         <img 
           src={blog.image} 
           alt={blog.title} 
-          class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
+          class="w-full h-full object-cover" 
         />
       </div>
     {/if}
@@ -81,7 +80,7 @@
     <div class="flex items-center justify-between gap-3 mb-4">
       <div class="flex items-center gap-2 flex-1 min-w-0">
         <Avatar
-          class="w-8 h-8 flex-shrink-0 ring-2 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300"
+          class="w-8 h-8 flex-shrink-0 ring-2 ring-primary/10 transition-all duration-300"
           src={blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined}
           fallback={blog.author?.name
             ? getInitials(blog.author.name, blog.author.name)

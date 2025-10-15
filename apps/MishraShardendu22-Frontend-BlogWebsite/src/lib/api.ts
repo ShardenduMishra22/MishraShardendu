@@ -11,6 +11,10 @@ export interface User {
   email: string
   name: string
   profileImage?: string
+  // Additional optional fields from backend (kept permissive for different schemas)
+  image?: string
+  avatar?: string
+  profile?: UserProfile | null
   isVerified: boolean
   isOwner: boolean
   createdAt?: string

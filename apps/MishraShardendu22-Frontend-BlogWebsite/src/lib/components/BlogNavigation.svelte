@@ -131,7 +131,7 @@
           <div class="flex items-center gap-3 mb-3">
             <div class="relative">
               <Avatar
-                src={undefined}
+                src={user.profileImage || user.image || user.avatar || user.profile?.avatar || undefined}
                 fallback={user.name?.charAt(0) || "U"}
                 class="w-12 h-12 border-2 border-primary/20 shadow-md"
               />
@@ -291,7 +291,7 @@
         <div class="flex items-center gap-3 mb-3">
           <div class="relative">
             <Avatar
-              src={undefined}
+              src={user.profileImage || user.image || user.avatar || user.profile?.avatar || undefined}
               fallback={user.name?.charAt(0) || "U"}
               class="w-12 h-12 border-2 border-primary/20 shadow-md"
             />
