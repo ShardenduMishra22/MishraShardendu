@@ -38,6 +38,9 @@
     }
   ],
   "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "vite --port 5174",
     "dev:mfe": "vite --port $(microfrontends port 2>/dev/null || echo 5174)",

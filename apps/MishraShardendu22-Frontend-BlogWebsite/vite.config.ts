@@ -23,6 +23,7 @@ export default defineConfig(() => {
     },
     appType: 'spa' as const,
     build: {
+      outDir: 'dist', // Explicitly set output directory for Vercel
       rollupOptions: {
         output: {
           manualChunks: {
