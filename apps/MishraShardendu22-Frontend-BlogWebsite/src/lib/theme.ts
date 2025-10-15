@@ -1,12 +1,14 @@
 /**
  * Theme management utilities for dark/light mode
+ * Uses shared localStorage key to sync theme across all portfolio websites
  */
 
 import { writable } from 'svelte/store';
 
 export type Theme = 'light' | 'dark';
 
-const THEME_KEY = 'blog-theme';
+// Shared theme key across all portfolio websites for synchronized theme
+const THEME_KEY = 'portfolio-theme';
 
 // Get initial theme from localStorage or system preference
 function getInitialTheme(): Theme {
@@ -65,8 +67,24 @@ function createThemeStore() {
           }
         };
         
+        // Listen for theme changes from other tabs/websites (cross-app sync)
+        const handleStorageChange = (e: StorageEvent) => {
+          if (e.key === THEME_KEY && e.newValue) {
+            const newTheme = e.newValue as Theme;
+            if (newTheme === 'light' || newTheme === 'dark') {
+              applyTheme(newTheme);
+              set(newTheme);
+            }
+          }
+        };
+        
         mediaQuery.addEventListener('change', handleChange);
-        return () => mediaQuery.removeEventListener('change', handleChange);
+        window.addEventListener('storage', handleStorageChange);
+        
+        return () => {
+          mediaQuery.removeEventListener('change', handleChange);
+          window.removeEventListener('storage', handleStorageChange);
+        };
       }
     }
   };

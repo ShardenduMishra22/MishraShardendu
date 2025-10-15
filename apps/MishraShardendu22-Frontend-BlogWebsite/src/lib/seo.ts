@@ -18,9 +18,9 @@ export interface SEOConfig {
 
 const DEFAULT_SEO: SEOConfig = {
   title: 'Blogs By Shardendu Mishra | Tech Articles & Programming Insights',
-  description: 'Explore in-depth technical articles about web development, software engineering, programming best practices, and modern tech stack insights by Shardendu Mishra.',
-  keywords: 'Shardendu Mishra blog, technical blog, web development articles, programming tutorials, software engineering, Go programming, React tutorials, TypeScript guides, tech insights, developer blog',
-  image: 'mishrashardendu22.is-a.dev/blogog-image.png',
+  description: 'Explore in-depth technical articles about web development, software engineering, programming best practices, and modern tech stack insights by Shardendu Mishra, a passionate software engineer and IIIT Dharwad student.',
+  keywords: 'Shardendu Mishra blog, technical blog, web development articles, programming tutorials, software engineering, Go programming, React tutorials, TypeScript guides, tech insights, developer blog, coding tips, IIIT Dharwad, full stack development, system design',
+  image: 'https://mishrashardendu22.is-a.dev/blog/blogog-image.png',
   url: 'https://mishrashardendu22.is-a.dev/blog',
   type: 'website',
   author: 'Shardendu Mishra',

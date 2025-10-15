@@ -218,6 +218,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          storageKey="portfolio-theme"
         >
           <div className="min-h-screen bg-background text-foreground">
             <div className="fixed bottom-4 right-4 z-50">

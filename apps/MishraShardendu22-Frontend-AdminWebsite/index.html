@@ -58,6 +58,33 @@
     
     <!-- Manifest -->
     <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Theme initialization script - prevents FOUC and handles migration -->
+    <script>
+      (function() {
+        try {
+          // Migrate old theme keys to new shared key for backward compatibility
+          const oldTheme = localStorage.getItem('theme');
+          const sharedTheme = localStorage.getItem('portfolio-theme');
+          
+          if (!sharedTheme && oldTheme) {
+            localStorage.setItem('portfolio-theme', oldTheme);
+            localStorage.removeItem('theme');
+          }
+          
+          // Use shared theme key across all portfolio websites for synchronized theme
+          const theme = localStorage.getItem('portfolio-theme') || 'system';
+          const isDark = theme === 'dark' || 
+            (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          
+          const root = document.documentElement;
+          root.classList.remove('light', 'dark');
+          root.classList.add(isDark ? 'dark' : 'light');
+        } catch (e) {
+          console.error('Failed to initialize theme:', e);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="app"></div>

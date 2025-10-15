@@ -10,7 +10,8 @@ console.log('[Blog Main] Base path:', import.meta.env.BASE_URL);
 function initTheme() {
   try {
     console.log('[Blog Main] Initializing theme...');
-    const theme = localStorage.getItem('blog-theme') || 
+    // Use shared theme key across all portfolio websites for synchronized theme
+    const theme = localStorage.getItem('portfolio-theme') || 
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     
     console.log('[Blog Main] Theme:', theme);

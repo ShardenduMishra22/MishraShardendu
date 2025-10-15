@@ -46,10 +46,14 @@
         blog = response.data;
         
         // Update SEO with blog data
-        const baseUrl = 'https://mishrashardendu22.is-a.dev/blog';
-        const blogUrl = `${baseUrl}/blog/${blogId}`;
+        const baseUrl = 'https://mishrashardendu22.is-a.dev';
+        const blogUrl = `${baseUrl}/blog/read/${blogId}`;
         const description = truncateDescription(blog.content, 160);
         const authorName = blog.author?.name || 'Shardendu Mishra';
+        const tags = Array.isArray(blog.tags) ? blog.tags : [];
+        const keywords = tags.length > 0 
+          ? `${tags.join(', ')}, programming, software development, tech article` 
+          : 'programming, software development, tech article, coding tutorial';
         
         updateSEO({
           title: `${blog.title} | Shardendu Mishra Blog`,
@@ -59,7 +63,8 @@
           author: authorName,
           publishedTime: blog.createdAt,
           modifiedTime: blog.updatedAt,
-          tags: Array.isArray(blog.tags) ? blog.tags : [],
+          tags: tags,
+          keywords: keywords,
         });
 
         // Add structured data for SEO

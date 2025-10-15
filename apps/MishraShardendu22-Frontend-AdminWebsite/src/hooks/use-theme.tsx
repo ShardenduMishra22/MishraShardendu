@@ -30,10 +30,10 @@ export function ThemeProvider({ children }: { children: JSX.Element | JSX.Elemen
     setResolvedTheme(newTheme)
   }
 
-  // Set theme and persist to localStorage
+  // Set theme and persist to localStorage (using shared key for cross-app sync)
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme)
-    localStorage.setItem('theme', newTheme)
+    localStorage.setItem('portfolio-theme', newTheme)
 
     if (newTheme === 'system') {
       applyTheme(getSystemTheme())
@@ -44,7 +44,8 @@ export function ThemeProvider({ children }: { children: JSX.Element | JSX.Elemen
 
   // Initialize theme on mount
   useEffect(() => {
-    const storedTheme = localStorage.getItem('theme') as Theme | null
+    // Use shared theme key across all portfolio websites for synchronized theme
+    const storedTheme = localStorage.getItem('portfolio-theme') as Theme | null
     const initialTheme = storedTheme || 'system'
     setThemeState(initialTheme)
 
@@ -62,8 +63,25 @@ export function ThemeProvider({ children }: { children: JSX.Element | JSX.Elemen
       }
     }
 
+    // Listen for theme changes from other tabs/websites (cross-app sync)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'portfolio-theme' && e.newValue) {
+        const newTheme = e.newValue as Theme
+        setThemeState(newTheme)
+        if (newTheme === 'system') {
+          applyTheme(getSystemTheme())
+        } else {
+          applyTheme(newTheme)
+        }
+      }
+    }
+
     mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
+    window.addEventListener('storage', handleStorageChange)
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange)
+      window.removeEventListener('storage', handleStorageChange)
+    }
   }, [])
 
   return (

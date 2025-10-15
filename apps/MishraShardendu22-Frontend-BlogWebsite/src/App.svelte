@@ -124,51 +124,57 @@
 
   // Update SEO based on current page
   function updatePageSEO() {
-    const baseUrl = 'https://mishrashardendu22.is-a.dev/blog';
+    const baseUrl = 'https://mishrashardendu22.is-a.dev';
     
     switch (pageComponent()) {
       case 'login':
         updateSEO({
-          title: 'Login - Shardendu Mishra Blog',
-          description: 'Sign in to access your blog dashboard and create new posts.',
+          title: 'Login | Shardendu Mishra Blog | Access Your Dashboard',
+          description: 'Sign in to your blog dashboard to create, edit, and publish technical articles. Manage your content and engage with your readers.',
           url: `${baseUrl}/blog/login`,
+          keywords: 'blog login, content management, writer dashboard',
         });
         break;
       case 'list':
         updateSEO({
           title: 'Blogs By Shardendu Mishra | Tech Articles & Programming Insights',
-          description: 'Explore in-depth technical articles about web development, software engineering, programming best practices, and modern tech stack insights.',
+          description: 'Explore in-depth technical articles covering web development, software engineering, programming best practices, system design, and modern tech stack insights. Written by Shardendu Mishra, a passionate software engineer and IIIT Dharwad student.',
           url: `${baseUrl}/blog/read`,
+          keywords: 'technical articles, programming blog, web development, software engineering, coding tutorials, tech insights',
         });
         break;
       case 'create':
         updateSEO({
-          title: 'Create New Post - Shardendu Mishra Blog',
-          description: 'Create and publish a new blog post to share your technical insights.',
+          title: 'Create New Post | Shardendu Mishra Blog',
+          description: 'Create and publish a new technical blog post. Share your knowledge, insights, and experiences with the developer community.',
           url: `${baseUrl}/blog/create`,
+          keywords: 'create blog post, write article, publish content',
         });
         break;
       case 'dashboard':
         updateSEO({
-          title: 'Dashboard - Shardendu Mishra Blog',
-          description: 'Manage your blog posts, view analytics, and monitor engagement.',
+          title: 'Dashboard | Shardendu Mishra Blog | Manage Your Content',
+          description: 'Manage your blog posts, view analytics, monitor engagement, and track your content performance. Your central hub for blog management.',
           url: `${baseUrl}/blog/dashboard`,
+          keywords: 'blog dashboard, content management, analytics, post management',
         });
         break;
       case 'edit':
         updateSEO({
           title: 'Edit Post - Shardendu Mishra Blog',
-          description: 'Edit and update your blog post content.',
+          description: 'Edit and update your blog post content. Refine your technical article to ensure accuracy and clarity for your readers.',
           url: `${baseUrl}${currentPath}`,
+          keywords: 'edit blog post, update article, content editing',
         });
         break;
       case 'detail':
         // SEO will be updated by BlogDetailPage component with specific post data
         updateSEO({
-          title: 'Blog Post - Shardendu Mishra',
-          description: 'Read this technical article by Shardendu Mishra.',
+          title: 'Blog Post | Shardendu Mishra',
+          description: 'Read this insightful technical article by Shardendu Mishra covering programming concepts, best practices, and real-world development experiences.',
           url: `${baseUrl}${currentPath}`,
           type: 'article',
+          keywords: 'technical article, programming tutorial, software development',
         });
         break;
       default:
