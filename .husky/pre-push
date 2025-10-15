@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Build all 3 apps using turbo
+# If any build fails, the push will be blocked
+pnpm turbo build
+
+# Check the exit code
+if [ $? -ne 0 ]; then
+  echo "❌ Build failed! Push blocked."
+  exit 1
+fi
+
+echo "✅ All builds successful!"

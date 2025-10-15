@@ -172,6 +172,7 @@ Each sitemap must include:
 ### Online Validators
 
 1. **XML Sitemap Validator**
+
    ```bash
    # Validate XML structure
    curl -X POST "https://www.xml-sitemaps.com/validate-xml-sitemap.html" \

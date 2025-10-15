@@ -9,7 +9,7 @@ Backend API for the personal website providing authentication, data management, 
 - Runtime: Node.js 18+ or Go 1.21+
 - Database: PostgreSQL 15+
 - ORM: Drizzle (Node.js) or GORM (Go)
-- Authentication: JWT tokens with Better-auth
+- Authentication: JWT tokens
 - API Documentation: OpenAPI 3.0 / Swagger
 
 ## Features
@@ -24,6 +24,7 @@ Backend API for the personal website providing authentication, data management, 
 ## API Endpoints
 
 ### Health Check
+
 ```
 GET /health
 GET /api/health
@@ -32,6 +33,7 @@ GET /api/health
 Returns server status and database connectivity.
 
 ### Authentication
+
 ```
 POST /api/auth/register
 POST /api/auth/login
@@ -40,6 +42,7 @@ GET /api/auth/me
 ```
 
 ### Projects
+
 ```
 GET /api/projects
 GET /api/projects/:id
@@ -49,6 +52,7 @@ DELETE /api/projects/:id (authenticated)
 ```
 
 ### Sitemap Generation
+
 ```
 GET /sitemap.xml
 GET /api/sitemap
@@ -57,6 +61,7 @@ GET /api/sitemap
 Dynamically generates sitemap based on current content.
 
 ### Robots.txt
+
 ```
 GET /robots.txt
 ```
@@ -71,12 +76,12 @@ Returns robots.txt with sitemap location.
 function generateSitemap(request, response):
     baseURL = "https://mishrashardendu22.is-a.dev"
     currentDate = getCurrentDate()
-    
+
     # Initialize XML structure
     xml = createXMLDocument()
     urlset = xml.createElement("urlset")
     urlset.setAttribute("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9")
-    
+
     # Add homepage
     addURLToSitemap(urlset, {
         loc: baseURL + "/",
@@ -84,7 +89,7 @@ function generateSitemap(request, response):
         changefreq: "weekly",
         priority: "1.0"
     })
-    
+
     # Add static pages
     staticPages = [
         {path: "/projects", changefreq: "weekly", priority: "0.9"},
@@ -93,7 +98,7 @@ function generateSitemap(request, response):
         {path: "/volunteer", changefreq: "monthly", priority: "0.6"},
         {path: "/contact", changefreq: "yearly", priority: "0.5"}
     ]
-    
+
     for each page in staticPages:
         addURLToSitemap(urlset, {
             loc: baseURL + page.path,
@@ -101,7 +106,7 @@ function generateSitemap(request, response):
             changefreq: page.changefreq,
             priority: page.priority
         })
-    
+
     # Add dynamic project pages from database
     projects = database.query("SELECT slug, updated_at FROM projects WHERE published = true")
     for each project in projects:
@@ -111,51 +116,51 @@ function generateSitemap(request, response):
             changefreq: "monthly",
             priority: "0.8"
         })
-    
+
     # Set response headers
     response.setHeader("Content-Type", "application/xml")
     response.setHeader("Cache-Control", "public, max-age=3600")
-    
+
     # Return XML
     return xml.toString()
 
 function addURLToSitemap(urlset, data):
     url = urlset.createElement("url")
-    
+
     loc = urlset.createElement("loc")
     loc.textContent = data.loc
     url.appendChild(loc)
-    
+
     lastmod = urlset.createElement("lastmod")
     lastmod.textContent = data.lastmod
     url.appendChild(lastmod)
-    
+
     changefreq = urlset.createElement("changefreq")
     changefreq.textContent = data.changefreq
     url.appendChild(changefreq)
-    
+
     priority = urlset.createElement("priority")
     priority.textContent = data.priority
     url.appendChild(priority)
-    
+
     urlset.appendChild(url)
 ```
 
 ### Node.js Express Example
 
 ```javascript
-const express = require('express');
-const router = express.Router();
-const db = require('./database');
+const express = require('express')
+const router = express.Router()
+const db = require('./database')
 
 router.get('/sitemap.xml', async (req, res) => {
   try {
-    const baseURL = 'https://mishrashardendu22.is-a.dev';
-    const currentDate = new Date().toISOString().split('T')[0];
-    
+    const baseURL = 'https://mishrashardendu22.is-a.dev'
+    const currentDate = new Date().toISOString().split('T')[0]
+
     let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
-    
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`
+
     // Homepage
     sitemap += `
   <url>
@@ -163,56 +168,54 @@ router.get('/sitemap.xml', async (req, res) => {
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>`;
-    
+  </url>`
+
     // Static pages
     const staticPages = [
       { path: '/projects', changefreq: 'weekly', priority: '0.9' },
       { path: '/experiences', changefreq: 'monthly', priority: '0.8' },
       { path: '/certifications', changefreq: 'monthly', priority: '0.7' },
       { path: '/volunteer', changefreq: 'monthly', priority: '0.6' },
-      { path: '/contact', changefreq: 'yearly', priority: '0.5' }
-    ];
-    
-    staticPages.forEach(page => {
+      { path: '/contact', changefreq: 'yearly', priority: '0.5' },
+    ]
+
+    staticPages.forEach((page) => {
       sitemap += `
   <url>
     <loc>${baseURL}${page.path}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
-  </url>`;
-    });
-    
+  </url>`
+    })
+
     // Dynamic project pages
-    const projects = await db.query(
-      'SELECT slug, updated_at FROM projects WHERE published = true'
-    );
-    
-    projects.rows.forEach(project => {
-      const lastmod = new Date(project.updated_at).toISOString().split('T')[0];
+    const projects = await db.query('SELECT slug, updated_at FROM projects WHERE published = true')
+
+    projects.rows.forEach((project) => {
+      const lastmod = new Date(project.updated_at).toISOString().split('T')[0]
       sitemap += `
   <url>
     <loc>${baseURL}/projects/${project.slug}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>`;
-    });
-    
-    sitemap += `
-</urlset>`;
-    
-    res.header('Content-Type', 'application/xml');
-    res.header('Cache-Control', 'public, max-age=3600');
-    res.send(sitemap);
-  } catch (error) {
-    console.error('Sitemap generation error:', error);
-    res.status(500).send('Error generating sitemap');
-  }
-});
+  </url>`
+    })
 
-module.exports = router;
+    sitemap += `
+</urlset>`
+
+    res.header('Content-Type', 'application/xml')
+    res.header('Cache-Control', 'public, max-age=3600')
+    res.send(sitemap)
+  } catch (error) {
+    console.error('Sitemap generation error:', error)
+    res.status(500).send('Error generating sitemap')
+  }
+})
+
+module.exports = router
 ```
 
 ## Environment Variables
@@ -284,6 +287,7 @@ Access full API documentation at `/api/docs` when running the server.
 ## Contact
 
 **Shardendu Mishra**
+
 - GitHub: https://github.com/MishraShardendu22/MishraShardendu22-Backend-PersonalWebsite
 - Email: mishrashardendu22@gmail.com
 

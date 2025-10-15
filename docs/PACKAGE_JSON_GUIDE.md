@@ -80,10 +80,10 @@ Every package in the monorepo should include the following metadata for optimal 
   "homepage": "https://mishrashardendu22.is-a.dev/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MishraShardendu22/MishraShardendu22-Frontend-PersonalWebsite.git"
+    "url": "https://github.com/MishraShardendu22/MishraShardendu.git"
   },
   "bugs": {
-    "url": "https://github.com/MishraShardendu22/MishraShardendu22-Frontend-PersonalWebsite/issues"
+    "url": "https://github.com/MishraShardendu22/MishraShardendu/issues"
   },
   "license": "MIT",
   "keywords": [
@@ -126,10 +126,10 @@ Every package in the monorepo should include the following metadata for optimal 
   "homepage": "https://mishrashardendu22.is-a.dev/blog",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MishraShardendu22/MishraShardendu22-Frontend-BlogWebsite.git"
+    "url": "https://github.com/MishraShardendu22/MishraShardendu.git"
   },
   "bugs": {
-    "url": "https://github.com/MishraShardendu22/MishraShardendu22-Frontend-BlogWebsite/issues"
+    "url": "https://github.com/MishraShardendu22/MishraShardendu/issues"
   },
   "license": "MIT",
   "keywords": [
@@ -169,24 +169,16 @@ Every package in the monorepo should include the following metadata for optimal 
     "email": "mishrashardendu22@gmail.com",
     "url": "https://github.com/MishraShardendu22"
   },
-  "homepage": "https://github.com/MishraShardendu22/MishraShardendu22-Frontend-AdminWebsite",
+  "homepage": "https://github.com/MishraShardendu22/MishraShardendu",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MishraShardendu22/MishraShardendu22-Frontend-AdminWebsite.git"
+    "url": "https://github.com/MishraShardendu22/MishraShardendu.git"
   },
   "bugs": {
-    "url": "https://github.com/MishraShardendu22/MishraShardendu22-Frontend-AdminWebsite/issues"
+    "url": "https://github.com/MishraShardendu22/MishraShardendu/issues"
   },
   "license": "MIT",
-  "keywords": [
-    "admin",
-    "dashboard",
-    "portfolio",
-    "cms",
-    "preact",
-    "vite",
-    "typescript"
-  ],
+  "keywords": ["admin", "dashboard", "portfolio", "cms", "preact", "vite", "typescript"],
   "social": {
     "linkedin": "https://www.linkedin.com/in/shardendumishra22/",
     "github": "https://github.com/MishraShardendu22"
@@ -200,26 +192,31 @@ Every package in the monorepo should include the following metadata for optimal 
 ## Required Fields Explained
 
 ### Core Metadata
+
 - **name**: Package identifier (kebab-case)
 - **version**: Semantic versioning (MAJOR.MINOR.PATCH)
 - **private**: Set to false for public packages, true for internal
 - **description**: Under 160 characters, SEO-friendly
 
 ### Author and Contributors
+
 - **author**: Primary package maintainer
 - **contributors**: Array of additional maintainers
 
 ### Repository Information
+
 - **homepage**: Main URL for the package
 - **repository**: Git repository configuration
 - **bugs**: Issue tracker URL
 
 ### Discovery and SEO
+
 - **license**: License type (MIT recommended)
 - **keywords**: Array of searchable terms for npm/GitHub
 - **social**: Custom field with social media links
 
 ### Environment
+
 - **engines**: Node.js version requirements
 - **packageManager**: Specify pnpm version if needed
 
@@ -255,6 +252,7 @@ Always include these standard scripts:
 ## Keywords Selection
 
 Choose keywords that:
+
 - Describe the technology stack
 - Indicate the package purpose
 - Match common search terms
@@ -262,6 +260,7 @@ Choose keywords that:
 - Mention key features
 
 Example for a Next.js portfolio:
+
 ```json
 "keywords": [
   "portfolio",
@@ -278,11 +277,13 @@ Example for a Next.js portfolio:
 ## Version Management
 
 Follow semantic versioning:
+
 - MAJOR: Breaking changes
 - MINOR: New features, backward compatible
 - PATCH: Bug fixes, backward compatible
 
 Example: 2.10.0
+
 - Version 2: Major version
 - .10: Ten minor releases
 - .0: No patches yet

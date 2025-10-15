@@ -27,6 +27,7 @@ Lightweight, high-performance admin interface for managing portfolio platform co
 The Admin Dashboard provides a comprehensive interface for managing all aspects of the portfolio platform. Built with Preact for minimal bundle size and maximum performance, it offers full CRUD operations for projects, blog posts, experiences, and other content types.
 
 **Key Characteristics**:
+
 - Minimal bundle size with Preact (3KB alternative to React)
 - Fast development with Vite's HMR
 - Type-safe with TypeScript
@@ -37,36 +38,43 @@ The Admin Dashboard provides a comprehensive interface for managing all aspects 
 ## Technology Stack
 
 ### Core Framework
+
 - **Vite 7.1.9**: Next-generation frontend tooling with lightning-fast HMR
 - **Preact 10.27.2**: Fast 3KB alternative to React with same API
 - **TypeScript 5.8**: Static type checking and enhanced IDE support
 
 ### Routing & Navigation
+
 - **Preact Router**: Declarative routing for single-page application
 - **History API**: Browser history management
 
 ### Styling & UI
+
 - **Tailwind CSS 4**: Utility-first CSS framework
 - **HeadlessUI**: Unstyled, accessible UI components adapted for Preact
 - **Lucide Preact**: Icon library optimized for Preact
 - **clsx**: Utility for conditional class names
 
 ### Form Management
+
 - **React Hook Form**: Performant form library (works with Preact)
 - **Zod**: TypeScript-first schema validation
 - **@hookform/resolvers**: Validation integration
 
 ### Rich Text Editing
+
 - **TipTap**: Extensible rich text editor
 - **ProseMirror**: Foundation for TipTap editor
 - **Extensions**: Tables, code blocks, images, mentions
 
 ### HTTP Client
+
 - **Axios**: Promise-based HTTP client
 - **Interceptors**: Request/response middleware
 - **Error Handling**: Centralized error management
 
 ### Additional Libraries
+
 - **date-fns**: Modern date utility library
 - **React Hot Toast**: Beautiful notifications
 - **Chart.js**: Data visualization for analytics
@@ -77,6 +85,7 @@ The Admin Dashboard provides a comprehensive interface for managing all aspects 
 ### Content Management
 
 **Projects**:
+
 - Create, read, update, delete (CRUD) operations
 - Rich media upload and management
 - Technology stack tagging
@@ -85,6 +94,7 @@ The Admin Dashboard provides a comprehensive interface for managing all aspects 
 - Featured project selection
 
 **Blog Posts**:
+
 - Full-featured rich text editor
 - Markdown export/import
 - Category and tag management
@@ -93,6 +103,7 @@ The Admin Dashboard provides a comprehensive interface for managing all aspects 
 - Scheduled publishing
 
 **Experiences**:
+
 - Work history management
 - Achievement tracking
 - Technology association
@@ -100,6 +111,7 @@ The Admin Dashboard provides a comprehensive interface for managing all aspects 
 - Current position indicator
 
 **Certifications**:
+
 - Credential management
 - Issuer information
 - Validation links
@@ -109,12 +121,14 @@ The Admin Dashboard provides a comprehensive interface for managing all aspects 
 ### User Management
 
 **Authentication**:
+
 - Secure login/logout
 - Session management
 - Remember me functionality
 - Password reset flow
 
 **Authorization**:
+
 - Role-based access control
 - Permission management
 - Admin/editor/viewer roles
@@ -123,6 +137,7 @@ The Admin Dashboard provides a comprehensive interface for managing all aspects 
 ### Analytics Dashboard
 
 **Metrics**:
+
 - Page views and unique visitors
 - Content performance analytics
 - User engagement metrics
@@ -130,6 +145,7 @@ The Admin Dashboard provides a comprehensive interface for managing all aspects 
 - Geographic distribution
 
 **Visualizations**:
+
 - Line charts for trends
 - Bar charts for comparisons
 - Pie charts for distributions
@@ -138,6 +154,7 @@ The Admin Dashboard provides a comprehensive interface for managing all aspects 
 ### Media Management
 
 **Features**:
+
 - Drag-and-drop file upload
 - Image optimization
 - File organization
@@ -148,6 +165,7 @@ The Admin Dashboard provides a comprehensive interface for managing all aspects 
 ### System Administration
 
 **Settings**:
+
 - Site configuration
 - API key management
 - Feature flags
@@ -155,6 +173,7 @@ The Admin Dashboard provides a comprehensive interface for managing all aspects 
 - Cache control
 
 **Monitoring**:
+
 - Error tracking
 - Performance metrics
 - API health checks
@@ -239,11 +258,13 @@ public/                           # Static assets
 ### Component Architecture
 
 **Container/Presentational Pattern**:
+
 - Container components handle logic and state
 - Presentational components focus on UI
 - Promotes reusability and testability
 
 **Composition**:
+
 - Small, focused components
 - Compose complex UIs from simple parts
 - Prop-based communication
@@ -376,28 +397,30 @@ pnpm analyze          # Analyze bundle size
 ### Development Workflow
 
 1. **Feature Development**:
+
    ```bash
    # Create feature branch
    git checkout -b feature/new-admin-feature
-   
+
    # Develop with hot reload
    pnpm dev
-   
+
    # Run tests
    pnpm test
-   
+
    # Build and verify
    pnpm build && pnpm preview
    ```
 
 2. **Component Development**:
+
    ```typescript
    // Create new component
    // src/components/ui/NewComponent.tsx
-   
+
    import { h } from 'preact'
    import type { ComponentProps } from './types'
-   
+
    export function NewComponent(props: ComponentProps) {
      return (
        <div className="component">
@@ -408,11 +431,12 @@ pnpm analyze          # Analyze bundle size
    ```
 
 3. **Adding New Pages**:
+
    ```typescript
    // Add route in app.tsx
    import { Route } from 'preact-router'
    import NewPage from './pages/NewPage'
-   
+
    <Route path="/admin/new-page" component={NewPage} />
    ```
 
@@ -421,6 +445,7 @@ pnpm analyze          # Analyze bundle size
 ### Projects Management
 
 **List View**:
+
 - Paginated project list
 - Search and filter
 - Sort by various fields
@@ -428,6 +453,7 @@ pnpm analyze          # Analyze bundle size
 - Bulk operations
 
 **Create/Edit**:
+
 ```typescript
 interface ProjectFormData {
   title: string
@@ -444,6 +470,7 @@ interface ProjectFormData {
 ```
 
 **Features**:
+
 - Rich text description editor
 - Technology multi-select
 - Image upload with preview
@@ -453,6 +480,7 @@ interface ProjectFormData {
 ### Blog Management
 
 **Editor Features**:
+
 - TipTap WYSIWYG editor
 - Markdown support
 - Code block with syntax highlighting
@@ -461,6 +489,7 @@ interface ProjectFormData {
 - Table support
 
 **Publishing Options**:
+
 - Draft/Published status
 - Schedule publishing
 - SEO metadata
@@ -468,6 +497,7 @@ interface ProjectFormData {
 - Tag management
 
 **Preview**:
+
 - Live preview while editing
 - Mobile/desktop preview
 - SEO preview
@@ -475,6 +505,7 @@ interface ProjectFormData {
 ### Analytics Dashboard
 
 **Metrics Displayed**:
+
 ```typescript
 interface AnalyticsMetrics {
   pageViews: {
@@ -502,6 +533,7 @@ interface AnalyticsMetrics {
 ```
 
 **Visualizations**:
+
 - 7/30/90 day views
 - Content performance
 - User engagement
@@ -510,6 +542,7 @@ interface AnalyticsMetrics {
 ### Media Library
 
 **Features**:
+
 - Drag-and-drop upload
 - Multiple file upload
 - Image preview
@@ -518,6 +551,7 @@ interface AnalyticsMetrics {
 - Copy URL functionality
 
 **Supported Formats**:
+
 - Images: JPG, PNG, WebP, SVG
 - Documents: PDF
 - Maximum size: 10MB per file
@@ -534,8 +568,8 @@ export const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: parseInt(import.meta.env.VITE_API_TIMEOUT),
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 })
 
 // Request interceptor
@@ -573,7 +607,7 @@ export const projectsApi = {
   create: (data) => api.post('/projects', data),
   update: (id, data) => api.put(`/projects/${id}`, data),
   delete: (id) => api.delete(`/projects/${id}`),
-  updateOrder: (data) => api.patch('/projects/order', data)
+  updateOrder: (data) => api.patch('/projects/order', data),
 }
 
 // Blog API
@@ -583,7 +617,7 @@ export const blogApi = {
   create: (data) => api.post('/blogs', data),
   update: (id, data) => api.put(`/blogs/${id}`, data),
   delete: (id) => api.delete(`/blogs/${id}`),
-  publish: (id) => api.patch(`/blogs/${id}/publish`)
+  publish: (id) => api.patch(`/blogs/${id}/publish`),
 }
 ```
 
@@ -600,7 +634,7 @@ export function useAuth() {
   const login = async (credentials) => {
     const response = await api.post('/auth/login', credentials)
     const { token, user } = response.data
-    
+
     localStorage.setItem('admin_auth_token', token)
     setUser(user)
   }
@@ -663,14 +697,16 @@ export function hasPermission(user, resource, action) {
   const permissions = {
     admin: ['*'],
     editor: ['projects:*', 'blogs:*', 'media:read'],
-    viewer: ['projects:read', 'blogs:read']
+    viewer: ['projects:read', 'blogs:read'],
   }
 
   const userPermissions = permissions[user.role] || []
-  
-  return userPermissions.includes('*') ||
-         userPermissions.includes(`${resource}:*`) ||
-         userPermissions.includes(`${resource}:${action}`)
+
+  return (
+    userPermissions.includes('*') ||
+    userPermissions.includes(`${resource}:*`) ||
+    userPermissions.includes(`${resource}:${action}`)
+  )
 }
 ```
 
@@ -785,11 +821,11 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['preact', 'preact/hooks'],
-          editor: ['@tiptap/core', '@tiptap/react']
-        }
-      }
-    }
-  }
+          editor: ['@tiptap/core', '@tiptap/react'],
+        },
+      },
+    },
+  },
 })
 ```
 
@@ -798,11 +834,13 @@ export default defineConfig({
 ### Bundle Size
 
 **Targets**:
+
 - Initial bundle: < 50KB (gzipped)
 - Vendor chunks: < 100KB (gzipped)
 - Total size: < 200KB (gzipped)
 
 **Optimizations**:
+
 - Preact instead of React (saves ~30KB)
 - Code splitting by route
 - Dynamic imports for heavy components
@@ -811,6 +849,7 @@ export default defineConfig({
 ### Load Time
 
 **Metrics**:
+
 - Time to Interactive: < 2s
 - First Contentful Paint: < 1s
 - Lighthouse Score: 90+
@@ -819,7 +858,7 @@ export default defineConfig({
 
 ```typescript
 // Lazy load heavy components
-const AnalyticsDashboard = lazy(() => 
+const AnalyticsDashboard = lazy(() =>
   import('./pages/analytics/Dashboard')
 )
 
@@ -901,6 +940,7 @@ See [CONTRIBUTING.md](../../docs/CONTRIBUTING.md) for guidelines.
 ## Support
 
 For support:
+
 - **Issues**: [GitHub Issues](https://github.com/MishraShardendu22/MishraShardendu/issues)
 - **Docs**: [Root Docs](../../docs)
 - **Email**: mishrashardendu22@gmail.com

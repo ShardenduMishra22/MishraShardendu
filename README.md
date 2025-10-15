@@ -12,14 +12,14 @@ Deliver a high-performance, accessible, and SEO-optimized portfolio platform tha
 
 ## Monorepo Structure
 
-| Repository | Purpose | Technology | Live URL |
-|-----------|---------|------------|----------|
-| [MishraShardendu22](https://github.com/MishraShardendu22/MishraShardendu22) | Root monorepo | Turborepo + PNPM | - |
-| [PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Frontend-PersonalWebsite) | Main portfolio site | Next.js 15 | https://mishrashardendu22.is-a.dev |
-| [BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Frontend-BlogWebsite) | Blog platform | Svelte 5  | https://mishrashardendu22.is-a.dev/blog |
-| [AdminWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Frontend-AdminWebsite) | Admin dashboard | Preact  | https://mishrashardendu22.is-a.dev/admin |
-| [Backend-PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-PersonalWebsite) | Personal site API | Go/Fiber | API endpoint |
-| [Backend-BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-BlogWebsite) | Blog API | JS/Node.js | API endpoint |
+| Repository                                                                                                | Purpose             | Technology       | Live URL                                 |
+| --------------------------------------------------------------------------------------------------------- | ------------------- | ---------------- | ---------------------------------------- |
+| [MishraShardendu22](https://github.com/MishraShardendu22/MishraShardendu22)                               | Root monorepo       | Turborepo + PNPM | -                                        |
+| [PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu)                                   | Main portfolio site | Next.js 15       | https://mishrashardendu22.is-a.dev       |
+| [BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu)                                       | Blog platform       | Svelte 5         | https://mishrashardendu22.is-a.dev/blog  |
+| [AdminWebsite](https://github.com/MishraShardendu22/MishraShardendu)                                      | Admin dashboard     | Preact           | https://mishrashardendu22.is-a.dev/admin |
+| [Backend-PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-PersonalWebsite) | Personal site API   | Go/Fiber         | API endpoint                             |
+| [Backend-BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-BlogWebsite)         | Blog API            | JS/Node.js       | API endpoint                             |
 
 ## Overview
 
@@ -28,7 +28,7 @@ This monorepo contains a complete portfolio platform ecosystem built with cuttin
 ### Architecture
 
 - Monorepo Structure: Turborepo + PNPM Workspaces
-- Frontend Applications: Next.js 15, Astro 5, Vite + Preact
+- Frontend Applications: Next.js 15, Svelte 5, Vite + Preact
 - Shared Packages: TypeScript, React components, utilities, authentication
 - Database Systems: PostgreSQL (Blog), MongoDB (Portfolio)
 - Styling: Tailwind CSS 4 + shadcn/ui components
@@ -40,7 +40,7 @@ This monorepo contains a complete portfolio platform ecosystem built with cuttin
 mishrashardendu22/
 ├── apps/
 │   ├── MishraShardendu22-Frontend-PersonalWebsite/  # Next.js 15 - Main portfolio
-│   ├── MishraShardendu22-Frontend-BlogWebsite/      # Astro 5 - Blog system
+│   ├── MishraShardendu22-Frontend-BlogWebsite/      # Svelte 5 - Blog system
 │   └── MishraShardendu22-Frontend-AdminWebsite/     # Vite + Preact - Admin panel
 ├── packages/
 │   ├── shared-ui/          # Shared React components
@@ -81,7 +81,7 @@ The main portfolio application showcasing projects, experiences, skills, and cer
   - TypeScript 5.8
   - Tailwind CSS 4
   - PostgreSQL with Drizzle ORM
-  - Better-auth authentication
+  - Authentication system
 
 - Features:
   - Dynamic project showcase with filtering
@@ -91,13 +91,13 @@ The main portfolio application showcasing projects, experiences, skills, and cer
   - SEO optimized with metadata API
   - PWA support
 
-### Blog Website (Astro 5)
+### Blog Website (Svelte 5)
 
 A high-performance blog platform with markdown support and content management capabilities.
 
 - Technology Stack:
-  - Astro 5 with SSR
-  - React islands for interactivity
+  - Svelte 5 with SSR
+  - SvelteKit for routing and server-side rendering
   - Drizzle ORM with PostgreSQL
   - TipTap rich text editor
   - MDX support
@@ -130,61 +130,51 @@ A lightweight admin interface for managing all platform content.
 
 ## Shared Packages
 
-### @repo/shared-ui
-Reusable React components used across all applications. Built with Radix UI primitives and Tailwind CSS.
+### @repo/eslint-config
 
-### @repo/shared-utils
-Common utility functions for data manipulation, formatting, and validation.
-
-### @repo/shared-types
-TypeScript type definitions and interfaces shared across the monorepo.
-
-### @repo/auth-shared
-Authentication logic and utilities using Better-auth.
-
-### @repo/ui
-Component library with shadcn/ui components configured for the design system.
+Shared ESLint configurations for consistent code quality across all applications.
 
 ### @repo/typescript-config
+
 Shared TypeScript configurations for consistent type checking across projects.
 
 ## Technology Stack
 
 ### Core
 
-| Technology | Version | Purpose |
-|-----------|---------|---------|
-| Node.js | 18+ | Runtime environment |
-| PNPM | 9.0.0 | Package manager |
-| Turborepo | 2.5.8 | Monorepo build system |
-| TypeScript | 5.8 | Type safety |
+| Technology | Version | Purpose               |
+| ---------- | ------- | --------------------- |
+| Node.js    | 18+     | Runtime environment   |
+| PNPM       | 9.0.0   | Package manager       |
+| Turborepo  | 2.5.8   | Monorepo build system |
+| TypeScript | 5.8     | Type safety           |
 
 ### Frontend
 
-| Framework | Version | Application |
-|----------|---------|-------------|
-| Next.js | 15.5.3 | Personal Website |
-| Astro | 5.14.4 | Blog Website |
-| Vite | 7.1.9 | Admin Dashboard |
-| React | 19.2.0 | UI Library |
-| Preact | 10.27.2 | Admin Dashboard |
+| Framework | Version | Application      |
+| --------- | ------- | ---------------- |
+| Next.js   | 15.5.3  | Personal Website |
+| Svelte    | 5.14.4  | Blog Website     |
+| Vite      | 7.1.9   | Admin Dashboard  |
+| React     | 19.2.0  | UI Library       |
+| Preact    | 10.27.2 | Admin Dashboard  |
 
 ### Databases & ORMs
 
-| Technology | Version | Purpose |
-|-----------|---------|---------|
-| PostgreSQL | 15+ | Blog content storage |
-| MongoDB | 7.0+ | Portfolio data storage |
-| Drizzle ORM | Latest | Type-safe database queries |
+| Technology  | Version | Purpose                    |
+| ----------- | ------- | -------------------------- |
+| PostgreSQL  | 15+     | Blog content storage       |
+| MongoDB     | 7.0+    | Portfolio data storage     |
+| Drizzle ORM | Latest  | Type-safe database queries |
 
 ### Styling & UI
 
-| Technology | Purpose |
-|-----------|---------|
-| Tailwind CSS 4 | Utility-first styling |
-| shadcn/ui | Component library |
-| Radix UI | Headless UI primitives |
-| Lucide React | Icon library |
+| Technology     | Purpose                |
+| -------------- | ---------------------- |
+| Tailwind CSS 4 | Utility-first styling  |
+| shadcn/ui      | Component library      |
+| Radix UI       | Headless UI primitives |
+| Lucide React   | Icon library           |
 
 ## Getting Started
 
@@ -235,6 +225,7 @@ pnpm clean
 Each application requires specific environment variables:
 
 **PersonalWebsite (.env.local):**
+
 ```env
 DATABASE_URL=postgresql://user:password@localhost:5432/portfolio
 NEXTAUTH_SECRET=your-secret-key
@@ -242,11 +233,13 @@ API_URL=https://api.mishrashardendu22.is-a.dev
 ```
 
 **BlogWebsite (.env):**
+
 ```env
 VITE_API_URL=https://api-blog.mishrashardendu22.is-a.dev
 ```
 
 **AdminWebsite (.env):**
+
 ```env
 VITE_API_URL=https://api.mishrashardendu22.is-a.dev
 VITE_AUTH_TOKEN=your-admin-token
@@ -309,6 +302,7 @@ Add the following environment variables in Vercel project settings for each appl
 This monorepo implements comprehensive SEO and accessibility optimizations:
 
 ### Technical SEO
+
 - Dynamic sitemap generation at `/sitemap.xml` for all applications
 - Robots.txt configuration allowing all crawlers
 - Canonical URLs for duplicate content prevention
@@ -317,6 +311,7 @@ This monorepo implements comprehensive SEO and accessibility optimizations:
 - Semantic HTML5 elements throughout
 
 ### On-Page SEO
+
 - Unique meta descriptions under 160 characters per page
 - Optimized title tags with templates
 - H1-H6 heading hierarchy
@@ -325,6 +320,7 @@ This monorepo implements comprehensive SEO and accessibility optimizations:
 - Lazy loading for images and media
 
 ### Accessibility (WCAG 2.1 AA)
+
 - Semantic HTML structure
 - ARIA labels and roles where needed
 - Keyboard navigation support
@@ -334,6 +330,7 @@ This monorepo implements comprehensive SEO and accessibility optimizations:
 - Responsive design for mobile accessibility
 
 ### Performance
+
 - Core Web Vitals optimization (LCP, FID, CLS)
 - Image optimization (WebP, AVIF formats)
 - Code splitting and lazy loading
@@ -393,11 +390,11 @@ pnpm clean
 
 ### Accessing Applications
 
-| Application | URL | Description |
-|------------|-----|-------------|
+| Application      | URL                     | Description    |
+| ---------------- | ----------------------- | -------------- |
 | Personal Website | `http://localhost:3000` | Main portfolio |
-| Blog Website | `http://localhost:4321` | Blog platform |
-| Admin Dashboard | `http://localhost:5173` | Admin panel |
+| Blog Website     | `http://localhost:4321` | Blog platform  |
+| Admin Dashboard  | `http://localhost:5173` | Admin panel    |
 
 ## Environment Configuration
 
@@ -438,16 +435,19 @@ See docs/DEPLOYMENT_GUIDE.md for full instructions.
 ## Performance
 
 ### Build
+
 - Turborepo caching for incremental builds
 - PNPM workspace optimization
 - Parallel task execution
 
 ### Runtime
+
 - Next.js Server Components for optimal loading
-- Astro partial hydration to minimize JavaScript
+- Svelte reactive compilation to minimize JavaScript
 - Vite optimized bundling for fast admin dashboard
 
 ### Metrics
+
 - Lighthouse: 95+
 - First Contentful Paint: < 1.5s
 - Time to Interactive: < 2.5s
@@ -456,17 +456,20 @@ See docs/DEPLOYMENT_GUIDE.md for full instructions.
 ## Security
 
 ### Authentication
-- JWT-based authentication with Better-auth
+
+- JWT-based authentication
 - Secure session management
 - Role-based access control
 
 ### Data Protection
+
 - Input validation with Zod schemas
 - Parameterized queries (SQL injection prevention)
 - Content sanitization (XSS defense)
 - SameSite cookies for CSRF mitigation
 
 ### Best Practices
+
 - Environment variable encryption
 - Secure HTTP headers
 - Rate limiting on API endpoints
@@ -526,11 +529,12 @@ Email: mishrashardendu22@gmail.com
 
 ## Acknowledgments
 
-Built with Next.js, Astro, React, TypeScript, Tailwind CSS, Turborepo, PostgreSQL, Drizzle, and more.
+Built with Next.js, Svelte, React, TypeScript, Tailwind CSS, Turborepo, PostgreSQL, Drizzle, and more.
 
-Last Updated: October 2025 -  Version 3.0.0 -  Monorepo Architecture
+Last Updated: October 2025 - Version 3.0.0 - Monorepo Architecture
 
 ### docs/DEVELOPMENT_GUIDE.md
+
 # Development Guide
 
 ## Prerequisites
@@ -612,6 +616,7 @@ pnpm dev
 ```
 
 Access apps:
+
 - Personal Website: `http://localhost:3000`
 - Blog Website: `http://localhost:4321`
 - Admin Dashboard: `http://localhost:5173`
@@ -673,6 +678,7 @@ pnpm test:e2e
 - Cache issues: `pnpm clean && rm -rf node_modules/.cache`
 
 ### docs/DEPLOYMENT_GUIDE.md
+
 # Deployment Guide
 
 ## Build Artifacts
@@ -683,8 +689,9 @@ pnpm start # optional local preview if configured
 ```
 
 Each app produces a build:
+
 - Personal Website (Next.js): `.next/` output; use output: standalone if configured.
-- Blog Website (Astro): `dist/` for static or SSR build output.
+- Blog Website (Svelte): `dist/` for static or SSR build output.
 - Admin Dashboard (Vite): `dist/` static assets.
 
 ## Environment for Production
@@ -719,7 +726,7 @@ Ensure proper SSR/edge runtimes if used.
 ## Static Assets and Caching
 
 - Set long-term caching headers for static assets in `dist/`.
-- Use hashed filenames from Vite/Astro builds.
+- Use hashed filenames from Vite/Svelte builds.
 - For Next.js, leverage image optimization and headers via configuration.
 
 ## Database Migrations
@@ -741,7 +748,7 @@ Example GitHub Actions workflow (simplified):
 name: ci
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -776,6 +783,7 @@ Add deployment jobs per platform and app.
 - Use feature flags to disable risky features.
 
 ### docs/API_DOCS.md
+
 # API Documentation
 
 This document outlines API routes used by the platform. Adjust paths as needed per deployment.
@@ -792,6 +800,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 ### POST /api/auth/login
 
 - Body:
+
 ```json
 {
   "email": "user@example.com",
@@ -800,6 +809,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 ```
 
 - Response 200:
+
 ```json
 {
   "token": "jwt",
@@ -827,6 +837,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
   - `limit`, `offset` (optional)
 
 - Response 200:
+
 ```json
 {
   "items": [
@@ -847,6 +858,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 
 - Header: `Authorization: Bearer <token>`
 - Body:
+
 ```json
 {
   "title": "string",
@@ -857,6 +869,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 ```
 
 - Response 201:
+
 ```json
 { "id": "uuid" }
 ```
@@ -871,6 +884,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
   - `limit`, `offset`
 
 - Response 200:
+
 ```json
 {
   "items": [
@@ -879,7 +893,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
       "slug": "my-first-post",
       "title": "string",
       "excerpt": "string",
-      "tags": ["astro", "nextjs"],
+      "tags": ["svelte", "nextjs"],
       "publishedAt": "2025-10-01T00:00:00.000Z"
     }
   ],
@@ -890,6 +904,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 ### GET /api/posts/:slug
 
 - Response 200:
+
 ```json
 {
   "id": "uuid",
@@ -905,6 +920,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 
 - Header: `Authorization: Bearer <token>`
 - Body:
+
 ```json
 {
   "title": "string",
@@ -916,6 +932,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 ```
 
 - Response 201:
+
 ```json
 { "id": "uuid" }
 ```
@@ -925,6 +942,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 ### GET /api/posts/:slug/comments
 
 - Response 200:
+
 ```json
 [
   {
@@ -939,6 +957,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 ### POST /api/posts/:slug/comments
 
 - Body:
+
 ```json
 {
   "author": "string",
@@ -947,6 +966,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 ```
 
 - Response 201:
+
 ```json
 { "id": "uuid" }
 ```
@@ -957,6 +977,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 
 - Header: `Authorization: Bearer <token>`
 - Response 200:
+
 ```json
 {
   "users": 1200,
@@ -967,6 +988,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 ```
 
 ### docs/CONTRIBUTING.md
+
 # Contributing Guidelines
 
 ## Getting Started
@@ -1011,6 +1033,7 @@ This document outlines API routes used by the platform. Adjust paths as needed p
 - Squash commits when merging.
 
 ### docs/CODE_OF_CONDUCT.md
+
 # Code of Conduct
 
 ## Our Pledge
@@ -1040,6 +1063,7 @@ This Code of Conduct applies within project spaces and in public spaces when rep
 Report issues to the maintainer at mishrashardendu22@gmail.com. All complaints will be reviewed and investigated, resulting in a response deemed necessary and appropriate to the circumstances.
 
 ### docs/SECURITY.md
+
 # Security Policy
 
 ## Supported Versions
@@ -1068,6 +1092,7 @@ Security fixes are applied to the latest major version.
 - Keep dependencies updated.
 
 ### docs/POSTMAN.md
+
 # Postman Collection
 
 ## Overview
@@ -1096,6 +1121,7 @@ A Postman collection is provided to test API endpoints for projects, posts, comm
 - Enable tests and view assertions in the Postman Tests tab.
 
 ### docs/API_EXAMPLES.md
+
 # API Examples
 
 ## cURL
@@ -1115,7 +1141,7 @@ curl -s -X POST http://localhost:3000/api/posts \
 
 ```js
 async function listPosts() {
-  const res = await fetch('/api/posts');
-  return res.json();
+  const res = await fetch('/api/posts')
+  return res.json()
 }
 ```

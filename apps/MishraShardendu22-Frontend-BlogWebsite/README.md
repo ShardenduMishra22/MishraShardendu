@@ -42,6 +42,7 @@ pnpm install
 ### Development
 
 #### Standalone Mode
+
 ```bash
 pnpm dev
 ```
@@ -116,6 +117,7 @@ VITE_API_URL=http://localhost:3000
 ### API Integration
 
 The frontend connects to your backend API. Make sure:
+
 - Backend is running on the configured URL
 - CORS is properly configured
 - All endpoints match the API specification
@@ -127,20 +129,20 @@ The frontend connects to your backend API. Make sure:
 ```typescript
 // Comprehensive types matching backend
 export interface Blog {
-  id: number;
-  title: string;
-  content: string;
-  tags?: string[];
-  authorId: number;
-  createdAt: string;
-  updatedAt: string;
-  author?: Author;
+  id: number
+  title: string
+  content: string
+  tags?: string[]
+  authorId: number
+  createdAt: string
+  updatedAt: string
+  author?: Author
 }
 
 // Type-safe API calls
-const response = await blogApi.getBlogById(1);
+const response = await blogApi.getBlogById(1)
 if (response.success && response.data) {
-  const blog: Blog = response.data;
+  const blog: Blog = response.data
 }
 ```
 
@@ -148,30 +150,31 @@ if (response.success && response.data) {
 
 ```typescript
 // Email validation
-const emailValidation = validateEmail("user@example.com");
+const emailValidation = validateEmail('user@example.com')
 if (!emailValidation.isValid) {
-  console.error(emailValidation.error);
+  console.error(emailValidation.error)
 }
 
 // Password strength
-const passwordValidation = validatePassword("SecurePass123!");
+const passwordValidation = validatePassword('SecurePass123!')
 // Requires: 8+ chars, uppercase, lowercase, number, special char
 ```
 
 ### 3. Toast Notifications
 
 ```typescript
-import { toast } from './lib/toast';
+import { toast } from './lib/toast'
 
-toast.success("Blog created successfully!");
-toast.error("Failed to save");
-toast.warning("Please verify your email");
-toast.info("New features available");
+toast.success('Blog created successfully!')
+toast.error('Failed to save')
+toast.warning('Please verify your email')
+toast.info('New features available')
 ```
 
 ### 4. OTP Verification
 
 Dedicated component with:
+
 - 6-digit OTP input
 - Resend functionality (60s cooldown)
 - Auto-verification
@@ -180,6 +183,7 @@ Dedicated component with:
 ## 🧪 Testing
 
 See [TESTING.md](./TESTING.md) for:
+
 - Authentication flow tests
 - Blog management tests
 - Validation tests
@@ -189,6 +193,7 @@ See [TESTING.md](./TESTING.md) for:
 ## 🚢 Deployment
 
 See [DEPLOYMENT.md](./DEPLOYMENT.md) for:
+
 - Vercel deployment
 - Netlify deployment
 - Docker configuration

@@ -13,7 +13,13 @@ const Popover = ({ open, children }: PopoverProps) => {
   return <div>{children}</div>
 }
 
-const PopoverTrigger = ({ children, onClick }: { children: JSX.Element | JSX.Element[]; onClick?: () => void }) => {
+const PopoverTrigger = ({
+  children,
+  onClick,
+}: {
+  children: JSX.Element | JSX.Element[]
+  onClick?: () => void
+}) => {
   return <div onClick={onClick}>{children}</div>
 }
 

@@ -2,52 +2,53 @@ import { mount } from 'svelte'
 import './app.css'
 import App from './App.svelte'
 
-console.log('[Blog Main] Starting application...');
-console.log('[Blog Main] Current URL:', window.location.href);
-console.log('[Blog Main] Base path:', import.meta.env.BASE_URL);
+console.log('[Blog Main] Starting application...')
+console.log('[Blog Main] Current URL:', window.location.href)
+console.log('[Blog Main] Base path:', import.meta.env.BASE_URL)
 
 // Initialize theme before mounting to prevent FOUC
 function initTheme() {
   try {
-    console.log('[Blog Main] Initializing theme...');
+    console.log('[Blog Main] Initializing theme...')
     // Use shared theme key across all portfolio websites for synchronized theme
-    const theme = localStorage.getItem('portfolio-theme') || 
-      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    
-    console.log('[Blog Main] Theme:', theme);
-    
+    const theme =
+      localStorage.getItem('portfolio-theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+
+    console.log('[Blog Main] Theme:', theme)
+
     if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add('dark')
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove('dark')
     }
   } catch (e) {
-    console.error('[Blog Main] Failed to initialize theme:', e);
+    console.error('[Blog Main] Failed to initialize theme:', e)
   }
 }
 
 // Initialize theme immediately
-initTheme();
+initTheme()
 
 // Mount app with error handling
-let app;
+let app
 
 try {
-  const appElement = document.getElementById('app');
+  const appElement = document.getElementById('app')
   if (!appElement) {
-    throw new Error('App container element not found');
+    throw new Error('App container element not found')
   }
-  
-  console.log('[Blog Main] Mounting app...');
+
+  console.log('[Blog Main] Mounting app...')
   app = mount(App, {
     target: appElement,
-  });
-  
-  console.log('[Blog Main] App mounted successfully');
+  })
+
+  console.log('[Blog Main] App mounted successfully')
 } catch (error) {
-  console.error('[Blog Main] Failed to mount app:', error);
+  console.error('[Blog Main] Failed to mount app:', error)
   // Show error message to user
-  const appElement = document.getElementById('app');
+  const appElement = document.getElementById('app')
   if (appElement) {
     appElement.innerHTML = `
       <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; background: #000; color: #fff;">
@@ -58,8 +59,8 @@ try {
           <button onclick="window.location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Reload Page</button>
         </div>
       </div>
-    `;
+    `
   }
 }
 
-export default app;
+export default app

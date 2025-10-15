@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'preact/hooks'
-import { projectsAPI, experiencesAPI, skillsAPI, certificationsAPI } from '../../utils/apiResponse.util'
+import {
+  projectsAPI,
+  experiencesAPI,
+  skillsAPI,
+  certificationsAPI,
+} from '../../utils/apiResponse.util'
 import { Card, CardContent } from '../../components/ui/card'
 import { Button } from '../../components/ui/button'
 import { Badge } from '../../components/ui/badge'
@@ -29,10 +34,10 @@ export default function DashboardPage() {
 
         const projectsData = Array.isArray(projectsRes.data) ? projectsRes.data : []
         const experiencesData = Array.isArray(experiencesRes.data) ? experiencesRes.data : []
-        
+
         setProjects(projectsData.slice(0, 3))
         setExperiences(experiencesData.slice(0, 3))
-        
+
         setStats({
           projects: projectsData.length,
           experiences: experiencesData.length,
@@ -259,7 +264,11 @@ export default function DashboardPage() {
                       </div>
                       <Badge variant="secondary" className="text-sm px-3 py-1">
                         {new Date(experience.experience_time_line?.[0]?.start_date).getFullYear()} -{' '}
-                        {new Date(experience.experience_time_line?.[experience.experience_time_line.length - 1]?.end_date).getFullYear()}
+                        {new Date(
+                          experience.experience_time_line?.[
+                            experience.experience_time_line.length - 1
+                          ]?.end_date
+                        ).getFullYear()}
                       </Badge>
                     </div>
                   ))}

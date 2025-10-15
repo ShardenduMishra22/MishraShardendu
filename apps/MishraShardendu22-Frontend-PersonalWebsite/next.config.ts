@@ -29,9 +29,12 @@ const nextConfig: NextConfig = {
   },
   outputFileTracingRoot: require('path').join(__dirname, '../../'),
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? {
-      exclude: ['error', 'warn']
-    } : false,
+    removeConsole:
+      process.env.NODE_ENV === 'production'
+        ? {
+            exclude: ['error', 'warn'],
+          }
+        : false,
   },
 }
 

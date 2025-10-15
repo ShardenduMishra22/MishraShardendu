@@ -19,7 +19,7 @@ export const ProfileInfo = ({ currentYear }: ProfileInfoProps) => {
       </div>
 
       <p className="text-muted-foreground text-base lg:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
-        Software Engineer engineering innovative and absolutely 
+        Software Engineer engineering innovative and absolutely
       </p>
       <p className="text-muted-foreground text-base lg:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-6">
         awesome solutions and giving amazing user experiences.

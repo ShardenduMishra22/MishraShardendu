@@ -7,18 +7,8 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env*",
-        "!**/.next/cache/**",
-        "!**/node_modules/**"
-      ],
-      "outputs": [
-        ".next/**",
-        "!.next/cache/**",
-        "dist/**",
-        ".astro/**"
-      ],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "!**/.next/cache/**", "!**/node_modules/**"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", ".svelte-kit/**"],
       "cache": true,
       "outputLogs": "hash-only",
       "env": [
@@ -59,8 +49,5 @@
       "cache": true
     }
   },
-  "globalDependencies": [
-    "**/.env*",
-    "tsconfig.json"
-  ]
+  "globalDependencies": ["**/.env*", "tsconfig.json"]
 }

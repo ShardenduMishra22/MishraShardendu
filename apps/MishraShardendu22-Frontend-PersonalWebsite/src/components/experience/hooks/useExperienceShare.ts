@@ -11,11 +11,11 @@ export function useExperienceShare(experience: Experience | null) {
   const handleCopyMarkdown = async () => {
     if (!experience) return
 
-  const position = experience.experience_time_line?.[0]?.position ?? ''
-  const start = experience.experience_time_line?.[0]?.start_date ?? ''
-  const end = experience.experience_time_line?.[0]?.end_date ?? ''
+    const position = experience.experience_time_line?.[0]?.position ?? ''
+    const start = experience.experience_time_line?.[0]?.start_date ?? ''
+    const end = experience.experience_time_line?.[0]?.end_date ?? ''
 
-  const markdownContent = `# ${position} at ${experience.company_name}
+    const markdownContent = `# ${position} at ${experience.company_name}
 
 ## Duration
 ${formatDate(start)} - ${formatDate(end)}
@@ -28,9 +28,9 @@ ${experience.description}
 
 ${
   experience.certificate_url
-  ? `## Certificate
+    ? `## Certificate
 - **Certificate:** ${experience.certificate_url}`
-  : ''
+    : ''
 }
 
 ---

@@ -31,19 +31,71 @@ function App() {
   return (
     <Router>
       <Route path="/admin/login" component={LoginPage} />
-      <Route path="/admin/dashboard" component={() => <AdminLayout><DashboardPage /></AdminLayout>} />
-      <Route path="/admin/profile" component={() => <AdminLayout><ProfilePage /></AdminLayout>} />
-      <Route path="/admin/skills" component={() => <AdminLayout><SkillsPage /></AdminLayout>} />
-      <Route path="/admin/projects" component={() => <AdminLayout><ProjectsPage /></AdminLayout>} />
-      <Route path="/admin/experiences" component={() => <AdminLayout><ExperiencesPage /></AdminLayout>} />
-      <Route path="/admin/certifications" component={() => <AdminLayout><CertificationsPage /></AdminLayout>} />
-      <Route path="/admin/kanban" component={() => <AdminLayout><KanbanPage /></AdminLayout>} />
-      <Route default component={() => {
-        if (typeof window !== 'undefined') {
-          window.location.href = isAuthenticated ? '/admin/dashboard' : '/admin/login'
-        }
-        return null
-      }} />
+      <Route
+        path="/admin/dashboard"
+        component={() => (
+          <AdminLayout>
+            <DashboardPage />
+          </AdminLayout>
+        )}
+      />
+      <Route
+        path="/admin/profile"
+        component={() => (
+          <AdminLayout>
+            <ProfilePage />
+          </AdminLayout>
+        )}
+      />
+      <Route
+        path="/admin/skills"
+        component={() => (
+          <AdminLayout>
+            <SkillsPage />
+          </AdminLayout>
+        )}
+      />
+      <Route
+        path="/admin/projects"
+        component={() => (
+          <AdminLayout>
+            <ProjectsPage />
+          </AdminLayout>
+        )}
+      />
+      <Route
+        path="/admin/experiences"
+        component={() => (
+          <AdminLayout>
+            <ExperiencesPage />
+          </AdminLayout>
+        )}
+      />
+      <Route
+        path="/admin/certifications"
+        component={() => (
+          <AdminLayout>
+            <CertificationsPage />
+          </AdminLayout>
+        )}
+      />
+      <Route
+        path="/admin/kanban"
+        component={() => (
+          <AdminLayout>
+            <KanbanPage />
+          </AdminLayout>
+        )}
+      />
+      <Route
+        default
+        component={() => {
+          if (typeof window !== 'undefined') {
+            window.location.href = isAuthenticated ? '/admin/dashboard' : '/admin/login'
+          }
+          return null
+        }}
+      />
     </Router>
   )
 }

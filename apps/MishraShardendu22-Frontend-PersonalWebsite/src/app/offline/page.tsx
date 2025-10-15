@@ -27,7 +27,8 @@ export default function OfflinePage() {
             You&apos;re Offline
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
-            It looks like you&apos;re not connected to the internet. Don&apos;t worry, you can still browse some cached content.
+            It looks like you&apos;re not connected to the internet. Don&apos;t worry, you can still
+            browse some cached content.
           </p>
         </div>
 
@@ -38,7 +39,7 @@ export default function OfflinePage() {
           >
             Go to Homepage
           </Link>
-          
+
           <div className="text-sm text-gray-500 dark:text-gray-400">
             <p>Try these when you&apos;re back online:</p>
             <div className="mt-2 space-x-4">
@@ -59,12 +60,10 @@ export default function OfflinePage() {
         </div>
 
         <div className="mt-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-          <h3 className="font-medium text-gray-900 dark:text-white mb-2">
-            About Shardendu Mishra
-          </h3>
+          <h3 className="font-medium text-gray-900 dark:text-white mb-2">About Shardendu Mishra</h3>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            Software Developer and Engineer passionate about building impactful applications 
-            with modern technologies. Specializing in Go, React, and cloud-native solutions.
+            Software Developer and Engineer passionate about building impactful applications with
+            modern technologies. Specializing in Go, React, and cloud-native solutions.
           </p>
         </div>
 

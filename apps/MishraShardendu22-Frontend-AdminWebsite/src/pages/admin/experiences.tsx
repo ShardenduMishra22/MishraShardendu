@@ -1,7 +1,22 @@
 import { useEffect, useState } from 'preact/hooks'
-import { Plus, Edit, Trash2, Briefcase, GraduationCap, ChevronLeft, ChevronRight, X } from 'lucide-react'
+import {
+  Plus,
+  Edit,
+  Trash2,
+  Briefcase,
+  GraduationCap,
+  ChevronLeft,
+  ChevronRight,
+  X,
+} from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../../components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../../components/ui/dialog'
 import { Alert, AlertDescription } from '../../components/ui/alert'
 import { Badge } from '../../components/ui/badge'
 import { Input } from '../../components/ui/input'
@@ -49,7 +64,7 @@ export default function ExperiencesPage() {
     company_logo: '',
     certificate_url: '',
     projects: [],
-    images: ''
+    images: '',
   })
 
   const fetchExperiences = async () => {
@@ -69,7 +84,10 @@ export default function ExperiencesPage() {
     projectsAPI.getAllProjects().then((res) => {
       setAllProjects(
         Array.isArray(res.data)
-          ? res.data.map((p: { inline: { id: string }; project_name: string }) => ({ id: p.inline.id, name: p.project_name }))
+          ? res.data.map((p: { inline: { id: string }; project_name: string }) => ({
+              id: p.inline.id,
+              name: p.project_name,
+            }))
           : []
       )
     })
@@ -145,7 +163,7 @@ export default function ExperiencesPage() {
       company_logo: '',
       certificate_url: '',
       projects: [],
-      images: ''
+      images: '',
     })
     setSelectedTechnologies([])
     setSelectedProjects([])
@@ -248,38 +266,49 @@ export default function ExperiencesPage() {
                   <Input
                     id="company_name"
                     value={formData.company_name}
-                    onChange={(e) => setFormData({...formData, company_name: (e.target as HTMLInputElement).value})}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        company_name: (e.target as HTMLInputElement).value,
+                      })
+                    }
                     placeholder="Enter company name"
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="position">Position</Label>
-                  <Input 
-                    id="position" 
+                  <Input
+                    id="position"
                     value={formData.position}
-                    onChange={(e) => setFormData({...formData, position: (e.target as HTMLInputElement).value})}
-                    placeholder="Enter position" 
+                    onChange={(e) =>
+                      setFormData({ ...formData, position: (e.target as HTMLInputElement).value })
+                    }
+                    placeholder="Enter position"
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="start_date">Start Date</Label>
-                  <Input 
-                    id="start_date" 
-                    type="date" 
+                  <Input
+                    id="start_date"
+                    type="date"
                     value={formData.start_date}
-                    onChange={(e) => setFormData({...formData, start_date: (e.target as HTMLInputElement).value})}
+                    onChange={(e) =>
+                      setFormData({ ...formData, start_date: (e.target as HTMLInputElement).value })
+                    }
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="end_date">End Date</Label>
-                  <Input 
-                    id="end_date" 
-                    type="date" 
+                  <Input
+                    id="end_date"
+                    type="date"
                     value={formData.end_date}
-                    onChange={(e) => setFormData({...formData, end_date: (e.target as HTMLInputElement).value})}
+                    onChange={(e) =>
+                      setFormData({ ...formData, end_date: (e.target as HTMLInputElement).value })
+                    }
                   />
                 </div>
 
@@ -288,7 +317,12 @@ export default function ExperiencesPage() {
                   <Input
                     id="company_logo"
                     value={formData.company_logo}
-                    onChange={(e) => setFormData({...formData, company_logo: (e.target as HTMLInputElement).value})}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        company_logo: (e.target as HTMLInputElement).value,
+                      })
+                    }
                     placeholder="https://example.com/logo.png"
                   />
                 </div>
@@ -298,7 +332,12 @@ export default function ExperiencesPage() {
                   <Input
                     id="certificate_url"
                     value={formData.certificate_url}
-                    onChange={(e) => setFormData({...formData, certificate_url: (e.target as HTMLInputElement).value})}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        certificate_url: (e.target as HTMLInputElement).value,
+                      })
+                    }
                     placeholder="https://example.com/certificate.pdf"
                   />
                 </div>
@@ -308,7 +347,7 @@ export default function ExperiencesPage() {
                 <Label htmlFor="description">Description</Label>
                 <MarkdownEditor
                   content={formData.description}
-                  onChange={(content) => setFormData({...formData, description: content})}
+                  onChange={(content) => setFormData({ ...formData, description: content })}
                   placeholder="Describe your experience..."
                 />
               </div>
@@ -318,7 +357,9 @@ export default function ExperiencesPage() {
                 <Input
                   id="images"
                   value={formData.images}
-                  onChange={(e) => setFormData({...formData, images: (e.target as HTMLInputElement).value})}
+                  onChange={(e) =>
+                    setFormData({ ...formData, images: (e.target as HTMLInputElement).value })
+                  }
                   placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
                 />
               </div>

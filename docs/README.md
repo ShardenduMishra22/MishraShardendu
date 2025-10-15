@@ -5,11 +5,13 @@ This directory contains comprehensive documentation for the Shardendu Mishra Por
 ## Table of Contents
 
 ### Project Documentation
+
 - [API Documentation](./API_DOCS.md) - API endpoints and usage
 - [Development Guide](./DEVELOPMENT_GUIDE.md) - Setup and development instructions
 - [Postman Collection](./POSTMAN.md) - API testing with Postman
 
 ### Component Guides
+
 - [Canvas Card Visibility Fix](./CANVAS_CARD_VISIBILITY_FIX.md)
 - [Experience Sidebar Fix](./EXPERIENCE_SIDEBAR_FIX.md)
 - [Media Projects Button Fix](./MEDIA_PROJECTS_BUTTON_FIX.md)
@@ -18,17 +20,20 @@ This directory contains comprehensive documentation for the Shardendu Mishra Por
 - [UI Components Guide](./UI_COMPONENTS_GUIDE.md)
 
 ### Architecture & Setup
+
 - [Microfrontends Setup](./MICROFRONTENDS_SETUP.md)
 - [Migration Examples](./MIGRATION_EXAMPLES.md)
 - [Session Summary](./SESSION_SUMMARY.md)
 - [Docs Cleanup Summary](./DOCS_CLEANUP_SUMMARY.md)
 
 ### Community Guidelines
+
 - [Contributing Guidelines](./CONTRIBUTING.md) - How to contribute
 - [Code of Conduct](./CODE_OF_CONDUCT.md) - Community standards
 - [Security Policy](./SECURITY.md) - Security and vulnerability reporting
 
 ### Additional Resources
+
 - [Response Documentation](./Response.md) - Response format specifications
 
 ## Quick Links

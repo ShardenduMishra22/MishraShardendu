@@ -12,11 +12,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     base: basePath,
-    plugins: [
-      preact(),
-      tailwindcss(),
-      microfrontends({ basePath }),
-    ],
+    plugins: [preact(), tailwindcss(), microfrontends({ basePath })],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),

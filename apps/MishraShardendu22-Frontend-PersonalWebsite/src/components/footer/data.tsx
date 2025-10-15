@@ -48,7 +48,7 @@ export const quickLinks: LinkItem[] = [
     label: 'Certifications',
     shortLabel: 'Certs',
     icon: <Award className="h-3 lg:h-4 w-3 lg:w-4" />,
-  }
+  },
 ]
 
 export const socialLinks: LinkItem[] = [

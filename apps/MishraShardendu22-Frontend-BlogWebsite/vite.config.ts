@@ -1,4 +1,4 @@
-import path from "path"
+import path from 'path'
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
@@ -11,14 +11,10 @@ export default defineConfig(() => {
 
   return {
     base: basePath,
-    plugins: [
-      svelte(),
-      tailwindcss(),
-      microfrontends(),
-    ],
+    plugins: [svelte(), tailwindcss(), microfrontends()],
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        '@': path.resolve(__dirname, './src'),
       },
     },
     appType: 'spa' as const,
@@ -30,10 +26,7 @@ export default defineConfig(() => {
             // Core vendor chunk - Framework
             'vendor-core': ['svelte'],
             // UI components chunk
-            'vendor-ui': [
-              'lucide-svelte',
-              'lucide-react',
-            ],
+            'vendor-ui': ['lucide-svelte', 'lucide-react'],
           },
         },
       },

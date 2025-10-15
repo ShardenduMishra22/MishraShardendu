@@ -26,12 +26,14 @@ Backend API for the blog platform providing content management, authentication, 
 ## API Endpoints
 
 ### Health Check
+
 ```
 GET /health
 GET /api/health
 ```
 
 ### Blog Posts
+
 ```
 GET /api/posts
 GET /api/posts/:slug
@@ -41,6 +43,7 @@ DELETE /api/posts/:slug (authenticated)
 ```
 
 ### Categories and Tags
+
 ```
 GET /api/categories
 GET /api/tags
@@ -49,6 +52,7 @@ GET /api/posts?tag=:tagSlug
 ```
 
 ### Comments
+
 ```
 GET /api/posts/:slug/comments
 POST /api/posts/:slug/comments (authenticated)
@@ -56,12 +60,14 @@ DELETE /api/comments/:id (authenticated)
 ```
 
 ### Sitemap Generation
+
 ```
 GET /sitemap.xml
 GET /blog-sitemap.xml
 ```
 
 ### RSS Feed
+
 ```
 GET /rss.xml
 GET /feed.xml
@@ -74,12 +80,12 @@ GET /feed.xml
 ```
 function generateBlogSitemap(request, response):
     baseURL = "https://mishrashardendu22.is-a.dev/blog"
-    
+
     # Initialize XML structure
     xml = createXMLDocument()
     urlset = xml.createElement("urlset")
     urlset.setAttribute("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9")
-    
+
     # Add blog home
     addURLToSitemap(urlset, {
         loc: baseURL,
@@ -87,16 +93,16 @@ function generateBlogSitemap(request, response):
         changefreq: "daily",
         priority: "1.0"
     })
-    
+
     # Add published blog posts from database
     posts = database.query("
-        SELECT slug, updated_at, published_at 
-        FROM posts 
-        WHERE status = 'published' 
+        SELECT slug, updated_at, published_at
+        FROM posts
+        WHERE status = 'published'
         AND published_at <= NOW()
         ORDER BY published_at DESC
     ")
-    
+
     for each post in posts:
         addURLToSitemap(urlset, {
             loc: baseURL + "/" + post.slug,
@@ -104,7 +110,7 @@ function generateBlogSitemap(request, response):
             changefreq: "weekly",
             priority: "0.8"
         })
-    
+
     # Add category pages
     categories = database.query("SELECT slug FROM categories")
     for each category in categories:
@@ -114,7 +120,7 @@ function generateBlogSitemap(request, response):
             changefreq: "weekly",
             priority: "0.6"
         })
-    
+
     # Add tag pages
     tags = database.query("SELECT slug FROM tags")
     for each tag in tags:
@@ -124,29 +130,29 @@ function generateBlogSitemap(request, response):
             changefreq: "weekly",
             priority: "0.5"
         })
-    
+
     # Set response headers
     response.setHeader("Content-Type", "application/xml")
     response.setHeader("Cache-Control", "public, max-age=1800")
-    
+
     return xml.toString()
 ```
 
 ### Node.js Express Example
 
 ```javascript
-const express = require('express');
-const router = express.Router();
-const db = require('./database');
+const express = require('express')
+const router = express.Router()
+const db = require('./database')
 
 router.get('/sitemap.xml', async (req, res) => {
   try {
-    const baseURL = 'https://mishrashardendu22.is-a.dev/blog';
-    const currentDate = new Date().toISOString().split('T')[0];
-    
+    const baseURL = 'https://mishrashardendu22.is-a.dev/blog'
+    const currentDate = new Date().toISOString().split('T')[0]
+
     let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
-    
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`
+
     // Blog home
     sitemap += `
   <url>
@@ -154,8 +160,8 @@ router.get('/sitemap.xml', async (req, res) => {
     <lastmod>${currentDate}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-  </url>`;
-    
+  </url>`
+
     // Published blog posts
     const posts = await db.query(`
       SELECT slug, updated_at, published_at 
@@ -163,56 +169,56 @@ router.get('/sitemap.xml', async (req, res) => {
       WHERE status = 'published' 
       AND published_at <= NOW()
       ORDER BY published_at DESC
-    `);
-    
-    posts.rows.forEach(post => {
-      const lastmod = new Date(post.updated_at).toISOString().split('T')[0];
+    `)
+
+    posts.rows.forEach((post) => {
+      const lastmod = new Date(post.updated_at).toISOString().split('T')[0]
       sitemap += `
   <url>
     <loc>${baseURL}/${post.slug}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>`;
-    });
-    
+  </url>`
+    })
+
     // Category pages
-    const categories = await db.query('SELECT slug FROM categories');
-    categories.rows.forEach(category => {
+    const categories = await db.query('SELECT slug FROM categories')
+    categories.rows.forEach((category) => {
       sitemap += `
   <url>
     <loc>${baseURL}/categories/${category.slug}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
-  </url>`;
-    });
-    
+  </url>`
+    })
+
     // Tag pages
-    const tags = await db.query('SELECT slug FROM tags');
-    tags.rows.forEach(tag => {
+    const tags = await db.query('SELECT slug FROM tags')
+    tags.rows.forEach((tag) => {
       sitemap += `
   <url>
     <loc>${baseURL}/tags/${tag.slug}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>`;
-    });
-    
-    sitemap += `
-</urlset>`;
-    
-    res.header('Content-Type', 'application/xml');
-    res.header('Cache-Control', 'public, max-age=1800');
-    res.send(sitemap);
-  } catch (error) {
-    console.error('Blog sitemap generation error:', error);
-    res.status(500).send('Error generating sitemap');
-  }
-});
+  </url>`
+    })
 
-module.exports = router;
+    sitemap += `
+</urlset>`
+
+    res.header('Content-Type', 'application/xml')
+    res.header('Cache-Control', 'public, max-age=1800')
+    res.send(sitemap)
+  } catch (error) {
+    console.error('Blog sitemap generation error:', error)
+    res.status(500).send('Error generating sitemap')
+  }
+})
+
+module.exports = router
 ```
 
 ## Canonical URL Configuration
@@ -285,8 +291,8 @@ The API also provides an RSS feed endpoint:
 ```javascript
 router.get('/rss.xml', async (req, res) => {
   try {
-    const baseURL = 'https://mishrashardendu22.is-a.dev/blog';
-    
+    const baseURL = 'https://mishrashardendu22.is-a.dev/blog'
+
     const posts = await db.query(`
       SELECT title, slug, summary, published_at, updated_at, author
       FROM posts 
@@ -294,18 +300,18 @@ router.get('/rss.xml', async (req, res) => {
       AND published_at <= NOW()
       ORDER BY published_at DESC
       LIMIT 20
-    `);
-    
+    `)
+
     let rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
     <title>Shardendu Mishra Blog</title>
     <link>${baseURL}</link>
     <description>Technical articles about web development, programming, and software engineering insights</description>
-    <language>en-us</language>`;
-    
-    posts.rows.forEach(post => {
-      const pubDate = new Date(post.published_at).toUTCString();
+    <language>en-us</language>`
+
+    posts.rows.forEach((post) => {
+      const pubDate = new Date(post.published_at).toUTCString()
       rss += `
     <item>
       <title>${escapeXML(post.title)}</title>
@@ -313,21 +319,21 @@ router.get('/rss.xml', async (req, res) => {
       <description>${escapeXML(post.summary)}</description>
       <pubDate>${pubDate}</pubDate>
       <guid>${baseURL}/${post.slug}</guid>
-    </item>`;
-    });
-    
+    </item>`
+    })
+
     rss += `
   </channel>
-</rss>`;
-    
-    res.header('Content-Type', 'application/rss+xml');
-    res.header('Cache-Control', 'public, max-age=3600');
-    res.send(rss);
+</rss>`
+
+    res.header('Content-Type', 'application/rss+xml')
+    res.header('Cache-Control', 'public, max-age=3600')
+    res.send(rss)
   } catch (error) {
-    console.error('RSS generation error:', error);
-    res.status(500).send('Error generating RSS feed');
+    console.error('RSS generation error:', error)
+    res.status(500).send('Error generating RSS feed')
   }
-});
+})
 ```
 
 ## API Documentation
@@ -337,6 +343,7 @@ Access full API documentation at `/api/docs` when running the server.
 ## Contact
 
 **Shardendu Mishra**
+
 - GitHub: https://github.com/MishraShardendu22/MishraShardendu22-Backend-BlogWebsite
 - Email: mishrashardendu22@gmail.com
 

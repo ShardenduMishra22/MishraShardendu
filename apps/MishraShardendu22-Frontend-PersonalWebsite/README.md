@@ -24,20 +24,23 @@ Professional portfolio application showcasing projects, experiences, skills, and
 This is the main portfolio application of the monorepo, serving as the primary web presence. It provides a comprehensive showcase of professional work, technical skills, and career achievements through an intuitive and performant interface.
 
 **Key Characteristics**:
+
 - Server-side rendering with Next.js 15 App Router
 - Type-safe database operations with Drizzle ORM
-- Modern authentication with Better-auth
+- Modern authentication system
 - Progressive Web App capabilities
 - Optimized for Core Web Vitals
 
 ## Technology Stack
 
 ### Core Framework
+
 - **Next.js 15.5.3**: React framework with App Router, Server Components, and Server Actions
 - **React 19.2.0**: UI library with concurrent features and improved hydration
 - **TypeScript 5.8**: Static type checking and enhanced developer experience
 
 ### Styling & UI
+
 - **Tailwind CSS 4**: Utility-first CSS framework with JIT compilation
 - **shadcn/ui**: High-quality accessible component library built on Radix UI
 - **Radix UI**: Unstyled, accessible component primitives
@@ -45,20 +48,23 @@ This is the main portfolio application of the monorepo, serving as the primary w
 - **Framer Motion**: Production-ready animation library
 
 ### Database & ORM
+
 - **PostgreSQL 15+**: Relational database for structured data
 - **Drizzle ORM**: Type-safe SQL ORM with excellent TypeScript support
-- **Better-auth**: Modern authentication library with session management
 
 ### Data Visualization
+
 - **Nivo**: Rich data visualization library
 - **Recharts**: Composable charting library built on D3
 
 ### Form Management
+
 - **React Hook Form**: Performant form library with minimal re-renders
 - **Zod**: TypeScript-first schema validation
 - **@hookform/resolvers**: Integration between React Hook Form and Zod
 
 ### Additional Libraries
+
 - **Axios**: HTTP client for API requests
 - **date-fns**: Modern date utility library
 - **React Markdown**: Markdown rendering component
@@ -68,6 +74,7 @@ This is the main portfolio application of the monorepo, serving as the primary w
 ## Features
 
 ### Portfolio Showcase
+
 - **Dynamic Project Gallery**: Filterable and searchable project showcase with live statistics
 - **Project Details**: Comprehensive project pages with descriptions, technologies, and links
 - **GitHub Integration**: Real-time repository statistics and contribution data
@@ -75,6 +82,7 @@ This is the main portfolio application of the monorepo, serving as the primary w
 - **Technology Tags**: Visual representation of tech stack for each project
 
 ### Professional Experience
+
 - **Timeline View**: Chronological display of work experience
 - **Achievement Highlights**: Key accomplishments and responsibilities
 - **Skills Matrix**: Interactive visualization of technical proficiencies
@@ -82,6 +90,7 @@ This is the main portfolio application of the monorepo, serving as the primary w
 - **Volunteer Work**: Community contributions and open-source involvement
 
 ### Content Management
+
 - **Blog Integration**: Seamless connection with blog application
 - **Rich Text Support**: Markdown and HTML content rendering
 - **Comment System**: Engagement through threaded discussions
@@ -89,6 +98,7 @@ This is the main portfolio application of the monorepo, serving as the primary w
 - **Analytics Dashboard**: Performance metrics and visitor insights
 
 ### User Experience
+
 - **Responsive Design**: Mobile-first approach with breakpoint optimization
 - **Dark/Light Mode**: System preference detection with manual toggle
 - **Progressive Web App**: Offline support and app-like experience
@@ -96,6 +106,7 @@ This is the main portfolio application of the monorepo, serving as the primary w
 - **Accessibility**: WCAG 2.1 AA compliance with keyboard navigation
 
 ### Technical Features
+
 - **Server Components**: Optimal data fetching and reduced client bundle
 - **Streaming SSR**: Progressive page rendering for faster perceived performance
 - **Image Optimization**: WebP/AVIF formats with lazy loading
@@ -161,7 +172,6 @@ public/                          # Static assets
 - **Client State**: React hooks (useState, useReducer) for local state
 - **URL State**: Search params and pathname for shareable state
 - **Form State**: React Hook Form for complex form management
-- **Auth State**: Better-auth for authentication state
 
 ## Getting Started
 
@@ -214,18 +224,6 @@ DATABASE_URL="postgresql://username:password@localhost:5432/portfolio_db"
 
 # Direct database connection (for migrations)
 DIRECT_URL="postgresql://username:password@localhost:5432/portfolio_db"
-```
-
-### Authentication
-
-```env
-# Better-auth configuration
-BETTER_AUTH_SECRET="your-secret-key-min-32-characters"
-BETTER_AUTH_URL="http://localhost:3000"
-
-# JWT Configuration
-JWT_SECRET="your-jwt-secret-matching-backend"
-JWT_EXPIRATION="7d"
 ```
 
 ### API Configuration
@@ -330,6 +328,7 @@ pnpm test:e2e        # Run end-to-end tests
 ### Core Tables
 
 #### Projects Table
+
 ```typescript
 export const projects = pgTable('projects', {
   id: serial('id').primaryKey(),
@@ -347,11 +346,12 @@ export const projects = pgTable('projects', {
   githubStars: integer('github_stars'),
   githubForks: integer('github_forks'),
   createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow()
-});
+  updatedAt: timestamp('updated_at').defaultNow(),
+})
 ```
 
 #### Experiences Table
+
 ```typescript
 export const experiences = pgTable('experiences', {
   id: serial('id').primaryKey(),
@@ -369,11 +369,12 @@ export const experiences = pgTable('experiences', {
   companyUrl: varchar('company_url', { length: 500 }),
   companyLogo: varchar('company_logo', { length: 500 }),
   createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow()
-});
+  updatedAt: timestamp('updated_at').defaultNow(),
+})
 ```
 
 #### Certifications Table
+
 ```typescript
 export const certifications = pgTable('certifications', {
   id: serial('id').primaryKey(),
@@ -387,8 +388,8 @@ export const certifications = pgTable('certifications', {
   skills: text('skills').array(),
   imageUrl: varchar('image_url', { length: 500 }),
   createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow()
-});
+  updatedAt: timestamp('updated_at').defaultNow(),
+})
 ```
 
 ### Relationships
@@ -443,55 +444,6 @@ GET    /api/proxy/skills          # Fetch skills
 GET    /api/health                # Application health status
 ```
 
-## Authentication
-
-### Better-auth Integration
-
-The application uses Better-auth for modern, secure authentication:
-
-**Features**:
-- Email/password authentication
-- Session management with secure cookies
-- CSRF protection
-- Rate limiting on auth endpoints
-- Password hashing with bcrypt
-- JWT token generation for API access
-
-**Configuration** (`lib/auth.ts`):
-```typescript
-import { betterAuth } from "better-auth"
-import { drizzleAdapter } from "better-auth/adapters/drizzle"
-import { db } from "./db"
-
-export const auth = betterAuth({
-  database: drizzleAdapter(db, {
-    provider: "pg"
-  }),
-  session: {
-    expiresIn: 60 * 60 * 24 * 7, // 7 days
-    updateAge: 60 * 60 * 24 // 24 hours
-  },
-  emailAndPassword: {
-    enabled: true,
-    minPasswordLength: 8
-  }
-})
-```
-
-### Protected Routes
-
-Protected routes use middleware to verify authentication:
-
-```typescript
-// middleware.ts
-import { authMiddleware } from "@/lib/auth"
-
-export default authMiddleware({
-  publicRoutes: ["/", "/projects", "/experiences"],
-  protectedRoutes: ["/api/admin/*"]
-})
-```
-
 ## Deployment
 
 ### Vercel Deployment (Recommended)
@@ -510,6 +462,7 @@ vercel --prod
 ### Environment Variables on Vercel
 
 Add all required environment variables in Vercel dashboard:
+
 1. Go to Project Settings > Environment Variables
 2. Add each variable from `.env.local`
 3. Set scope (Production, Preview, Development)
@@ -518,6 +471,7 @@ Add all required environment variables in Vercel dashboard:
 ### Build Configuration
 
 **vercel.json**:
+
 ```json
 {
   "buildCommand": "pnpm build",
@@ -532,6 +486,7 @@ Add all required environment variables in Vercel dashboard:
 ### Database Setup for Production
 
 Use managed PostgreSQL service:
+
 - **Vercel Postgres**: Integrated solution
 - **Neon**: Serverless PostgreSQL
 - **Supabase**: PostgreSQL with additional features
@@ -620,6 +575,7 @@ For contribution guidelines, please refer to the [main repository CONTRIBUTING.m
 ## Support
 
 For issues, questions, or contributions:
+
 - **Issues**: [GitHub Issues](https://github.com/MishraShardendu22/MishraShardendu/issues)
 - **Documentation**: [Root Docs](../../docs)
 - **Email**: mishrashardendu22@gmail.com

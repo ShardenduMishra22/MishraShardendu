@@ -23,21 +23,25 @@ Use this template for creating professional README files for each application in
 ## Technology Stack
 
 ### Core
+
 - Framework Name Version: Description of role
 - Library Name Version: Description of role
 - Language Version: Description of role
 
 ### UI and Styling
+
 - CSS Framework: Purpose
 - Component Library: Purpose
 - Icon Library: Purpose
 
 ### Data Management
+
 - State Management: Tool and purpose
 - Data Fetching: Tool and purpose
 - Form Handling: Tool and purpose
 
 ### Additional Tools
+
 - Tool 1: Purpose
 - Tool 2: Purpose
 
@@ -133,6 +137,7 @@ src/
 This application implements comprehensive SEO and accessibility features:
 
 ### SEO Features
+
 - Dynamic sitemap generation at `/sitemap.xml`
 - Robots.txt configuration
 - Canonical URLs on all pages
@@ -141,6 +146,7 @@ This application implements comprehensive SEO and accessibility features:
 - Optimized meta descriptions and title tags
 
 ### Accessibility Features
+
 - Semantic HTML structure
 - ARIA labels and roles
 - Keyboard navigation support
@@ -208,6 +214,7 @@ Contributions are welcome. Please follow these steps:
 5. Submit a pull request
 
 Please ensure:
+
 - All tests pass
 - Code follows style guide (ESLint + Prettier)
 - Commit messages are clear and descriptive
@@ -224,12 +231,14 @@ Please ensure:
 ### Common Issues
 
 **Issue 1: Description**
+
 ```bash
 # Solution
 command to fix
 ```
 
 **Issue 2: Description**
+
 ```bash
 # Solution
 command to fix

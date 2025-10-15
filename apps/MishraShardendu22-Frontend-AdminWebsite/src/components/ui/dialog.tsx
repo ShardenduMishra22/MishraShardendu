@@ -27,7 +27,13 @@ const Dialog = ({ open, children }: DialogProps) => {
   return <div>{children}</div>
 }
 
-const DialogTrigger = ({ children, onClick }: { children: JSX.Element | JSX.Element[]; onClick?: () => void }) => {
+const DialogTrigger = ({
+  children,
+  onClick,
+}: {
+  children: JSX.Element | JSX.Element[]
+  onClick?: () => void
+}) => {
   return <div onClick={onClick}>{children}</div>
 }
 
@@ -35,20 +41,19 @@ const DialogPortal = ({ children }: { children: JSX.Element | JSX.Element[] }) =
   return <div>{children}</div>
 }
 
-const DialogClose = ({ children, onClick }: { children?: JSX.Element | JSX.Element[]; onClick?: () => void }) => {
+const DialogClose = ({
+  children,
+  onClick,
+}: {
+  children?: JSX.Element | JSX.Element[]
+  onClick?: () => void
+}) => {
   return <div onClick={onClick}>{children}</div>
 }
 
 const DialogOverlay = forwardRef<HTMLDivElement, JSX.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        'fixed inset-0 z-50 bg-black/80',
-        className
-      )}
-      {...props}
-    />
+    <div ref={ref} className={cn('fixed inset-0 z-50 bg-black/80', className)} {...props} />
   )
 )
 DialogOverlay.displayName = 'DialogOverlay'
@@ -83,29 +88,14 @@ const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
 )
 DialogContent.displayName = 'DialogContent'
 
-const DialogHeader = ({
-  className,
-  ...props
-}: JSX.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      'flex flex-col space-y-1.5 text-center sm:text-left',
-      className
-    )}
-    {...props}
-  />
+const DialogHeader = ({ className, ...props }: JSX.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn('flex flex-col space-y-1.5 text-center sm:text-left', className)} {...props} />
 )
 DialogHeader.displayName = 'DialogHeader'
 
-const DialogFooter = ({
-  className,
-  ...props
-}: JSX.HTMLAttributes<HTMLDivElement>) => (
+const DialogFooter = ({ className, ...props }: JSX.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(
-      'flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2',
-      className
-    )}
+    className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)}
     {...props}
   />
 )
@@ -115,25 +105,19 @@ const DialogTitle = forwardRef<HTMLHeadingElement, JSX.HTMLAttributes<HTMLHeadin
   ({ className, ...props }, ref) => (
     <h2
       ref={ref}
-      className={cn(
-        'text-lg font-semibold leading-none tracking-tight',
-        className
-      )}
+      className={cn('text-lg font-semibold leading-none tracking-tight', className)}
       {...props}
     />
   )
 )
 DialogTitle.displayName = 'DialogTitle'
 
-const DialogDescription = forwardRef<HTMLParagraphElement, JSX.HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, ...props }, ref) => (
-    <p
-      ref={ref}
-      className={cn('text-sm text-muted-foreground', className)}
-      {...props}
-    />
-  )
-)
+const DialogDescription = forwardRef<
+  HTMLParagraphElement,
+  JSX.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <p ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props} />
+))
 DialogDescription.displayName = 'DialogDescription'
 
 export {
@@ -148,4 +132,3 @@ export {
   DialogTitle,
   DialogDescription,
 }
-

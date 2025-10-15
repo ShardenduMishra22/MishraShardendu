@@ -32,7 +32,9 @@ async function proxy(req: NextRequest) {
   const url = new URL(req.url)
 
   const fullUrl =
-    target + url.pathname.replace('/api/proxy/volunteer/experiences', '/api/volunteer/experiences') + url.search
+    target +
+    url.pathname.replace('/api/proxy/volunteer/experiences', '/api/volunteer/experiences') +
+    url.search
 
   const method = req.method || 'GET'
   const headers = Object.fromEntries(req.headers.entries())

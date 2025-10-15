@@ -13,7 +13,7 @@ export const LazyVExperienceSection = () => {
   const [loading, setLoading] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
   const [experiences, setExperiences] = useState<VolunteerExperience[]>([])
-  
+
   const { hasBeenVisible } = useIntersectionObserver(sectionRef as React.RefObject<Element>, {
     threshold: 0.05,
     rootMargin: '100px',
@@ -42,11 +42,7 @@ export const LazyVExperienceSection = () => {
   }, [hasBeenVisible, loaded, loading, fetchExperiences])
 
   return (
-    <div 
-      ref={sectionRef} 
-      className="scroll-mt-20 relative" 
-      id="experience-section"
-    >
+    <div ref={sectionRef} className="scroll-mt-20 relative" id="experience-section">
       {loading ? (
         <div className="w-full">
           <ExperienceSkeleton />

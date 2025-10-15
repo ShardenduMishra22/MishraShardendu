@@ -77,7 +77,7 @@ export const json = [
         "Webpack",
         "ESLint",
         "Prettier",
-        "Astro.js",
+        "Svelte",
         "Markdown",
         "REST APIs",
         "Chrome Extensions",
@@ -94,7 +94,7 @@ export const json = [
         "https://tokenova.vercel.app/",
         "https://project-management-internhsip-shardendu-mishra.vercel.app/",
         "https://www.youtube.com/watch?v=7s0jAgrxq-o",
-        "https://astro-zeta-lime.vercel.app/"
+        "https://svelte-blog.vercel.app/"
     ],
     "issue_date": "2024-08-01",
     "expiry_date": ""

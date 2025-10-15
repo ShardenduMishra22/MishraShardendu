@@ -12,15 +12,15 @@ export const useContactForm = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setSubmitStatus('error')
       return
@@ -35,10 +35,10 @@ export const useContactForm = () => {
         email: formData.email,
         message: formData.message,
       })
-      
+
       setSubmitStatus('success')
       setFormData({ name: '', email: '', message: '' })
-      
+
       setTimeout(() => setSubmitStatus('idle'), 3000)
     } catch (error) {
       setSubmitStatus('error')

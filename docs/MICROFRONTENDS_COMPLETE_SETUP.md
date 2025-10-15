@@ -8,7 +8,7 @@ The portfolio uses Vercel's Microfrontends framework to split the monorepo into 
 
 - **mishrashardendu22** (PersonalWebsite) - Next.js 15 - Main application
 - **mishrashardendu22-admin** (AdminWebsite) - Vite + Preact - Admin dashboard
-- **mishrashardendu22-blog** (BlogWebsite) - Astro 5 - Blog platform
+- **mishrashardendu22-blog** (BlogWebsite) - Svelte 5 - Blog platform
 
 ## Architecture
 
@@ -17,6 +17,7 @@ The portfolio uses Vercel's Microfrontends framework to split the monorepo into 
 The PersonalWebsite serves as the **default application** and contains the `microfrontends.json` configuration file that controls routing for all microfrontends.
 
 **Route Distribution:**
+
 - `/` - PersonalWebsite (default)
 - `/admin` and `/admin/*` - AdminWebsite
 - `/blog` and `/blog/*` - BlogWebsite
@@ -26,7 +27,8 @@ The PersonalWebsite serves as the **default application** and contains the `micr
 ### 1. PersonalWebsite (Next.js 15)
 
 #### microfrontends.json
-```json
+
+````json
 #### microfrontends.json
 
 ```json
@@ -64,8 +66,9 @@ The PersonalWebsite serves as the **default application** and contains the `micr
     }
   }
 }
-```
-```
+````
+
+````
 
 #### next.config.ts
 ```typescript
@@ -98,9 +101,10 @@ const nextConfig: NextConfig = {
 };
 
 export default withMicrofrontends(nextConfig);
-```
+````
 
 #### package.json (Dependencies)
+
 ```json
 {
   "dependencies": {
@@ -122,14 +126,14 @@ export default withMicrofrontends(nextConfig);
 #### vite.config.ts
 
 ```typescript
-import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
-import preact from '@preact/preset-vite';
-import tailwindcss from '@tailwindcss/vite';
-import { microfrontends } from '@vercel/microfrontends/experimental/vite';
+import path from 'path'
+import { defineConfig, loadEnv } from 'vite'
+import preact from '@preact/preset-vite'
+import tailwindcss from '@tailwindcss/vite'
+import { microfrontends } from '@vercel/microfrontends/experimental/vite'
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '');
+  const env = loadEnv(mode, process.cwd(), '')
 
   return {
     plugins: [
@@ -138,11 +142,12 @@ export default defineConfig(({ mode }) => {
       microfrontends({ basePath: '/vc-ap-mishrashardendu22-admin/' }),
     ],
     // ... rest of config
-  };
-});
+  }
+})
 ```
 
 #### package.json (Dependencies)
+
 ```json
 {
   "type": "module",
@@ -163,41 +168,37 @@ export default defineConfig(({ mode }) => {
 ```
 
 **Key Points:**
+
 - Plugin uses `basePath` option instead of separate `base` config
 - `microfrontends({ basePath: '/vc-ap-mishrashardendu22-admin/' })` handles asset prefixing automatically
 - Using `@vercel/microfrontends/experimental/vite` for latest features
 - `@module-federation/vite` for module federation support
 - **Important**: Asset path `/vc-ap-mishrashardendu22-admin/:path*` must be added to `microfrontends.json` routing for CSS/JS assets to load correctly
 
-### 3. BlogWebsite (Astro 5)
+### 3. BlogWebsite (Svelte 5)
 
-#### astro.config.mjs
+#### svelte.config.js
 
 ```javascript
-// @ts-check
-import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'astro/config';
+import adapter from '@sveltejs/adapter-vercel'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
-import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';
-
-// Astro is configured as "other framework" with manual asset prefix
-export default defineConfig({
-  base: '/vc-ap-mishrashardendu22-blog/',
-  output: 'server',
-  adapter: vercel({
-    webAnalytics: { enabled: false }
-  }),
-  trailingSlash: 'ignore',
-  vite: {
-    plugins: [tailwindcss()],
-    // ... rest of config
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+  preprocess: vitePreprocess(),
+  kit: {
+    adapter: adapter(),
+    paths: {
+      base: '/vc-ap-mishrashardendu22-blog',
+    },
   },
-  integrations: [react()],
-});
+}
+
+export default config
 ```
 
 #### package.json (Dependencies)
+
 ```json
 {
   "type": "module",
@@ -206,19 +207,20 @@ export default defineConfig({
     "@vercel/toolbar": "^0.1.36"
   },
   "scripts": {
-    "dev": "astro dev --port 4321",
-    "dev:mfe": "astro dev --port $(microfrontends port 2>/dev/null || echo 4321)",
+    "dev": "vite dev --port 4321",
+    "dev:mfe": "vite dev --port $(microfrontends port 2>/dev/null || echo 4321)",
     "proxy": "microfrontends proxy --local-apps mishrashardendu22-blog",
-    "build": "astro build"
+    "build": "vite build"
   }
 }
 ```
 
 **Key Points:**
-- **Astro is configured as "Other Framework"** - not officially supported by Vercel microfrontends
-- Uses standard Astro `base` config option: `base: '/vc-ap-mishrashardendu22-blog/'`
+
+- **Svelte is configured with SvelteKit** - uses adapter-vercel for deployment
+- Uses SvelteKit `paths.base` config option: `base: '/vc-ap-mishrashardendu22-blog'`
 - All assets (CSS, JS, images) are automatically prefixed with the base path
-- No special microfrontends plugin needed - Astro handles asset paths natively
+- SvelteKit handles asset paths natively through its routing system
 - **Important**: Asset path `/vc-ap-mishrashardendu22-blog/:path*` must be added to `microfrontends.json` routing for assets to load correctly
 
 ## Development Workflow
@@ -226,6 +228,7 @@ export default defineConfig({
 ### Local Development
 
 #### Option 1: Run Individual Apps
+
 ```bash
 # Terminal 1 - PersonalWebsite (Port 3000)
 cd apps/MishraShardendu22-Frontend-PersonalWebsite
@@ -241,6 +244,7 @@ pnpm dev
 ```
 
 #### Option 2: Run with Microfrontends CLI (Recommended)
+
 ```bash
 # Terminal 1 - PersonalWebsite with dynamic port
 cd apps/MishraShardendu22-Frontend-PersonalWebsite
@@ -260,6 +264,7 @@ pnpm dev:mfe
 ```
 
 #### Option 3: Run from Root (Turborepo)
+
 ```bash
 # From root - runs all apps concurrently
 pnpm dev
@@ -282,11 +287,11 @@ pnpm dev
 
 Each microfrontend automatically gets an asset prefix in production:
 
-| Application | Asset Prefix |
-|------------|--------------|
-| mishrashardendu22 (PersonalWebsite) | `/` (root) |
+| Application                            | Asset Prefix                      |
+| -------------------------------------- | --------------------------------- |
+| mishrashardendu22 (PersonalWebsite)    | `/` (root)                        |
 | mishrashardendu22-admin (AdminWebsite) | `/vc-ap-mishrashardendu22-admin/` |
-| mishrashardendu22-blog (BlogWebsite) | `/vc-ap-mishrashardendu22-blog/` |
+| mishrashardendu22-blog (BlogWebsite)   | `/vc-ap-mishrashardendu22-blog/`  |
 
 The format is `/vc-ap-<application-name>/`
 
@@ -302,6 +307,7 @@ All three applications use the same versions of core microfrontends packages:
 ```
 
 Additional AdminWebsite dependency:
+
 ```json
 {
   "@module-federation/vite": "^1.2.7"
@@ -339,15 +345,18 @@ Additional AdminWebsite dependency:
 Ensure all environment variables are set for each Vercel project:
 
 **PersonalWebsite:**
+
 - Database connection strings
 - Authentication secrets
 - API keys
 
 **AdminWebsite:**
+
 - Backend API URLs
 - Authentication tokens
 
 **BlogWebsite:**
+
 - Database connection strings
 - Content API keys
 
@@ -356,25 +365,31 @@ Ensure all environment variables are set for each Vercel project:
 ### Common Issues
 
 #### 1. 404 Errors on Microfrontend Routes
+
 **Problem**: Visiting `/admin` or `/blog` returns 404
 
 **Solution**:
+
 - Verify `microfrontends.json` exists in PersonalWebsite
 - Check that `group` property is set for each routing configuration
 - Ensure project names match exactly in Vercel
 
 #### 2. Assets Not Loading
+
 **Problem**: CSS/JS files return 404 in admin or blog apps
 
 **Solution**:
-- Verify `base` is set correctly in Vite/Astro config
+
+- Verify `base` is set correctly in Vite/Svelte config
 - Check asset prefix matches: `/vc-ap-<app-name>/`
 - Clear browser cache and rebuild
 
 #### 3. TypeScript Errors
+
 **Problem**: `Cannot find module '@vercel/microfrontends/...'`
 
 **Solution**:
+
 ```bash
 # Install dependencies from root
 cd /path/to/monorepo
@@ -382,9 +397,11 @@ pnpm install
 ```
 
 #### 4. Proxy Not Working in Development
+
 **Problem**: Routes don't proxy correctly to other apps
 
 **Solution**:
+
 ```bash
 # Make sure proxy is running
 cd apps/MishraShardendu22-Frontend-PersonalWebsite
@@ -395,9 +412,11 @@ pnpm dev:mfe
 ```
 
 #### 5. Port Conflicts
+
 **Problem**: `microfrontends port` command fails
 
 **Solution**:
+
 - Ensure `@vercel/microfrontends` is installed in each app
 - Use fallback ports in scripts: `$(microfrontends port 2>/dev/null || echo 3000)`
 - Check no other processes are using the ports
@@ -405,16 +424,18 @@ pnpm dev:mfe
 ## Key Configuration Rules
 
 ### ✅ DO:
+
 - Use exact project names in `microfrontends.json`
-- Set `base` path for non-default apps (Vite/Astro)
+- Set `base` path for non-default apps (Vite/Svelte)
 - Include `group` property for each routing rule
 - Use `:path*` for wildcard route matching
 - Install `@vercel/microfrontends` in all apps
 - Use `withMicrofrontends` wrapper for Next.js config
 
 ### ❌ DON'T:
+
 - Use `/` or `/*` in path patterns (use `:path*` instead)
-- Forget `base` path in Vite/Astro configs
+- Forget `base` path in Vite/Svelte configs
 - Miss the `group` property in routing configs
 - Use different package versions across apps
 - Have conflicting route paths
@@ -439,16 +460,17 @@ Before deploying, verify:
 - [Vercel Microfrontends Documentation](https://vercel.com/docs/frameworks/microfrontends)
 - [Next.js Microfrontends Guide](https://vercel.com/docs/frameworks/microfrontends/next-js)
 - [Vite Microfrontends Guide](https://vercel.com/docs/frameworks/microfrontends/vite)
-- [Astro Microfrontends Guide](https://vercel.com/docs/frameworks/microfrontends/astro)
+- [Svelte Microfrontends Guide](https://vercel.com/docs/frameworks/microfrontends/svelte)
 
 ## Summary
 
 This microfrontends setup allows you to:
+
 - ✅ Deploy and develop each app independently
 - ✅ Share common packages via workspace
 - ✅ Route between apps seamlessly
 - ✅ Scale and optimize each app separately
-- ✅ Use different frameworks (Next.js, Vite, Astro)
+- ✅ Use different frameworks (Next.js, Vite, Svelte)
 - ✅ Maintain a unified monorepo structure
 
 All configurations are now complete and ready for development and deployment!

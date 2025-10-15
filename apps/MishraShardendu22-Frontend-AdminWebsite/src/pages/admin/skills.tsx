@@ -3,7 +3,14 @@ import { Button } from '../../components/ui/button'
 import { Alert, AlertDescription } from '../../components/ui/alert'
 import { Input } from '../../components/ui/input'
 import { Label } from '../../components/ui/label'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../../components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../../components/ui/dialog'
 import { skillsAPI } from '../../utils/apiResponse.util'
 import { Plus, X, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
 import toast from 'react-hot-toast'
@@ -49,7 +56,7 @@ export default function SkillsPage() {
         .split(',')
         .map((s) => s.trim())
         .filter((s) => s.length > 0)
-      
+
       await skillsAPI.addSkills({ skills: skillsArray })
       toast.success('Skills added successfully')
       setIsAddDialogOpen(false)
@@ -137,18 +144,10 @@ export default function SkillsPage() {
                 />
               </div>
               <div class="flex justify-end gap-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => setIsAddDialogOpen(false)}
-                >
+                <Button type="button" variant="outline" onClick={() => setIsAddDialogOpen(false)}>
                   Cancel
                 </Button>
-                <Button
-                  type="submit"
-                  disabled={submitting}
-                  class="bg-teal-600 hover:bg-teal-700"
-                >
+                <Button type="submit" disabled={submitting} class="bg-teal-600 hover:bg-teal-700">
                   {submitting && <Loader2 class="w-4 h-4 mr-2 animate-spin" />}
                   {submitting ? 'Adding...' : 'Add Skills'}
                 </Button>

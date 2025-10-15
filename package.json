@@ -23,7 +23,7 @@
     "turborepo",
     "pnpm",
     "nextjs",
-    "astro",
+    "svelte",
     "vite",
     "typescript",
     "react",
@@ -34,6 +34,7 @@
     "packages/*"
   ],
   "scripts": {
+    "prepare": "husky",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
@@ -41,11 +42,12 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
-    "clean": "turbo run clean && rm -rf node_modules",
-    "clean:turbo": "rm -rf .turbo",
+    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
+    "clean:turbo": "rm -rf .turbo apps/*/.turbo packages/*/.turbo",
     "clean:all": "pnpm clean && pnpm clean:turbo"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
     "prettier": "^3.6.2",
     "turbo": "^2.5.8"
   },
@@ -53,5 +55,5 @@
     "node": ">=18.0.0",
     "pnpm": ">=9.0.0"
   },
-  "packageManager": "pnpm@9.0.0"
+  "packageManager": "pnpm@10.18.3"
 }

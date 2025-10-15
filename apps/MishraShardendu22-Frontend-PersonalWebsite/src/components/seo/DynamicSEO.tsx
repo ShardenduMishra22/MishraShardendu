@@ -101,5 +101,3 @@ export function ProjectPageJsonLd({ project, baseUrl = BASE_URL }: ProjectSEOPro
     />
   )
 }
-
-

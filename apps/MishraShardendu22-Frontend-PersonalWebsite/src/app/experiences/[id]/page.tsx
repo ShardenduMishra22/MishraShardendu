@@ -14,7 +14,8 @@ import { ExperienceDescription } from '@/components/experience/ExperienceDescrip
 
 export default function ExperienceDetailPage({ params }: { params: any }) {
   const { experience, loading, error } = useExperience(params.id)
-  const { handleShare, handleCopyMarkdown, shareClicked, copyClicked } = useExperienceShare(experience)
+  const { handleShare, handleCopyMarkdown, shareClicked, copyClicked } =
+    useExperienceShare(experience)
 
   if (loading) return <LoadingState />
   if (error || !experience) return <ErrorState error={error} />

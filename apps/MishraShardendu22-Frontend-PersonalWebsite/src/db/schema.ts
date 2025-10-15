@@ -1,4 +1,3 @@
-
 import { pgTable, integer, varchar, text, timestamp } from 'drizzle-orm/pg-core'
 import { user } from './authSchema'
 

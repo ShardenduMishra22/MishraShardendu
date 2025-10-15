@@ -14,7 +14,7 @@ Complete development guide for the portfolio website.
 
 ```bash
 # Clone repository
-git clone https://github.com/MishraShardendu22/MishraShardendu22-Frontend-PersonalWebsite.git
+git clone https://github.com/MishraShardendu22/MishraShardendu.git
 
 # Install dependencies
 pnpm install
@@ -297,7 +297,6 @@ export async function GET(request: Request) {
 
 ```tsx
 import { cn } from '@/lib/utils'
-
 ;<div
   className={cn('base-classes', isActive && 'active-classes', isPending && 'pending-classes')}
 />

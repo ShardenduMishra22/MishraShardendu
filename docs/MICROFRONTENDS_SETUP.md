@@ -8,7 +8,7 @@ The portfolio is split into three microfrontend applications:
 
 - **mishrashardendu22** (PersonalWebsite) - Main/Default app (Next.js)
 - **mishrashardendu22-admin** (AdminWebsite) - Admin dashboard (Vite + Preact)
-- **mishrashardendu22-blog** (BlogWebsite) - Blog section (Astro)
+- **mishrashardendu22-blog** (BlogWebsite) - Blog section (Svelte)
 
 ## Architecture
 
@@ -110,25 +110,27 @@ export default defineConfig({
 }
 ```
 
-### 3. BlogWebsite (Astro)
+### 3. BlogWebsite (Svelte)
 
 **Package**: `@vercel/microfrontends` installed
 
-**astro.config.mjs**:
+**svelte.config.js**:
 
 ```javascript
-export default defineConfig({
-  vite: {
-    base: '/vc-ap-mishrashardendu22-blog/',
+export default {
+  kit: {
+    paths: {
+      base: '/vc-ap-mishrashardendu22-blog',
+    },
   },
-})
+}
 ```
 
 **package.json scripts**:
 
 ```json
 {
-  "dev": "astro dev --port $(microfrontends port)",
+  "dev": "vite dev --port $(microfrontends port)",
   "proxy": "microfrontends proxy --local-apps mishrashardendu22-blog"
 }
 ```
@@ -225,7 +227,7 @@ If you set up Turborepo, it will automatically run both the proxy and dev server
 **Solution**:
 
 - For Next.js: Ensure `withMicrofrontends` wrapper is applied
-- For Vite/Astro: Ensure `base` path is configured correctly
+- For Vite/Svelte: Ensure `base` path is configured correctly
 
 ### Issue 4: Wrong Path Pattern
 

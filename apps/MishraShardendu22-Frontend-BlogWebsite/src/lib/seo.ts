@@ -3,106 +3,108 @@
  */
 
 export interface SEOConfig {
-  title?: string;
-  description?: string;
-  keywords?: string;
-  image?: string;
-  url?: string;
-  type?: string;
-  author?: string;
-  publishedTime?: string;
-  modifiedTime?: string;
-  section?: string;
-  tags?: string[];
+  title?: string
+  description?: string
+  keywords?: string
+  image?: string
+  url?: string
+  type?: string
+  author?: string
+  publishedTime?: string
+  modifiedTime?: string
+  section?: string
+  tags?: string[]
 }
 
 const DEFAULT_SEO: SEOConfig = {
   title: 'Blogs By Shardendu Mishra | Tech Articles & Programming Insights',
-  description: 'Explore in-depth technical articles about web development, software engineering, programming best practices, and modern tech stack insights by Shardendu Mishra, a passionate software engineer and IIIT Dharwad student.',
-  keywords: 'Shardendu Mishra blog, technical blog, web development articles, programming tutorials, software engineering, Go programming, React tutorials, TypeScript guides, tech insights, developer blog, coding tips, IIIT Dharwad, full stack development, system design',
+  description:
+    'Explore in-depth technical articles about web development, software engineering, programming best practices, and modern tech stack insights by Shardendu Mishra, a passionate software engineer and IIIT Dharwad student.',
+  keywords:
+    'Shardendu Mishra blog, technical blog, web development articles, programming tutorials, software engineering, Go programming, React tutorials, TypeScript guides, tech insights, developer blog, coding tips, IIIT Dharwad, full stack development, system design',
   image: 'https://mishrashardendu22.is-a.dev/blog/blogog-image.png',
   url: 'https://mishrashardendu22.is-a.dev/blog',
   type: 'website',
   author: 'Shardendu Mishra',
-};
+}
 
 /**
  * Update page meta tags dynamically
  */
 export function updateSEO(config: SEOConfig = {}): void {
-  const seo = { ...DEFAULT_SEO, ...config };
+  const seo = { ...DEFAULT_SEO, ...config }
 
   // Update document title
   if (seo.title) {
-    document.title = seo.title;
+    document.title = seo.title
   }
 
   // Update or create meta tags
-  updateMetaTag('name', 'description', seo.description || '');
-  updateMetaTag('name', 'keywords', seo.keywords || '');
-  updateMetaTag('name', 'author', seo.author || '');
+  updateMetaTag('name', 'description', seo.description || '')
+  updateMetaTag('name', 'keywords', seo.keywords || '')
+  updateMetaTag('name', 'author', seo.author || '')
 
   // Open Graph tags
-  updateMetaTag('property', 'og:title', seo.title || '');
-  updateMetaTag('property', 'og:description', seo.description || '');
-  updateMetaTag('property', 'og:image', seo.image || '');
-  updateMetaTag('property', 'og:url', seo.url || '');
-  updateMetaTag('property', 'og:type', seo.type || 'website');
+  updateMetaTag('property', 'og:title', seo.title || '')
+  updateMetaTag('property', 'og:description', seo.description || '')
+  updateMetaTag('property', 'og:image', seo.image || '')
+  updateMetaTag('property', 'og:url', seo.url || '')
+  updateMetaTag('property', 'og:type', seo.type || 'website')
 
   // Twitter tags
-  updateMetaTag('name', 'twitter:title', seo.title || '');
-  updateMetaTag('name', 'twitter:description', seo.description || '');
-  updateMetaTag('name', 'twitter:image', seo.image || '');
+  updateMetaTag('name', 'twitter:title', seo.title || '')
+  updateMetaTag('name', 'twitter:description', seo.description || '')
+  updateMetaTag('name', 'twitter:image', seo.image || '')
 
   // Article specific tags
   if (seo.type === 'article') {
-    updateMetaTag('property', 'og:type', 'article');
+    updateMetaTag('property', 'og:type', 'article')
     if (seo.publishedTime) {
-      updateMetaTag('property', 'article:published_time', seo.publishedTime);
+      updateMetaTag('property', 'article:published_time', seo.publishedTime)
     }
     if (seo.modifiedTime) {
-      updateMetaTag('property', 'article:modified_time', seo.modifiedTime);
+      updateMetaTag('property', 'article:modified_time', seo.modifiedTime)
     }
     if (seo.author) {
-      updateMetaTag('property', 'article:author', seo.author);
+      updateMetaTag('property', 'article:author', seo.author)
     }
     if (seo.section) {
-      updateMetaTag('property', 'article:section', seo.section);
+      updateMetaTag('property', 'article:section', seo.section)
     }
     if (seo.tags && seo.tags.length > 0) {
       // Remove existing tag meta tags
-      const existingTags = document.querySelectorAll('meta[property="article:tag"]');
-      existingTags.forEach(tag => tag.remove());
-      
+      const existingTags = document.querySelectorAll('meta[property="article:tag"]')
+      existingTags.forEach((tag) => tag.remove())
+
       // Add new tags
-      seo.tags.forEach(tag => {
-        const meta = document.createElement('meta');
-        meta.setAttribute('property', 'article:tag');
-        meta.setAttribute('content', tag);
-        document.head.appendChild(meta);
-      });
+      seo.tags.forEach((tag) => {
+        const meta = document.createElement('meta')
+        meta.setAttribute('property', 'article:tag')
+        meta.setAttribute('content', tag)
+        document.head.appendChild(meta)
+      })
     }
   }
 
   // Update canonical URL
-  updateCanonicalLink(seo.url || '');
+  updateCanonicalLink(seo.url || '')
 }
 
 /**
  * Helper function to update or create a meta tag
  */
 function updateMetaTag(attributeName: string, attributeValue: string, content: string): void {
-  if (!content) return;
+  if (!content) return
 
-  let element = document.querySelector(`meta[${attributeName}="${attributeValue}"]`);
-  
+  let element = document.querySelector(`meta[${attributeName}="${attributeValue}"]`)
+
   if (element) {
-    element.setAttribute('content', content);
+    element.setAttribute('content', content)
   } else {
-    element = document.createElement('meta');
-    element.setAttribute(attributeName, attributeValue);
-    element.setAttribute('content', content);
-    document.head.appendChild(element);
+    element = document.createElement('meta')
+    element.setAttribute(attributeName, attributeValue)
+    element.setAttribute('content', content)
+    document.head.appendChild(element)
   }
 }
 
@@ -110,17 +112,17 @@ function updateMetaTag(attributeName: string, attributeValue: string, content: s
  * Update canonical link
  */
 function updateCanonicalLink(url: string): void {
-  if (!url) return;
+  if (!url) return
 
-  let canonical = document.querySelector('link[rel="canonical"]');
-  
+  let canonical = document.querySelector('link[rel="canonical"]')
+
   if (canonical) {
-    canonical.setAttribute('href', url);
+    canonical.setAttribute('href', url)
   } else {
-    canonical = document.createElement('link');
-    canonical.setAttribute('rel', 'canonical');
-    canonical.setAttribute('href', url);
-    document.head.appendChild(canonical);
+    canonical = document.createElement('link')
+    canonical.setAttribute('rel', 'canonical')
+    canonical.setAttribute('href', url)
+    document.head.appendChild(canonical)
   }
 }
 
@@ -133,28 +135,28 @@ export function generateSlug(title: string): string {
     .trim()
     .replace(/[^\w\s-]/g, '')
     .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+    .replace(/^-+|-+$/g, '')
 }
 
 /**
  * Truncate text for meta descriptions
  */
 export function truncateDescription(text: string, maxLength: number = 160): string {
-  if (text.length <= maxLength) return text;
-  return text.substring(0, maxLength - 3).trim() + '...';
+  if (text.length <= maxLength) return text
+  return text.substring(0, maxLength - 3).trim() + '...'
 }
 
 /**
  * Generate structured data for blog post
  */
 export function generateBlogPostStructuredData(data: {
-  title: string;
-  description: string;
-  author: string;
-  datePublished: string;
-  dateModified?: string;
-  image?: string;
-  url: string;
+  title: string
+  description: string
+  author: string
+  datePublished: string
+  dateModified?: string
+  image?: string
+  url: string
 }): string {
   const structuredData = {
     '@context': 'https://schema.org',
@@ -182,9 +184,9 @@ export function generateBlogPostStructuredData(data: {
       '@type': 'WebPage',
       '@id': data.url,
     },
-  };
+  }
 
-  return JSON.stringify(structuredData);
+  return JSON.stringify(structuredData)
 }
 
 /**
@@ -192,14 +194,14 @@ export function generateBlogPostStructuredData(data: {
  */
 export function insertStructuredData(jsonLD: string): void {
   // Remove existing structured data
-  const existing = document.querySelector('script[type="application/ld+json"]');
+  const existing = document.querySelector('script[type="application/ld+json"]')
   if (existing) {
-    existing.remove();
+    existing.remove()
   }
 
   // Insert new structured data
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-  script.textContent = jsonLD;
-  document.head.appendChild(script);
+  const script = document.createElement('script')
+  script.type = 'application/ld+json'
+  script.textContent = jsonLD
+  document.head.appendChild(script)
 }

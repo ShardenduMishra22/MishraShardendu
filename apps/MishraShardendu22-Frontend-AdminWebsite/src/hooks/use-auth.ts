@@ -18,20 +18,20 @@ export function useAuth() {
 
   const login = async (credentials: AuthRequest) => {
     try {
-      const response = await authAPI.login(credentials) as { token?: string; message?: string }
-      
+      const response = (await authAPI.login(credentials)) as { token?: string; message?: string }
+
       if (response.token) {
         localStorage.setItem('jwt_token', response.token)
         setIsAuthenticated(true)
         return { success: true, data: response }
       }
-      
+
       return { success: false, error: response.message || 'Login failed' }
     } catch (error) {
       console.error('Login error:', error)
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'An error occurred during login' 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'An error occurred during login',
       }
     }
   }

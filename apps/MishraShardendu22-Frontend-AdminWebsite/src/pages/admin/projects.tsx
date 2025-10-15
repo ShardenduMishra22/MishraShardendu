@@ -3,7 +3,14 @@ import { Button } from '../../components/ui/button'
 import { Input } from '../../components/ui/input'
 import { Label } from '../../components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../../components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../../components/ui/dialog'
 import { Badge } from '../../components/ui/badge'
 import { projectsAPI } from '../../utils/apiResponse.util'
 import { Plus, ExternalLink, Loader2, Pencil, Trash2, Github } from 'lucide-react'
@@ -18,7 +25,7 @@ export default function ProjectsPage() {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [editingProject, setEditingProject] = useState<Project | null>(null)
-  
+
   // Form state for adding/editing
   const [formData, setFormData] = useState({
     project_name: '',
@@ -27,7 +34,7 @@ export default function ProjectsPage() {
     project_repository: '',
     project_live_link: '',
     skills: '',
-    order: 0
+    order: 0,
   })
 
   const fetchProjects = async () => {
@@ -53,7 +60,7 @@ export default function ProjectsPage() {
       project_repository: '',
       project_live_link: '',
       skills: '',
-      order: 0
+      order: 0,
     })
   }
 
@@ -78,9 +85,9 @@ export default function ProjectsPage() {
         project_repository: formData.project_repository,
         project_live_link: formData.project_live_link,
         skills: skillsArray,
-        project_video: ''
+        project_video: '',
       })
-      
+
       toast.success('Project added successfully!')
       setIsAddDialogOpen(false)
       resetForm()
@@ -113,9 +120,9 @@ export default function ProjectsPage() {
         project_repository: formData.project_repository,
         project_live_link: formData.project_live_link,
         skills: skillsArray,
-        project_video: ''
+        project_video: '',
       })
-      
+
       toast.success('Project updated successfully!')
       setIsEditDialogOpen(false)
       setEditingProject(null)
@@ -130,7 +137,7 @@ export default function ProjectsPage() {
 
   const handleDeleteProject = async (id: string) => {
     if (!confirm('Are you sure you want to delete this project?')) return
-    
+
     try {
       await projectsAPI.deleteProject(id)
       toast.success('Project deleted successfully!')
@@ -149,7 +156,7 @@ export default function ProjectsPage() {
       project_repository: project.project_repository || '',
       project_live_link: project.project_live_link || '',
       skills: project.skills?.join(', ') || '',
-      order: project.order || 0
+      order: project.order || 0,
     })
     setIsEditDialogOpen(true)
   }
@@ -198,7 +205,9 @@ export default function ProjectsPage() {
                 <Input
                   id="project_name"
                   value={formData.project_name}
-                  onInput={(e) => setFormData({ ...formData, project_name: (e.target as HTMLInputElement).value })}
+                  onInput={(e) =>
+                    setFormData({ ...formData, project_name: (e.target as HTMLInputElement).value })
+                  }
                   disabled={submitting}
                   required
                 />
@@ -208,7 +217,12 @@ export default function ProjectsPage() {
                 <Input
                   id="small_description"
                   value={formData.small_description}
-                  onInput={(e) => setFormData({ ...formData, small_description: (e.target as HTMLInputElement).value })}
+                  onInput={(e) =>
+                    setFormData({
+                      ...formData,
+                      small_description: (e.target as HTMLInputElement).value,
+                    })
+                  }
                   disabled={submitting}
                 />
               </div>
@@ -227,7 +241,12 @@ export default function ProjectsPage() {
                     id="project_live_link"
                     type="url"
                     value={formData.project_live_link}
-                    onInput={(e) => setFormData({ ...formData, project_live_link: (e.target as HTMLInputElement).value })}
+                    onInput={(e) =>
+                      setFormData({
+                        ...formData,
+                        project_live_link: (e.target as HTMLInputElement).value,
+                      })
+                    }
                     disabled={submitting}
                   />
                 </div>
@@ -237,7 +256,12 @@ export default function ProjectsPage() {
                     id="project_repository"
                     type="url"
                     value={formData.project_repository}
-                    onInput={(e) => setFormData({ ...formData, project_repository: (e.target as HTMLInputElement).value })}
+                    onInput={(e) =>
+                      setFormData({
+                        ...formData,
+                        project_repository: (e.target as HTMLInputElement).value,
+                      })
+                    }
                     disabled={submitting}
                   />
                 </div>
@@ -248,7 +272,9 @@ export default function ProjectsPage() {
                   id="skills"
                   placeholder="React, TypeScript, Node.js"
                   value={formData.skills}
-                  onInput={(e) => setFormData({ ...formData, skills: (e.target as HTMLInputElement).value })}
+                  onInput={(e) =>
+                    setFormData({ ...formData, skills: (e.target as HTMLInputElement).value })
+                  }
                   disabled={submitting}
                 />
               </div>
@@ -259,13 +285,23 @@ export default function ProjectsPage() {
                     id="order"
                     type="number"
                     value={formData.order}
-                    onInput={(e) => setFormData({ ...formData, order: parseInt((e.target as HTMLInputElement).value) || 0 })}
+                    onInput={(e) =>
+                      setFormData({
+                        ...formData,
+                        order: parseInt((e.target as HTMLInputElement).value) || 0,
+                      })
+                    }
                     disabled={submitting}
                   />
                 </div>
               </div>
               <div className="flex justify-end gap-3 pt-4">
-                <Button type="button" variant="outline" onClick={() => setIsAddDialogOpen(false)} disabled={submitting}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setIsAddDialogOpen(false)}
+                  disabled={submitting}
+                >
                   Cancel
                 </Button>
                 <Button type="submit" disabled={submitting}>
@@ -304,26 +340,39 @@ export default function ProjectsPage() {
                     <Button size="sm" variant="ghost" onClick={() => openEditDialog(project)}>
                       <Pencil className="w-4 h-4" />
                     </Button>
-                    <Button size="sm" variant="ghost" onClick={() => handleDeleteProject(project.inline.id)}>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => handleDeleteProject(project.inline.id)}
+                    >
                       <Trash2 className="w-4 h-4 text-destructive" />
                     </Button>
                   </div>
                 </div>
-                <CardDescription className="line-clamp-2">{project.small_description}</CardDescription>
+                <CardDescription className="line-clamp-2">
+                  {project.small_description}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {project.skills && project.skills.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {project.skills.map((skill) => (
-                        <Badge key={skill} variant="outline">{skill}</Badge>
+                        <Badge key={skill} variant="outline">
+                          {skill}
+                        </Badge>
                       ))}
                     </div>
                   )}
                   <div className="flex gap-2">
                     {project.project_live_link && (
                       <Button size="sm" variant="outline">
-                        <a href={project.project_live_link} target="_blank" rel="noopener noreferrer" className="flex items-center">
+                        <a
+                          href={project.project_live_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center"
+                        >
                           <ExternalLink className="w-3 h-3 mr-1" />
                           Live
                         </a>
@@ -331,7 +380,12 @@ export default function ProjectsPage() {
                     )}
                     {project.project_repository && (
                       <Button size="sm" variant="outline">
-                        <a href={project.project_repository} target="_blank" rel="noopener noreferrer" className="flex items-center">
+                        <a
+                          href={project.project_repository}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center"
+                        >
                           <Github className="w-3 h-3 mr-1" />
                           Code
                         </a>
@@ -358,7 +412,9 @@ export default function ProjectsPage() {
               <Input
                 id="edit-project_name"
                 value={formData.project_name}
-                onInput={(e) => setFormData({ ...formData, project_name: (e.target as HTMLInputElement).value })}
+                onInput={(e) =>
+                  setFormData({ ...formData, project_name: (e.target as HTMLInputElement).value })
+                }
                 disabled={submitting}
                 required
               />
@@ -368,7 +424,12 @@ export default function ProjectsPage() {
               <Input
                 id="edit-small_description"
                 value={formData.small_description}
-                onInput={(e) => setFormData({ ...formData, small_description: (e.target as HTMLInputElement).value })}
+                onInput={(e) =>
+                  setFormData({
+                    ...formData,
+                    small_description: (e.target as HTMLInputElement).value,
+                  })
+                }
                 disabled={submitting}
               />
             </div>
@@ -387,7 +448,12 @@ export default function ProjectsPage() {
                   id="edit-project_live_link"
                   type="url"
                   value={formData.project_live_link}
-                  onInput={(e) => setFormData({ ...formData, project_live_link: (e.target as HTMLInputElement).value })}
+                  onInput={(e) =>
+                    setFormData({
+                      ...formData,
+                      project_live_link: (e.target as HTMLInputElement).value,
+                    })
+                  }
                   disabled={submitting}
                 />
               </div>
@@ -397,7 +463,12 @@ export default function ProjectsPage() {
                   id="edit-project_repository"
                   type="url"
                   value={formData.project_repository}
-                  onInput={(e) => setFormData({ ...formData, project_repository: (e.target as HTMLInputElement).value })}
+                  onInput={(e) =>
+                    setFormData({
+                      ...formData,
+                      project_repository: (e.target as HTMLInputElement).value,
+                    })
+                  }
                   disabled={submitting}
                 />
               </div>
@@ -408,7 +479,9 @@ export default function ProjectsPage() {
                 id="edit-skills"
                 placeholder="React, TypeScript, Node.js"
                 value={formData.skills}
-                onInput={(e) => setFormData({ ...formData, skills: (e.target as HTMLInputElement).value })}
+                onInput={(e) =>
+                  setFormData({ ...formData, skills: (e.target as HTMLInputElement).value })
+                }
                 disabled={submitting}
               />
             </div>
@@ -419,13 +492,23 @@ export default function ProjectsPage() {
                   id="edit-order"
                   type="number"
                   value={formData.order}
-                  onInput={(e) => setFormData({ ...formData, order: parseInt((e.target as HTMLInputElement).value) || 0 })}
+                  onInput={(e) =>
+                    setFormData({
+                      ...formData,
+                      order: parseInt((e.target as HTMLInputElement).value) || 0,
+                    })
+                  }
                   disabled={submitting}
                 />
               </div>
             </div>
             <div className="flex justify-end gap-3 pt-4">
-              <Button type="button" variant="outline" onClick={() => setIsEditDialogOpen(false)} disabled={submitting}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsEditDialogOpen(false)}
+                disabled={submitting}
+              >
                 Cancel
               </Button>
               <Button type="submit" disabled={submitting}>

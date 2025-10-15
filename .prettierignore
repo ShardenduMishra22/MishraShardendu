@@ -7,7 +7,7 @@ pnpm-lock.yaml
 dist
 build
 .next
-.astro
+.svelte-kit
 out
 .vercel
 .turbo

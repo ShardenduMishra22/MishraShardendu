@@ -3,7 +3,14 @@ import { Button } from '../../components/ui/button'
 import { Input } from '../../components/ui/input'
 import { Label } from '../../components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../../components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../../components/ui/dialog'
 import { Badge } from '../../components/ui/badge'
 import { certificationsAPI } from '../../utils/apiResponse.util'
 import { Plus, ExternalLink, Loader2, Pencil, Trash2, Award } from 'lucide-react'
@@ -18,7 +25,7 @@ export default function CertificationsPage() {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [editingCertification, setEditingCertification] = useState<Certification | null>(null)
-  
+
   // Form state
   const [formData, setFormData] = useState({
     title: '',
@@ -27,7 +34,7 @@ export default function CertificationsPage() {
     issue_date: '',
     expiry_date: '',
     certificate_url: '',
-    skills: ''
+    skills: '',
   })
 
   const fetchCertifications = async () => {
@@ -53,7 +60,7 @@ export default function CertificationsPage() {
       issue_date: '',
       expiry_date: '',
       certificate_url: '',
-      skills: ''
+      skills: '',
     })
   }
 
@@ -80,9 +87,9 @@ export default function CertificationsPage() {
         certificate_url: formData.certificate_url,
         skills: skillsArray,
         projects: [],
-        images: []
+        images: [],
       })
-      
+
       toast.success('Certification added successfully!')
       setIsAddDialogOpen(false)
       resetForm()
@@ -117,9 +124,9 @@ export default function CertificationsPage() {
         certificate_url: formData.certificate_url,
         skills: skillsArray,
         projects: [],
-        images: []
+        images: [],
       })
-      
+
       toast.success('Certification updated successfully!')
       setIsEditDialogOpen(false)
       setEditingCertification(null)
@@ -134,7 +141,7 @@ export default function CertificationsPage() {
 
   const handleDeleteCertification = async (id: string) => {
     if (!confirm('Are you sure you want to delete this certification?')) return
-    
+
     try {
       await certificationsAPI.deleteCertification(id)
       toast.success('Certification deleted successfully!')
@@ -153,7 +160,7 @@ export default function CertificationsPage() {
       issue_date: certification.issue_date,
       expiry_date: certification.expiry_date,
       certificate_url: certification.certificate_url,
-      skills: certification.skills?.join(', ') || ''
+      skills: certification.skills?.join(', ') || '',
     })
     setIsEditDialogOpen(true)
   }
@@ -180,7 +187,9 @@ export default function CertificationsPage() {
       {/* Action Bar */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 border-b border-border pb-4">
         <div>
-          <h2 className="text-2xl font-bold text-accent">Your Certifications ({certifications.length})</h2>
+          <h2 className="text-2xl font-bold text-accent">
+            Your Certifications ({certifications.length})
+          </h2>
           <p className="text-foreground/60 text-sm">Add and manage your certifications</p>
         </div>
 
@@ -202,7 +211,9 @@ export default function CertificationsPage() {
                 <Input
                   id="title"
                   value={formData.title}
-                  onInput={(e) => setFormData({ ...formData, title: (e.target as HTMLInputElement).value })}
+                  onInput={(e) =>
+                    setFormData({ ...formData, title: (e.target as HTMLInputElement).value })
+                  }
                   disabled={submitting}
                   required
                 />
@@ -220,7 +231,9 @@ export default function CertificationsPage() {
                 <Input
                   id="issuer"
                   value={formData.issuer}
-                  onInput={(e) => setFormData({ ...formData, issuer: (e.target as HTMLInputElement).value })}
+                  onInput={(e) =>
+                    setFormData({ ...formData, issuer: (e.target as HTMLInputElement).value })
+                  }
                   disabled={submitting}
                   required
                 />
@@ -232,7 +245,9 @@ export default function CertificationsPage() {
                     id="issue_date"
                     type="month"
                     value={formData.issue_date}
-                    onInput={(e) => setFormData({ ...formData, issue_date: (e.target as HTMLInputElement).value })}
+                    onInput={(e) =>
+                      setFormData({ ...formData, issue_date: (e.target as HTMLInputElement).value })
+                    }
                     disabled={submitting}
                     required
                   />
@@ -243,7 +258,12 @@ export default function CertificationsPage() {
                     id="expiry_date"
                     type="month"
                     value={formData.expiry_date}
-                    onInput={(e) => setFormData({ ...formData, expiry_date: (e.target as HTMLInputElement).value })}
+                    onInput={(e) =>
+                      setFormData({
+                        ...formData,
+                        expiry_date: (e.target as HTMLInputElement).value,
+                      })
+                    }
                     disabled={submitting}
                   />
                 </div>
@@ -254,7 +274,12 @@ export default function CertificationsPage() {
                   id="certificate_url"
                   type="url"
                   value={formData.certificate_url}
-                  onInput={(e) => setFormData({ ...formData, certificate_url: (e.target as HTMLInputElement).value })}
+                  onInput={(e) =>
+                    setFormData({
+                      ...formData,
+                      certificate_url: (e.target as HTMLInputElement).value,
+                    })
+                  }
                   disabled={submitting}
                 />
               </div>
@@ -264,12 +289,19 @@ export default function CertificationsPage() {
                   id="skills"
                   placeholder="React, TypeScript, AWS"
                   value={formData.skills}
-                  onInput={(e) => setFormData({ ...formData, skills: (e.target as HTMLInputElement).value })}
+                  onInput={(e) =>
+                    setFormData({ ...formData, skills: (e.target as HTMLInputElement).value })
+                  }
                   disabled={submitting}
                 />
               </div>
               <div className="flex justify-end gap-3 pt-4">
-                <Button type="button" variant="outline" onClick={() => setIsAddDialogOpen(false)} disabled={submitting}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setIsAddDialogOpen(false)}
+                  disabled={submitting}
+                >
                   Cancel
                 </Button>
                 <Button type="submit" disabled={submitting}>
@@ -309,7 +341,12 @@ export default function CertificationsPage() {
                     <CardDescription>
                       <div className="space-y-1">
                         <p className="font-medium">{cert.issuer}</p>
-                        <p className="text-sm">{new Date(cert.issue_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
+                        <p className="text-sm">
+                          {new Date(cert.issue_date).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                          })}
+                        </p>
                       </div>
                     </CardDescription>
                   </div>
@@ -317,7 +354,11 @@ export default function CertificationsPage() {
                     <Button size="sm" variant="ghost" onClick={() => openEditDialog(cert)}>
                       <Pencil className="w-4 h-4" />
                     </Button>
-                    <Button size="sm" variant="ghost" onClick={() => handleDeleteCertification(cert.inline.id)}>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => handleDeleteCertification(cert.inline.id)}
+                    >
                       <Trash2 className="w-4 h-4 text-destructive" />
                     </Button>
                   </div>
@@ -326,19 +367,24 @@ export default function CertificationsPage() {
               <CardContent>
                 <div className="space-y-3">
                   {cert.description && (
-                    <p className="text-sm text-foreground/80">
-                      {cert.description}
-                    </p>
+                    <p className="text-sm text-foreground/80">{cert.description}</p>
                   )}
                   {cert.skills && cert.skills.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {cert.skills.map((skill) => (
-                        <Badge key={skill} variant="outline">{skill}</Badge>
+                        <Badge key={skill} variant="outline">
+                          {skill}
+                        </Badge>
                       ))}
                     </div>
                   )}
                   {cert.certificate_url && (
-                    <a href={cert.certificate_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline w-full">
+                    <a
+                      href={cert.certificate_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-sm text-primary hover:underline w-full"
+                    >
                       <ExternalLink className="w-3 h-3" />
                       View Certificate
                     </a>
@@ -363,7 +409,9 @@ export default function CertificationsPage() {
               <Input
                 id="edit-title"
                 value={formData.title}
-                onInput={(e) => setFormData({ ...formData, title: (e.target as HTMLInputElement).value })}
+                onInput={(e) =>
+                  setFormData({ ...formData, title: (e.target as HTMLInputElement).value })
+                }
                 disabled={submitting}
                 required
               />
@@ -381,7 +429,9 @@ export default function CertificationsPage() {
               <Input
                 id="edit-issuer"
                 value={formData.issuer}
-                onInput={(e) => setFormData({ ...formData, issuer: (e.target as HTMLInputElement).value })}
+                onInput={(e) =>
+                  setFormData({ ...formData, issuer: (e.target as HTMLInputElement).value })
+                }
                 disabled={submitting}
                 required
               />
@@ -393,7 +443,9 @@ export default function CertificationsPage() {
                   id="edit-issue_date"
                   type="month"
                   value={formData.issue_date}
-                  onInput={(e) => setFormData({ ...formData, issue_date: (e.target as HTMLInputElement).value })}
+                  onInput={(e) =>
+                    setFormData({ ...formData, issue_date: (e.target as HTMLInputElement).value })
+                  }
                   disabled={submitting}
                   required
                 />
@@ -404,7 +456,9 @@ export default function CertificationsPage() {
                   id="edit-expiry_date"
                   type="month"
                   value={formData.expiry_date}
-                  onInput={(e) => setFormData({ ...formData, expiry_date: (e.target as HTMLInputElement).value })}
+                  onInput={(e) =>
+                    setFormData({ ...formData, expiry_date: (e.target as HTMLInputElement).value })
+                  }
                   disabled={submitting}
                 />
               </div>
@@ -415,7 +469,12 @@ export default function CertificationsPage() {
                 id="edit-certificate_url"
                 type="url"
                 value={formData.certificate_url}
-                onInput={(e) => setFormData({ ...formData, certificate_url: (e.target as HTMLInputElement).value })}
+                onInput={(e) =>
+                  setFormData({
+                    ...formData,
+                    certificate_url: (e.target as HTMLInputElement).value,
+                  })
+                }
                 disabled={submitting}
               />
             </div>
@@ -425,12 +484,19 @@ export default function CertificationsPage() {
                 id="edit-skills"
                 placeholder="React, TypeScript, AWS"
                 value={formData.skills}
-                onInput={(e) => setFormData({ ...formData, skills: (e.target as HTMLInputElement).value })}
+                onInput={(e) =>
+                  setFormData({ ...formData, skills: (e.target as HTMLInputElement).value })
+                }
                 disabled={submitting}
               />
             </div>
             <div className="flex justify-end gap-3 pt-4">
-              <Button type="button" variant="outline" onClick={() => setIsEditDialogOpen(false)} disabled={submitting}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsEditDialogOpen(false)}
+                disabled={submitting}
+              >
                 Cancel
               </Button>
               <Button type="submit" disabled={submitting}>

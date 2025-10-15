@@ -8,13 +8,13 @@
     "email": "mishrashardendu22@gmail.com",
     "url": "https://github.com/MishraShardendu22"
   },
-  "homepage": "https://github.com/MishraShardendu22/MishraShardendu22-Frontend-PersonalWebsite",
+  "homepage": "https://github.com/MishraShardendu22/MishraShardendu",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MishraShardendu22/MishraShardendu22-Frontend-PersonalWebsite.git"
+    "url": "https://github.com/MishraShardendu22/MishraShardendu.git"
   },
   "bugs": {
-    "url": "https://github.com/MishraShardendu22/MishraShardendu22-Frontend-PersonalWebsite/issues"
+    "url": "https://github.com/MishraShardendu22/MishraShardendu/issues"
   },
   "license": "MIT",
   "keywords": [
@@ -51,14 +51,9 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check-all": "pnpm type-check && pnpm lint && pnpm format:check",
-    "prepare": "husky"
+    "check-all": "pnpm type-check && pnpm lint && pnpm format:check"
   },
   "dependencies": {
-    "@repo/shared-ui": "workspace:*",
-    "@repo/shared-utils": "workspace:*",
-    "@repo/shared-types": "workspace:*",
-    "@repo/auth-shared": "workspace:*",
     "@emailjs/browser": "^4.4.1",
     "@nivo/bar": "^0.99.0",
     "@nivo/core": "^0.99.0",
@@ -74,7 +69,6 @@
     "@vercel/speed-insights": "^1.2.0",
     "@vercel/toolbar": "^0.1.36",
     "axios": "^1.12.2",
-    "better-auth": "^1.3.26",
     "better-fetch": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -141,7 +135,6 @@
     "eslint": "^9.37.0",
     "eslint-config-next": "15.3.5",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "husky": "^9.1.7",
     "lint-staged": "^16.2.3",
     "prettier": "^3.6.2",
     "tailwindcss": "^4.1.14",
