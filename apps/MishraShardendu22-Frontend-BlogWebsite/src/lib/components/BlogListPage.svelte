@@ -1,21 +1,18 @@
 <script lang="ts">
-  import Button from "./ui/button.svelte";
-  import Input from "./ui/input.svelte";
-  import { BookOpen, Plus, Search } from "lucide-svelte";
-  import BlogCard from "./BlogCard.svelte";
-  import { cn } from "../utils";
-  import { blogApi, type Blog } from "../api";
-  import { authStore } from "../auth";
   import { onMount } from "svelte";
+  import { authStore } from "../auth";
+  import Input from "./ui/input.svelte";
+  import Button from "./ui/button.svelte";
+  import BlogCard from "./BlogCard.svelte";
+  import { blogApi, type Blog } from "../api";
+  import { BookOpen, Plus, Search } from "lucide-svelte";
 
-  // Get auth state
-  let isOwner = $state(false);
-  let blogs = $state<Blog[]>([]);
+  let error = $state("");
   let loading = $state(true);
   let searchTerm = $state("");
-  let error = $state("");
-  
-  // Determine base path for navigation
+  let isOwner = $state(false);
+  let blogs = $state<Blog[]>([]);
+
   const basePath = typeof window !== 'undefined' && window.location.pathname.startsWith('/blog') ? '/blog' : '';
 
   // Subscribe to auth store

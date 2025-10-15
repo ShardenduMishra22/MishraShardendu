@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 # Build all 3 apps using turbo
 # If any build fails, the push will be blocked
 pnpm turbo build

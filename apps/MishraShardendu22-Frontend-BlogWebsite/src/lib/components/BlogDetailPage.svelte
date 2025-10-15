@@ -2,8 +2,7 @@
   import Button from "./ui/button.svelte";
   import Badge from "./ui/badge.svelte";
   import Avatar from "./ui/avatar.svelte";
-  import Textarea from "./ui/textarea.svelte";
-  import { Calendar, User, Share2, Check, MessageCircle, Send, Trash } from "lucide-svelte";
+  import { Calendar, MessageCircle, Send, Trash, Share2, Check, Edit, Info, ChevronDown, ChevronUp } from "lucide-svelte";
   import { marked } from "marked";
   import { blogApi, commentApi, type Blog, type Comment } from "../api";
   import { authStore } from "../auth";
@@ -28,7 +27,9 @@
   let isSubmittingComment = $state(false);
   let currentUser = $state<any>(null);
   let commentError = $state("");
+  let showInfoPanel = $state(false);
   let showTags = $state(false);
+  let textareaRef: HTMLTextAreaElement;
 
   authStore.subscribe((state) => {
     currentUser = state.user;
@@ -125,6 +126,9 @@
         toast.success("Comment added successfully!");
         await loadComments();
         newComment = "";
+        if (textareaRef) {
+          textareaRef.style.height = 'auto';
+        }
       }
     } catch (err: any) {
       console.error("Failed to submit comment:", err);
@@ -160,8 +164,6 @@
     });
   };
 
-  // using shared resolveImageUrl from utils/image.ts
-
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -173,13 +175,152 @@
     }
   };
 
+  const scrollToComments = () => {
+    const commentsSection = document.getElementById('comments-section');
+    if (commentsSection) {
+      commentsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const autoResize = (e: Event) => {
+    const target = e.target as HTMLTextAreaElement;
+    target.style.height = 'auto';
+    target.style.height = target.scrollHeight + 'px';
+  };
+
   const editUrl = $derived(() => {
     if (!blog) return '';
     return `${basePath}/read/${blog.id}/edit`;
   });
+
+  const canEdit = $derived(() => {
+    return blog && currentUser && (currentUser.isOwner || currentUser.id === blog.authorId);
+  });
 </script>
 
-<div class="w-[100%]">
+{#if blog}
+  <!-- Floating Info Button (Top Right) -->
+  <div class="fixed top-6 right-6 z-50">
+    <Button 
+      variant="default" 
+      size="icon"
+      onclick={() => showInfoPanel = !showInfoPanel}
+      className="w-12 h-12 rounded-full shadow-lg"
+    >
+      <Info class="w-5 h-5" />
+    </Button>
+
+    {#if showInfoPanel}
+
+
+      <!-- Info Panel Popover -->
+      <div class="absolute right-0 mt-3 w-80 bg-card border border-border rounded-lg shadow-xl z-50 overflow-hidden">
+        <div class="p-4 space-y-4">
+          <!-- Author Section -->
+          <div class="pb-3 border-b border-border">
+            <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Author</p>
+            <div class="flex items-center gap-3">
+              <Avatar
+                src={resolveImageUrl(blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined)}
+                fallback={blog.author?.name?.charAt(0) || "U"}
+                class="w-12 h-12 border-2 border-primary/20"
+              />
+              <div class="flex-1 min-w-0">
+                <p class="font-semibold text-sm truncate">{blog.author?.name || "Unknown"}</p>
+                <p class="text-xs text-muted-foreground truncate">{blog.author?.email || ""}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post Details -->
+          <div class="space-y-2 pb-3 border-b border-border">
+            <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Details</p>
+            
+            <div class="flex items-center gap-2 text-sm">
+              <Calendar class="w-4 h-4 text-muted-foreground" />
+              <span class="text-muted-foreground">{formatDate(blog.createdAt)}</span>
+            </div>
+
+            <div class="flex items-center gap-2 text-sm">
+              <MessageCircle class="w-4 h-4 text-muted-foreground" />
+              <span class="text-muted-foreground">{comments.length} comments</span>
+            </div>
+          </div>
+
+          <!-- Tags Section -->
+          {#if blog.tags && blog.tags.length > 0}
+            <div class="pb-3 border-b border-border">
+              <button
+                type="button"
+                class="w-full flex items-center justify-between text-left mb-2"
+                onclick={() => showTags = !showTags}
+              >
+                <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Tags ({blog.tags.length})
+                </p>
+                {#if showTags}
+                  <ChevronUp class="w-4 h-4 text-muted-foreground" />
+                {:else}
+                  <ChevronDown class="w-4 h-4 text-muted-foreground" />
+                {/if}
+              </button>
+
+              {#if showTags}
+                <div class="flex flex-wrap gap-1.5 mt-2">
+                  {#each blog.tags as tag}
+                    <Badge variant="secondary" class="text-xs px-2 py-0.5">{tag}</Badge>
+                  {/each}
+                </div>
+              {/if}
+            </div>
+          {/if}
+
+          <!-- Action Buttons -->
+          <div class="space-y-2">
+            {#if canEdit()}
+              <Button 
+                variant="secondary" 
+                onclick={() => window.location.href = editUrl()} 
+                size="sm"
+                className="w-full"
+              >
+                <Edit class="w-4 h-4 mr-2" />
+                Edit Post
+              </Button>
+            {/if}
+
+            <Button 
+              variant="outline" 
+              onclick={handleShare} 
+              size="sm"
+              className="w-full"
+            >
+              {#if shareSuccess}
+                <Check class="w-4 h-4 mr-2" />
+                Copied!
+              {:else}
+                <Share2 class="w-4 h-4 mr-2" />
+                Share Post
+              {/if}
+            </Button>
+
+            <Button 
+              variant="default" 
+              onclick={scrollToComments} 
+              size="sm"
+              className="w-full"
+            >
+              <MessageCircle class="w-4 h-4 mr-2" />
+              Go to Comments
+            </Button>
+          </div>
+        </div>
+      </div>
+    {/if}
+  </div>
+{/if}
+
+<div class="w-full max-w-7xl mx-auto px-2 py-8 lg:px-3">
   {#if loading}
     <div class="space-y-4">
       <div class="h-10 bg-muted/50 rounded animate-pulse"></div>
@@ -187,219 +328,146 @@
       <div class="h-96 bg-muted/50 rounded animate-pulse"></div>
     </div>
   {:else if blog}
+    <!-- Article Header -->
+    <article>
+      <header class="mb-8">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-foreground leading-tight">
+          {blog.title}
+        </h1>
+      </header>
 
-
-  <div class="grid grid-cols-2 lg:grid-cols-[2fr_320px] gap-3 xl:gap-4">
-  <!-- Main Content -->
-      <main class="max-w-[100%]">
-        <div class="mb-2">
-          {#if blog.image}
-            <div class="mb-2 rounded-lg overflow-hidden">
-              <img src={resolveImageUrl(blog.image)} alt={blog.title} class="w-full h-64 sm:h-80 md:h-96 object-cover object-left shadow-lg" />
-            </div>
-          {/if}
-          <h1 class="text-4xl sm:text-5xl font-bold mb-4 text-foreground leading-tight">{blog.title}</h1>
-        </div>
-
-  <!-- Article content -->
-  <div class="w-full">
-          <div class="prose prose-lg dark:prose-invert max-w-none mb-12">
-            {@html renderedContent}
+      <!-- Featured Image -->
+      {#if blog.image}
+        <div class="mb-8 rounded-lg overflow-hidden bg-muted/20">
+          <!-- container forces a visible viewport; image will scale down to always show fully -->
+          <div class="w-full h-[500px] sm:h-[600px] flex items-center justify-center bg-muted/20">
+        <img
+          src={resolveImageUrl(blog.image)}
+          alt={blog.title}
+          class="max-w-full max-h-full object-contain"
+        />
           </div>
         </div>
+      {/if}
 
-        <!-- Comments Section -->
-        <div class="bg-card border border-border rounded-xl p-8 shadow-sm">
-          <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-            <MessageCircle class="w-6 h-6" />
-            Comments ({comments.length})
-          </h2>
+      <!-- Article Content -->
+      <div class="prose prose-lg dark:prose-invert max-w-none mb-12">
+        {@html renderedContent}
+      </div>
+    </article>
 
-          {#if error}
-            <div class="mb-4 p-4 bg-destructive/10 border border-destructive/30 rounded-lg">
-              <p class="text-destructive text-sm">{error}</p>
-            </div>
-          {/if}
+    <!-- Comments Section -->
+    <section id="comments-section" class="bg-card border border-border rounded-xl p-5 sm:p-6 scroll-mt-20 shadow-sm">
+      <h2 class="text-xl font-bold mb-5 flex items-center gap-2">
+        <MessageCircle class="w-5 h-5" />
+        Comments ({comments.length})
+      </h2>
 
-          {#if currentUser && currentUser.isVerified}
-            <div class="mb-8">
-              <div class="flex items-start gap-4 mb-3">
-                <Avatar
-                  src={resolveImageUrl(currentUser.profileImage || currentUser.image || currentUser.profile?.avatar || undefined)}
-                  fallback={currentUser?.name?.charAt(0) || "U"}
-                  class="w-10 h-10 border-2 border-primary/20"
-                />
-                <Textarea
-                  placeholder="Share your thoughts..."
-                  bind:value={newComment}
-                  class="flex-1"
-                />
-              </div>
-              <div class="flex items-center gap-3">
-                <Button 
-                  onclick={handleSubmitComment}
-                  disabled={isSubmittingComment || !newComment.trim()}
-                >
-                  <Send class="w-4 h-4 mr-2" />
-                  {isSubmittingComment ? "Posting..." : "Post Comment"}
-                </Button>
-              </div>
-            </div>
-          {:else if currentUser && !currentUser.isVerified}
-            <div class="mb-8 p-4 bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800 rounded-lg">
-              <p class="text-amber-800 dark:text-amber-200 text-sm font-medium">
-                Please verify your email to post comments.
-              </p>
-            </div>
-          {:else}
-            <div class="mb-8 p-4 bg-muted border border-border rounded-lg">
-              <p class="text-muted-foreground text-sm">
-                Please <a href={`${basePath}/login`} class="text-primary font-medium hover:underline">log in</a> to post comments.
-              </p>
-            </div>
-          {/if}
-
-          {#if comments.length > 0}
-            <div class="space-y-4">
-              {#each comments as comment}
-                <div class="p-5 bg-muted/30 border border-border rounded-lg hover:bg-muted/50 transition-colors">
-                  <div class="flex items-start justify-between mb-3">
-                    <div class="flex items-center gap-3">
-                                <Avatar
-                                  src={resolveImageUrl(comment.user?.profileImage || comment.user?.image || comment.user?.profile?.avatar || undefined)}
-                                  fallback={comment.user?.name?.charAt(0) || "U"}
-                                  class="w-10 h-10 border-2 border-primary/20"
-                                />
-                      <div>
-                        <p class="font-bold text-sm">{comment.user?.name || "Unknown"}</p>
-                        <p class="text-xs text-muted-foreground">{formatDate(comment.createdAt)}</p>
-                      </div>
-                    </div>
-                    {#if currentUser && (currentUser.id === comment.userId || currentUser.isOwner)}
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onclick={() => handleDeleteComment(comment.id)}
-                        className="hover:bg-destructive/10 hover:text-destructive"
-                      >
-                        <Trash class="w-4 h-4" />
-                      </Button>
-                    {/if}
-                  </div>
-                  <p class="text-sm whitespace-pre-wrap leading-relaxed">{comment.content}</p>
-                </div>
-              {/each}
-            </div>
-          {:else}
-            <div class="text-center py-12 bg-muted/20 rounded-lg border border-dashed border-border">
-              <MessageCircle class="w-12 h-12 mx-auto mb-3 text-muted-foreground/50" />
-              <p class="text-muted-foreground">No comments yet. Be the first to share your thoughts!</p>
-            </div>
-          {/if}
+      {#if error}
+        <div class="mb-4 p-3 bg-destructive/10 border border-destructive/30 rounded-lg">
+          <p class="text-destructive text-sm">{error}</p>
         </div>
-      </main>
+      {/if}
 
-      <!-- Sidebar -->
-      <aside class="space-y-4 lg:sticky lg:top-8 lg:self-start min-w-[280px] max-w-[320px]">
-        <div class="bg-card border border-border rounded-xl p-4 shadow-sm">
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">Author</h3>
-          <div class="flex flex-col items-center text-center space-y-2">
+      {#if currentUser && currentUser.isVerified}
+        <div class="mb-6 p-4 bg-muted/30 border border-border rounded-lg">
+          <div class="flex items-center gap-3">
             <Avatar
-              src={resolveImageUrl(blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined)}
-              fallback={blog.author?.name?.charAt(0) || "U"}
-              class="w-14 h-14 border-2 border-primary/20"
+              src={resolveImageUrl(currentUser.profileImage || currentUser.image || currentUser.profile?.avatar || undefined)}
+              fallback={currentUser?.name?.charAt(0) || "U"}
+              class="w-9 h-9 border-2 border-primary/20 flex-shrink-0"
             />
-            <div>
-              <p class="font-semibold text-foreground text-sm">{blog.author?.name || "Unknown"}</p>
-              <p class="text-[11px] text-muted-foreground">{blog.author?.email || ""}</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Meta Info Card -->
-        <div class="bg-card border border-border rounded-xl p-4 shadow-sm space-y-3">
-          <h3 class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Details</h3>
-          
-          <div class="flex items-center gap-3 text-sm">
-            <Calendar class="w-4 h-4 text-muted-foreground flex-shrink-0" />
-            <div>
-              <p class="text-xs text-muted-foreground">Published</p>
-              <p class="font-medium">{formatDate(blog.createdAt)}</p>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-3 text-sm">
-            <MessageCircle class="w-4 h-4 text-muted-foreground flex-shrink-0" />
-            <div>
-              <p class="text-xs text-muted-foreground">Comments</p>
-              <p class="font-medium">{comments.length} comments</p>
-            </div>
-          </div>
-
-          <Button variant="outline" onclick={handleShare} className="w-full mt-3">
-            {#if shareSuccess}
-              <Check class="w-4 h-4 mr-2" />
-              Copied!
-            {:else}
-              <Share2 class="w-4 h-4 mr-2" />
-              Share Article
-            {/if}
-          </Button>
-          {#if blog && currentUser && (currentUser.isOwner || currentUser.id === blog.authorId) && editUrl()}
-            <Button variant="secondary" onclick={() => (window.location.href = editUrl())} className="w-full mt-2">
-              Edit Article
-            </Button>
-          {/if}
-        </div>
-
-
-        {#if blog.tags && blog.tags.length > 0}
-          <div class="bg-card border border-border rounded-xl p-2 shadow-sm">
-            <button
-              type="button"
-              class="w-full flex items-center justify-between px-3 py-2"
-              aria-expanded={showTags}
-              onclick={() => (showTags = !showTags)}
+            <textarea
+              bind:this={textareaRef}
+              bind:value={newComment}
+              oninput={autoResize}
+              placeholder="Share your thoughts..."
+              class="flex-1 text-sm bg-background border border-input rounded-md px-3 py-2 resize-none overflow-hidden min-h-[36px] focus:outline-none focus:ring-2 focus:ring-ring"
+            ></textarea>
+            <Button 
+              onclick={handleSubmitComment}
+              disabled={isSubmittingComment || !newComment.trim()}
+              size="sm"
+              className="flex-shrink-0 h-9"
             >
-              <h3 class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Tags ({blog.tags.length})</h3>
-              <span class="text-xs text-muted-foreground">{showTags ? '▴' : '▾'}</span>
-            </button>
-
-            {#if showTags}
-              <div class="px-3 pb-3 pt-1">
-                <div class="flex flex-wrap gap-2">
-                  {#each blog.tags as tag}
-                    <Badge variant="secondary" class="text-xs px-2 py-0.5">{tag}</Badge>
-                  {/each}
-                </div>
-              </div>
-            {/if}
+              <Send class="w-3.5 h-3.5 mr-1.5" />
+              Post
+            </Button>
           </div>
-        {/if}
-      </aside>
-    </div>
+        </div>
+      {:else if currentUser && !currentUser.isVerified}
+        <div class="mb-6 p-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800 rounded-lg">
+          <p class="text-amber-800 dark:text-amber-200 text-xs">
+            Please verify your email to post comments.
+          </p>
+        </div>
+      {:else}
+        <div class="mb-6 p-3 bg-muted border border-border rounded-lg">
+          <p class="text-muted-foreground text-xs">
+            Please <a href={`${basePath}/login`} class="text-primary font-medium hover:underline">log in</a> to post comments.
+          </p>
+        </div>
+      {/if}
+
+      {#if comments.length > 0}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {#each comments as comment}
+            <div class="p-3 bg-muted/20 border border-border/50 rounded-lg hover:bg-muted/40 hover:border-border transition-all">
+              <div class="flex items-start justify-between mb-2">
+                <div class="flex items-center gap-2 min-w-0 flex-1">
+                  <Avatar
+                    src={resolveImageUrl(comment.user?.profileImage || comment.user?.image || comment.user?.profile?.avatar || undefined)}
+                    fallback={comment.user?.name?.charAt(0) || "U"}
+                    class="w-8 h-8 flex-shrink-0"
+                  />
+                  <div class="min-w-0 flex-1">
+                    <p class="font-semibold text-xs truncate">{comment.user?.name || "Unknown"}</p>
+                    <p class="text-[10px] text-muted-foreground">{formatDate(comment.createdAt)}</p>
+                  </div>
+                </div>
+                {#if currentUser && (currentUser.id === comment.userId || currentUser.isOwner)}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onclick={() => handleDeleteComment(comment.id)}
+                    className="hover:bg-destructive/10 hover:text-destructive h-7 w-7 p-0 flex-shrink-0"
+                  >
+                    <Trash class="w-3 h-3" />
+                  </Button>
+                {/if}
+              </div>
+              <p class="text-xs whitespace-pre-wrap leading-relaxed text-muted-foreground">{comment.content}</p>
+            </div>
+          {/each}
+        </div>
+      {:else}
+        <div class="text-center py-10 bg-muted/10 rounded-lg border border-dashed border-border/50">
+          <MessageCircle class="w-10 h-10 mx-auto mb-2 text-muted-foreground/40" />
+          <p class="text-xs text-muted-foreground">No comments yet. Be the first to share your thoughts!</p>
+        </div>
+      {/if}
+    </section>
   {:else}     
-    <div class="text-center py-4">
+    <div class="text-center py-12">
       <h2 class="text-2xl font-bold mb-4">Blog not found</h2>
-      <Button onclick={() => (window.location.href = `${basePath}/read`)}>Back to Blogs</Button>
     </div>
   {/if}
 </div>
 
 <style>
-  /* Prevent markdown content from causing horizontal overflow */
-  :global(.prose) {
-    /* allow long words to break and wrap */
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-    -ms-word-break: break-word;
+  html {
+    scroll-behavior: smooth;
   }
 
-  /* Make pre/code blocks wrap long lines and remain scrollable if needed */
+  :global(.prose) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
   :global(.prose pre) {
-    white-space: pre-wrap; /* wrap long lines */
+    white-space: pre-wrap;
     word-break: break-word;
     overflow: auto;
     padding: 0.75rem;
@@ -410,7 +478,6 @@
     word-break: break-word;
   }
 
-  /* Ensure images and iframes inside prose scale within the constrained column */
   :global(.prose img),
   :global(.prose iframe) {
     max-width: 100%;
