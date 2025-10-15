@@ -1,0 +1,22 @@
+# Shardendu Mishra Portfolio - Robots Configuration
+# This is the root configuration for the monorepo
+
+User-agent: *
+Allow: /
+
+# Sitemap locations
+Sitemap: https://mishrashardendu22.is-a.dev/sitemap.xml
+Sitemap: https://mishrashardendu22.is-a.dev/blog/sitemap.xml
+
+# Disallow admin areas (if accessible from root)
+Disallow: /admin/
+Disallow: /api/admin/
+
+# Allow all public assets
+Allow: /icons/
+Allow: /favicon.ico
+Allow: /manifest.json
+Allow: /robots.txt
+
+# Rate limiting for crawlers
+Crawl-delay: 1

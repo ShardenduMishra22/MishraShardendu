@@ -215,13 +215,14 @@
       <div class="mx-auto pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-6 sm:py-8 max-w-7xl">
         {#if pageComponent() === "list"}
         <div class="space-y-6 sm:space-y-8 animate-slide-up">
-          <div class="space-y-3 pb-4 border-b-2 border-border/50">
+          <div class="relative space-y-3 pb-6 border-b-2 border-border/50">
+            <div class="absolute -top-4 -left-4 w-24 h-24 bg-primary/5 rounded-full blur-3xl"></div>
             <h1
-              class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent drop-shadow-sm"
+              class="relative text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent drop-shadow-sm"
             >
               Blog Posts
             </h1>
-            <p class="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
+            <p class="relative text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
               Explore articles about web development, programming, and tech insights
             </p>
           </div>
@@ -229,11 +230,12 @@
         </div>
       {:else if pageComponent() === "create"}
         <div class="space-y-6 sm:space-y-8 animate-slide-up">
-          <div class="space-y-3 pb-4 border-b-2 border-border/50">
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <div class="relative space-y-3 pb-6 border-b-2 border-border/50">
+            <div class="absolute -top-4 -left-4 w-24 h-24 bg-emerald-500/5 rounded-full blur-3xl"></div>
+            <h1 class="relative text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-emerald-600 dark:from-emerald-400 to-primary bg-clip-text text-transparent">
               Create New Post
             </h1>
-            <p class="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
+            <p class="relative text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
               Share your thoughts and insights with the world
             </p>
           </div>
@@ -241,11 +243,12 @@
         </div>
       {:else if pageComponent() === "dashboard"}
         <div class="space-y-6 sm:space-y-8 animate-slide-up">
-          <div class="space-y-3 pb-4 border-b-2 border-border/50">
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <div class="relative space-y-3 pb-6 border-b-2 border-border/50">
+            <div class="absolute -top-4 -left-4 w-24 h-24 bg-violet-500/5 rounded-full blur-3xl"></div>
+            <h1 class="relative text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-violet-600 dark:from-violet-400 to-primary bg-clip-text text-transparent">
               Dashboard
             </h1>
-            <p class="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
+            <p class="relative text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
               Manage your blog posts and view analytics
             </p>
           </div>
@@ -255,11 +258,12 @@
         <BlogDetailPage blogId={blogId() || "1"} />
       {:else if pageComponent() === "edit" && blogId()}
         <div class="space-y-6 sm:space-y-8 animate-slide-up">
-          <div class="space-y-3 pb-4 border-b-2 border-border/50">
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <div class="relative space-y-3 pb-6 border-b-2 border-border/50">
+            <div class="absolute -top-4 -left-4 w-24 h-24 bg-amber-500/5 rounded-full blur-3xl"></div>
+            <h1 class="relative text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-amber-600 dark:from-amber-400 to-primary bg-clip-text text-transparent">
               Edit Post
             </h1>
-            <p class="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
+            <p class="relative text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
               Update your blog post content
             </p>
           </div>

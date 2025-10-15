@@ -1,12 +1,25 @@
-# Shardendu Mishra - MishraShardendu22
-
 <div align="center">
-  <img src="./GopherShardenduMishra.png" alt="Shardendu Mishra" width="200" />
-  <h3>Enterprise-grade portfolio platform built with modern web technologies</h3>
-  <p>A comprehensive monorepo featuring personal website, blog system, and admin dashboard</p>
+  <img src="https://raw.githubusercontent.com/ShardenduMishra22/ShardenduMishra22/main/Gopher.gif" alt="Gopher Mishra" width="200"/>
 </div>
 
-Version: 3.0.0 -  Status: production -  Build: passing
+# MishraShardendu22 Monorepo
+
+Professional portfolio ecosystem featuring a Next.js personal website, Svelte blog platform, and Preact admin dashboard. Built with TypeScript, Turborepo, and modern web standards for optimal performance and maintainability.
+
+## Mission
+
+Deliver a high-performance, accessible, and SEO-optimized portfolio platform that showcases technical expertise while providing seamless content management and exceptional user experience across all devices.
+
+## Monorepo Structure
+
+| Repository | Purpose | Technology | Live URL |
+|-----------|---------|------------|----------|
+| [MishraShardendu22](https://github.com/MishraShardendu22/MishraShardendu22) | Root monorepo | Turborepo + PNPM | - |
+| [PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Frontend-PersonalWebsite) | Main portfolio site | Next.js 15 | https://mishrashardendu22.is-a.dev/ |
+| [BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Frontend-BlogWebsite) | Blog platform | Svelte 5 + Vite | https://mishrashardendu22.is-a.dev/blog |
+| [AdminWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Frontend-AdminWebsite) | Admin dashboard | Preact + Vite | Internal |
+| [Backend-PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-PersonalWebsite) | Personal site API | Node.js/Go | API endpoint |
+| [Backend-BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-BlogWebsite) | Blog API | Node.js/Go | API endpoint |
 
 ## Overview
 
@@ -36,10 +49,25 @@ mishrashardendu22/
 │   ├── auth-shared/        # Authentication logic
 │   ├── ui/                 # UI component library
 │   └── typescript-config/  # Shared TypeScript configurations
+├── public/                 # Shared public assets (icons, manifests)
 ├── docs/                   # Documentation
 ├── scripts/                # Build and deployment scripts
 └── turbo.json              # Turborepo configuration
 ```
+
+## Icons & Assets
+
+All applications share a common set of icons and assets located in the root `public/` directory:
+
+- **favicon.ico** - Main favicon (48x48)
+- **logo.png** - Primary GopherShardenduMishra logo
+- **apple-touch-icon.png** - iOS home screen icon (192x192)
+- **manifest.json** - PWA manifest with app shortcuts
+- **browserconfig.xml** - Windows tile configuration
+- **robots.txt** - Search engine crawler configuration
+- **icons/** - Multiple icon sizes (16x16, 32x32, 192x192, 512x512)
+
+Each application maintains its own copy of these assets in their respective `public/` directories, optimized for their specific needs. See `public/README.md` for detailed icon specifications.
 
 ## Applications
 
@@ -160,38 +188,186 @@ Shared TypeScript configurations for consistent type checking across projects.
 
 ## Getting Started
 
+## Quick Start
+
 ### Prerequisites
 
-```
-Node.js >= 18.0.0
-PNPM >= 9.0.0
-PostgreSQL >= 15
-MongoDB >= 7.0 (optional)
-```
+- Node.js >= 18.0.0
+- PNPM >= 9.0.0
+- PostgreSQL >= 15 (for database-backed apps)
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone <repo>
-cd mishrashardendu22
+# Clone the monorepo
+git clone https://github.com/MishraShardendu22/MishraShardendu22.git
+cd MishraShardendu22
 
-# Install dependencies
+# Install all dependencies
 pnpm install
 
-# Setup environment variables
-# Copy .env.example to .env.local in each app directory and configure secrets
-
-# Run database migrations
-cd apps/MishraShardendu22-Frontend-PersonalWebsite
-pnpm db:push
-cd ../MishraShardendu22-Frontend-BlogWebsite
-pnpm db:push
-cd ../../
-
-# Start development servers
-pnpm dev
+# Set up environment variables
+# Copy .env.example to .env.local in each app directory
+# Configure database URLs, API endpoints, and authentication secrets
 ```
+
+### Development
+
+```bash
+# Start all applications in development mode
+pnpm dev
+
+# Build all applications
+pnpm build
+
+# Lint all packages
+pnpm lint
+
+# Type check all packages
+pnpm typecheck
+
+# Clean build artifacts
+pnpm clean
+```
+
+### Environment Configuration
+
+Each application requires specific environment variables:
+
+**PersonalWebsite (.env.local):**
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/portfolio
+NEXTAUTH_SECRET=your-secret-key
+API_URL=https://api.mishrashardendu22.is-a.dev
+```
+
+**BlogWebsite (.env):**
+```env
+VITE_API_URL=https://api-blog.mishrashardendu22.is-a.dev
+```
+
+**AdminWebsite (.env):**
+```env
+VITE_API_URL=https://api.mishrashardendu22.is-a.dev
+VITE_AUTH_TOKEN=your-admin-token
+```
+
+## CI/CD and Deployment
+
+### Turborepo Pipeline
+
+The monorepo uses Turborepo for optimized build caching and parallel execution:
+
+```json
+{
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "dist/**", "build/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {},
+    "typecheck": {}
+  }
+}
+```
+
+### Vercel Deployment
+
+All frontend applications are deployed to Vercel with automatic deployments on push to main:
+
+- **Personal Website**: Deployed from `apps/MishraShardendu22-Frontend-PersonalWebsite`
+  - Production: https://mishrashardendu22.is-a.dev/
+  - Framework Preset: Next.js
+  - Build Command: `cd ../.. && pnpm turbo run build --filter=ms22-main`
+  - Output Directory: `.next`
+
+- **Blog Website**: Deployed from `apps/MishraShardendu22-Frontend-BlogWebsite`
+  - Production: https://mishrashardendu22.is-a.dev/blog (via microfrontend)
+  - Framework Preset: Vite
+  - Build Command: `cd ../.. && pnpm turbo run build --filter=ms22-blog`
+  - Output Directory: `dist`
+
+- **Admin Website**: Internal deployment
+  - Framework Preset: Vite
+  - Build Command: `cd ../.. && pnpm turbo run build --filter=ms22-admin`
+  - Output Directory: `dist`
+
+### Environment Variables in Vercel
+
+Add the following environment variables in Vercel project settings for each application:
+
+- `DATABASE_URL` (Personal Website)
+- `NEXTAUTH_SECRET` (Personal Website)
+- `VITE_API_URL` (Blog and Admin)
+
+## SEO and Accessibility
+
+This monorepo implements comprehensive SEO and accessibility optimizations:
+
+### Technical SEO
+- Dynamic sitemap generation at `/sitemap.xml` for all applications
+- Robots.txt configuration allowing all crawlers
+- Canonical URLs for duplicate content prevention
+- Structured data (JSON-LD) for Organization, Person, and content schemas
+- OpenGraph and Twitter Card meta tags for social sharing
+- Semantic HTML5 elements throughout
+
+### On-Page SEO
+- Unique meta descriptions under 160 characters per page
+- Optimized title tags with templates
+- H1-H6 heading hierarchy
+- Alt text for all images
+- Internal linking strategy
+- Lazy loading for images and media
+
+### Accessibility (WCAG 2.1 AA)
+- Semantic HTML structure
+- ARIA labels and roles where needed
+- Keyboard navigation support
+- Focus indicators
+- Color contrast ratios meeting standards
+- Screen reader compatibility
+- Responsive design for mobile accessibility
+
+### Performance
+- Core Web Vitals optimization (LCP, FID, CLS)
+- Image optimization (WebP, AVIF formats)
+- Code splitting and lazy loading
+- CDN delivery via Vercel Edge Network
+- Service worker for offline support (PWA)
+
+## Contributing
+
+Contributions are welcome. Please follow these guidelines:
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit changes: `git commit -am 'Add new feature'`
+4. Push to branch: `git push origin feature/your-feature`
+5. Submit a pull request
+
+Ensure all tests pass and code follows the existing style guide (ESLint + Prettier).
+
+## License
+
+This project is licensed under the MIT License. See LICENSE file for details.
+
+## Contact
+
+**Shardendu Mishra**
+
+- Website: https://mishrashardendu22.is-a.dev/
+- LinkedIn: https://www.linkedin.com/in/shardendumishra22/
+- GitHub: https://github.com/MishraShardendu22
+- Twitter/X: https://x.com/Shardendu_M
+- LeetCode: https://leetcode.com/u/ShardenduMishra22/
+- Email: mishrashardendu22@gmail.com
+
+For bug reports and feature requests, please use the GitHub issue tracker in the respective repository.
 
 ### Development
 

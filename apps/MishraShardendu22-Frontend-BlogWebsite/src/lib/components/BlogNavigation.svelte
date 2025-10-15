@@ -66,6 +66,11 @@
   });
 
   const isRouteActive = (href: string) => {
+    // "Main Website" link should never be active when we're in the blog app
+    if (href === "/" || href === "https://mishrashardendu22.is-a.dev") {
+      return false;
+    }
+
     // Normalize both paths for comparison
     const normalizedCurrent = currentPath.startsWith('/blog') 
       ? currentPath.substring(5) || '/read' 
@@ -75,7 +80,7 @@
       : href;
 
     // Home/List/Read page
-    if (normalizedHref === "/" || normalizedHref === "" || normalizedHref === "/read") {
+    if (normalizedHref === "/read") {
       if (normalizedCurrent === "/dashboard" || normalizedCurrent === "/create") {
         return false;
       }
@@ -165,7 +170,7 @@
           class={cn(
             "flex items-center gap-3 w-full max-w-md p-4 rounded-xl border transition-all duration-300 group relative overflow-hidden",
             isActive
-              ? "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground border-primary shadow-lg shadow-primary/20"
+              ? "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground border-primary shadow-lg shadow-primary/20 scale-[1.02]"
               : "bg-card/80 backdrop-blur-sm border-border hover:border-primary/50 hover:shadow-md hover:scale-[1.02]"
           )}
         >
@@ -177,16 +182,19 @@
             {@const Icon = item.icon}
             <Icon class={cn(
               "h-5 w-5 flex-shrink-0 relative z-10 transition-all duration-300",
-              isActive ? "scale-110" : "group-hover:scale-110 group-hover:text-primary"
+              isActive ? "scale-110 drop-shadow-sm" : "group-hover:scale-110 group-hover:text-primary group-hover:rotate-3"
             )} />
           {/if}
           <div class="flex-1 min-w-0 relative z-10">
-            <div class="font-semibold text-sm">{item.name}</div>
+            <div class={cn("font-semibold text-sm", isActive && "drop-shadow-sm")}>{item.name}</div>
             <div class={cn(
               "text-xs truncate transition-colors",
-              isActive ? "opacity-90" : "opacity-80 group-hover:opacity-100"
+              isActive ? "text-primary-foreground/80" : "text-muted-foreground group-hover:text-foreground/70"
             )}>{item.description}</div>
           </div>
+          {#if isActive}
+            <div class="absolute right-2 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary-foreground/20 rounded-full"></div>
+          {/if}
         </a>
       {/each}
 
@@ -240,8 +248,8 @@
         class={cn(
           "flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-300 group relative overflow-hidden",
           isActive
-            ? "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground shadow-lg shadow-primary/25"
-            : "hover:bg-gradient-to-r hover:from-accent/10 hover:to-accent/5 text-foreground hover:shadow-md border border-transparent hover:border-border/50"
+            ? "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground shadow-lg shadow-primary/25 scale-[1.02]"
+            : "hover:bg-gradient-to-r hover:from-accent/10 hover:to-accent/5 text-foreground hover:shadow-md border border-transparent hover:border-border/50 hover:scale-[1.01]"
         )}
       >
         <span class={cn(
@@ -253,7 +261,7 @@
           <Icon
             class={cn(
               "h-5 w-5 flex-shrink-0 transition-all duration-300 relative z-10",
-              isActive ? "scale-110 drop-shadow-sm" : "group-hover:scale-110 group-hover:text-primary"
+              isActive ? "scale-110 drop-shadow-sm" : "group-hover:scale-110 group-hover:text-primary group-hover:rotate-3"
             )}
           />
         {/if}
@@ -268,6 +276,9 @@
             {item.description}
           </div>
         </div>
+        {#if isActive}
+          <div class="absolute right-2 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary-foreground/20 rounded-full"></div>
+        {/if}
       </a>
     {/each}
   </nav>

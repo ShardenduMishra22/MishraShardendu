@@ -1,0 +1,7 @@
+# Robots.txt for MishraShardendu22 Admin Dashboard
+# Disallow all crawlers - internal application only
+
+User-agent: *
+Disallow: /
+
+# No sitemap needed for internal admin application

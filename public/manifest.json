@@ -1,0 +1,67 @@
+{
+  "name": "Shardendu Mishra - Portfolio Monorepo",
+  "short_name": "Shardendu",
+  "description": "Software Developer and Engineer passionate about building impactful applications with modern technologies. Full-stack developer specializing in Go, React, TypeScript, and cloud-native solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["portfolio", "developer", "software", "engineering", "technology"],
+  "icons": [
+    {
+      "src": "/icons/icon-16.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Main Portfolio",
+      "short_name": "Portfolio",
+      "description": "View main portfolio website",
+      "url": "https://mishrashardendu22.is-a.dev",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "description": "Read technical articles and insights",
+      "url": "https://mishrashardendu22.is-a.dev/blog",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Admin Dashboard",
+      "short_name": "Admin",
+      "description": "Access admin dashboard",
+      "url": "https://mishrashardendu22.is-a.dev/admin",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
