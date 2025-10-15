@@ -191,7 +191,7 @@
           <h3 class="text-sm font-bold uppercase tracking-wide text-muted-foreground mb-4">Author</h3>
           <div class="flex flex-col items-center text-center space-y-3">
             <Avatar
-              src={blog.author?.profile?.avatar || undefined}
+              src={blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined}
               fallback={blog.author?.name?.charAt(0) || "U"}
               class="w-20 h-20 border-2 border-primary/20"
             />
@@ -254,6 +254,11 @@
       <main class="order-1 max-w-3xl">
         <!-- Blog Header -->
         <div class="mb-8">
+          {#if blog.image}
+            <div class="mb-6 rounded-lg overflow-hidden">
+              <img src={blog.image} alt={blog.title} class="w-full h-64 object-cover" />
+            </div>
+          {/if}
           <h1 class="text-4xl sm:text-5xl font-bold mb-4 text-foreground leading-tight">{blog.title}</h1>
         </div>
 
@@ -277,18 +282,29 @@
 
           {#if currentUser && currentUser.isVerified}
             <div class="mb-8">
-              <Textarea
-                placeholder="Share your thoughts..."
-                bind:value={newComment}
-                class="mb-3"
-              />
-              <Button 
-                onclick={handleSubmitComment}
-                disabled={isSubmittingComment || !newComment.trim()}
-              >
-                <Send class="w-4 h-4 mr-2" />
-                {isSubmittingComment ? "Posting..." : "Post Comment"}
-              </Button>
+              <div class="mb-8">
+                <div class="flex items-start gap-4 mb-3">
+                  <Avatar
+                    src={currentUser.profileImage || currentUser.image || currentUser.profile?.avatar || undefined}
+                    fallback={currentUser?.name?.charAt(0) || "U"}
+                    class="w-10 h-10 border-2 border-primary/20"
+                  />
+                  <Textarea
+                    placeholder="Share your thoughts..."
+                    bind:value={newComment}
+                    class="mb-3 flex-1"
+                  />
+                </div>
+                <div class="flex items-center gap-3">
+                  <Button 
+                    onclick={handleSubmitComment}
+                    disabled={isSubmittingComment || !newComment.trim()}
+                  >
+                    <Send class="w-4 h-4 mr-2" />
+                    {isSubmittingComment ? "Posting..." : "Post Comment"}
+                  </Button>
+                </div>
+              </div>
             </div>
           {:else if currentUser && !currentUser.isVerified}
             <div class="mb-8 p-4 bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800 rounded-lg">
@@ -298,8 +314,8 @@
             </div>
           {:else}
             <div class="mb-8 p-4 bg-muted border border-border rounded-lg">
-              <p class="text-muted-foreground text-sm">
-                Please <a href="/login" class="text-primary font-medium hover:underline">log in</a> to post comments.
+                <p class="text-muted-foreground text-sm">
+                Please <a href={`${basePath}/login`} class="text-primary font-medium hover:underline">log in</a> to post comments.
               </p>
             </div>
           {/if}
@@ -311,7 +327,7 @@
                   <div class="flex items-start justify-between mb-3">
                     <div class="flex items-center gap-3">
                       <Avatar
-                        src={undefined}
+                        src={comment.user?.profileImage || comment.user?.image || comment.user?.profile?.avatar || undefined}
                         fallback={comment.user?.name?.charAt(0) || "U"}
                         class="w-10 h-10 border-2 border-primary/20"
                       />

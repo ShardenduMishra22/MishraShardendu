@@ -10,6 +10,7 @@ export interface User {
   id: number
   email: string
   name: string
+  profileImage?: string
   isVerified: boolean
   isOwner: boolean
   createdAt?: string
@@ -25,6 +26,9 @@ export interface Author {
   id: number
   name: string
   email: string
+  image?: string
+  profileImage?: string
+  avatar?: string
   profile?: UserProfile
 }
 
@@ -58,12 +62,15 @@ export interface PaginatedResponse<T> extends ApiResponse<T> {
 export interface Blog {
   id: number
   title: string
+  url?: string
+  image?: string
   content: string
   tags?: string[]
   authorId: number
   createdAt: string
   updatedAt: string
   author?: Author
+  authorProfile?: UserProfile | null
   comments?: number // comment count
   summary?: string
   published?: boolean
@@ -161,10 +168,15 @@ const apiRequest = async <T>(endpoint: string, options: RequestInit = {}): Promi
 
 // Auth API
 export const authApi = {
-  register: async (email: string, password: string, name: string): Promise<AuthResponse> => {
+  register: async (
+    email: string,
+    password: string,
+    name: string,
+    profileImage?: string
+  ): Promise<AuthResponse> => {
     return apiRequest<AuthResponse>('/api/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ email, password, name }),
+      body: JSON.stringify({ email, password, name, profileImage }),
     })
   },
 
@@ -233,6 +245,7 @@ export const blogApi = {
     title: string
     content: string
     tags?: string[]
+    image?: string
     summary?: string
     published?: boolean
   }): Promise<ApiResponse<Blog>> => {

@@ -16,6 +16,9 @@
   let tags = $state<string[]>([]);
   let newTag = $state("");
   let isSubmitting = $state(false);
+  let image = $state("");
+  let showImageInput = $state(false);
+  let imageError = $state("");
   
   // Field-specific errors
   let titleError = $state("");
@@ -59,8 +62,9 @@
   const validateForm = (): boolean => {
     let isValid = true;
     
-    titleError = "";
-    contentError = "";
+  titleError = "";
+  contentError = "";
+  imageError = "";
 
     // Validate title
     const titleValidation = validateBlogTitle(title);
@@ -74,6 +78,20 @@
     if (!contentValidation.isValid) {
       contentError = contentValidation.error || "";
       isValid = false;
+    }
+
+    // Validate Image (optional)
+    if (image && image.trim()) {
+      try {
+        const parsed = new URL(image.trim());
+        if (!parsed.protocol.startsWith("http")) {
+          imageError = "Image URL must start with http or https";
+          isValid = false;
+        }
+      } catch {
+        imageError = "Invalid image URL format";
+        isValid = false;
+      }
     }
 
     return isValid;
@@ -90,12 +108,16 @@
     isSubmitting = true;
 
     try {
-      const response = await blogApi.createBlog({
+      const payload: any = {
         title: title.trim(),
         content: content.trim(),
         tags: tags.length > 0 ? tags : undefined,
         published: true,
-      });
+      };
+
+      if (image && image.trim()) payload.image = image.trim();
+
+      const response = await blogApi.createBlog(payload);
 
       if (response.success) {
         toast.success("Blog post created successfully!");
@@ -177,6 +199,31 @@
           Add tags to categorize your post (max 10 tags, alphanumeric & hyphens only)
         </p>
       </div>
+    </div>
+
+    <!-- Image Section (optional) -->
+    <div class="space-y-3">
+      <div class="flex items-center justify-between">
+        <Label for="image" class="text-base font-semibold">Post Image</Label>
+        <Button type="button" variant="outline" className="text-sm" onclick={() => showImageInput = !showImageInput}>
+          {showImageInput ? 'Hide Image' : 'Enter Image'}
+        </Button>
+      </div>
+      {#if showImageInput}
+        <Input
+          id="image"
+          placeholder="https://example.com/your-image.jpg"
+          bind:value={image}
+          class={imageError ? 'border-destructive' : ''}
+        />
+        {#if imageError}
+          <p class="text-xs text-destructive">{imageError}</p>
+        {:else}
+          <p class="text-sm text-muted-foreground">Provide an image URL to display with the blog post (optional)</p>
+        {/if}
+      {:else}
+        <p class="text-sm text-muted-foreground">You can optionally add an image for the post. Click "Enter Image" to add it.</p>
+      {/if}
     </div>
 
     <!-- Content Section -->

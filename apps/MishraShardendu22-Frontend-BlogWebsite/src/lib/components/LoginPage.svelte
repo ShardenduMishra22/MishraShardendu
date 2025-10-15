@@ -12,6 +12,7 @@
   let email = $state("");
   let password = $state("");
   let name = $state("");
+  let profileImage = $state("");
   let isLogin = $state(true);
   let isSubmitting = $state(false);
   let showOTPInput = $state(false);
@@ -78,7 +79,7 @@
           toast.error(result.error || "Login failed");
         }
       } else {
-        const result = await authStore.register(email, password, name);
+        const result = await authStore.register(email, password, name, profileImage || undefined);
         if (result.success) {
           showOTPInput = true;
           toast.success("Registration successful! Please verify your email.");
@@ -152,6 +153,20 @@
               <p class="text-xs text-destructive">{nameError}</p>
             {/if}
           </div>
+
+          <div class="space-y-2">
+            <Label for="profileImage">Profile Image (optional)</Label>
+            <div class="relative">
+              <Input
+                id="profileImage"
+                type="url"
+                placeholder="https://example.com/your-image.jpg"
+                bind:value={profileImage}
+                class="pl-3"
+              />
+            </div>
+            <p class="text-xs text-muted-foreground">Add your Image or let Luck roll a Die !! (optional)</p>
+          </div>
         {/if}
 
         <div class="space-y-2">
@@ -214,7 +229,7 @@
       </div>
 
       <div class="text-center">
-        <a href="/blog" class="text-sm text-muted-foreground hover:text-primary">
+        <a href="/blog/read" class="text-sm text-muted-foreground hover:text-primary">
           Continue as guest
         </a>
       </div>

@@ -130,9 +130,9 @@ function createAuthStore() {
     },
 
     // Register
-    register: async (email: string, password: string, name: string) => {
+    register: async (email: string, password: string, name: string, profileImage?: string) => {
       try {
-        const response = await authApi.register(email, password, name)
+        const response = await authApi.register(email, password, name, profileImage)
 
         if (response.success && response.data) {
           const { token, user } = response.data
