@@ -6,8 +6,8 @@ import { microfrontends } from '@vercel/microfrontends/experimental/vite'
 
 // https://vite.dev/config/
 export default defineConfig(() => {
-  // Always use /blog base path since it's accessed through microfrontends
-  const basePath = '/blog'
+  // Use relative base path - microfrontends proxy handles the /blog routing
+  const basePath = './'
 
   return {
     base: basePath,
