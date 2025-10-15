@@ -21,6 +21,7 @@ import {
   Clock,
   Briefcase,
   GraduationCap,
+  Book,
 } from 'lucide-react'
 
 export const navItems = [
@@ -33,6 +34,7 @@ export const navItems = [
   { href: '#volunteer', label: 'Volunteer', icon: Heart },
   { href: '#certifications', label: 'Certifications', icon: Award },
   { href: '#contact', label: 'Contact', icon: Mail },
+  { href: '/blog/read', label: 'Blog', icon: Book }
 ]
 
 export const GoLangIcon = ({ className = 'h-16 w-16 text-blue-500 m-2' }) => (
