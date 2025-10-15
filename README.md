@@ -14,7 +14,7 @@ Deliver a high-performance, accessible, and SEO-optimized portfolio platform tha
 
 | Repository                                                                                                | Purpose             | Technology       | Live URL                                 |
 | --------------------------------------------------------------------------------------------------------- | ------------------- | ---------------- | ---------------------------------------- |
-| [MishraShardendu22](https://github.com/MishraShardendu22/MishraShardendu22)                               | Root monorepo       | Turborepo + PNPM | -                                        |
+| [MishraShardendu22](https://github.com/MishraShardendu22/MishraShardendu)                               | Root monorepo       | Turborepo + PNPM | -                                        |
 | [PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu)                                   | Main portfolio site | Next.js 15       | https://mishrashardendu22.is-a.dev       |
 | [BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu)                                       | Blog platform       | Svelte 5         | https://mishrashardendu22.is-a.dev/blog  |
 | [AdminWebsite](https://github.com/MishraShardendu22/MishraShardendu)                                      | Admin dashboard     | Preact           | https://mishrashardendu22.is-a.dev/admin |
