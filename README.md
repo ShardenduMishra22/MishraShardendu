@@ -28,7 +28,7 @@ This monorepo contains a complete portfolio platform ecosystem built with cuttin
 ### Architecture
 
 - Monorepo Structure: Turborepo + PNPM Workspaces
-- Frontend Applications: Next.js 15, Svelte 5, Vite + Preact
+- Frontend Applications: Next.js 15, Svelte 5, Preact
 - Shared Packages: TypeScript, React components, utilities, authentication
 - Database Systems: PostgreSQL (Blog), MongoDB (Portfolio)
 - Styling: Tailwind CSS 4 + shadcn/ui components
@@ -41,7 +41,7 @@ mishrashardendu22/
 ├── apps/
 │   ├── MishraShardendu22-Frontend-PersonalWebsite/  # Next.js 15 - Main portfolio
 │   ├── MishraShardendu22-Frontend-BlogWebsite/      # Svelte 5 - Blog system
-│   └── MishraShardendu22-Frontend-AdminWebsite/     # Vite + Preact - Admin panel
+│   └── MishraShardendu22-Frontend-AdminWebsite/     # Preact - Admin panel
 ├── packages/
 │   ├── shared-ui/          # Shared React components
 │   ├── shared-utils/       # Common utilities
@@ -110,7 +110,7 @@ A high-performance blog platform with markdown support and content management ca
   - RSS feed generation
   - Full-text search
 
-### Admin Dashboard (Vite + Preact)
+### Admin Dashboard (Preact)
 
 A lightweight admin interface for managing all platform content.
 
