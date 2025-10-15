@@ -16,10 +16,10 @@ Deliver a high-performance, accessible, and SEO-optimized portfolio platform tha
 |-----------|---------|------------|----------|
 | [MishraShardendu22](https://github.com/MishraShardendu22/MishraShardendu22) | Root monorepo | Turborepo + PNPM | - |
 | [PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Frontend-PersonalWebsite) | Main portfolio site | Next.js 15 | https://mishrashardendu22.is-a.dev |
-| [BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Frontend-BlogWebsite) | Blog platform | Svelte 5 + Vite | https://mishrashardendu22.is-a.dev/blog |
-| [AdminWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Frontend-AdminWebsite) | Admin dashboard | Preact + Vite | https://mishrashardendu22.is-a.dev/admin |
-| [Backend-PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-PersonalWebsite) | Personal site API | Node.js/Go | API endpoint |
-| [Backend-BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-BlogWebsite) | Blog API | Node.js/Go | API endpoint |
+| [BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Frontend-BlogWebsite) | Blog platform | Svelte 5  | https://mishrashardendu22.is-a.dev/blog |
+| [AdminWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Frontend-AdminWebsite) | Admin dashboard | Preact  | https://mishrashardendu22.is-a.dev/admin |
+| [Backend-PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-PersonalWebsite) | Personal site API | Go/Fiber | API endpoint |
+| [Backend-BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-BlogWebsite) | Blog API | JS/Node.js | API endpoint |
 
 ## Overview
 
