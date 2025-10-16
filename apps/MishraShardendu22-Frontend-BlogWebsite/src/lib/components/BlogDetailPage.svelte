@@ -328,47 +328,51 @@
       <div class="h-96 bg-muted/50 rounded animate-pulse"></div>
     </div>
   {:else if blog}
-    <!-- Article Header -->
-    <article>
-      <header class="mb-8">
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-foreground leading-tight">
+
+<article>
+  {#if blog.image}
+    <div class="group relative rounded-lg overflow-hidden border border-border mb-8 h-[250px]">
+      <img
+        src={resolveImageUrl(blog.image)}
+        alt={blog.title}
+        class="w-full h-full object-cover transition-all duration-300 group-hover:blur-sm group-hover:scale-110"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+      <header class="absolute inset-0 flex items-center justify-center p-6">
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center leading-tight drop-shadow-2xl">
           {blog.title}
         </h1>
       </header>
+    </div>
+  {:else}
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+        {blog.title}
+      </h1>
+    </header>
+  {/if}
 
-      <!-- Featured Image -->
-      {#if blog.image}
-        <div class="mb-8 rounded-lg overflow-hidden bg-muted/20">
-          <div class="w-full h-[500px] sm:h-[600px] flex items-center justify-center bg-muted/20">
-            <img
-              src={resolveImageUrl(blog.image)}
-              alt={blog.title}
-              class="max-w-full max-h-full object-contain"
-            />
-          </div>
-        </div>
-      {/if}
+  <!-- Article Content -->
+  <div class="prose prose-lg dark:prose-invert max-w-none mb-12
+              prose-headings:font-bold prose-headings:tracking-tight
+              prose-h1:text-5xl prose-h1:mt-12 prose-h1:mb-8
+              prose-h2:text-4xl prose-h2:mt-10 prose-h2:mb-6 prose-h2:border-b prose-h2:border-border prose-h2:pb-3
+              prose-h3:text-3xl prose-h3:mt-8 prose-h3:mb-5
+              prose-h4:text-2xl prose-h4:mt-6 prose-h4:mb-4
+              prose-h5:text-xl prose-h5:mt-5 prose-h5:mb-3
+              prose-h6:text-lg prose-h6:mt-4 prose-h6:mb-2
+              prose-p:text-base prose-p:leading-relaxed prose-p:mb-5
+              prose-strong:font-semibold prose-strong:text-foreground
+              prose-code:text-sm prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-primary
+              prose-pre:bg-muted prose-pre:border prose-pre:border-border
+              prose-a:text-primary prose-a:font-medium hover:prose-a:underline prose-a:no-underline
+              prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground
+              prose-ul:my-5 prose-ol:my-5 prose-li:my-2
+              prose-img:rounded-lg prose-img:my-8">
+    {@html renderedContent}
+  </div>
+</article>
 
-      <!-- Article Content -->
-      <div class="prose prose-lg dark:prose-invert max-w-none mb-12
-                  prose-headings:font-bold prose-headings:tracking-tight
-                  prose-h1:text-5xl prose-h1:mt-12 prose-h1:mb-8
-                  prose-h2:text-4xl prose-h2:mt-10 prose-h2:mb-6 prose-h2:border-b prose-h2:border-border prose-h2:pb-3
-                  prose-h3:text-3xl prose-h3:mt-8 prose-h3:mb-5
-                  prose-h4:text-2xl prose-h4:mt-6 prose-h4:mb-4
-                  prose-h5:text-xl prose-h5:mt-5 prose-h5:mb-3
-                  prose-h6:text-lg prose-h6:mt-4 prose-h6:mb-2
-                  prose-p:text-base prose-p:leading-relaxed prose-p:mb-5
-                  prose-strong:font-semibold prose-strong:text-foreground
-                  prose-code:text-sm prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-primary
-                  prose-pre:bg-muted prose-pre:border prose-pre:border-border
-                  prose-a:text-primary prose-a:font-medium hover:prose-a:underline prose-a:no-underline
-                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground
-                  prose-ul:my-5 prose-ol:my-5 prose-li:my-2
-                  prose-img:rounded-lg prose-img:my-8">
-        {@html renderedContent}
-      </div>
-    </article>
 
     <!-- Comments Section -->
     <section id="comments-section" class="bg-card border border-border rounded-xl p-5 sm:p-6 scroll-mt-20 shadow-sm">
