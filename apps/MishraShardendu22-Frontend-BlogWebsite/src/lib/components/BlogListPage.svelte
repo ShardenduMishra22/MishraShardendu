@@ -68,7 +68,7 @@
     </div>
 
     <div class="flex items-center gap-3">
-      <div class="relative flex-1 min-w-0 hidden sm:block" style="min-width: 360px;">
+  <div class="relative flex-1 min-w-0 hidden lg:block" style="min-width: 360px;">
         <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 pointer-events-none" />
         <Input
           placeholder="Search blogs..."
@@ -80,7 +80,7 @@
       {#if isOwner}
         <Button
           onclick={() => (window.location.href = `${basePath}/create`)}
-          className="h-12 px-5 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold shadow-lg rounded-xl text-sm flex-shrink-0"
+          className="h-12 px-5 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold shadow-lg rounded-xl text-sm flex-shrink-0 hidden lg:inline-flex"
         >
           <Plus class="w-4 h-4" />
           <span class="ml-2">Create</span>
@@ -135,7 +135,7 @@
       {#if !searchTerm && isOwner}
         <Button
           onclick={() => (window.location.href = `${basePath}/create`)}
-          className="h-12 sm:h-13 px-7 sm:px-9 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground font-bold shadow-xl hover:shadow-2xl shadow-primary/30 transition-all duration-300 gap-2 sm:gap-2.5 rounded-xl text-sm sm:text-base hover:scale-105"
+          className="h-12 sm:h-13 px-7 sm:px-9 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground font-bold shadow-xl hover:shadow-2xl shadow-primary/30 transition-all duration-300 gap-2 sm:gap-2.5 rounded-xl text-sm sm:text-base hover:scale-105 hidden lg:inline-flex"
         >
           <Plus class="w-5 h-5 sm:w-6 sm:h-6" />
           Create First Post

@@ -201,118 +201,135 @@
 </script>
 
 {#if blog}
-  <!-- Floating Info Button (Top Right) -->
-  <div class="fixed top-6 right-6 z-50">
-    <Button 
-      variant="default" 
-      size="icon"
-      onclick={() => showInfoPanel = !showInfoPanel}
-      className="w-12 h-12 rounded-full shadow-lg"
-    >
-      <Info class="w-5 h-5" />
-    </Button>
+  <!-- Floating Info Button: bottom-left on mobile/tablet, top-right on lg+ -->
+  <div class="fixed z-50">
+    <!-- Mobile / Tablet (bottom-left) -->
+    <div class="lg:hidden fixed left-4 bottom-4">
+      <Button 
+        variant="default" 
+        size="icon"
+        onclick={() => showInfoPanel = !showInfoPanel}
+        className="w-12 h-12 rounded-full shadow-lg"
+      >
+        <Info class="w-5 h-5" />
+      </Button>
+    </div>
+
+    <!-- Desktop / Large screens (top-right) -->
+    <div class="hidden lg:block fixed top-6 right-6">
+      <Button 
+        variant="default" 
+        size="icon"
+        onclick={() => showInfoPanel = !showInfoPanel}
+        className="w-12 h-12 rounded-full shadow-lg"
+      >
+        <Info class="w-5 h-5" />
+      </Button>
+    </div>
 
     {#if showInfoPanel}
-      <!-- Info Panel Popover -->
-      <div class="absolute right-0 mt-3 w-80 bg-card border border-border rounded-lg shadow-xl z-50 overflow-hidden">
-        <div class="p-4 space-y-4">
-          <!-- Author Section -->
-          <div class="pb-3 border-b border-border">
-            <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Author</p>
-            <div class="flex items-center gap-3">
-              <Avatar
-                src={resolveImageUrl(blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined)}
-                fallback={blog.author?.name?.charAt(0) || "U"}
-                class="w-12 h-12 border-2 border-primary/20"
-              />
-              <div class="flex-1 min-w-0">
-                <p class="font-semibold text-sm truncate">{blog.author?.name || "Unknown"}</p>
-                <p class="text-xs text-muted-foreground truncate">{blog.author?.email || ""}</p>
+      <!-- Info Panel Popover: adapt position based on screen size -->
+      <div class="absolute z-50">
+        <div class="lg:fixed lg:top-20 lg:right-6 lg:w-80 w-72 left-4 bottom-20 bg-card border border-border rounded-lg shadow-xl overflow-hidden">
+          <div class="p-4 space-y-4">
+            <!-- Author Section -->
+            <div class="pb-3 border-b border-border">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Author</p>
+              <div class="flex items-center gap-3">
+                <Avatar
+                  src={resolveImageUrl(blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined)}
+                  fallback={blog.author?.name?.charAt(0) || "U"}
+                  class="w-12 h-12 border-2 border-primary/20"
+                />
+                <div class="flex-1 min-w-0">
+                  <p class="font-semibold text-sm truncate">{blog.author?.name || "Unknown"}</p>
+                  <p class="text-xs text-muted-foreground truncate">{blog.author?.email || ""}</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Post Details -->
-          <div class="space-y-2 pb-3 border-b border-border">
-            <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Details</p>
-            
-            <div class="flex items-center gap-2 text-sm">
-              <Calendar class="w-4 h-4 text-muted-foreground" />
-              <span class="text-muted-foreground">{formatDate(blog.createdAt)}</span>
+            <!-- Post Details -->
+            <div class="space-y-2 pb-3 border-b border-border">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Details</p>
+              
+              <div class="flex items-center gap-2 text-sm">
+                <Calendar class="w-4 h-4 text-muted-foreground" />
+                <span class="text-muted-foreground">{formatDate(blog.createdAt)}</span>
+              </div>
+
+              <div class="flex items-center gap-2 text-sm">
+                <MessageCircle class="w-4 h-4 text-muted-foreground" />
+                <span class="text-muted-foreground">{comments.length} comments</span>
+              </div>
             </div>
 
-            <div class="flex items-center gap-2 text-sm">
-              <MessageCircle class="w-4 h-4 text-muted-foreground" />
-              <span class="text-muted-foreground">{comments.length} comments</span>
-            </div>
-          </div>
+            <!-- Tags Section -->
+            {#if blog.tags && blog.tags.length > 0}
+              <div class="pb-3 border-b border-border">
+                <button
+                  type="button"
+                  class="w-full flex items-center justify-between text-left mb-2"
+                  onclick={() => showTags = !showTags}
+                >
+                  <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Tags ({blog.tags.length})
+                  </p>
+                  {#if showTags}
+                    <ChevronUp class="w-4 h-4 text-muted-foreground" />
+                  {:else}
+                    <ChevronDown class="w-4 h-4 text-muted-foreground" />
+                  {/if}
+                </button>
 
-          <!-- Tags Section -->
-          {#if blog.tags && blog.tags.length > 0}
-            <div class="pb-3 border-b border-border">
-              <button
-                type="button"
-                class="w-full flex items-center justify-between text-left mb-2"
-                onclick={() => showTags = !showTags}
-              >
-                <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  Tags ({blog.tags.length})
-                </p>
                 {#if showTags}
-                  <ChevronUp class="w-4 h-4 text-muted-foreground" />
-                {:else}
-                  <ChevronDown class="w-4 h-4 text-muted-foreground" />
+                  <div class="flex flex-wrap gap-1.5 mt-2">
+                    {#each blog.tags as tag}
+                      <Badge variant="secondary" class="text-xs px-2 py-0.5">{tag}</Badge>
+                    {/each}
+                  </div>
                 {/if}
-              </button>
+              </div>
+            {/if}
 
-              {#if showTags}
-                <div class="flex flex-wrap gap-1.5 mt-2">
-                  {#each blog.tags as tag}
-                    <Badge variant="secondary" class="text-xs px-2 py-0.5">{tag}</Badge>
-                  {/each}
-                </div>
+            <!-- Action Buttons -->
+            <div class="space-y-2">
+              {#if canEdit()}
+                <Button 
+                  variant="secondary" 
+                  onclick={() => window.location.href = editUrl()} 
+                  size="sm"
+                  className="w-full"
+                >
+                  <Edit class="w-4 h-4 mr-2" />
+                  Edit Post
+                </Button>
               {/if}
-            </div>
-          {/if}
 
-          <!-- Action Buttons -->
-          <div class="space-y-2">
-            {#if canEdit()}
               <Button 
-                variant="secondary" 
-                onclick={() => window.location.href = editUrl()} 
+                variant="outline" 
+                onclick={handleShare} 
                 size="sm"
                 className="w-full"
               >
-                <Edit class="w-4 h-4 mr-2" />
-                Edit Post
+                {#if shareSuccess}
+                  <Check class="w-4 h-4 mr-2" />
+                  Copied!
+                {:else}
+                  <Share2 class="w-4 h-4 mr-2" />
+                  Share Post
+                {/if}
               </Button>
-            {/if}
 
-            <Button 
-              variant="outline" 
-              onclick={handleShare} 
-              size="sm"
-              className="w-full"
-            >
-              {#if shareSuccess}
-                <Check class="w-4 h-4 mr-2" />
-                Copied!
-              {:else}
-                <Share2 class="w-4 h-4 mr-2" />
-                Share Post
-              {/if}
-            </Button>
-
-            <Button 
-              variant="default" 
-              onclick={scrollToComments} 
-              size="sm"
-              className="w-full"
-            >
-              <MessageCircle class="w-4 h-4 mr-2" />
-              Go to Comments
-            </Button>
+              <Button 
+                variant="default" 
+                onclick={scrollToComments} 
+                size="sm"
+                className="w-full"
+              >
+                <MessageCircle class="w-4 h-4 mr-2" />
+                Go to Comments
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -320,7 +337,14 @@
   </div>
 {/if}
 
-<div class="w-full max-w-7xl mx-auto px-2 py-8 lg:px-3">
+<!-- Mobile back button (fixed) -->
+<div class="lg:hidden fixed top-4 left-4 z-50">
+  <Button variant="ghost" size="icon" onclick={() => history.back()} className="w-10 h-10">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0L3.586 10l4.707-4.707a1 1 0 011.414 1.414L6.414 10l3.293 3.293a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+  </Button>
+</div>
+
+<div class="w-full max-w-7xl mx-auto px-2 py-8 lg:px-3 overflow-x-hidden">
   {#if loading}
     <div class="space-y-4">
       <div class="h-10 bg-muted/50 rounded animate-pulse"></div>

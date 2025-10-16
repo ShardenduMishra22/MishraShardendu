@@ -101,11 +101,13 @@
     </div>
 
     <div class="flex items-center gap-3">
-      <div class="relative hidden sm:block" style="min-width:280px;">
+        <!-- hide large search on very small screens -->
+          <div class="relative hidden lg:block" style="min-width:280px;">
         <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
         <Input placeholder="Search your posts..." bind:value={searchTerm} class="pl-10 h-11" />
       </div>
-      <Button onclick={() => (window.location.href = `${basePath}/create`)} className="h-11 px-6 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground rounded-lg">Create Post</Button>
+        <!-- Desktop Create button; on small screens show smaller icon handled by mobile menu -->
+      <Button onclick={() => (window.location.href = `${basePath}/create`)} className="h-11 px-6 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground rounded-lg hidden lg:inline-flex">Create Post</Button>
     </div>
   </div>
   
@@ -165,7 +167,7 @@
         {searchTerm ? "Try a different search term" : "Create your first blog post"}
       </p>
       {#if !searchTerm}
-        <Button onclick={() => (window.location.href = `${basePath}/create`)}>
+        <Button onclick={() => (window.location.href = `${basePath}/create`)} className="hidden sm:inline-flex">
           <Plus class="w-4 h-4 mr-2" />
           Create First Post
         </Button>
@@ -178,9 +180,6 @@
           <!-- Title above -->
           <div class="mb-2">
             <div class="flex items-center gap-3 min-w-0">
-              {#if blog.image}
-                <img src={resolveImageUrl(blog.image)} alt={blog.title} class="w-16 h-10 object-cover rounded-md flex-shrink-0 sm:hidden" />
-              {/if}
               <div class="min-w-0">
                 <h4 class="text-sm sm:text-base font-semibold text-foreground mb-0 line-clamp-2 truncate">
                   {blog.title}
@@ -190,8 +189,8 @@
           </div>
 
           <!-- Tags (1/4) and buttons (3/4) below title -->
-          <div class="mt-3 flex items-start gap-3">
-            <div class="tags w-1/4">
+          <div class="mt-3 flex items-start gap-3 flex-wrap">
+            <div class="tags w-full sm:w-1/4">
               {#if blog.tags && blog.tags.length > 0}
                 <div class="flex flex-wrap gap-2">
                   {#each blog.tags.slice(0, 3) as tag}
@@ -204,11 +203,11 @@
               {/if}
             </div>
 
-            <div class="actions w-3/4 flex justify-end">
-              <div class="card-actions w-full max-w-none">
-                <button type="button" class="view-btn" onclick={() => (window.location.href = `${basePath}/read/${blog.id}`)}>View</button>
-                <button type="button" class="edit-btn" onclick={() => (window.location.href = `${basePath}/read/${blog.id}/edit`)}><Edit class="w-4 h-4" /></button>
-                <button type="button" class="delete-btn" onclick={() => handleDelete(blog.id)} disabled={deletingBlogId === blog.id}><Trash2 class="w-4 h-4" /></button>
+            <div class="actions w-full sm:w-3/4 flex justify-end">
+              <div class="card-actions w-full max-w-none flex gap-2 flex-wrap justify-end">
+                <button type="button" class="view-btn px-3 py-2 rounded-md bg-primary/10 text-primary" onclick={() => (window.location.href = `${basePath}/read/${blog.id}`)}>View</button>
+                <button type="button" class="edit-btn p-2 rounded-md border" onclick={() => (window.location.href = `${basePath}/read/${blog.id}/edit`)}><Edit class="w-4 h-4" /></button>
+                <button type="button" class="delete-btn p-2 rounded-md border text-destructive" onclick={() => handleDelete(blog.id)} disabled={deletingBlogId === blog.id}><Trash2 class="w-4 h-4" /></button>
               </div>
             </div>
           </div>

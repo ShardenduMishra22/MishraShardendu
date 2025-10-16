@@ -100,12 +100,12 @@
   };
 </script>
 
-<div class="lg:hidden fixed top-4 right-4 z-50">
+<div class="lg:hidden fixed top-4 right-4 z-50 pointer-events-auto">
   <Button
     variant="outline"
     size="sm"
     onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}
-    className="bg-card/95 backdrop-blur-sm border-border shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+    className="bg-card/95 backdrop-blur-sm border-border shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 p-0.5"
   >
       {#if isMobileMenuOpen}
         <X class="h-4 w-4" />
@@ -132,6 +132,16 @@
           <X class="h-4 w-4" />
         </Button>
       </div>
+
+      <!-- Mobile Create button CTA -->
+      {#if isOwner}
+        <div class="mb-4">
+          <Button size="sm" className="w-full bg-gradient-to-r from-primary to-primary/90 text-primary-foreground" onclick={() => { isMobileMenuOpen = false; window.location.href = `${basePath}/create`; }}>
+            <Plus class="w-4 h-4 mr-2" />
+            Create Post
+          </Button>
+        </div>
+      {/if}
 
       {#if isAuthenticated && user}
         <div class="mb-4">

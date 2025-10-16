@@ -323,6 +323,11 @@ h6 {
     min-height: 100dvh; /* Dynamic viewport height for mobile */
   }
 
+  /* Prevent horizontal overflow caused by fixed elements or wide content */
+  html, body, #app {
+    overflow-x: hidden;
+  }
+
   /* Mobile-optimized form elements */
   input,
   textarea,
@@ -398,6 +403,15 @@ h6 {
   .stat-card { padding: 1rem; border-radius: var(--radius); background: var(--card); border: 1px solid var(--border); }
 
   @media (max-width: 900px) {
+    /* Make stats stack on narrow screens */
+    .modern-stats {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Ensure fixed top buttons have safe spacing on small screens */
+    .fixed.top-6.right-6, .fixed.top-4.left-4, .fixed.top-4.right-4 {
+      top: calc(0.5rem + var(--safe-area-inset-top));
+    }
     .modern-stats { grid-template-columns: repeat(2, 1fr); }
   }
 
