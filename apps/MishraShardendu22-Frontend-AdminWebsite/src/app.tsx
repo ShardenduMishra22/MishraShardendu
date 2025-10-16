@@ -1,17 +1,19 @@
-import { Router, Route } from 'preact-router'
 import { useEffect } from 'preact/hooks'
 import { useAuth } from './hooks/use-auth'
+import { Router, Route } from 'preact-router'
 
 // Import pages (these will be created)
 import LoginPage from './pages/admin/login'
-import DashboardPage from './pages/admin/dashboard'
-import ProfilePage from './pages/admin/profile'
 import SkillsPage from './pages/admin/skills'
-import ProjectsPage from './pages/admin/projects'
-import ExperiencesPage from './pages/admin/experiences'
-import CertificationsPage from './pages/admin/certifications'
 import KanbanPage from './pages/admin/kanban'
+import ProfilePage from './pages/admin/profile'
+import ProjectsPage from './pages/admin/projects'
+import DashboardPage from './pages/admin/dashboard'
+import ExperiencesPage from './pages/admin/experiences'
+import BlogReorderPage from './pages/admin/blogReorder'
+import VolunteerPage from './pages/admin/volunteer'
 import AdminLayout from './components/layout/AdminLayout'
+import CertificationsPage from './pages/admin/certifications'
 
 function App() {
   const { isAuthenticated, isLoading, initializeAuth } = useAuth()
@@ -72,6 +74,14 @@ function App() {
         )}
       />
       <Route
+        path="/admin/volunteer"
+        component={() => (
+          <AdminLayout>
+            <VolunteerPage />
+          </AdminLayout>
+        )}
+      />
+      <Route
         path="/admin/certifications"
         component={() => (
           <AdminLayout>
@@ -84,6 +94,14 @@ function App() {
         component={() => (
           <AdminLayout>
             <KanbanPage />
+          </AdminLayout>
+        )}
+      />
+      <Route
+        path="/admin/blogs/reorder"
+        component={() => (
+          <AdminLayout>
+            <BlogReorderPage />
           </AdminLayout>
         )}
       />

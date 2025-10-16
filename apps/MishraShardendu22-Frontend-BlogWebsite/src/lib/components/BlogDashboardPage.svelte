@@ -18,6 +18,7 @@
   import { authStore } from "../auth";
   import { getBasePath } from "../navigation";
   import { onMount } from "svelte";
+  import resolveImageUrl from "../utils/image"
 
   const basePath = getBasePath();
 
@@ -169,7 +170,10 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {#each filteredBlogs as blog (blog.id)}
         <div class="rounded-lg border border-border bg-card p-4 sm:p-5 lg:p-6">
-          <div class="mb-4">
+          <div class="mb-4 flex items-start gap-3">
+            {#if blog.image}
+              <img src={resolveImageUrl(blog.image)} alt={blog.title} class="w-16 h-10 object-cover rounded-md flex-shrink-0 sm:hidden" />
+            {/if}
             <h4 class="text-sm sm:text-base font-semibold text-foreground mb-2 line-clamp-2">
               {blog.title}
             </h4>

@@ -11,6 +11,8 @@ import {
   LayoutDashboard,
   FolderKanban,
   GraduationCap,
+  Book,
+  User2Icon,
 } from 'lucide-react'
 import { Button } from '../ui/button'
 import ThemeToggle from '../extra/ThemeToggle'
@@ -19,11 +21,18 @@ import type { JSX } from 'preact'
 const navigation = [
   { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
   { name: 'Profile', href: '/admin/profile', icon: User },
+
   { name: 'Skills', href: '/admin/skills', icon: Settings },
-  { name: 'Projects', href: '/admin/projects', icon: Briefcase },
+
   { name: 'Experiences', href: '/admin/experiences', icon: GraduationCap },
+  { name: 'Volunteer', href: '/admin/volunteer', icon: User2Icon },
+
   { name: 'Certifications', href: '/admin/certifications', icon: Award },
+
+  { name: 'Projects', href: '/admin/projects', icon: Briefcase },
   { name: 'Kanban', href: '/admin/kanban', icon: FolderKanban },
+
+  { name: 'Blog', href: '/admin/blogs/reorder', icon: Book },
 ]
 
 interface AdminLayoutProps {

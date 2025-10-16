@@ -1,14 +1,11 @@
 <script lang="ts">
-  import Button from "./ui/button.svelte";
+  import { blogApi } from "../api";
+  import { toast } from "../toast";
   import Input from "./ui/input.svelte";
   import Label from "./ui/label.svelte";
-  import Badge from "./ui/badge.svelte";
+  import Button from "./ui/button.svelte";
   import Textarea from "./ui/textarea.svelte";
   import { Save, X, Plus } from "lucide-svelte";
-  import { cn } from "../utils";
-  import { blogApi } from "../api";
-  import { authStore } from "../auth";
-  import { toast } from "../toast";
   import { validateBlogTitle, validateBlogContent, validateTag } from "../validation";
 
   let { blogId }: { blogId?: string | null } = $props();
@@ -19,10 +16,8 @@
   let newTag = $state("");
   let isSubmitting = $state(false);
   let image = $state("");
-  let showImageInput = $state(false);
   let imageError = $state("");
   
-  // Field-specific errors
   let titleError = $state("");
   let contentError = $state("");
   let tagError = $state("");
@@ -36,7 +31,6 @@
       return;
     }
 
-    // Validate tag
     const validation = validateTag(trimmedTag);
     if (!validation.isValid) {
       tagError = validation.error || "Invalid tag";
@@ -79,26 +73,26 @@
   const validateForm = (): boolean => {
     let isValid = true;
     
-  titleError = "";
-  contentError = "";
-  imageError = "";
+    titleError = "";
+    contentError = "";
+    imageError = "";
 
-    // Validate title
     const titleValidation = validateBlogTitle(title);
     if (!titleValidation.isValid) {
       titleError = titleValidation.error || "";
       isValid = false;
     }
 
-    // Validate content
     const contentValidation = validateBlogContent(content);
     if (!contentValidation.isValid) {
       contentError = contentValidation.error || "";
       isValid = false;
     }
 
-    // Validate Image (optional)
-    if (image && image.trim()) {
+    if (!image || !image.trim()) {
+      imageError = "Image URL is required";
+      isValid = false;
+    } else {
       try {
         const parsed = new URL(image.trim());
         if (!parsed.protocol.startsWith("http")) {
@@ -130,12 +124,10 @@
         content: content.trim(),
         tags: tags.length > 0 ? tags : undefined,
         published: true,
+        image: image.trim(),
       };
 
-      if (image && image.trim()) payload.image = image.trim();
-
       if (blogId) {
-        // Update existing blog
         const response = await blogApi.updateBlog(parseInt(blogId), payload);
         if (response.success) {
           toast.success("Blog post updated successfully!");
@@ -157,10 +149,8 @@
     }
   };
 
-  // Reactively load existing blog when blogId prop changes (prevents stale data)
   $effect(() => {
     if (!blogId) {
-      // Clear form when not editing
       title = "";
       content = "";
       tags = [];
@@ -177,9 +167,7 @@
 
 <div>
   <form onsubmit={handleSubmit} class="space-y-8">
-    <!-- Title and Tags Row -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <!-- Title Section -->
       <div class="space-y-3">
         <Label for="title" class="text-base font-semibold">Title</Label>
         <Input
@@ -196,34 +184,33 @@
         {/if}
       </div>
 
-      <!-- Tags Section -->
       <div class="space-y-3">
         <Label for="tags" class="text-base font-semibold">Tags</Label>
         <div class="flex gap-2">
-            <div class="flex items-center gap-2 w-full">
-              <div class="flex-1 flex items-center gap-2 bg-card/40 border border-border rounded-md px-3 py-2 focus-within:ring-2 focus-within:ring-primary/30 transition-shadow">
-                <Input
-                  id="tags"
-                  placeholder="Add a tag..."
-                  bind:value={newTag}
-                  onkeypress={(e: KeyboardEvent) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      handleAddTag();
-                    }
-                  }}
-                  class="w-full bg-transparent placeholder:text-muted-foreground border-0 focus:outline-none {tagError ? 'border-destructive' : ''}"
-                />
-                <button
-                  type="button"
-                  aria-label="Add tag"
-                  onclick={handleAddTag}
-                  class="w-9 h-9 inline-flex items-center justify-center rounded-md bg-primary/10 text-primary hover:bg-primary/20 transition-colors border border-transparent"
-                >
-                  <Plus class="w-4 h-4" />
-                </button>
-              </div>
+          <div class="flex items-center gap-2 w-full">
+            <div class="flex-1 flex items-center gap-2 bg-card/40 border border-border rounded-md px-3 py-2 focus-within:ring-2 focus-within:ring-primary/30 transition-shadow">
+              <Input
+                id="tags"
+                placeholder="Add a tag..."
+                bind:value={newTag}
+                onkeypress={(e: KeyboardEvent) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleAddTag();
+                  }
+                }}
+                class="w-full bg-transparent placeholder:text-muted-foreground border-0 focus:outline-none {tagError ? 'border-destructive' : ''}"
+              />
+              <button
+                type="button"
+                aria-label="Add tag"
+                onclick={handleAddTag}
+                class="w-9 h-9 inline-flex items-center justify-center rounded-md bg-primary/10 text-primary hover:bg-primary/20 transition-colors border border-transparent"
+              >
+                <Plus class="w-4 h-4" />
+              </button>
             </div>
+          </div>
         </div>
 
         {#if tagError}
@@ -253,32 +240,25 @@
       </div>
     </div>
 
-    <!-- Image Section (optional) -->
     <div class="space-y-3">
       <div class="flex items-center justify-between">
         <Label for="image" class="text-base font-semibold">Post Image</Label>
-        <Button type="button" variant="outline" className="text-sm" onclick={() => showImageInput = !showImageInput}>
-          {showImageInput ? 'Hide Image' : 'Enter Image'}
-        </Button>
       </div>
-      {#if showImageInput}
-        <Input
-          id="image"
-          placeholder="https://example.com/your-image.jpg"
-          bind:value={image}
-          class={imageError ? 'border-destructive' : ''}
-        />
-        {#if imageError}
-          <p class="text-xs text-destructive">{imageError}</p>
-        {:else}
-          <p class="text-sm text-muted-foreground">Provide an image URL to display with the blog post (optional)</p>
-        {/if}
+
+      <Input
+        id="image"
+        placeholder="https://example.com/your-image.jpg"
+        bind:value={image}
+        class={imageError ? 'border-destructive' : ''}
+        required
+      />
+      {#if imageError}
+        <p class="text-xs text-destructive">{imageError}</p>
       {:else}
-        <p class="text-sm text-muted-foreground">You can optionally add an image for the post. Click "Enter Image" to add it.</p>
+        <p class="text-sm text-muted-foreground">Provide an image URL to display with the blog post (required)</p>
       {/if}
     </div>
 
-    <!-- Content Section -->
     <div class="space-y-3">
       <Label for="content" class="text-base font-semibold">Content</Label>
       <Textarea
@@ -302,12 +282,11 @@
       {/if}
     </div>
 
-    <!-- Actions -->
     <div class="flex gap-3 justify-end">
-  <Button className="" type="button" variant="outline" onclick={() => (window.location.href = blogId ? `/blog/read/${blogId}` : "/blog/read")}>
-    Cancel
-  </Button>
-  <Button className="" type="submit" disabled={isSubmitting} onclick={() => {}}>
+      <Button className="" type="button" variant="outline" onclick={() => (window.location.href = blogId ? `/blog/read/${blogId}` : "/blog/read")}>
+        Cancel
+      </Button>
+      <Button className="" type="submit" disabled={isSubmitting} onclick={() => {}}>
         <Save class="w-4 h-4 mr-2" />
         {isSubmitting ? (blogId ? "Updating..." : "Creating...") : (blogId ? "Update Post" : "Create Post")}
       </Button>

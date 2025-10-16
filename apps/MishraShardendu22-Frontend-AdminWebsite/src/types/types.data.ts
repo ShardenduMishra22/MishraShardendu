@@ -267,3 +267,13 @@ export type CreateAchievementRequest = CreateCertificationRequest
 export type UpdateAchievementRequest = UpdateCertificationRequest
 export type UpdateCertificationRequest = CreateCertificationRequest
 export type UpdateVolunteerExperienceRequest = CreateVolunteerExperienceRequest
+
+export interface BlogReorderItem {
+  orderId: number
+  title: string
+}
+
+export interface BlogReorderUpdate {
+  blogId_Old: number
+  blogId_New: number
+}
