@@ -60,8 +60,9 @@ const SortableCard = ({ item }: SortableCardProps) => {
     id: item.uid,
   })
 
+  // KEY FIX: Disable transform when dragging to prevent dual movement
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: isDragging ? 'unset' : CSS.Transform.toString(transform),
     transition,
   }
 
@@ -166,7 +167,7 @@ export default function BlogReorderPage() {
     try {
       setSaving(true)
       const payload: BlogReorderUpdate[] = changedItems.map((item) => ({
-        blogId_Old: item.blogId,
+        id: item.blogId,
         blogId_New: item.newOrder,
       }))
 

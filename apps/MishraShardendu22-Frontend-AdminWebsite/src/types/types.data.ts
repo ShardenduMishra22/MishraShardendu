@@ -269,7 +269,7 @@ export type UpdateCertificationRequest = CreateCertificationRequest
 export type UpdateVolunteerExperienceRequest = CreateVolunteerExperienceRequest
 
 export interface BlogReorderUpdate {
-  blogId_Old: number
+  id: number
   blogId_New: number
 }
 
