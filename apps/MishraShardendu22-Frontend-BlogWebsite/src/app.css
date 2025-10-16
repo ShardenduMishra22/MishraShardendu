@@ -145,6 +145,15 @@ body {
   --sidebar-ring: #3b82f6;
 }
 
+/* View button foreground should adapt to theme: black in light, white in dark */
+:root {
+  --view-foreground: #000000; /* light theme: black */
+}
+
+.dark {
+  --view-foreground: #ffffff; /* dark theme: white */
+}
+
 /* Mobile-optimized ProseMirror styles */
 .ProseMirror {
   line-height: 1.6;
@@ -388,6 +397,200 @@ h6 {
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+}
+
+/* Sidebar interaction fixes: reserve space and prevent overlap */
+/* On large screens, the sidebar is fixed with a collapsed width of 5rem (w-20)
+   and expands to 18rem (w-72) on hover. Reserve the collapsed width by default
+   and animate main's margin when the sidebar expands. */
+@media (min-width: 1024px) {
+  main {
+    margin-left: 5rem; /* matches w-20 */
+    transition: margin-left 0.25s ease-in-out, padding 0.25s ease-in-out;
+  }
+
+  /* When the sidebar group is hovered, it expands to 18rem (w-72). Shift main accordingly. */
+  aside.group:hover ~ main,
+  aside.group:focus-within ~ main {
+    margin-left: 18rem; /* matches w-72 */
+  }
+
+  /* Ensure the fixed aside doesn't cover the main content when open on mobile fallback
+     (the mobile menu uses fixed inset overlay; main should stay scrollable beneath) */
+  .lg\:hidden + main {
+    margin-left: 0;
+  }
+}
+
+/* Dashboard card actions: 3 equal buttons (view/edit/delete) */
+.card-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  /* Make card-actions span the full width of its parent container so buttons fill available space */
+  width: 100%;
+}
+
+.card-actions button {
+  height: 42px;
+  border-radius: 0.625rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+  color: var(--foreground);
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+  width: 100%;
+  min-width: 0; /* allow grid cells to size properly */
+}
+
+.card-actions .view-btn {
+  background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(16,185,129,0.06));
+  color: var(--view-foreground);
+  border: 1px solid rgba(16,185,129,0.18);
+}
+
+.card-actions .edit-btn {
+  background: linear-gradient(90deg, rgba(59,130,246,0.12), rgba(59,130,246,0.06));
+}
+
+.card-actions .delete-btn {
+  background: linear-gradient(90deg, rgba(239,68,68,0.08), rgba(239,68,68,0.04));
+}
+
+.card-actions button:hover {
+  /* Remove translate and heavy shadow for these action buttons */
+  transform: none;
+  box-shadow: none;
+}
+
+.card-actions .view-btn:hover {
+  background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+  color: var(--primary-foreground);
+  border-color: rgba(0,0,0,0.08);
+}
+
+
+/* Modern card and stat visuals */
+.modern-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.stat-card:hover {
+  /* Disable upward movement and heavy shadow on hover */
+  transform: none;
+  transition: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.stat-label {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon-inner {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+}
+
+
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Improved card look used by blog cards */
+.blog-card-improved {
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.45);
+  padding: 0.75rem;
+}
+
+.blog-card-improved:hover {
+  /* Keep the same appearance on hover; no translate or heavier shadow */
+  transform: none;
+  transition: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.45);
+}
+
+.blog-card-improved .line-clamp-2 { margin-bottom: 0.25rem; }
+.blog-card-improved .line-clamp-3 { margin-top: 0.5rem; }
+
+/* Tighter spacing for dashboard stat numbers */
+.stat-card p:first-child { margin-bottom: .25rem; }
+
+
+/* Smooth reveal for sidebar labels (title, nav item labels, user info) */
+@media (min-width: 1024px) {
+  /* Base hidden/collapsed state for label containers */
+  .nav-label {
+    opacity: 0;
+    transform: translateX(-6px);
+    max-width: 0;
+    overflow: hidden;
+    transition: opacity 180ms ease, transform 220ms ease, max-width 220ms ease;
+    white-space: nowrap;
+  }
+
+  /* When the aside expands (on hover/focus), show labels */
+  aside.group:hover .nav-label,
+  aside.group:focus-within .nav-label {
+    opacity: 1;
+    transform: translateX(0);
+    max-width: 40rem; /* large enough to reveal all label content */
+  }
+
+  /* Ensure truncated text remains stable while animating */
+  .nav-label .truncate {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+  }
+  /* Ensure form controls inside nav-label animate smoothly */
+  .nav-label button,
+  .nav-label .inline-flex {
+    opacity: inherit;
+    transform: inherit;
+    transition: opacity 180ms ease, transform 220ms ease;
   }
 }
 

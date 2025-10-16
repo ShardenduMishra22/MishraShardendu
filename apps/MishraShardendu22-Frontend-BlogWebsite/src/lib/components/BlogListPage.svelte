@@ -12,6 +12,8 @@
   let searchTerm = $state("");
   let isOwner = $state(false);
   let blogs = $state<Blog[]>([]);
+  let currentPage = $state(1);
+  const pageSize = 4;
 
   const basePath = typeof window !== 'undefined' && window.location.pathname.startsWith('/blog') ? '/blog' : '';
 
@@ -48,48 +50,51 @@
         blog.content.toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
+
+  // Pagination helpers
+  const totalPages = $derived(Math.max(1, Math.ceil(filteredBlogs.length / pageSize)));
+  $effect(() => {
+    // clamp currentPage if filtered results shrink
+    if (currentPage > totalPages) currentPage = totalPages;
+  });
 </script>
 
 <div class="space-y-6 md:space-y-8 animate-slide-up">
+  <!-- Page header with inline controls -->
+  <div class="flex items-start justify-between gap-4">
+    <div class="space-y-2">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent drop-shadow-sm">Blog Posts</h1>
+      <p class="text-base text-muted-foreground font-medium">Explore articles about web development, programming, and tech insights</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <div class="relative flex-1 min-w-0 hidden sm:block" style="min-width: 360px;">
+        <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 pointer-events-none" />
+        <Input
+          placeholder="Search blogs..."
+          bind:value={searchTerm}
+          class="pl-10 pr-4 h-12 bg-card/80 backdrop-blur-sm border-2 border-border/60 focus:border-primary/50 hover:border-border rounded-xl text-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 shadow-sm w-full font-medium"
+        />
+      </div>
+
+      {#if isOwner}
+        <Button
+          onclick={() => (window.location.href = `${basePath}/create`)}
+          className="h-12 px-5 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold shadow-lg rounded-xl text-sm flex-shrink-0"
+        >
+          <Plus class="w-4 h-4" />
+          <span class="ml-2">Create</span>
+        </Button>
+      {/if}
+    </div>
+  </div>
   {#if error}
     <div class="p-4 bg-destructive/10 border-2 border-destructive/30 rounded-xl shadow-lg backdrop-blur-sm">
       <p class="text-destructive text-sm font-semibold">{error}</p>
     </div>
   {/if}
 
-  <!-- Search and Create Post Section -->
-  <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-    <div class="relative flex-1 min-w-0 group">
-      <Search
-        class="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground group-focus-within:text-primary w-4 h-4 sm:w-5 sm:h-5 pointer-events-none z-10 transition-colors"
-      />
-      <Input
-        placeholder="Search blogs..."
-        bind:value={searchTerm}
-        class="pl-10 sm:pl-12 pr-20 sm:pr-24 h-12 sm:h-13 bg-card/80 backdrop-blur-sm border-2 border-border/60 focus:border-primary/50 hover:border-border hover:shadow-md focus:ring-2 focus:ring-primary/20 rounded-xl text-sm sm:text-base text-foreground placeholder:text-muted-foreground transition-all duration-300 shadow-sm w-full font-medium"
-      />
-      <div
-        class="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
-      >
-        <span
-          class="text-xs font-bold bg-gradient-to-r from-primary to-primary/80 text-primary-foreground px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg shadow-md whitespace-nowrap"
-        >
-          {filteredBlogs.length}
-        </span>
-      </div>
-    </div>
-
-    {#if isOwner}
-      <Button
-        onclick={() => (window.location.href = `${basePath}/create`)}
-        className="h-12 sm:h-13 px-5 sm:px-7 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground font-bold shadow-lg hover:shadow-xl shadow-primary/30 transition-all duration-300 gap-2 rounded-xl text-sm sm:text-base flex-shrink-0 w-full sm:w-auto hover:scale-[1.02]"
-      >
-        <Plus class="w-4 h-4 sm:w-5 sm:h-5" />
-        <span class="hidden xs:inline">Create Post</span>
-        <span class="xs:hidden">Create</span>
-      </Button>
-    {/if}
-  </div>
+  <!-- legacy search area removed (controls moved into header) -->
 
   {#if loading}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
@@ -138,10 +143,35 @@
       {/if}
     </div>
   {:else}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
-      {#each filteredBlogs as blog (blog.id)}
-        <BlogCard {blog} onReadMore={(blogId) => (window.location.href = `${basePath}/read/${blogId}`)} />
+    <div class="blog-grid">
+      {#each filteredBlogs.slice((currentPage-1)*pageSize, currentPage*pageSize) as blog (blog.id)}
+        <div class="blog-card-improved">
+          <BlogCard {blog} onReadMore={(blogId) => (window.location.href = `${basePath}/read/${blogId}`)} />
+        </div>
       {/each}
     </div>
+
+    <!-- Pagination -->
+    {#if filteredBlogs.length > pageSize}
+      <div class="mt-6 flex items-center justify-center gap-3">
+        <Button size="sm" variant="outline" onclick={() => currentPage = Math.max(1, currentPage - 1)} className="px-3">
+          Prev
+        </Button>
+
+        {#each Array(totalPages) as _, i}
+          {@const page = i + 1}
+          <button
+            class={page === currentPage ? 'px-3 py-1 rounded-lg bg-primary text-primary-foreground font-semibold' : 'px-3 py-1 rounded-lg bg-card/80 border border-border'}
+            on:click={() => (currentPage = page)}
+          >
+            {page}
+          </button>
+        {/each}
+
+        <Button size="sm" variant="outline" onclick={() => currentPage = Math.min(totalPages, currentPage + 1)} className="px-3">
+          Next
+        </Button>
+      </div>
+    {/if}
   {/if}
 </div>

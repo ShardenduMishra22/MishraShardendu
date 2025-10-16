@@ -211,23 +211,11 @@
     <LoginPage />
   {:else}
     <BlogNavigation />
-  <main class="lg:ml-8 transition-all duration-300 ease-in-out">
+  <main class="lg:ml-20 transition-all duration-300 ease-in-out">
       <div class="mx-auto pl-2 pr-2 sm:pl-3 sm:pr-3 lg:pl-4 lg:pr-4 py-6 sm:py-8 max-w-10xl">
         {#if pageComponent() === "list"}
-        <div class="space-y-6 sm:space-y-8 animate-slide-up">
-          <div class="relative space-y-3 pb-6 border-b-2 border-border/50">
-            <div class="absolute -top-4 -left-4 w-24 h-24 bg-primary/5 rounded-full blur-3xl"></div>
-            <h1
-              class="relative text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent drop-shadow-sm"
-            >
-              Blog Posts
-            </h1>
-            <p class="relative text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
-              Explore articles about web development, programming, and tech insights
-            </p>
-          </div>
           <BlogListPage />
-        </div>
+
       {:else if pageComponent() === "create"}
         <div class="space-y-6 sm:space-y-8 animate-slide-up">
           <div class="relative space-y-3 pb-6 border-b-2 border-border/50">
@@ -242,18 +230,7 @@
           <BlogCreatePage blogId={blogId()} />
         </div>
       {:else if pageComponent() === "dashboard"}
-        <div class="space-y-6 sm:space-y-8 animate-slide-up">
-          <div class="relative space-y-3 pb-6 border-b-2 border-border/50">
-            <div class="absolute -top-4 -left-4 w-24 h-24 bg-violet-500/5 rounded-full blur-3xl"></div>
-            <h1 class="relative text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-violet-600 dark:from-violet-400 to-primary bg-clip-text text-transparent">
-              Dashboard
-            </h1>
-            <p class="relative text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
-              Manage your blog posts and view analytics
-            </p>
-          </div>
-          <BlogDashboardPage />
-        </div>
+        <BlogDashboardPage />
       {:else if pageComponent() === "detail" && blogId()}
         <BlogDetailPage blogId={blogId() || "1"} />
       {:else if pageComponent() === "edit" && blogId()}

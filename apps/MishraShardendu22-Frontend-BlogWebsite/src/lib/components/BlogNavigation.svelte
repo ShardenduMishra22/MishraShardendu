@@ -184,10 +184,10 @@
     <div class="w-12 h-12 p-2.5 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 shadow-sm flex items-center justify-center flex-shrink-0">
       <BookOpen class="h-6 w-6 text-primary" />
     </div>
-    <div class="ml-3 hidden group-hover:block">
-      <h1 class="font-bold text-lg whitespace-nowrap">Blog</h1>
-      <p class="text-xs text-muted-foreground whitespace-nowrap">Shardendu Mishra</p>
-    </div>
+      <div class="ml-3 nav-label">
+        <h1 class="font-bold text-lg whitespace-nowrap">Blog</h1>
+        <p class="text-xs text-muted-foreground whitespace-nowrap">Shardendu Mishra</p>
+      </div>
   </div>
 
   <nav class="flex-1 py-4 px-2 space-y-1 overflow-y-auto">
@@ -212,7 +212,7 @@
             )} />
           {/if}
         </div>
-        <div class="hidden group-hover:flex flex-col justify-center pr-4 flex-1 min-w-0">
+        <div class="nav-label flex flex-col justify-center pr-4 flex-1 min-w-0">
           <div class={cn("font-semibold text-sm whitespace-nowrap")}>{item.name}</div>
           <div class={cn("text-xs whitespace-nowrap truncate", isActive ? "text-primary-foreground/80" : "text-muted-foreground")}>{item.description}</div>
         </div>
@@ -241,7 +241,7 @@
               {/if}
             </div>
           </div>
-          <div class="hidden group-hover:block flex-1 min-w-0 ml-2">
+          <div class="nav-label flex-1 min-w-0 ml-2">
             <p class="text-sm font-bold truncate">{user.name}</p>
             <p class="text-xs text-muted-foreground truncate">{user.email}</p>
             {#if !user.isVerified}
@@ -254,7 +254,7 @@
         </div>
         
         {#if !user.isVerified}
-          <div class="mt-3 pt-3 border-t border-border/50 hidden group-hover:block">
+          <div class="mt-3 pt-3 border-t border-border/50 nav-label">
             <CompactEmailVerification email={user.email} />
           </div>
         {/if}
@@ -272,7 +272,7 @@
               <LogOut class="w-5 h-5 text-muted-foreground hover:text-red-600 dark:hover:text-red-400 transition-colors" />
             </button>
           </div>
-          <div class="hidden group-hover:block flex-1 ml-2">
+          <div class="nav-label flex-1 ml-2">
             <Button 
               size="sm" 
               variant="outline" 
@@ -297,7 +297,7 @@
               <LogIn class="w-5 h-5 text-primary-foreground" />
             </button>
           </div>
-          <div class="hidden group-hover:block flex-1 ml-2">
+          <div class="nav-label flex-1 ml-2">
             <Button 
               size="default" 
               className="w-full bg-gradient-to-r from-primary to-primary/90" 

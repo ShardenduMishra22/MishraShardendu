@@ -62,119 +62,82 @@
 </script>
 
 <article
-  class="group relative rounded-xl border border-border bg-card/50 backdrop-blur-sm p-5 lg:p-6 
-         transition-all duration-300 overflow-hidden"
+  class="group relative rounded-xl border border-border bg-card/50 backdrop-blur-sm p-4 lg:p-4 
+         transition-all duration-300 overflow-hidden max-h-[520px]"
 >
   <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
   
   <div class="relative z-10">
     {#if blog.image}
-        <div class="mb-4 rounded-lg overflow-hidden aspect-video bg-muted">
-        <img 
-          src={resolveImageUrl(blog.image)} 
-          alt={blog.title} 
-          class="w-full h-full object-cover" 
+      <div class="mb-3 rounded-lg overflow-hidden bg-muted h-44 w-full flex items-center justify-center">
+        <img
+          src={resolveImageUrl(blog.image)}
+          alt={blog.title}
+          class="w-full h-full object-contain" 
         />
       </div>
     {/if}
 
-    <div class="flex items-center justify-between gap-3 mb-4">
-      <div class="flex items-center gap-2 flex-1 min-w-0">
+        <div class="flex items-center gap-3 text-xs text-muted-foreground">
+      <div class="flex items-center gap-2 min-w-0">
         <Avatar
-          class="w-8 h-8 flex-shrink-0 ring-2 ring-primary/10 transition-all duration-300"
+          class="w-7 h-7 flex-shrink-0 ring-2 ring-primary/10"
           src={resolveImageUrl(blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined)}
-          fallback={blog.author?.name
-            ? getInitials(blog.author.name, blog.author.name)
-            : blog.author?.email?.charAt(0).toUpperCase() || "U"}
+          fallback={blog.author?.name ? getInitials(blog.author.name, blog.author.name) : blog.author?.email?.charAt(0).toUpperCase() || "U"}
         />
-        <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-foreground truncate group-hover:text-primary transition-colors">
-            {blog.author?.name || blog.author?.email || "Unknown Author"}
-          </p>
-          <div class="flex items-center gap-2 text-xs text-muted-foreground">
-            <span class="flex items-center gap-1">
-              <Calendar class="w-3 h-3" />
-              {formatDate(blog.createdAt)}
-            </span>
+        <div class="min-w-0">
+          <div class="text-sm font-semibold text-foreground truncate">{blog.author?.name || blog.author?.email || "Unknown"}</div>
+          <div class="flex items-center gap-2 text-xs text-muted-foreground truncate">
+            <span>{formatDate(blog.createdAt)}</span>
             {#if readingTime > 0}
-              <span class="flex items-center gap-1">
-                <Clock class="w-3 h-3" />
-                {readingTime} min read
-              </span>
+              <span>• {readingTime} min</span>
             {/if}
           </div>
         </div>
       </div>
 
-      <div class="flex items-center gap-1.5 text-muted-foreground group-hover:text-primary flex-shrink-0 transition-colors">
-        <MessageCircle class="w-4 h-4" />
-        <span class="text-sm font-medium">{blog.comments ?? 0}</span>
-      </div>
-    </div>
+      {#if blog.tags && blog.tags.length > 0}
+        <div class="flex items-center gap-2 ml-2">
+          {#each blog.tags.slice(0,2) as tag}
+            <Badge variant="secondary" class="text-xs px-2 py-0.5">{tag}</Badge>
+          {/each}
+          {#if blog.tags.length > 2}
+            <Badge variant="outline" class="text-xs px-2 py-0.5">+{blog.tags.length - 2}</Badge>
+          {/if}
+        </div>
+      {/if}
 
-    <h3 class="text-lg font-bold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors leading-tight">
-      {blog.title}
-    </h3>
+      <div class="ml-auto flex items-center gap-3">
+        <div class="flex items-center gap-1 text-sm text-muted-foreground">
+          <MessageCircle class="w-4 h-4" />
+          <span class="font-medium">{blog.comments ?? 0}</span>
+        </div>
 
-    {#if excerpt}
-      <p class="text-sm text-muted-foreground mb-4 line-clamp-3 leading-relaxed">
-        {excerpt}
-      </p>
-    {/if}
-
-    {#if blog.tags && blog.tags.length > 0}
-      <div class="flex flex-wrap gap-2 mb-4">
-        {#each blog.tags.slice(0, 3) as tag}
-          <Badge 
-            variant="secondary" 
-            class="text-xs px-2.5 py-1 font-medium hover:bg-primary/20 transition-colors"
-          >
-            {tag}
-          </Badge>
-        {/each}
-        {#if blog.tags.length > 3}
-          <Badge variant="outline" class="text-xs px-2.5 py-1 font-medium">
-            +{blog.tags.length - 3}
-          </Badge>
+        {#if customActions}
+          {@render customActions?.()}
         {/if}
-      </div>
-    {/if}
 
-    {#if customActions}
-      <div class="flex items-center gap-2">
         <Button
           variant="outline"
           size="sm"
           onclick={() => onReadMore?.(blog.id.toString())}
-          className="flex-1 text-sm group/btn relative overflow-hidden h-10 font-semibold border-2 
-                     hover:border-primary hover:bg-primary hover:text-primary-foreground 
-                     shadow-sm hover:shadow-md transition-all duration-300"
+          className="h-9 px-3"
         >
-          <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
-                       -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></span>
-          <span class="relative flex items-center justify-center gap-2">
-            Read Article
-            <ArrowRight class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-          </span>
+          Read
+          <ArrowRight class="w-4 h-4 ml-2" />
         </Button>
-        {@render customActions?.()}
       </div>
-    {:else}
-      <Button
-        variant="outline"
-        size="sm"
-        onclick={() => onReadMore?.(blog.id.toString())}
-        className="w-full text-sm group/btn relative overflow-hidden h-10 font-semibold border-2 
-                   hover:border-primary hover:bg-primary hover:text-primary-foreground 
-                   shadow-sm hover:shadow-md transition-all duration-300"
-      >
-        <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
-                     -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></span>
-        <span class="relative flex items-center justify-center gap-2">
-          Read Article
-          <ArrowRight class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-        </span>
-      </Button>
+    </div>
+
+    <h3 class="text-base lg:text-lg font-bold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors leading-tight">
+      {blog.title}
+    </h3>
+
+    <!-- show excerpt on md+ screens only -->
+    {#if excerpt}
+      <p class="hidden md:block text-sm text-muted-foreground mt-3 line-clamp-3 leading-relaxed">
+        {excerpt}
+      </p>
     {/if}
   </div>
 </article>

@@ -89,67 +89,68 @@
 </script>
 
 <div class="space-y-3 md:space-y-4">
-  <!-- Stats Cards -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-    <Card class="p-12">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-sm text-muted-foreground">Total Posts</p>
-          <p class="text-3xl font-bold">{blogs.length}</p>
-        </div>
-        <div class="p-3 bg-primary/10 rounded-lg">
-          <BookOpen class="w-6 h-6 text-primary" />
-        </div>
-      </div>
-    </Card>
-
-    <Card class="p-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-sm text-muted-foreground">Total Comments</p>
-          <p class="text-3xl font-bold">{totalComments}</p>
-        </div>
-        <div class="p-3 bg-blue-500/10 rounded-lg">
-          <MessageCircle class="w-6 h-6 text-blue-500" />
-        </div>
-      </div>
-    </Card>
-
-    <Card class="p-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-sm text-muted-foreground">Avg. Comments</p>
-          <p class="text-3xl font-bold">
-            {blogs.length > 0 ? (totalComments / blogs.length).toFixed(1) : "0"}
-          </p>
-        </div>
-        <div class="p-3 bg-green-500/10 rounded-lg">
-          <BarChart3 class="w-6 h-6 text-green-500" />
-        </div>
-      </div>
-    </Card>
-  </div>
-
-  <!-- Search and Actions -->
-  <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-    <div class="relative flex-1">
-      <Search
-        class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5"
-      />
-      <Input
-        placeholder="Search your posts..."
-        bind:value={searchTerm}
-        class="pl-10 h-11"
-      />
+  <!-- Header with actions -->
+  <div class="flex items-start justify-between gap-4">
+    <div>
+  <h1 class="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">Dashboard</h1>
+      <p class="text-sm text-muted-foreground">Manage your blog posts and view analytics</p>
     </div>
-    <Button
-      onclick={() => (window.location.href = `${basePath}/create`)}
-      className="h-11 px-6 sm:w-auto"
-    >
-      <Plus class="w-5 h-5 mr-2" />
-      Create Post
-    </Button>
+
+    <div class="flex items-center gap-3">
+      <div class="relative hidden sm:block" style="min-width:280px;">
+        <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+        <Input placeholder="Search your posts..." bind:value={searchTerm} class="pl-10 h-11" />
+      </div>
+      <Button onclick={() => (window.location.href = `${basePath}/create`)} className="h-11 px-6 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground rounded-lg">Create Post</Button>
+    </div>
   </div>
+  
+  <!-- Stats Cards -->
+  <div class="modern-stats mt-4">
+    <div class="stat-card">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="stat-label">Total Posts</p>
+          <p class="stat-number">{blogs.length}</p>
+        </div>
+        <div class="stat-icon">
+          <div class="stat-icon-inner">
+            <BookOpen class="w-5 h-5 text-white" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="stat-label">Total Comments</p>
+          <p class="stat-number">{totalComments}</p>
+        </div>
+        <div class="stat-icon">
+          <div class="stat-icon-inner from-blue-500 to-blue-700">
+            <MessageCircle class="w-5 h-5 text-white" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="stat-label">Avg. Comments</p>
+          <p class="stat-number">{blogs.length > 0 ? (totalComments / blogs.length).toFixed(1) : "0"}</p>
+        </div>
+        <div class="stat-icon">
+          <div class="stat-icon-inner from-emerald-400 to-emerald-600">
+            <BarChart3 class="w-5 h-5 text-white" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
 
   <!-- Blog List -->
   {#if filteredBlogs.length === 0}
@@ -169,50 +170,43 @@
   {:else}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {#each filteredBlogs as blog (blog.id)}
-        <div class="rounded-lg border border-border bg-card p-4 sm:p-5 lg:p-6">
-          <div class="mb-4 flex items-start gap-3">
-            {#if blog.image}
-              <img src={resolveImageUrl(blog.image)} alt={blog.title} class="w-16 h-10 object-cover rounded-md flex-shrink-0 sm:hidden" />
-            {/if}
-            <h4 class="text-sm sm:text-base font-semibold text-foreground mb-2 line-clamp-2">
-              {blog.title}
-            </h4>
-            {#if blog.tags && blog.tags.length > 0}
-              <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-2">
-                {#each blog.tags.slice(0, 3) as tag}
-                  <Badge variant="secondary" class="text-xs px-1.5 sm:px-2 py-0.5">
-                    {tag}
-                  </Badge>
-                {/each}
+        <div class="blog-card-improved">
+          <!-- Title above -->
+          <div class="mb-2">
+            <div class="flex items-center gap-3 min-w-0">
+              {#if blog.image}
+                <img src={resolveImageUrl(blog.image)} alt={blog.title} class="w-16 h-10 object-cover rounded-md flex-shrink-0 sm:hidden" />
+              {/if}
+              <div class="min-w-0">
+                <h4 class="text-sm sm:text-base font-semibold text-foreground mb-0 line-clamp-2 truncate">
+                  {blog.title}
+                </h4>
               </div>
-            {/if}
+            </div>
           </div>
-          <div class="flex gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onclick={() => (window.location.href = `${basePath}/read/${blog.id}`)}
-              class="flex-1"
-            >
-              View
-            </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onclick={() => (window.location.href = `${basePath}/read/${blog.id}/edit`)}
-                className=""
-              >
-                <Edit class="w-4 h-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onclick={() => handleDelete(blog.id)}
-                disabled={deletingBlogId === blog.id}
-                className="text-destructive hover:text-destructive"
-              >
-                <Trash2 class="w-4 h-4" />
-              </Button>
+
+          <!-- Tags (1/4) and buttons (3/4) below title -->
+          <div class="mt-3 flex items-start gap-3">
+            <div class="tags w-1/4">
+              {#if blog.tags && blog.tags.length > 0}
+                <div class="flex flex-wrap gap-2">
+                  {#each blog.tags.slice(0, 3) as tag}
+                    <Badge variant="secondary" class="text-xs px-2 py-0.5">{tag}</Badge>
+                  {/each}
+                  {#if blog.tags.length > 3}
+                    <Badge variant="outline" class="text-xs px-2 py-0.5">+{blog.tags.length - 3}</Badge>
+                  {/if}
+                </div>
+              {/if}
+            </div>
+
+            <div class="actions w-3/4 flex justify-end">
+              <div class="card-actions w-full max-w-none">
+                <button type="button" class="view-btn" onclick={() => (window.location.href = `${basePath}/read/${blog.id}`)}>View</button>
+                <button type="button" class="edit-btn" onclick={() => (window.location.href = `${basePath}/read/${blog.id}/edit`)}><Edit class="w-4 h-4" /></button>
+                <button type="button" class="delete-btn" onclick={() => handleDelete(blog.id)} disabled={deletingBlogId === blog.id}><Trash2 class="w-4 h-4" /></button>
+              </div>
+            </div>
           </div>
         </div>
       {/each}
