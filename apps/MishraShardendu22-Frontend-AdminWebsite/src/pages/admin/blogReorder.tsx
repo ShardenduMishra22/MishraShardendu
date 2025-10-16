@@ -66,37 +66,41 @@ const SortableCard = ({ item }: SortableCardProps) => {
   }
 
   return (
-    <Card
+    <div
       ref={setNodeRef}
       style={style}
-      className={`group relative border bg-card transition-all duration-200 ${
-        isDragging ? 'opacity-50 shadow-lg scale-[0.98]' : 'hover:shadow-md hover:border-primary/30'
+      className={`group relative transition-all duration-200 ${
+        isDragging ? 'opacity-50 shadow-lg scale-[0.98]' : ''
       }`}
     >
-      <CardHeader className="p-4">
-        <div className="flex items-start gap-3">
-          <div
-            className="mt-0.5 cursor-grab active:cursor-grabbing p-1 rounded hover:bg-muted/50 transition-colors"
-            {...attributes}
-            {...listeners}
-            role="button"
-            tabIndex={0}
-            aria-roledescription="draggable"
-            aria-describedby={`blog-${item.blogId}`}
-          >
-            <GripVertical className="h-4 w-4 text-muted-foreground" />
+      <Card
+        className={`border bg-card ${isDragging ? '' : 'hover:shadow-md hover:border-primary/30'}`}
+      >
+        <CardHeader className="p-4">
+          <div className="flex items-start gap-3">
+            <div
+              className="mt-0.5 cursor-grab active:cursor-grabbing p-1 rounded hover:bg-muted/50 transition-colors"
+              {...attributes}
+              {...listeners}
+              role="button"
+              tabIndex={0}
+              aria-roledescription="draggable"
+              aria-describedby={`blog-${item.blogId}`}
+            >
+              <GripVertical className="h-4 w-4 text-muted-foreground" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <CardTitle className="text-base font-medium text-foreground line-clamp-2 leading-snug">
+                {item.title}
+              </CardTitle>
+            </div>
+            <Badge variant="secondary" className="shrink-0 font-mono text-xs h-6 px-2">
+              #{item.order}
+            </Badge>
           </div>
-          <div className="flex-1 min-w-0">
-            <CardTitle className="text-base font-medium text-foreground line-clamp-2 leading-snug">
-              {item.title}
-            </CardTitle>
-          </div>
-          <Badge variant="secondary" className="shrink-0 font-mono text-xs h-6 px-2">
-            #{item.order}
-          </Badge>
-        </div>
-      </CardHeader>
-    </Card>
+        </CardHeader>
+      </Card>
+    </div>
   )
 }
 
