@@ -213,8 +213,6 @@
     </Button>
 
     {#if showInfoPanel}
-
-
       <!-- Info Panel Popover -->
       <div class="absolute right-0 mt-3 w-80 bg-card border border-border rounded-lg shadow-xl z-50 overflow-hidden">
         <div class="p-4 space-y-4">
@@ -341,19 +339,33 @@
       <!-- Featured Image -->
       {#if blog.image}
         <div class="mb-8 rounded-lg overflow-hidden bg-muted/20">
-          <!-- container forces a visible viewport; image will scale down to always show fully -->
           <div class="w-full h-[500px] sm:h-[600px] flex items-center justify-center bg-muted/20">
-        <img
-          src={resolveImageUrl(blog.image)}
-          alt={blog.title}
-          class="max-w-full max-h-full object-contain"
-        />
+            <img
+              src={resolveImageUrl(blog.image)}
+              alt={blog.title}
+              class="max-w-full max-h-full object-contain"
+            />
           </div>
         </div>
       {/if}
 
       <!-- Article Content -->
-      <div class="prose prose-lg dark:prose-invert max-w-none mb-12">
+      <div class="prose prose-lg dark:prose-invert max-w-none mb-12
+                  prose-headings:font-bold prose-headings:tracking-tight
+                  prose-h1:text-5xl prose-h1:mt-12 prose-h1:mb-8
+                  prose-h2:text-4xl prose-h2:mt-10 prose-h2:mb-6 prose-h2:border-b prose-h2:border-border prose-h2:pb-3
+                  prose-h3:text-3xl prose-h3:mt-8 prose-h3:mb-5
+                  prose-h4:text-2xl prose-h4:mt-6 prose-h4:mb-4
+                  prose-h5:text-xl prose-h5:mt-5 prose-h5:mb-3
+                  prose-h6:text-lg prose-h6:mt-4 prose-h6:mb-2
+                  prose-p:text-base prose-p:leading-relaxed prose-p:mb-5
+                  prose-strong:font-semibold prose-strong:text-foreground
+                  prose-code:text-sm prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-primary
+                  prose-pre:bg-muted prose-pre:border prose-pre:border-border
+                  prose-a:text-primary prose-a:font-medium hover:prose-a:underline prose-a:no-underline
+                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground
+                  prose-ul:my-5 prose-ol:my-5 prose-li:my-2
+                  prose-img:rounded-lg prose-img:my-8">
         {@html renderedContent}
       </div>
     </article>
@@ -457,7 +469,6 @@
 </div>
 
 <style>
-
   :global(.prose) {
     overflow-wrap: anywhere;
     word-break: break-word;
