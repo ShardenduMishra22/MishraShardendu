@@ -37,12 +37,12 @@ import toast from 'react-hot-toast'
 import { useAuth } from '../../hooks/use-auth'
 
 interface SortableCardProps {
-  item: { id: number; title: string; order: number }
+  item: { uid: string; apiId: number; title: string; order: number }
 }
 
 const SortableCard = ({ item }: SortableCardProps) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: item.id,
+    id: item.uid,
   })
 
   const style = {
@@ -67,7 +67,7 @@ const SortableCard = ({ item }: SortableCardProps) => {
             role="button"
             tabIndex={0}
             aria-roledescription="draggable"
-            aria-describedby={`blog-${item.id}`}
+            aria-describedby={`blog-${item.apiId}`}
           >
             <GripVertical className="h-4 w-4 text-muted-foreground" />
           </div>
@@ -88,8 +88,10 @@ const SortableCard = ({ item }: SortableCardProps) => {
 
 export default function BlogReorderPage() {
   const { isAuthenticated, isLoading } = useAuth()
-  // internal items keep a stable `id` (original id) and a mutable `order`
-  const [items, setItems] = useState<{ id: number; title: string; order: number }[]>([])
+  // internal items keep a stable `uid` for DnD and the API's id in `apiId`.
+  // `order` is mutable and represents the visible position (1-based).
+  const [items, setItems] = useState<{ uid: string; apiId: number; title: string; order: number }[]>([])
+  // map keyed by API id (orderId) -> original order value
   const [originalOrder, setOriginalOrder] = useState<Map<number, number>>(new Map())
   const [changedItems, setChangedItems] = useState<
     {
@@ -99,7 +101,7 @@ export default function BlogReorderPage() {
       newOrder: number
     }[]
   >([])
-  const [activeId, setActiveId] = useState<number | null>(null)
+  const [activeId, setActiveId] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -123,17 +125,19 @@ export default function BlogReorderPage() {
         setLoading(true)
         const res = await blogsAPI.getReorderList()
         const data = Array.isArray(res.data) ? res.data : []
-        // Preserve backend ordering - don't sort on the client
-        const incoming = data
-        // Map API items into internal shape: keep `id` stable and `order` editable
-        const internal = incoming.map((it) => ({
-          id: it.orderId,
+        // Preserve backend ordering - sort by orderId to display correctly
+        const incoming = Array.from(data).sort((a, b) => (a.orderId ?? 0) - (b.orderId ?? 0))
+        // Map API items into internal shape: create a stable internal uid for DnD,
+        // keep `apiId` (orderId from API) so we can send correct payloads to backend.
+        const internal = incoming.map((it, idx) => ({
+          uid: `${it.orderId}-${idx}`,
+          apiId: it.orderId,
           title: it.title,
           order: it.orderId,
         }))
         setItems(internal)
         const map = new Map<number, number>()
-        internal.forEach((it) => map.set(it.id, it.order))
+        internal.forEach((it) => map.set(it.apiId, it.order))
         setOriginalOrder(map)
         setError('')
       } catch (err) {
@@ -173,7 +177,8 @@ export default function BlogReorderPage() {
   }
 
   const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as number)
+    // active id will be the internal uid (string)
+    setActiveId(event.active.id as unknown as string)
   }
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -183,8 +188,8 @@ export default function BlogReorderPage() {
     if (!over || active.id === over.id) return
 
     setItems((current) => {
-      const oldIndex = current.findIndex((i) => i.id === active.id)
-      const newIndex = current.findIndex((i) => i.id === over.id)
+      const oldIndex = current.findIndex((i) => i.uid === (active.id as string))
+      const newIndex = current.findIndex((i) => i.uid === (over.id as string))
 
       const newItems = arrayMove(current, oldIndex, newIndex)
 
@@ -193,10 +198,10 @@ export default function BlogReorderPage() {
 
       const changes: { id: number; title: string; oldOrder: number; newOrder: number }[] = []
       updated.forEach((it) => {
-        const original = originalOrder.get(it.id)
+        const original = originalOrder.get(it.apiId)
         if (original !== undefined && original !== it.order) {
           changes.push({
-            id: it.id,
+            id: it.apiId,
             title: it.title,
             oldOrder: original,
             newOrder: it.order,
@@ -209,7 +214,7 @@ export default function BlogReorderPage() {
     })
   }
 
-  const activeItem = items.find((i) => i.id === activeId)
+  const activeItem = items.find((i) => i.uid === (activeId as string))
 
   if (loading) {
     return (
@@ -306,10 +311,10 @@ export default function BlogReorderPage() {
               onDragStart={handleDragStart}
               onDragEnd={handleDragEnd}
             >
-              <SortableContext items={items.map((i) => i.id)} strategy={rectSortingStrategy}>
+                <SortableContext items={items.map((i) => i.uid)} strategy={rectSortingStrategy}>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {items.map((it) => (
-                    <SortableCard key={it.id} item={it} />
+                    <SortableCard key={it.uid} item={it} />
                   ))}
                 </div>
               </SortableContext>
