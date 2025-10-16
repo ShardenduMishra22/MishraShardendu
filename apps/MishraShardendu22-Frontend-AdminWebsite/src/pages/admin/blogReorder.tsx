@@ -90,7 +90,9 @@ export default function BlogReorderPage() {
   const { isAuthenticated, isLoading } = useAuth()
   // internal items keep a stable `uid` for DnD and the API's id in `apiId`.
   // `order` is mutable and represents the visible position (1-based).
-  const [items, setItems] = useState<{ uid: string; apiId: number; title: string; order: number }[]>([])
+  const [items, setItems] = useState<
+    { uid: string; apiId: number; title: string; order: number }[]
+  >([])
   // map keyed by API id (orderId) -> original order value
   const [originalOrder, setOriginalOrder] = useState<Map<number, number>>(new Map())
   const [changedItems, setChangedItems] = useState<
@@ -311,7 +313,7 @@ export default function BlogReorderPage() {
               onDragStart={handleDragStart}
               onDragEnd={handleDragEnd}
             >
-                <SortableContext items={items.map((i) => i.uid)} strategy={rectSortingStrategy}>
+              <SortableContext items={items.map((i) => i.uid)} strategy={rectSortingStrategy}>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {items.map((it) => (
                     <SortableCard key={it.uid} item={it} />
