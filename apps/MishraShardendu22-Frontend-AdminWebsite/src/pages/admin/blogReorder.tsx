@@ -123,14 +123,18 @@ export default function BlogReorderPage() {
         setLoading(true)
         const res = await blogsAPI.getReorderList()
         const data = Array.isArray(res.data) ? res.data : []
-  // Preserve backend ordering - don't sort on the client
-  const incoming = data
-  // Map API items into internal shape: keep `id` stable and `order` editable
-  const internal = incoming.map((it) => ({ id: it.orderId, title: it.title, order: it.orderId }))
-  setItems(internal)
-  const map = new Map<number, number>()
-  internal.forEach((it) => map.set(it.id, it.order))
-  setOriginalOrder(map)
+        // Preserve backend ordering - don't sort on the client
+        const incoming = data
+        // Map API items into internal shape: keep `id` stable and `order` editable
+        const internal = incoming.map((it) => ({
+          id: it.orderId,
+          title: it.title,
+          order: it.orderId,
+        }))
+        setItems(internal)
+        const map = new Map<number, number>()
+        internal.forEach((it) => map.set(it.id, it.order))
+        setOriginalOrder(map)
         setError('')
       } catch (err) {
         console.error('Failed to load blogs reorder list', err)
@@ -155,9 +159,9 @@ export default function BlogReorderPage() {
 
       await blogsAPI.updateReorder(payload)
 
-  const newMap = new Map(originalOrder)
-  changedItems.forEach((c) => newMap.set(c.id, c.newOrder))
-  setOriginalOrder(newMap)
+      const newMap = new Map(originalOrder)
+      changedItems.forEach((c) => newMap.set(c.id, c.newOrder))
+      setOriginalOrder(newMap)
       setChangedItems([])
       toast.success('Blogs reordered successfully')
     } catch (err) {
@@ -318,7 +322,7 @@ export default function BlogReorderPage() {
                         <CardTitle className="text-base font-medium text-foreground line-clamp-2 flex-1">
                           {activeItem.title}
                         </CardTitle>
-                          <Badge variant="secondary" className="font-mono text-xs h-6 px-2">
+                        <Badge variant="secondary" className="font-mono text-xs h-6 px-2">
                           #{activeItem.order}
                         </Badge>
                       </div>

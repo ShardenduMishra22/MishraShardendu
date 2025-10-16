@@ -86,7 +86,10 @@ export default function AdminLayout({ children, path }: AdminLayoutProps) {
       <header className="sticky top-0 z-50 flex items-center justify-between bg-card/90 backdrop-blur-md border-b border-border px-4 sm:px-8 h-16 shadow-md">
         <div className="flex items-center gap-4">
           {isNarrow && (
-            <button className="p-2 rounded-md hover:bg-primary/20 transition" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            <button
+              className="p-2 rounded-md hover:bg-primary/20 transition"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
               <Menu className="w-6 h-6 text-primary" />
             </button>
           )}
