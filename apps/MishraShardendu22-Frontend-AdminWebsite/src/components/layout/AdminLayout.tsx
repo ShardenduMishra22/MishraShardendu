@@ -43,12 +43,25 @@ interface AdminLayoutProps {
 export default function AdminLayout({ children, path }: AdminLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { logout, isAuthenticated, isLoading } = useAuth()
+  const [isNarrow, setIsNarrow] = useState(false)
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated && path !== '/admin/login') {
       route('/admin/login')
     }
   }, [isAuthenticated, isLoading, path])
+
+  // show mobile/menu button when viewport is less than 1650px
+  useEffect(() => {
+    const update = () => {
+      if (typeof window === 'undefined') return
+      setIsNarrow(window.innerWidth < 1650)
+    }
+
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
 
   const isActive = (href: string) => path === href
 
@@ -72,33 +85,34 @@ export default function AdminLayout({ children, path }: AdminLayoutProps) {
 
       <header className="sticky top-0 z-50 flex items-center justify-between bg-card/90 backdrop-blur-md border-b border-border px-4 sm:px-8 h-16 shadow-md">
         <div className="flex items-center gap-4">
-          <button
-            className="lg:hidden p-2 rounded-md hover:bg-primary/20 transition"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            <Menu className="w-6 h-6 text-primary" />
-          </button>
+          {isNarrow && (
+            <button className="p-2 rounded-md hover:bg-primary/20 transition" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              <Menu className="w-6 h-6 text-primary" />
+            </button>
+          )}
           <a href="/admin/dashboard" className="font-bold text-xl text-primary select-none">
             Admin Panel
           </a>
         </div>
 
-        <nav className="hidden lg:flex gap-6 font-semibold">
-          {navigation.map(({ name, href, icon: Icon }) => (
-            <a
-              key={name}
-              href={href}
-              className={`flex items-center gap-2 px-3 py-2 rounded-md transition-colors duration-200 ${
-                isActive(href)
-                  ? 'bg-primary text-primary-foreground shadow-md'
-                  : 'text-foreground hover:bg-primary/10 hover:text-primary'
-              }`}
-            >
-              <Icon className="w-5 h-5" />
-              <span>{name}</span>
-            </a>
-          ))}
-        </nav>
+        {!isNarrow && (
+          <nav className="flex gap-6 font-semibold">
+            {navigation.map(({ name, href, icon: Icon }) => (
+              <a
+                key={name}
+                href={href}
+                className={`flex items-center gap-2 px-3 py-2 rounded-md transition-colors duration-200 ${
+                  isActive(href)
+                    ? 'bg-primary text-primary-foreground shadow-md'
+                    : 'text-foreground hover:bg-primary/10 hover:text-primary'
+                }`}
+              >
+                <Icon className="w-5 h-5" />
+                <span>{name}</span>
+              </a>
+            ))}
+          </nav>
+        )}
 
         <div className="flex items-center gap-4">
           <Button variant="outline" className="text-primary hover:bg-primary/20" onClick={logout}>
@@ -108,8 +122,8 @@ export default function AdminLayout({ children, path }: AdminLayoutProps) {
         </div>
       </header>
 
-      {mobileMenuOpen && (
-        <nav className="lg:hidden sticky top-16 z-40 bg-card/90 backdrop-blur-md border-b border-border shadow-md flex flex-col px-4 py-2 gap-2">
+      {mobileMenuOpen && isNarrow && (
+        <nav className="sticky top-16 z-40 bg-card/90 backdrop-blur-md border-b border-border shadow-md flex flex-col px-4 py-2 gap-2">
           {navigation.map(({ name, href, icon: Icon }) => (
             <a
               key={name}

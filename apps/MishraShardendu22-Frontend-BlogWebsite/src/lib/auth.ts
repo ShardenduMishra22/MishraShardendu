@@ -1,6 +1,6 @@
-import { writable } from 'svelte/store'
-import type { User, ApiError } from './api'
 import { authApi } from './api'
+import type { User } from './api'
+import { writable } from 'svelte/store'
 
 interface AuthState {
   user: User | null
@@ -197,7 +197,7 @@ function createAuthStore() {
       })
 
       // Redirect to login
-      window.location.href = '/login'
+      window.location.href = '/blog/login'
     },
 
     // Update user

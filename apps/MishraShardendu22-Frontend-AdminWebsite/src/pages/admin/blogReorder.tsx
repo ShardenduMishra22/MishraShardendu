@@ -20,7 +20,7 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 import { Badge } from '../../components/ui/badge'
 import { Button } from '../../components/ui/button'
-import type { BlogReorderItem, BlogReorderUpdate } from '../../types/types.data'
+import type { BlogReorderUpdate } from '../../types/types.data'
 import { blogsAPI } from '../../utils/apiResponse.util'
 import { Card, CardHeader, CardTitle } from '../../components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs'
@@ -37,12 +37,12 @@ import toast from 'react-hot-toast'
 import { useAuth } from '../../hooks/use-auth'
 
 interface SortableCardProps {
-  item: BlogReorderItem
+  item: { id: number; title: string; order: number }
 }
 
 const SortableCard = ({ item }: SortableCardProps) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: item.orderId,
+    id: item.id,
   })
 
   const style = {
@@ -67,7 +67,7 @@ const SortableCard = ({ item }: SortableCardProps) => {
             role="button"
             tabIndex={0}
             aria-roledescription="draggable"
-            aria-describedby={`blog-${item.orderId}`}
+            aria-describedby={`blog-${item.id}`}
           >
             <GripVertical className="h-4 w-4 text-muted-foreground" />
           </div>
@@ -78,7 +78,7 @@ const SortableCard = ({ item }: SortableCardProps) => {
           </div>
 
           <Badge variant="secondary" className="shrink-0 font-mono text-xs h-6 px-2">
-            #{item.orderId || 0}
+            #{item.order || 0}
           </Badge>
         </div>
       </CardHeader>
@@ -88,7 +88,8 @@ const SortableCard = ({ item }: SortableCardProps) => {
 
 export default function BlogReorderPage() {
   const { isAuthenticated, isLoading } = useAuth()
-  const [items, setItems] = useState<BlogReorderItem[]>([])
+  // internal items keep a stable `id` (original id) and a mutable `order`
+  const [items, setItems] = useState<{ id: number; title: string; order: number }[]>([])
   const [originalOrder, setOriginalOrder] = useState<Map<number, number>>(new Map())
   const [changedItems, setChangedItems] = useState<
     {
@@ -122,11 +123,14 @@ export default function BlogReorderPage() {
         setLoading(true)
         const res = await blogsAPI.getReorderList()
         const data = Array.isArray(res.data) ? res.data : []
-        const sorted = data.sort((a, b) => (a.orderId || 0) - (b.orderId || 0))
-        setItems(sorted)
-        const map = new Map<number, number>()
-        sorted.forEach((it) => map.set(it.orderId, it.orderId))
-        setOriginalOrder(map)
+  // Preserve backend ordering - don't sort on the client
+  const incoming = data
+  // Map API items into internal shape: keep `id` stable and `order` editable
+  const internal = incoming.map((it) => ({ id: it.orderId, title: it.title, order: it.orderId }))
+  setItems(internal)
+  const map = new Map<number, number>()
+  internal.forEach((it) => map.set(it.id, it.order))
+  setOriginalOrder(map)
         setError('')
       } catch (err) {
         console.error('Failed to load blogs reorder list', err)
@@ -151,9 +155,9 @@ export default function BlogReorderPage() {
 
       await blogsAPI.updateReorder(payload)
 
-      const newMap = new Map(originalOrder)
-      changedItems.forEach((c) => newMap.set(c.id, c.newOrder))
-      setOriginalOrder(newMap)
+  const newMap = new Map(originalOrder)
+  changedItems.forEach((c) => newMap.set(c.id, c.newOrder))
+  setOriginalOrder(newMap)
       setChangedItems([])
       toast.success('Blogs reordered successfully')
     } catch (err) {
@@ -175,22 +179,23 @@ export default function BlogReorderPage() {
     if (!over || active.id === over.id) return
 
     setItems((current) => {
-      const oldIndex = current.findIndex((i) => i.orderId === active.id)
-      const newIndex = current.findIndex((i) => i.orderId === over.id)
+      const oldIndex = current.findIndex((i) => i.id === active.id)
+      const newIndex = current.findIndex((i) => i.id === over.id)
 
       const newItems = arrayMove(current, oldIndex, newIndex)
 
-      const updated = newItems.map((it, idx) => ({ ...it, orderId: idx + 1 }))
+      // update the visible order (1-based)
+      const updated = newItems.map((it, idx) => ({ ...it, order: idx + 1 }))
 
       const changes: { id: number; title: string; oldOrder: number; newOrder: number }[] = []
       updated.forEach((it) => {
-        const original = originalOrder.get(it.orderId)
-        if (original !== undefined && original !== it.orderId) {
+        const original = originalOrder.get(it.id)
+        if (original !== undefined && original !== it.order) {
           changes.push({
-            id: it.orderId,
+            id: it.id,
             title: it.title,
             oldOrder: original,
-            newOrder: it.orderId,
+            newOrder: it.order,
           })
         }
       })
@@ -200,7 +205,7 @@ export default function BlogReorderPage() {
     })
   }
 
-  const activeItem = items.find((i) => i.orderId === activeId)
+  const activeItem = items.find((i) => i.id === activeId)
 
   if (loading) {
     return (
@@ -297,10 +302,10 @@ export default function BlogReorderPage() {
               onDragStart={handleDragStart}
               onDragEnd={handleDragEnd}
             >
-              <SortableContext items={items.map((i) => i.orderId)} strategy={rectSortingStrategy}>
+              <SortableContext items={items.map((i) => i.id)} strategy={rectSortingStrategy}>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {items.map((it) => (
-                    <SortableCard key={it.orderId} item={it} />
+                    <SortableCard key={it.id} item={it} />
                   ))}
                 </div>
               </SortableContext>
@@ -313,8 +318,8 @@ export default function BlogReorderPage() {
                         <CardTitle className="text-base font-medium text-foreground line-clamp-2 flex-1">
                           {activeItem.title}
                         </CardTitle>
-                        <Badge variant="secondary" className="font-mono text-xs h-6 px-2">
-                          #{activeItem.orderId}
+                          <Badge variant="secondary" className="font-mono text-xs h-6 px-2">
+                          #{activeItem.order}
                         </Badge>
                       </div>
                     </CardHeader>
@@ -398,7 +403,7 @@ export default function BlogReorderPage() {
                                 {item.title}
                               </span>
                               <span className="text-xs text-muted-foreground font-mono">
-                                ID: {String(item.id).substring(0, 8)}
+                                Order ID: #{item.id}
                               </span>
                             </div>
                           </td>
