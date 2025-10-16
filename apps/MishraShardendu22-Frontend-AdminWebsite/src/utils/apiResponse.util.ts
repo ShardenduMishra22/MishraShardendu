@@ -228,35 +228,28 @@ export const TimelineAPI = {
 
 import axios from 'axios'
 
+const BASE_URL = 'https://mishrashardendu22-backend-blogwebsite.onrender.com/api'
+
+const getAuthHeaders = () => {
+  const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null
+  return {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  }
+}
+
 export const blogsAPI = {
   getReorderList: async (): Promise<ApiResponse<BlogReorderItem[]>> => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null
-
-    const response = await axios.get(
-      'https://mishrashardendu22-backend-blogwebsite.onrender.com/api/blogs/reorder',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    const response = await axios.get(`${BASE_URL}/blogs/reorder`, {
+      headers: getAuthHeaders(),
+    })
     return response.data
   },
 
   updateReorder: async (payload: BlogReorderUpdate[]): Promise<ApiResponse<unknown>> => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null
-
-    const response = await axios.post(
-      'https://mishrashardendu22-backend-blogwebsite.onrender.com/api/blogs/reorder',
-      payload,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    const response = await axios.post(`${BASE_URL}/blogs/reorder`, payload, {
+      headers: getAuthHeaders(),
+    })
     return response.data
   },
 }

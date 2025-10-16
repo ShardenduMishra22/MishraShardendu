@@ -20,8 +20,6 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 import { Badge } from '../../components/ui/badge'
 import { Button } from '../../components/ui/button'
-import type { BlogReorderUpdate } from '../../types/types.data'
-import { blogsAPI } from '../../utils/apiResponse.util'
 import { Card, CardHeader, CardTitle } from '../../components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs'
 import {
@@ -35,9 +33,26 @@ import {
 } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useAuth } from '../../hooks/use-auth'
+import { blogsAPI } from '../../utils/apiResponse.util'
+import type { BlogReorderUpdate } from '../../types/types.data'
+
+interface BlogItem {
+  uid: string
+  blogId: number
+  title: string
+  order: number
+}
+
+interface ChangedItem {
+  uid: string
+  blogId: number
+  title: string
+  oldOrder: number
+  newOrder: number
+}
 
 interface SortableCardProps {
-  item: { uid: string; apiId: number; title: string; order: number }
+  item: BlogItem
 }
 
 const SortableCard = ({ item }: SortableCardProps) => {
@@ -67,7 +82,7 @@ const SortableCard = ({ item }: SortableCardProps) => {
             role="button"
             tabIndex={0}
             aria-roledescription="draggable"
-            aria-describedby={`blog-${item.apiId}`}
+            aria-describedby={`blog-${item.blogId}`}
           >
             <GripVertical className="h-4 w-4 text-muted-foreground" />
           </div>
@@ -76,9 +91,8 @@ const SortableCard = ({ item }: SortableCardProps) => {
               {item.title}
             </CardTitle>
           </div>
-
           <Badge variant="secondary" className="shrink-0 font-mono text-xs h-6 px-2">
-            #{item.order || 0}
+            #{item.order}
           </Badge>
         </div>
       </CardHeader>
@@ -88,22 +102,9 @@ const SortableCard = ({ item }: SortableCardProps) => {
 
 export default function BlogReorderPage() {
   const { isAuthenticated, isLoading } = useAuth()
-  // internal items keep a stable `uid` for DnD and the API's id in `apiId`.
-  // `order` is mutable and represents the visible position (1-based).
-  const [items, setItems] = useState<
-    { uid: string; apiId: number; title: string; order: number }[]
-  >([])
-  // map keyed by internal uid -> original order value
+  const [items, setItems] = useState<BlogItem[]>([])
   const [originalOrder, setOriginalOrder] = useState<Map<string, number>>(new Map())
-  const [changedItems, setChangedItems] = useState<
-    {
-      uid: string
-      id: number
-      title: string
-      oldOrder: number
-      newOrder: number
-    }[]
-  >([])
+  const [changedItems, setChangedItems] = useState<ChangedItem[]>([])
   const [activeId, setActiveId] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -123,35 +124,36 @@ export default function BlogReorderPage() {
   useEffect(() => {
     if (!isLoading && !isAuthenticated) return
 
-    const fetch = async () => {
+    const fetchBlogs = async () => {
       try {
         setLoading(true)
         const res = await blogsAPI.getReorderList()
         const data = Array.isArray(res.data) ? res.data : []
-        // Preserve backend ordering - sort by orderId to display correctly
-        const incoming = Array.from(data).sort((a, b) => (a.orderId ?? 0) - (b.orderId ?? 0))
-        // Map API items into internal shape: create a stable internal uid for DnD,
-        // keep `apiId` (orderId from API) so we can send correct payloads to backend.
-        const internal = incoming.map((it, idx) => ({
-          uid: `${it.orderId}-${idx}`,
-          apiId: it.orderId,
-          title: it.title,
-          order: it.orderId,
+
+        const sorted = [...data].sort((a, b) => (a.orderId ?? 0) - (b.orderId ?? 0))
+
+        const blogItems: BlogItem[] = sorted.map((blog) => ({
+          uid: `blog-${blog.id}`,
+          blogId: blog.id,
+          title: blog.title,
+          order: blog.orderId,
         }))
-        setItems(internal)
-  const map = new Map<string, number>()
-  internal.forEach((it) => map.set(it.uid, it.order))
-        setOriginalOrder(map)
+
+        setItems(blogItems)
+
+        const orderMap = new Map<string, number>()
+        blogItems.forEach((item) => orderMap.set(item.uid, item.order))
+        setOriginalOrder(orderMap)
         setError('')
       } catch (err) {
-        console.error('Failed to load blogs reorder list', err)
+        console.error('Failed to load blogs:', err)
         setError('Failed to load blogs. Please try again later.')
       } finally {
         setLoading(false)
       }
     }
 
-    fetch()
+    fetchBlogs()
   }, [isAuthenticated, isLoading])
 
   const handleSave = async () => {
@@ -159,21 +161,20 @@ export default function BlogReorderPage() {
 
     try {
       setSaving(true)
-      const payload: BlogReorderUpdate[] = changedItems.map((c) => ({
-        blogId_Old: c.id,
-        blogId_New: c.newOrder,
+      const payload: BlogReorderUpdate[] = changedItems.map((item) => ({
+        blogId_Old: item.blogId,
+        blogId_New: item.newOrder,
       }))
 
       await blogsAPI.updateReorder(payload)
 
-      const newMap = new Map(originalOrder)
-      // originalOrder is keyed by uid
-      changedItems.forEach((c) => newMap.set(c.uid, c.newOrder))
-      setOriginalOrder(newMap)
+      const newOrderMap = new Map(originalOrder)
+      changedItems.forEach((item) => newOrderMap.set(item.uid, item.newOrder))
+      setOriginalOrder(newOrderMap)
       setChangedItems([])
       toast.success('Blogs reordered successfully')
     } catch (err) {
-      console.error('Error saving blog order', err)
+      console.error('Error saving blog order:', err)
       toast.error('Failed to save changes. Please try again.')
     } finally {
       setSaving(false)
@@ -181,8 +182,7 @@ export default function BlogReorderPage() {
   }
 
   const handleDragStart = (event: DragStartEvent) => {
-    // active id will be the internal uid (string)
-    setActiveId(event.active.id as unknown as string)
+    setActiveId(event.active.id as string)
   }
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -192,24 +192,22 @@ export default function BlogReorderPage() {
     if (!over || active.id === over.id) return
 
     setItems((current) => {
-  const oldIndex = current.findIndex((i) => i.uid === (active.id as string))
-  const newIndex = current.findIndex((i) => i.uid === (over.id as string))
+      const oldIndex = current.findIndex((item) => item.uid === active.id)
+      const newIndex = current.findIndex((item) => item.uid === over.id)
 
-      const newItems = arrayMove(current, oldIndex, newIndex)
+      const reordered = arrayMove(current, oldIndex, newIndex)
+      const updated = reordered.map((item, idx) => ({ ...item, order: idx + 1 }))
 
-      // update the visible order (1-based)
-      const updated = newItems.map((it, idx) => ({ ...it, order: idx + 1 }))
-
-      const changes: { uid: string; id: number; title: string; oldOrder: number; newOrder: number }[] = []
-      updated.forEach((it) => {
-        const original = originalOrder.get(it.uid)
-        if (original !== undefined && original !== it.order) {
+      const changes: ChangedItem[] = []
+      updated.forEach((item) => {
+        const original = originalOrder.get(item.uid)
+        if (original !== undefined && original !== item.order) {
           changes.push({
-            uid: it.uid,
-            id: it.apiId,
-            title: it.title,
+            uid: item.uid,
+            blogId: item.blogId,
+            title: item.title,
             oldOrder: original,
-            newOrder: it.order,
+            newOrder: item.order,
           })
         }
       })
@@ -219,7 +217,7 @@ export default function BlogReorderPage() {
     })
   }
 
-  const activeItem = items.find((i) => i.uid === (activeId as string))
+  const activeItem = items.find((item) => item.uid === activeId)
 
   if (loading) {
     return (
@@ -250,7 +248,6 @@ export default function BlogReorderPage() {
     )
   }
 
-  // If user not authenticated (owner only) show nothing
   if (!isAuthenticated) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
@@ -318,8 +315,8 @@ export default function BlogReorderPage() {
             >
               <SortableContext items={items.map((i) => i.uid)} strategy={rectSortingStrategy}>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                  {items.map((it) => (
-                    <SortableCard key={it.uid} item={it} />
+                  {items.map((item) => (
+                    <SortableCard key={item.uid} item={item} />
                   ))}
                 </div>
               </SortableContext>
@@ -410,14 +407,14 @@ export default function BlogReorderPage() {
                       const isMovedDown = orderChange > 0
 
                       return (
-                        <tr key={item.id} className="hover:bg-muted/30 transition-colors">
+                        <tr key={item.blogId} className="hover:bg-muted/30 transition-colors">
                           <td className="px-4 py-3">
                             <div className="flex flex-col">
                               <span className="text-sm font-medium text-foreground truncate max-w-xs">
                                 {item.title}
                               </span>
                               <span className="text-xs text-muted-foreground font-mono">
-                                Order ID: #{item.id}
+                                Blog ID: #{item.blogId}
                               </span>
                             </div>
                           </td>
