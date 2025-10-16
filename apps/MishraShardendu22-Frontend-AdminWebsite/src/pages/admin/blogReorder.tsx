@@ -24,7 +24,15 @@ import type { BlogReorderItem, BlogReorderUpdate } from '../../types/types.data'
 import { blogsAPI } from '../../utils/apiResponse.util'
 import { Card, CardHeader, CardTitle } from '../../components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs'
-import { Save, Loader2, AlertCircle, GripVertical, CheckCircle2, TrendingDown, TrendingUp } from 'lucide-react'
+import {
+  Save,
+  Loader2,
+  AlertCircle,
+  GripVertical,
+  CheckCircle2,
+  TrendingDown,
+  TrendingUp,
+} from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useAuth } from '../../hooks/use-auth'
 
@@ -82,12 +90,14 @@ export default function BlogReorderPage() {
   const { isAuthenticated, isLoading } = useAuth()
   const [items, setItems] = useState<BlogReorderItem[]>([])
   const [originalOrder, setOriginalOrder] = useState<Map<number, number>>(new Map())
-  const [changedItems, setChangedItems] = useState<{
-    id: number
-    title: string
-    oldOrder: number
-    newOrder: number
-  }[]>([])
+  const [changedItems, setChangedItems] = useState<
+    {
+      id: number
+      title: string
+      oldOrder: number
+      newOrder: number
+    }[]
+  >([])
   const [activeId, setActiveId] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -176,7 +186,12 @@ export default function BlogReorderPage() {
       updated.forEach((it) => {
         const original = originalOrder.get(it.orderId)
         if (original !== undefined && original !== it.orderId) {
-          changes.push({ id: it.orderId, title: it.title, oldOrder: original, newOrder: it.orderId })
+          changes.push({
+            id: it.orderId,
+            title: it.title,
+            oldOrder: original,
+            newOrder: it.orderId,
+          })
         }
       })
 
@@ -231,7 +246,13 @@ export default function BlogReorderPage() {
         <div className="flex items-center gap-3 mb-2">
           <div className="p-2 rounded-lg bg-primary/10">
             <svg className="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none">
-              <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M4 6h16M4 12h16M4 18h16"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </div>
           <h1 className="text-3xl font-semibold text-foreground">Blog Reorder</h1>
@@ -243,7 +264,13 @@ export default function BlogReorderPage() {
         <div className="flex flex-col items-center justify-center py-16 border rounded-lg bg-muted/20">
           <div className="w-16 h-16 rounded-lg bg-muted flex items-center justify-center mb-4">
             <svg className="h-8 w-8 text-muted-foreground" viewBox="0 0 24 24" fill="none">
-              <path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M3 7h18M3 12h18M3 17h18"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </div>
           <h3 className="text-lg font-medium text-foreground mb-1">No Blogs Found</h3>
@@ -255,13 +282,21 @@ export default function BlogReorderPage() {
             <TabsTrigger value="all" className="flex-1 text-sm data-[state=active]:bg-background">
               All Blogs ({items.length})
             </TabsTrigger>
-            <TabsTrigger value="changed" className="flex-1 text-sm data-[state=active]:bg-background">
+            <TabsTrigger
+              value="changed"
+              className="flex-1 text-sm data-[state=active]:bg-background"
+            >
               Changes {changedItems.length > 0 && `(${changedItems.length})`}
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="all" className="mt-6">
-            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragStart={handleDragStart}
+              onDragEnd={handleDragEnd}
+            >
               <SortableContext items={items.map((i) => i.orderId)} strategy={rectSortingStrategy}>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {items.map((it) => (
@@ -301,7 +336,11 @@ export default function BlogReorderPage() {
                     <p className="text-xs text-muted-foreground">Click save to apply changes</p>
                   </div>
                 </div>
-                <Button onClick={handleSave} disabled={saving} className="bg-primary hover:bg-primary/90">
+                <Button
+                  onClick={handleSave}
+                  disabled={saving}
+                  className="bg-primary hover:bg-primary/90"
+                >
                   {saving ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -323,17 +362,27 @@ export default function BlogReorderPage() {
                   <CheckCircle2 className="h-8 w-8 text-muted-foreground" />
                 </div>
                 <h3 className="text-lg font-medium text-foreground mb-1">No Changes</h3>
-                <p className="text-sm text-muted-foreground">Reorder blogs in the All Blogs tab to see changes</p>
+                <p className="text-sm text-muted-foreground">
+                  Reorder blogs in the All Blogs tab to see changes
+                </p>
               </div>
             ) : (
               <div className="overflow-hidden rounded-lg border">
                 <table className="w-full">
                   <thead>
                     <tr className="bg-muted/50 border-b">
-                      <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Blog Title</th>
-                      <th className="px-4 py-3 text-center text-xs font-medium text-muted-foreground uppercase tracking-wider">Previous</th>
-                      <th className="px-4 py-3 text-center text-xs font-medium text-muted-foreground uppercase tracking-wider">New</th>
-                      <th className="px-4 py-3 text-center text-xs font-medium text-muted-foreground uppercase tracking-wider">Change</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        Blog Title
+                      </th>
+                      <th className="px-4 py-3 text-center text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        Previous
+                      </th>
+                      <th className="px-4 py-3 text-center text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        New
+                      </th>
+                      <th className="px-4 py-3 text-center text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        Change
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border bg-card">
@@ -345,16 +394,36 @@ export default function BlogReorderPage() {
                         <tr key={item.id} className="hover:bg-muted/30 transition-colors">
                           <td className="px-4 py-3">
                             <div className="flex flex-col">
-                              <span className="text-sm font-medium text-foreground truncate max-w-xs">{item.title}</span>
-                              <span className="text-xs text-muted-foreground font-mono">ID: {String(item.id).substring(0, 8)}</span>
+                              <span className="text-sm font-medium text-foreground truncate max-w-xs">
+                                {item.title}
+                              </span>
+                              <span className="text-xs text-muted-foreground font-mono">
+                                ID: {String(item.id).substring(0, 8)}
+                              </span>
                             </div>
                           </td>
-                          <td className="px-4 py-3 text-center"><Badge variant="outline" className="font-mono text-xs">#{item.oldOrder}</Badge></td>
-                          <td className="px-4 py-3 text-center"><Badge variant="default" className="font-mono text-xs bg-primary">#{item.newOrder}</Badge></td>
+                          <td className="px-4 py-3 text-center">
+                            <Badge variant="outline" className="font-mono text-xs">
+                              #{item.oldOrder}
+                            </Badge>
+                          </td>
+                          <td className="px-4 py-3 text-center">
+                            <Badge variant="default" className="font-mono text-xs bg-primary">
+                              #{item.newOrder}
+                            </Badge>
+                          </td>
                           <td className="px-4 py-3 text-center">
                             <div className="flex items-center justify-center gap-1">
-                              {isMovedDown ? (<TrendingDown className="h-3.5 w-3.5 text-orange-500" />) : (<TrendingUp className="h-3.5 w-3.5 text-green-500" />)}
-                              <span className={`text-sm font-medium ${isMovedDown ? 'text-orange-500' : 'text-green-500'}`}>{Math.abs(orderChange)}</span>
+                              {isMovedDown ? (
+                                <TrendingDown className="h-3.5 w-3.5 text-orange-500" />
+                              ) : (
+                                <TrendingUp className="h-3.5 w-3.5 text-green-500" />
+                              )}
+                              <span
+                                className={`text-sm font-medium ${isMovedDown ? 'text-orange-500' : 'text-green-500'}`}
+                              >
+                                {Math.abs(orderChange)}
+                              </span>
                             </div>
                           </td>
                         </tr>

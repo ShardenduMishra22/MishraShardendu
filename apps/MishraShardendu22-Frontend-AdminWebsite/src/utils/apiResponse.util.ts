@@ -230,22 +230,29 @@ import axios from 'axios'
 
 export const blogsAPI = {
   getReorderList: async (): Promise<ApiResponse<BlogReorderItem[]>> => {
-    const response = await axios.get('https://mishrashardendu22-backend-blogwebsite.onrender.com/api/blogs/reorder',{
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('jwt_token') || ''}`
+    const response = await axios.get(
+      'https://mishrashardendu22-backend-blogwebsite.onrender.com/api/blogs/reorder',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('jwt_token') || ''}`,
+        },
       }
-    })
+    )
     return response.data
   },
 
   updateReorder: async (payload: BlogReorderUpdate[]): Promise<ApiResponse<unknown>> => {
-    const response = await axios.post('https://mishrashardendu22-backend-blogwebsite.onrender.com/api/blogs/reorder', payload, {
-      headers: {
-        'Content-Type': 'application/json',
-        Bearer: typeof window !== 'undefined' ? localStorage.getItem('jwt_token') || '' : ''
+    const response = await axios.post(
+      'https://mishrashardendu22-backend-blogwebsite.onrender.com/api/blogs/reorder',
+      payload,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Bearer: typeof window !== 'undefined' ? localStorage.getItem('jwt_token') || '' : '',
+        },
       }
-    })
+    )
     return response.data
   },
 }

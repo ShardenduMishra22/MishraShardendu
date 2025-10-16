@@ -76,8 +76,7 @@ interface DialogContentProps extends JSX.HTMLAttributes<HTMLDivElement> {
 const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
   ({ className, children, onClose, ...props }, ref) => {
     const ctx = useContext(DialogContext)
-    const handleClose =
-      onClose ?? (() => ctx?.onOpenChange && ctx.onOpenChange(false))
+    const handleClose = onClose ?? (() => ctx?.onOpenChange && ctx.onOpenChange(false))
 
     return (
       <>

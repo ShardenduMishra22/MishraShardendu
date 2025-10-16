@@ -190,7 +190,9 @@ export default function VolunteerPage() {
   }
 
   const toggleProject = (id: string) => {
-    setSelectedProjects((prev) => (prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]))
+    setSelectedProjects((prev) =>
+      prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]
+    )
   }
 
   const totalPages = Math.ceil(items.length / limit)
@@ -223,51 +225,137 @@ export default function VolunteerPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="organisation">Organisation</Label>
-                  <Input id="organisation" value={formData.organisation} onInput={(e) => setFormData({...formData, organisation: (e.target as HTMLInputElement).value})} />
+                  <Input
+                    id="organisation"
+                    value={formData.organisation}
+                    onInput={(e) =>
+                      setFormData({
+                        ...formData,
+                        organisation: (e.target as HTMLInputElement).value,
+                      })
+                    }
+                  />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="position">Position</Label>
-                  <Input id="position" value={formData.volunteer_time_line?.[0]?.position || ''} onInput={(e) => setFormData({...formData, volunteer_time_line: [{ ...(formData.volunteer_time_line?.[0] || {}), position: (e.target as HTMLInputElement).value } ]})} />
+                  <Input
+                    id="position"
+                    value={formData.volunteer_time_line?.[0]?.position || ''}
+                    onInput={(e) =>
+                      setFormData({
+                        ...formData,
+                        volunteer_time_line: [
+                          {
+                            ...(formData.volunteer_time_line?.[0] || {}),
+                            position: (e.target as HTMLInputElement).value,
+                          },
+                        ],
+                      })
+                    }
+                  />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="start_date">Start Date</Label>
-                  <Input id="start_date" type="date" value={formData.volunteer_time_line?.[0]?.start_date || ''} onInput={(e) => setFormData({...formData, volunteer_time_line: [{ ...(formData.volunteer_time_line?.[0] || {}), start_date: (e.target as HTMLInputElement).value } ]})} />
+                  <Input
+                    id="start_date"
+                    type="date"
+                    value={formData.volunteer_time_line?.[0]?.start_date || ''}
+                    onInput={(e) =>
+                      setFormData({
+                        ...formData,
+                        volunteer_time_line: [
+                          {
+                            ...(formData.volunteer_time_line?.[0] || {}),
+                            start_date: (e.target as HTMLInputElement).value,
+                          },
+                        ],
+                      })
+                    }
+                  />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="end_date">End Date</Label>
-                  <Input id="end_date" type="date" value={formData.volunteer_time_line?.[0]?.end_date || ''} onInput={(e) => setFormData({...formData, volunteer_time_line: [{ ...(formData.volunteer_time_line?.[0] || {}), end_date: (e.target as HTMLInputElement).value } ]})} />
+                  <Input
+                    id="end_date"
+                    type="date"
+                    value={formData.volunteer_time_line?.[0]?.end_date || ''}
+                    onInput={(e) =>
+                      setFormData({
+                        ...formData,
+                        volunteer_time_line: [
+                          {
+                            ...(formData.volunteer_time_line?.[0] || {}),
+                            end_date: (e.target as HTMLInputElement).value,
+                          },
+                        ],
+                      })
+                    }
+                  />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="organisation_logo">Organisation Logo URL</Label>
-                  <Input id="organisation_logo" value={formData.organisation_logo} onInput={(e) => setFormData({...formData, organisation_logo: (e.target as HTMLInputElement).value})} />
+                  <Input
+                    id="organisation_logo"
+                    value={formData.organisation_logo}
+                    onInput={(e) =>
+                      setFormData({
+                        ...formData,
+                        organisation_logo: (e.target as HTMLInputElement).value,
+                      })
+                    }
+                  />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="images">Images (comma-separated URLs)</Label>
-                  <Input id="images" value={formData.images} onInput={(e) => setFormData({...formData, images: (e.target as HTMLInputElement).value})} />
+                  <Input
+                    id="images"
+                    value={formData.images}
+                    onInput={(e) =>
+                      setFormData({ ...formData, images: (e.target as HTMLInputElement).value })
+                    }
+                  />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
-                <MarkdownEditor content={formData.description} onChange={(c) => setFormData({...formData, description: c})} />
+                <MarkdownEditor
+                  content={formData.description}
+                  onChange={(c) => setFormData({ ...formData, description: c })}
+                />
               </div>
 
               <div className="space-y-2">
                 <Label>Technologies</Label>
                 <div className="flex gap-2">
-                  <Input value={newTechnology} onInput={(e) => setNewTechnology((e.target as HTMLInputElement).value)} placeholder="Add a technology" onKeyPress={(e) => { if ((e as KeyboardEvent).key === 'Enter') { e.preventDefault(); addTechnology() } }} />
-                  <Button type="button" onClick={addTechnology} variant="outline">Add</Button>
+                  <Input
+                    value={newTechnology}
+                    onInput={(e) => setNewTechnology((e.target as HTMLInputElement).value)}
+                    placeholder="Add a technology"
+                    onKeyPress={(e) => {
+                      if ((e as KeyboardEvent).key === 'Enter') {
+                        e.preventDefault()
+                        addTechnology()
+                      }
+                    }}
+                  />
+                  <Button type="button" onClick={addTechnology} variant="outline">
+                    Add
+                  </Button>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {selectedTechnologies.map((tech) => (
                     <Badge key={tech} variant="secondary" className="flex items-center gap-1">
                       {tech}
-                      <X className="h-3 w-3 cursor-pointer hover:text-destructive" onClick={() => removeTechnology(tech)} />
+                      <X
+                        className="h-3 w-3 cursor-pointer hover:text-destructive"
+                        onClick={() => removeTechnology(tech)}
+                      />
                     </Badge>
                   ))}
                 </div>
@@ -278,15 +366,25 @@ export default function VolunteerPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-40 overflow-y-auto">
                   {allProjects.map((p) => (
                     <div key={p.id} className="flex items-center space-x-2">
-                      <input type="checkbox" id={p.id} checked={selectedProjects.includes(p.id)} onChange={() => toggleProject(p.id)} className="rounded border-gray-300" />
-                      <Label htmlFor={p.id} className="text-sm">{p.name}</Label>
+                      <input
+                        type="checkbox"
+                        id={p.id}
+                        checked={selectedProjects.includes(p.id)}
+                        onChange={() => toggleProject(p.id)}
+                        className="rounded border-gray-300"
+                      />
+                      <Label htmlFor={p.id} className="text-sm">
+                        {p.name}
+                      </Label>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div className="flex justify-end gap-2">
-                <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
+                <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
+                  Cancel
+                </Button>
                 <Button type="submit">{editing ? 'Update' : 'Create'}</Button>
               </div>
             </form>
@@ -304,7 +402,9 @@ export default function VolunteerPage() {
         <div className="flex flex-col items-center justify-center py-16 animate-fade-in">
           <Briefcase className="mx-auto h-16 w-16 text-foreground mb-4" />
           <h3 className="text-2xl font-semibold text-foreground mb-2">No volunteer entries</h3>
-          <p className="text-lg text-foreground mb-6">Get started by adding your first volunteer experience.</p>
+          <p className="text-lg text-foreground mb-6">
+            Get started by adding your first volunteer experience.
+          </p>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger>
               <Button onClick={() => resetForm()} className="flex items-center">
@@ -317,20 +417,54 @@ export default function VolunteerPage() {
         <>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {currentData.map((v) => (
-              <Card key={v.inline?.id || v.inline.id} className="group relative overflow-hidden border-2 border-border/50 hover:border-secondary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-secondary/10 hover:-translate-y-2 bg-gradient-to-br from-card/50 to-card backdrop-blur-sm rounded-2xl animate-fade-in flex flex-col">
+              <Card
+                key={v.inline?.id || v.inline.id}
+                className="group relative overflow-hidden border-2 border-border/50 hover:border-secondary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-secondary/10 hover:-translate-y-2 bg-gradient-to-br from-card/50 to-card backdrop-blur-sm rounded-2xl animate-fade-in flex flex-col"
+              >
                 <CardHeader className="bg-gradient-to-r from-secondary/10 to-card pb-2">
                   <CardTitle className="text-2xl font-semibold text-secondary flex items-center gap-2">
                     <Briefcase className="h-5 w-5 text-secondary" />
                     {v.volunteer_time_line?.[0]?.position ?? 'Position'}
                   </CardTitle>
-                  <CardDescription className="text-foreground">{v.organisation} &bull; {v.volunteer_time_line?.[0]?.start_date} to {v.volunteer_time_line?.[0]?.end_date}</CardDescription>
+                  <CardDescription className="text-foreground">
+                    {v.organisation} &bull; {v.volunteer_time_line?.[0]?.start_date} to{' '}
+                    {v.volunteer_time_line?.[0]?.end_date}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1 flex flex-col gap-2 p-2">
-                  <p className="text-base text-foreground line-clamp-4">{v.description.length > 180 ? `${v.description.substring(0,180)}...` : v.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-2">{v.technologies.map((t, idx) => (<Badge key={idx} variant="secondary" className="text-xs px-2 py-1 rounded-full bg-secondary/10 text-secondary border border-secondary/20">{t}</Badge>))}</div>
+                  <p className="text-base text-foreground line-clamp-4">
+                    {v.description.length > 180
+                      ? `${v.description.substring(0, 180)}...`
+                      : v.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {v.technologies.map((t, idx) => (
+                      <Badge
+                        key={idx}
+                        variant="secondary"
+                        className="text-xs px-2 py-1 rounded-full bg-secondary/10 text-secondary border border-secondary/20"
+                      >
+                        {t}
+                      </Badge>
+                    ))}
+                  </div>
                   <div className="flex gap-1 mt-auto">
-                    <Button size="sm" variant="outline" onClick={() => handleEdit(v)} className="flex-1"><Edit className="h-4 w-4 mr-1" /> Edit</Button>
-                    <Button size="sm" variant="destructive" onClick={() => handleDelete(v.inline.id)} className="flex-1"><Trash2 className="h-4 w-4 mr-1" /> Delete</Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleEdit(v)}
+                      className="flex-1"
+                    >
+                      <Edit className="h-4 w-4 mr-1" /> Edit
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="destructive"
+                      onClick={() => handleDelete(v.inline.id)}
+                      className="flex-1"
+                    >
+                      <Trash2 className="h-4 w-4 mr-1" /> Delete
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -338,9 +472,25 @@ export default function VolunteerPage() {
           </div>
 
           <div className="flex justify-center items-center gap-4 mt-8">
-            <Button variant="outline" disabled={page === 1} onClick={() => setPage((p) => Math.max(1, p - 1))} className="flex items-center gap-1"><ChevronLeft className="h-4 w-4" /> Prev</Button>
-            <span className="text-foreground">Page {page} of {totalPages}</span>
-            <Button variant="outline" disabled={page === totalPages} onClick={() => setPage((p) => Math.min(totalPages, p + 1))} className="flex items-center gap-1">Next <ChevronRight className="h-4 w-4" /></Button>
+            <Button
+              variant="outline"
+              disabled={page === 1}
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              className="flex items-center gap-1"
+            >
+              <ChevronLeft className="h-4 w-4" /> Prev
+            </Button>
+            <span className="text-foreground">
+              Page {page} of {totalPages}
+            </span>
+            <Button
+              variant="outline"
+              disabled={page === totalPages}
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              className="flex items-center gap-1"
+            >
+              Next <ChevronRight className="h-4 w-4" />
+            </Button>
           </div>
         </>
       )}
