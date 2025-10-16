@@ -60,6 +60,8 @@ const SortableCard = ({ item }: SortableCardProps) => {
     id: item.uid,
   })
 
+  const { role, ...safeAttributes } = attributes as any
+
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -75,17 +77,15 @@ const SortableCard = ({ item }: SortableCardProps) => {
     >
       <CardHeader className="p-4">
         <div className="flex items-start gap-3">
-          <div
-            className="mt-0.5 cursor-grab active:cursor-grabbing p-1 rounded hover:bg-muted/50 transition-colors"
-            {...attributes}
+          <button
+            type="button"
+            className="mt-0.5 cursor-grab active:cursor-grabbing p-1 rounded hover:bg-muted/50 transition-colors touch-none"
+            {...safeAttributes}
             {...listeners}
-            role="button"
-            tabIndex={0}
-            aria-roledescription="draggable"
-            aria-describedby={`blog-${item.blogId}`}
+            aria-label="Drag to reorder"
           >
-            <GripVertical className="h-4 w-4 text-muted-foreground" />
-          </div>
+            <GripVertical className="h-4 w-4 text-muted-foreground pointer-events-none" />
+          </button>
           <div className="flex-1 min-w-0">
             <CardTitle className="text-base font-medium text-foreground line-clamp-2 leading-snug">
               {item.title}
