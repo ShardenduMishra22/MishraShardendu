@@ -62,23 +62,25 @@
 </script>
 
 <article
-  class="group relative rounded-xl border border-border bg-card/50 backdrop-blur-sm p-4 lg:p-4 
-         transition-all duration-300 overflow-hidden max-h-[520px]"
+  class="group relative rounded-xl border border-border overflow-hidden max-h-[520px] transition-all duration-300 hover:border-border/80"
 >
+  {#if blog.image}
+    <div class="absolute inset-0">
+      <img
+        src={resolveImageUrl(blog.image)}
+        alt={blog.title}
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 backdrop-blur-xl bg-black/60"></div>
+    </div>
+  {:else}
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-background"></div>
+  {/if}
+
   <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
   
-  <div class="relative z-10">
-    {#if blog.image}
-      <div class="mb-3 rounded-lg overflow-hidden bg-muted h-44 w-full flex items-center justify-center">
-        <img
-          src={resolveImageUrl(blog.image)}
-          alt={blog.title}
-          class="w-full h-full object-contain" 
-        />
-      </div>
-    {/if}
-
-        <div class="flex items-center gap-3 text-xs text-muted-foreground">
+  <div class="relative z-10 p-4 lg:p-4 h-full flex flex-col">
+    <div class="flex items-center gap-3 text-xs mb-4">
       <div class="flex items-center gap-2 min-w-0">
         <Avatar
           class="w-7 h-7 flex-shrink-0 ring-2 ring-primary/10"
@@ -86,8 +88,8 @@
           fallback={blog.author?.name ? getInitials(blog.author.name, blog.author.name) : blog.author?.email?.charAt(0).toUpperCase() || "U"}
         />
         <div class="min-w-0">
-          <div class="text-sm font-semibold text-foreground truncate">{blog.author?.name || blog.author?.email || "Unknown"}</div>
-          <div class="flex items-center gap-2 text-xs text-muted-foreground truncate">
+          <div class="text-sm font-semibold text-white truncate">{blog.author?.name || blog.author?.email || "Unknown"}</div>
+          <div class="flex items-center gap-2 text-xs text-white/80 truncate">
             <span>{formatDate(blog.createdAt)}</span>
             {#if readingTime > 0}
               <span>• {readingTime} min</span>
@@ -99,16 +101,16 @@
       {#if blog.tags && blog.tags.length > 0}
         <div class="flex items-center gap-2 ml-2">
           {#each blog.tags.slice(0,2) as tag}
-            <Badge variant="secondary" class="text-xs px-2 py-0.5">{tag}</Badge>
+            <Badge variant="secondary" class="text-xs px-2 py-0.5 bg-white/20 text-white border-white/30">{tag}</Badge>
           {/each}
           {#if blog.tags.length > 2}
-            <Badge variant="outline" class="text-xs px-2 py-0.5">+{blog.tags.length - 2}</Badge>
+            <Badge variant="outline" class="text-xs px-2 py-0.5 bg-white/10 text-white border-white/30">+{blog.tags.length - 2}</Badge>
           {/if}
         </div>
       {/if}
 
       <div class="ml-auto flex items-center gap-3">
-        <div class="flex items-center gap-1 text-sm text-muted-foreground">
+        <div class="flex items-center gap-1 text-sm text-white/90">
           <MessageCircle class="w-4 h-4" />
           <span class="font-medium">{blog.comments ?? 0}</span>
         </div>
@@ -121,7 +123,7 @@
           variant="outline"
           size="sm"
           onclick={() => onReadMore?.(blog.id.toString())}
-          className="h-9 px-3"
+          className="h-9 px-3 bg-white/10 hover:bg-white/20 text-white border-white/30"
         >
           Read
           <ArrowRight class="w-4 h-4 ml-2" />
@@ -129,13 +131,12 @@
       </div>
     </div>
 
-    <h3 class="text-base lg:text-lg font-bold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors leading-tight">
+    <h3 class="text-base lg:text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-primary-200 transition-colors leading-tight">
       {blog.title}
     </h3>
 
-    <!-- show excerpt on md+ screens only -->
     {#if excerpt}
-      <p class="hidden md:block text-sm text-muted-foreground mt-3 line-clamp-3 leading-relaxed">
+      <p class="hidden md:block text-sm text-white/80 mt-3 line-clamp-3 leading-relaxed">
         {excerpt}
       </p>
     {/if}

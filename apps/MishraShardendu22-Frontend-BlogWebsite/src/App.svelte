@@ -6,6 +6,7 @@
   import BlogDashboardPage from "./lib/components/BlogDashboardPage.svelte";
   import LoginPage from "./lib/components/LoginPage.svelte";
   import Toast from "./lib/components/Toast.svelte";
+  import ConfirmDialog from "./lib/components/ConfirmDialog.svelte";
   import ThemeToggle from "./lib/components/ThemeToggle.svelte";
   import { authStore } from "./lib/auth";
   import { updateSEO } from "./lib/seo";
@@ -193,6 +194,8 @@
 <div class="min-h-screen bg-background" style="min-height: 100vh;">
   <!-- Toast Notifications -->
   <Toast />
+  <!-- Confirm dialog mounted at app root -->
+  <ConfirmDialog />
   
   <!-- Theme Toggle -->
   <ThemeToggle />

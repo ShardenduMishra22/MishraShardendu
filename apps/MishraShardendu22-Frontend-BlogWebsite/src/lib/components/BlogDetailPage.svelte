@@ -7,6 +7,7 @@
   import { blogApi, commentApi, type Blog, type Comment } from "../api";
   import { authStore } from "../auth";
   import { toast } from "../toast";
+  import { confirm } from "../confirm";
   import { validateCommentContent } from "../validation";
   import { updateSEO, generateBlogPostStructuredData, insertStructuredData, truncateDescription } from "../seo";
   import { getBasePath } from "../navigation";
@@ -29,7 +30,7 @@
   let commentError = $state("");
   let showInfoPanel = $state(false);
   let showTags = $state(false);
-  let textareaRef: HTMLTextAreaElement;
+  let textareaRef = $state<HTMLTextAreaElement | null>(null);
 
   authStore.subscribe((state) => {
     currentUser = state.user;
@@ -144,7 +145,8 @@
   };
 
   const handleDeleteComment = async (commentId: number) => {
-    if (!confirm("Are you sure you want to delete this comment?")) return;
+    const ok = await confirm("Are you sure you want to delete this comment?", "Delete comment")
+    if (!ok) return;
 
     try {
       await commentApi.deleteComment(parseInt(blogId), commentId);
@@ -455,9 +457,6 @@
 </div>
 
 <style>
-  html {
-    scroll-behavior: smooth;
-  }
 
   :global(.prose) {
     overflow-wrap: anywhere;

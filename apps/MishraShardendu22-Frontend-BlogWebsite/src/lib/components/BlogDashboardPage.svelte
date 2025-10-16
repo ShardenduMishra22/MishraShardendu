@@ -18,6 +18,8 @@
   import { authStore } from "../auth";
   import { getBasePath } from "../navigation";
   import { onMount } from "svelte";
+  import { confirm } from "../confirm";
+  import { toast } from "../toast";
   import resolveImageUrl from "../utils/image"
 
   const basePath = getBasePath();
@@ -73,15 +75,17 @@
   const totalComments = $derived(stats.totalComments);
 
   const handleDelete = async (blogId: number) => {
-    if (!confirm("Are you sure you want to delete this blog post?")) return;
+    const ok = await confirm("Are you sure you want to delete this blog post?", "Delete post")
+    if (!ok) return;
 
     try {
       deletingBlogId = blogId;
       await blogApi.deleteBlog(blogId);
+      toast.success("Blog post deleted");
       await loadData();
     } catch (err: any) {
       console.error("Failed to delete blog:", err);
-      error = err.message || "Failed to delete blog";
+      toast.error(err.message || "Failed to delete blog");
     } finally {
       deletingBlogId = null;
     }

@@ -388,6 +388,35 @@ h6 {
     }
   }
 
+  /* Responsive tweaks for blog app */
+  .modern-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card { padding: 1rem; border-radius: var(--radius); background: var(--card); border: 1px solid var(--border); }
+
+  @media (max-width: 900px) {
+    .modern-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .modern-stats { grid-template-columns: 1fr; }
+
+    /* Blog card improvements */
+    .blog-card-improved { padding: 0.75rem; }
+    .blog-card-improved .tags { width: 40%; }
+    .blog-card-improved .actions { width: 60%; }
+
+    /* Make large featured images responsive */
+    .w-full.h-\[500px\] { height: auto !important; }
+    .prose { font-size: 1rem; }
+
+    /* Toast spacing adjust */
+    .toast-mobile-center { left: 50%; transform: translateX(-50%); }
+  }
+
   /* Remove motion for users who prefer reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *,

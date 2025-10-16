@@ -3,6 +3,24 @@
   import { X, CheckCircle, AlertCircle, AlertTriangle, Info } from "lucide-svelte";
   import { fly, fade } from "svelte/transition";
 
+  let containerStyle = $state('');
+
+  const updatePosition = () => {
+    if (typeof window === 'undefined') return;
+    if (window.innerWidth < 640) {
+      // center on small screens
+      containerStyle = 'left: 50%; transform: translateX(-50%); max-width: calc(100% - 2rem); right: auto;'
+    } else {
+      // align right on larger screens
+      containerStyle = 'right: 1rem; left: auto; transform: none; max-width: 360px;'
+    }
+  };
+
+  if (typeof window !== 'undefined') {
+    updatePosition();
+    window.addEventListener('resize', updatePosition);
+  }
+
   let toasts = $state<Toast[]>([]);
 
   toastStore.subscribe((state) => {
@@ -56,9 +74,10 @@
 </script>
 
 <div
-  class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none max-w-sm w-full pr-4"
+  class="fixed top-4 z-50 flex flex-col gap-2 pointer-events-none w-full px-4"
   aria-live="polite"
   aria-atomic="true"
+  style={containerStyle}
 >
   {#each toasts as toast (toast.id)}
     <div
