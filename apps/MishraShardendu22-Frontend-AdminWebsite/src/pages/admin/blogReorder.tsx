@@ -93,10 +93,11 @@ export default function BlogReorderPage() {
   const [items, setItems] = useState<
     { uid: string; apiId: number; title: string; order: number }[]
   >([])
-  // map keyed by API id (orderId) -> original order value
-  const [originalOrder, setOriginalOrder] = useState<Map<number, number>>(new Map())
+  // map keyed by internal uid -> original order value
+  const [originalOrder, setOriginalOrder] = useState<Map<string, number>>(new Map())
   const [changedItems, setChangedItems] = useState<
     {
+      uid: string
       id: number
       title: string
       oldOrder: number
@@ -138,8 +139,8 @@ export default function BlogReorderPage() {
           order: it.orderId,
         }))
         setItems(internal)
-        const map = new Map<number, number>()
-        internal.forEach((it) => map.set(it.apiId, it.order))
+  const map = new Map<string, number>()
+  internal.forEach((it) => map.set(it.uid, it.order))
         setOriginalOrder(map)
         setError('')
       } catch (err) {
@@ -166,7 +167,8 @@ export default function BlogReorderPage() {
       await blogsAPI.updateReorder(payload)
 
       const newMap = new Map(originalOrder)
-      changedItems.forEach((c) => newMap.set(c.id, c.newOrder))
+      // originalOrder is keyed by uid
+      changedItems.forEach((c) => newMap.set(c.uid, c.newOrder))
       setOriginalOrder(newMap)
       setChangedItems([])
       toast.success('Blogs reordered successfully')
@@ -190,19 +192,20 @@ export default function BlogReorderPage() {
     if (!over || active.id === over.id) return
 
     setItems((current) => {
-      const oldIndex = current.findIndex((i) => i.uid === (active.id as string))
-      const newIndex = current.findIndex((i) => i.uid === (over.id as string))
+  const oldIndex = current.findIndex((i) => i.uid === (active.id as string))
+  const newIndex = current.findIndex((i) => i.uid === (over.id as string))
 
       const newItems = arrayMove(current, oldIndex, newIndex)
 
       // update the visible order (1-based)
       const updated = newItems.map((it, idx) => ({ ...it, order: idx + 1 }))
 
-      const changes: { id: number; title: string; oldOrder: number; newOrder: number }[] = []
+      const changes: { uid: string; id: number; title: string; oldOrder: number; newOrder: number }[] = []
       updated.forEach((it) => {
-        const original = originalOrder.get(it.apiId)
+        const original = originalOrder.get(it.uid)
         if (original !== undefined && original !== it.order) {
           changes.push({
+            uid: it.uid,
             id: it.apiId,
             title: it.title,
             oldOrder: original,
