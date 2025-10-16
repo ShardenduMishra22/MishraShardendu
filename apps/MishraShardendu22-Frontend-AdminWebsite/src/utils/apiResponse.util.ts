@@ -229,9 +229,8 @@ export const TimelineAPI = {
 import axios from 'axios'
 
 export const blogsAPI = {
-
   getReorderList: async (): Promise<ApiResponse<BlogReorderItem[]>> => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('jwt_token') : null
+    const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null
 
     const response = await axios.get(
       'https://mishrashardendu22-backend-blogwebsite.onrender.com/api/blogs/reorder',
@@ -246,8 +245,8 @@ export const blogsAPI = {
   },
 
   updateReorder: async (payload: BlogReorderUpdate[]): Promise<ApiResponse<unknown>> => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('jwt_token') : null
-    
+    const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null
+
     const response = await axios.post(
       'https://mishrashardendu22-backend-blogwebsite.onrender.com/api/blogs/reorder',
       payload,
