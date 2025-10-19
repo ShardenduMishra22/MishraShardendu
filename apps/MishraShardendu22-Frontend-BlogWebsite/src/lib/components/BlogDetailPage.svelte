@@ -229,9 +229,18 @@
 
     {#if showInfoPanel}
       <!-- Info Panel Popover: adapt position based on screen size -->
-      <div class="absolute z-50">
-        <div class="lg:fixed lg:top-20 lg:right-6 lg:w-80 w-72 left-4 bottom-20 bg-card border border-border rounded-lg shadow-xl overflow-hidden">
-          <div class="p-4 space-y-4">
+      <div class="fixed z-50 inset-0 lg:inset-auto">
+        <!-- Mobile overlay -->
+        <button 
+          type="button"
+          class="lg:hidden absolute inset-0 bg-black/50 backdrop-blur-sm cursor-default" 
+          onclick={() => showInfoPanel = false}
+          aria-label="Close info panel"
+        ></button>
+        
+        <!-- Panel -->
+        <div class="absolute lg:fixed bottom-0 left-0 right-0 lg:top-20 lg:right-6 lg:left-auto lg:bottom-auto lg:w-80 bg-card border border-border lg:rounded-lg rounded-t-2xl shadow-xl overflow-hidden animate-slide-up lg:animate-none">
+          <div class="p-4 sm:p-5 space-y-4 max-h-[80vh] lg:max-h-[calc(100vh-120px)] overflow-y-auto">
             <!-- Author Section -->
             <div class="pb-3 border-b border-border">
               <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Author</p>
@@ -239,7 +248,7 @@
                 <Avatar
                   src={resolveImageUrl(blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined)}
                   fallback={blog.author?.name?.charAt(0) || "U"}
-                  class="w-12 h-12 border-2 border-primary/20"
+                  class="w-10 h-10 sm:w-12 sm:h-12 border-2 border-primary/20"
                 />
                 <div class="flex-1 min-w-0">
                   <p class="font-semibold text-sm truncate">{blog.author?.name || "Unknown"}</p>
@@ -344,7 +353,7 @@
   </Button>
 </div>
 
-<div class="w-full max-w-7xl mx-auto px-2 py-8 lg:px-3 overflow-x-hidden">
+<div class="w-full max-w-4xl mx-auto px-3 sm:px-4 lg:px-6 py-6 sm:py-8 overflow-x-hidden">
   {#if loading}
     <div class="space-y-4">
       <div class="h-10 bg-muted/50 rounded animate-pulse"></div>
@@ -355,96 +364,96 @@
 
 <article>
   {#if blog.image}
-    <div class="group relative rounded-lg overflow-hidden border border-border mb-8 h-[250px]">
+    <div class="group relative rounded-lg overflow-hidden border border-border mb-6 sm:mb-8 h-[200px] sm:h-[250px] lg:h-[300px]">
       <img
         src={resolveImageUrl(blog.image)}
         alt={blog.title}
         class="w-full h-full object-cover transition-all duration-300 group-hover:blur-sm group-hover:scale-110"
       />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-      <header class="absolute inset-0 flex items-center justify-center p-6">
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center leading-tight drop-shadow-2xl">
+      <header class="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center leading-tight drop-shadow-2xl">
           {blog.title}
         </h1>
       </header>
     </div>
   {:else}
-    <header class="mb-8">
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+    <header class="mb-6 sm:mb-8">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
         {blog.title}
       </h1>
     </header>
   {/if}
 
   <!-- Article Content -->
-  <div class="prose prose-lg dark:prose-invert max-w-none mb-12
+  <div class="prose prose-sm sm:prose-base lg:prose-lg dark:prose-invert max-w-none mb-8 sm:mb-12
               prose-headings:font-bold prose-headings:tracking-tight
-              prose-h1:text-5xl prose-h1:mt-12 prose-h1:mb-8
-              prose-h2:text-4xl prose-h2:mt-10 prose-h2:mb-6 prose-h2:border-b prose-h2:border-border prose-h2:pb-3
-              prose-h3:text-3xl prose-h3:mt-8 prose-h3:mb-5
-              prose-h4:text-2xl prose-h4:mt-6 prose-h4:mb-4
-              prose-h5:text-xl prose-h5:mt-5 prose-h5:mb-3
-              prose-h6:text-lg prose-h6:mt-4 prose-h6:mb-2
-              prose-p:text-base prose-p:leading-relaxed prose-p:mb-5
+              prose-h1:text-3xl sm:prose-h1:text-4xl lg:prose-h1:text-5xl prose-h1:mt-8 sm:prose-h1:mt-12 prose-h1:mb-6 sm:prose-h1:mb-8
+              prose-h2:text-2xl sm:prose-h2:text-3xl lg:prose-h2:text-4xl prose-h2:mt-8 sm:prose-h2:mt-10 prose-h2:mb-4 sm:prose-h2:mb-6 prose-h2:border-b prose-h2:border-border prose-h2:pb-2 sm:prose-h2:pb-3
+              prose-h3:text-xl sm:prose-h3:text-2xl lg:prose-h3:text-3xl prose-h3:mt-6 sm:prose-h3:mt-8 prose-h3:mb-3 sm:prose-h3:mb-5
+              prose-h4:text-lg sm:prose-h4:text-xl lg:prose-h4:text-2xl prose-h4:mt-5 sm:prose-h4:mt-6 prose-h4:mb-3 sm:prose-h4:mb-4
+              prose-h5:text-base sm:prose-h5:text-lg lg:prose-h5:text-xl prose-h5:mt-4 sm:prose-h5:mt-5 prose-h5:mb-2 sm:prose-h5:mb-3
+              prose-h6:text-sm sm:prose-h6:text-base lg:prose-h6:text-lg prose-h6:mt-3 sm:prose-h6:mt-4 prose-h6:mb-2
+              prose-p:text-sm sm:prose-p:text-base prose-p:leading-relaxed prose-p:mb-4 sm:prose-p:mb-5
               prose-strong:font-semibold prose-strong:text-foreground
-              prose-code:text-sm prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-primary
-              prose-pre:bg-muted prose-pre:border prose-pre:border-border
-              prose-a:text-primary prose-a:font-medium hover:prose-a:underline prose-a:no-underline
-              prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground
-              prose-ul:my-5 prose-ol:my-5 prose-li:my-2
-              prose-img:rounded-lg prose-img:my-8">
+              prose-code:text-xs sm:prose-code:text-sm prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-primary
+              prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:overflow-x-auto prose-pre:text-xs sm:prose-pre:text-sm
+              prose-a:text-primary prose-a:font-medium hover:prose-a:underline prose-a:no-underline prose-a:break-words
+              prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-3 sm:prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground
+              prose-ul:my-4 sm:prose-ul:my-5 prose-ol:my-4 sm:prose-ol:my-5 prose-li:my-1 sm:prose-li:my-2
+              prose-img:rounded-lg prose-img:my-6 sm:prose-img:my-8 prose-img:w-full">
     {@html renderedContent}
   </div>
 </article>
 
 
     <!-- Comments Section -->
-    <section id="comments-section" class="bg-card border border-border rounded-xl p-5 sm:p-6 scroll-mt-20 shadow-sm">
-      <h2 class="text-xl font-bold mb-5 flex items-center gap-2">
-        <MessageCircle class="w-5 h-5" />
+    <section id="comments-section" class="bg-card border border-border rounded-xl p-4 sm:p-5 lg:p-6 scroll-mt-20 shadow-sm">
+      <h2 class="text-lg sm:text-xl font-bold mb-4 sm:mb-5 flex items-center gap-2">
+        <MessageCircle class="w-4 h-4 sm:w-5 sm:h-5" />
         Comments ({comments.length})
       </h2>
 
       {#if error}
         <div class="mb-4 p-3 bg-destructive/10 border border-destructive/30 rounded-lg">
-          <p class="text-destructive text-sm">{error}</p>
+          <p class="text-destructive text-xs sm:text-sm">{error}</p>
         </div>
       {/if}
 
       {#if currentUser && currentUser.isVerified}
-        <div class="mb-6 p-4 bg-muted/30 border border-border rounded-lg">
-          <div class="flex items-center gap-3">
+        <div class="mb-5 sm:mb-6 p-3 sm:p-4 bg-muted/30 border border-border rounded-lg">
+          <div class="flex items-start gap-2 sm:gap-3">
             <Avatar
               src={resolveImageUrl(currentUser.profileImage || currentUser.image || currentUser.profile?.avatar || undefined)}
               fallback={currentUser?.name?.charAt(0) || "U"}
-              class="w-9 h-9 border-2 border-primary/20 flex-shrink-0"
+              class="w-8 h-8 sm:w-9 sm:h-9 border-2 border-primary/20 flex-shrink-0"
             />
             <textarea
               bind:this={textareaRef}
               bind:value={newComment}
               oninput={autoResize}
               placeholder="Share your thoughts..."
-              class="flex-1 text-sm bg-background border border-input rounded-md px-3 py-2 resize-none overflow-hidden min-h-[36px] focus:outline-none focus:ring-2 focus:ring-ring"
+              class="flex-1 text-xs sm:text-sm bg-background border border-input rounded-md px-2 sm:px-3 py-2 resize-none overflow-hidden min-h-[36px] focus:outline-none focus:ring-2 focus:ring-ring"
             ></textarea>
             <Button 
               onclick={handleSubmitComment}
               disabled={isSubmittingComment || !newComment.trim()}
               size="sm"
-              className="flex-shrink-0 h-9"
+              className="flex-shrink-0 h-8 sm:h-9 px-2 sm:px-3"
             >
-              <Send class="w-3.5 h-3.5 mr-1.5" />
-              Post
+              <Send class="w-3 h-3 sm:w-3.5 sm:h-3.5 sm:mr-1.5" />
+              <span class="hidden sm:inline">Post</span>
             </Button>
           </div>
         </div>
       {:else if currentUser && !currentUser.isVerified}
-        <div class="mb-6 p-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800 rounded-lg">
+        <div class="mb-5 sm:mb-6 p-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800 rounded-lg">
           <p class="text-amber-800 dark:text-amber-200 text-xs">
             Please verify your email to post comments.
           </p>
         </div>
       {:else}
-        <div class="mb-6 p-3 bg-muted border border-border rounded-lg">
+        <div class="mb-5 sm:mb-6 p-3 bg-muted border border-border rounded-lg">
           <p class="text-muted-foreground text-xs">
             Please <a href={`${basePath}/login`} class="text-primary font-medium hover:underline">log in</a> to post comments.
           </p>

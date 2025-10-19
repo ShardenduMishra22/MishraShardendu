@@ -29,6 +29,56 @@ const DEFAULT_SEO: SEOConfig = {
 }
 
 /**
+ * Ensure all favicon links are present in the document head
+ */
+function ensureFavicons(): void {
+  const faviconLinks = [
+    { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
+    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icons/icon-16.png' },
+    { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icons/icon-32.png' },
+    { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/icons/icon-192.png' },
+    { rel: 'icon', type: 'image/png', sizes: '512x512', href: '/icons/icon-512.png' },
+    { rel: 'apple-touch-icon', href: '/icons/icon-192.png' },
+    { rel: 'apple-touch-icon', sizes: '192x192', href: '/icons/icon-192.png' },
+    { rel: 'apple-touch-icon', sizes: '512x512', href: '/icons/icon-512.png' },
+  ]
+
+  faviconLinks.forEach((linkConfig) => {
+    const selector = linkConfig.type
+      ? `link[rel="${linkConfig.rel}"][type="${linkConfig.type}"]${linkConfig.sizes ? `[sizes="${linkConfig.sizes}"]` : ''}`
+      : `link[rel="${linkConfig.rel}"]${linkConfig.sizes ? `[sizes="${linkConfig.sizes}"]` : ''}[href="${linkConfig.href}"]`
+
+    let link = document.querySelector(selector) as HTMLLinkElement
+
+    if (!link) {
+      link = document.createElement('link')
+      link.rel = linkConfig.rel
+      link.href = linkConfig.href
+      if (linkConfig.type) link.type = linkConfig.type
+      if (linkConfig.sizes) link.setAttribute('sizes', linkConfig.sizes)
+      document.head.appendChild(link)
+    }
+  })
+
+  // Ensure manifest link
+  if (!document.querySelector('link[rel="manifest"]')) {
+    const manifest = document.createElement('link')
+    manifest.rel = 'manifest'
+    manifest.href = '/manifest.json'
+    document.head.appendChild(manifest)
+  }
+
+  // Ensure viewport meta tag
+  if (!document.querySelector('meta[name="viewport"]')) {
+    const viewport = document.createElement('meta')
+    viewport.name = 'viewport'
+    viewport.content = 'width=device-width, initial-scale=1.0'
+    document.head.appendChild(viewport)
+  }
+}
+
+/**
  * Update page meta tags dynamically
  */
 export function updateSEO(config: SEOConfig = {}): void {
@@ -39,10 +89,17 @@ export function updateSEO(config: SEOConfig = {}): void {
     document.title = seo.title
   }
 
+  // Ensure favicons are present
+  ensureFavicons()
+
   // Update or create meta tags
   updateMetaTag('name', 'description', seo.description || '')
   updateMetaTag('name', 'keywords', seo.keywords || '')
   updateMetaTag('name', 'author', seo.author || '')
+
+  // Update theme-color and color-scheme
+  updateMetaTag('name', 'theme-color', '#000000')
+  updateMetaTag('name', 'color-scheme', 'light dark')
 
   // Open Graph tags
   updateMetaTag('property', 'og:title', seo.title || '')
@@ -50,11 +107,15 @@ export function updateSEO(config: SEOConfig = {}): void {
   updateMetaTag('property', 'og:image', seo.image || '')
   updateMetaTag('property', 'og:url', seo.url || '')
   updateMetaTag('property', 'og:type', seo.type || 'website')
+  updateMetaTag('property', 'og:site_name', 'Shardendu Mishra Blog')
+  updateMetaTag('property', 'og:locale', 'en_US')
 
   // Twitter tags
+  updateMetaTag('name', 'twitter:card', 'summary_large_image')
   updateMetaTag('name', 'twitter:title', seo.title || '')
   updateMetaTag('name', 'twitter:description', seo.description || '')
   updateMetaTag('name', 'twitter:image', seo.image || '')
+  updateMetaTag('name', 'twitter:creator', '@Shardendu_M')
 
   // Article specific tags
   if (seo.type === 'article') {
@@ -170,14 +231,14 @@ export function generateBlogPostStructuredData(data: {
     },
     datePublished: data.datePublished,
     dateModified: data.dateModified || data.datePublished,
-    image: data.image || 'mishrashardendu22.is-a.dev/blogog-image.png',
+    image: data.image || 'https://mishrashardendu22.is-a.dev/blog/blogog-image.png',
     url: data.url,
     publisher: {
       '@type': 'Person',
       name: 'Shardendu Mishra',
       logo: {
         '@type': 'ImageObject',
-        url: 'mishrashardendu22.is-a.dev/blogicons/icon-512.png',
+        url: 'https://mishrashardendu22.is-a.dev/blog/icons/icon-512.png',
       },
     },
     mainEntityOfPage: {

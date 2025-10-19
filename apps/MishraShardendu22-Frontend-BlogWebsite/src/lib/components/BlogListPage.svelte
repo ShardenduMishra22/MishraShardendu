@@ -59,16 +59,17 @@
   });
 </script>
 
-<div class="space-y-6 md:space-y-8 animate-slide-up">
+<div class="space-y-4 md:space-y-6 lg:space-y-8 animate-slide-up">
   <!-- Page header with inline controls -->
-  <div class="flex items-start justify-between gap-4">
-    <div class="space-y-2">
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent drop-shadow-sm">Blog Posts</h1>
-      <p class="text-base text-muted-foreground font-medium">Explore articles about web development, programming, and tech insights</p>
+  <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+    <div class="space-y-1 sm:space-y-2">
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent drop-shadow-sm">Blog Posts</h1>
+      <p class="text-sm sm:text-base text-muted-foreground font-medium">Explore articles about web development, programming, and tech insights</p>
     </div>
 
-    <div class="flex items-center gap-3">
-  <div class="relative flex-1 min-w-0 hidden lg:block" style="min-width: 360px;">
+    <!-- Desktop search and create button -->
+    <div class="hidden lg:flex items-center gap-3">
+      <div class="relative flex-1 min-w-0" style="min-width: 360px;">
         <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 pointer-events-none" />
         <Input
           placeholder="Search blogs..."
@@ -80,10 +81,32 @@
       {#if isOwner}
         <Button
           onclick={() => (window.location.href = `${basePath}/create`)}
-          className="h-12 px-5 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold shadow-lg rounded-xl text-sm flex-shrink-0 hidden lg:inline-flex"
+          className="h-12 px-5 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold shadow-lg rounded-xl text-sm flex-shrink-0"
         >
           <Plus class="w-4 h-4" />
           <span class="ml-2">Create</span>
+        </Button>
+      {/if}
+    </div>
+
+    <!-- Mobile search and create button -->
+    <div class="flex lg:hidden items-center gap-2">
+      <div class="relative flex-1 min-w-0">
+        <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 pointer-events-none" />
+        <Input
+          placeholder="Search blogs..."
+          bind:value={searchTerm}
+          class="pl-9 pr-3 h-10 bg-card/80 backdrop-blur-sm border-2 border-border/60 focus:border-primary/50 hover:border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 shadow-sm w-full font-medium"
+        />
+      </div>
+
+      {#if isOwner}
+        <Button
+          onclick={() => (window.location.href = `${basePath}/create`)}
+          className="h-10 px-4 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold shadow-lg rounded-lg text-sm flex-shrink-0"
+        >
+          <Plus class="w-4 h-4" />
+          <span class="ml-1.5 hidden xs:inline">Create</span>
         </Button>
       {/if}
     </div>
@@ -162,7 +185,7 @@
           {@const page = i + 1}
           <button
             class={page === currentPage ? 'px-3 py-1 rounded-lg bg-primary text-primary-foreground font-semibold' : 'px-3 py-1 rounded-lg bg-card/80 border border-border'}
-            on:click={() => (currentPage = page)}
+            onclick={() => (currentPage = page)}
           >
             {page}
           </button>

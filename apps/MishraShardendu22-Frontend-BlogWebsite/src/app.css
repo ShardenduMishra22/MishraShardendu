@@ -840,3 +840,40 @@ h6 {
   font-weight: inherit;
   line-height: inherit;
 }
+/* Custom responsive breakpoint utilities */
+/* Extra small screens (xs) - for phones ~480px and below */
+@media (min-width: 475px) {
+  .xs\:inline {
+    display: inline;
+  }
+  
+  .xs\:hidden {
+    display: none;
+  }
+  
+  .xs\:block {
+    display: block;
+  }
+  
+  .xs\:flex {
+    display: flex;
+  }
+}
+
+/* Ensure overflow handling on small screens */
+@media (max-width: 640px) {
+  .blog-card-improved {
+    overflow: hidden;
+  }
+  
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Better touch targets on mobile */
+  button:not(.no-min-height),
+  a:not(.no-min-height) {
+    min-height: 40px;
+  }
+}
