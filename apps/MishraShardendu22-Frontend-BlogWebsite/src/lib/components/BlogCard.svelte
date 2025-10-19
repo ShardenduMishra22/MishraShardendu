@@ -62,7 +62,7 @@
 </script>
 
 <article
-  class="group relative rounded-xl border border-border overflow-hidden h-[420px] sm:h-[450px] lg:h-[520px] transition-all duration-300 hover:border-border/80"
+  class="group relative rounded-xl border border-border overflow-hidden max-h-[520px] transition-all duration-300 hover:border-border/80"
 >
   {#if blog.image}
     <div class="absolute inset-0">
@@ -79,40 +79,39 @@
 
   <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
   
-  <div class="relative z-10 p-3 sm:p-4 lg:p-5 h-full flex flex-col">
-    <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-xs mb-3 sm:mb-4">
-      <div class="flex items-center gap-2 min-w-0 flex-1">
+  <div class="relative z-10 p-4 lg:p-4 h-full flex flex-col">
+    <div class="flex items-center gap-3 text-xs mb-4">
+      <div class="flex items-center gap-2 min-w-0">
         <Avatar
-          class="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0 ring-2 ring-primary/10"
+          class="w-7 h-7 flex-shrink-0 ring-2 ring-primary/10"
           src={resolveImageUrl(blog.author?.profileImage || blog.author?.image || blog.author?.avatar || blog.author?.profile?.avatar || undefined)}
           fallback={blog.author?.name ? getInitials(blog.author.name, blog.author.name) : blog.author?.email?.charAt(0).toUpperCase() || "U"}
         />
-        <div class="min-w-0 flex-1">
-          <div class="text-xs sm:text-sm font-semibold text-white truncate">{blog.author?.name || blog.author?.email || "Unknown"}</div>
-          <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-white/80">
-            <span class="truncate">{formatDate(blog.createdAt)}</span>
+        <div class="min-w-0">
+          <div class="text-sm font-semibold text-white truncate">{blog.author?.name || blog.author?.email || "Unknown"}</div>
+          <div class="flex items-center gap-2 text-xs text-white/80 truncate">
+            <span>{formatDate(blog.createdAt)}</span>
             {#if readingTime > 0}
-              <span class="hidden xs:inline">•</span>
-              <span class="hidden xs:inline">{readingTime} min</span>
+              <span>• {readingTime} min</span>
             {/if}
           </div>
         </div>
       </div>
 
       {#if blog.tags && blog.tags.length > 0}
-        <div class="hidden sm:flex items-center gap-1.5 flex-shrink-0 flex-wrap">
-          {#each blog.tags.slice(0, 2) as tag}
-            <Badge variant="secondary" class="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 bg-white/20 text-white border-white/30">{tag}</Badge>
+        <div class="flex items-center gap-2 ml-2">
+          {#each blog.tags.slice(0,2) as tag}
+            <Badge variant="secondary" class="text-xs px-2 py-0.5 bg-white/20 text-white border-white/30">{tag}</Badge>
           {/each}
           {#if blog.tags.length > 2}
-            <Badge variant="outline" class="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 bg-white/10 text-white border-white/30">+{blog.tags.length - 2}</Badge>
+            <Badge variant="outline" class="text-xs px-2 py-0.5 bg-white/10 text-white border-white/30">+{blog.tags.length - 2}</Badge>
           {/if}
         </div>
       {/if}
 
-      <div class="hidden sm:flex sm:ml-auto items-center gap-2 sm:gap-3 flex-shrink-0">
-        <div class="flex items-center gap-1 text-xs sm:text-sm text-white/90">
-          <MessageCircle class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+      <div class="ml-auto flex items-center gap-3">
+        <div class="flex items-center gap-1 text-sm text-white/90">
+          <MessageCircle class="w-4 h-4" />
           <span class="font-medium">{blog.comments ?? 0}</span>
         </div>
 
@@ -124,59 +123,22 @@
           variant="outline"
           size="sm"
           onclick={() => onReadMore?.(blog.id.toString())}
-          className="h-8 sm:h-9 px-2.5 sm:px-3 bg-white/10 hover:bg-white/20 text-white border-white/30 text-xs sm:text-sm"
+          className="h-9 px-3 bg-white/10 hover:bg-white/20 text-white border-white/30"
         >
           Read
-          <ArrowRight class="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1 sm:ml-2" />
+          <ArrowRight class="w-4 h-4 ml-2" />
         </Button>
       </div>
     </div>
 
-    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-white mb-2 sm:mb-3 line-clamp-2 group-hover:text-primary-200 transition-colors leading-tight">
+    <h3 class="text-base lg:text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-primary-200 transition-colors leading-tight">
       {blog.title}
     </h3>
 
     {#if excerpt}
-      <p class="hidden md:block text-xs sm:text-sm text-white/80 mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-3 leading-relaxed flex-1">
+      <p class="hidden md:block text-sm text-white/80 mt-3 line-clamp-3 leading-relaxed">
         {excerpt}
       </p>
     {/if}
-
-    <!-- Mobile tags and actions -->
-    <div class="flex sm:hidden flex-col gap-2 mt-auto pt-2">
-      {#if blog.tags && blog.tags.length > 0}
-        <div class="flex items-center gap-1.5 flex-wrap">
-          {#each blog.tags.slice(0, 3) as tag}
-            <Badge variant="secondary" class="text-[10px] px-1.5 py-0.5 bg-white/20 text-white border-white/30">{tag}</Badge>
-          {/each}
-          {#if blog.tags.length > 3}
-            <Badge variant="outline" class="text-[10px] px-1.5 py-0.5 bg-white/10 text-white border-white/30">+{blog.tags.length - 3}</Badge>
-          {/if}
-        </div>
-      {/if}
-
-      <div class="flex items-center justify-between gap-2 pt-2 border-t border-white/10">
-        <div class="flex items-center gap-1 text-xs text-white/90">
-          <MessageCircle class="w-3.5 h-3.5" />
-          <span class="font-medium">{blog.comments ?? 0}</span>
-        </div>
-
-        <div class="flex items-center gap-2">
-          {#if customActions}
-            {@render customActions?.()}
-          {/if}
-
-          <Button
-            variant="outline"
-            size="sm"
-            onclick={() => onReadMore?.(blog.id.toString())}
-            className="h-8 px-3 bg-white/10 hover:bg-white/20 text-white border-white/30 text-xs"
-          >
-            Read
-            <ArrowRight class="w-3.5 h-3.5 ml-1.5" />
-          </Button>
-        </div>
-      </div>
-    </div>
   </div>
 </article>
