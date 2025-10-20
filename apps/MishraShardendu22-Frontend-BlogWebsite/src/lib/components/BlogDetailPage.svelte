@@ -230,7 +230,7 @@
     {#if showInfoPanel}
       <!-- Info Panel Popover: adapt position based on screen size -->
       <div class="absolute z-50">
-        <div class="lg:fixed lg:top-20 lg:right-6 lg:w-80 w-72 left-4 bottom-20 bg-card border border-border rounded-lg shadow-xl overflow-hidden">
+        <div class="lg:fixed lg:top-20 lg:right-6 lg:w-80 w-72 right-4 bottom-20 bg-card border border-border rounded-lg shadow-xl overflow-hidden">
           <div class="p-4 space-y-4">
             <!-- Author Section -->
             <div class="pb-3 border-b border-border">
