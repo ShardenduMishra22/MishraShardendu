@@ -1,8 +1,5 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 # Format staged files with Prettier and restage them so the commit includes formatting
-STAGED_FILES="$(git diff --name-only --cached --relative)"
+STAGED_FILES="$(git diff --name-only --cached --relative --diff-filter=ACMR)"
 if [ -n "$STAGED_FILES" ]; then
   FILES_TO_FORMAT=$(echo "$STAGED_FILES" | grep -E '\.(ts|tsx|js|jsx|json|md)$' || true)
   if [ -n "$FILES_TO_FORMAT" ]; then
