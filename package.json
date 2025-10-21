@@ -29,10 +29,6 @@
     "react",
     "preact"
   ],
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "prepare": "husky",
     "build": "turbo run build",
