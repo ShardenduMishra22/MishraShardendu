@@ -32,7 +32,6 @@ backendAPI.interceptors.response.use(
     if (error.response?.status === 401) {
       if (typeof window !== 'undefined') {
         localStorage.removeItem('jwt_token')
-        window.location.href = '/admin/login'
       }
     }
     console.error('Backend API Error:', error)

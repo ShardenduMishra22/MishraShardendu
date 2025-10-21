@@ -11,18 +11,7 @@ export const resumeLink =
 export const CodeChefProfile = process.env.NEXT_PUBLIC_BASE_URL + '/coming_soon'
 export const CodeforcesProfile = process.env.NEXT_PUBLIC_BASE_URL + '/coming_soon'
 
-import {
-  Home,
-  Code,
-  Mail,
-  User,
-  Heart,
-  Award,
-  Clock,
-  Briefcase,
-  GraduationCap,
-  Book,
-} from 'lucide-react'
+import { Home, Code, Mail, User, Heart, Award, Clock, Briefcase, GraduationCap } from 'lucide-react'
 
 export const navItems = [
   { href: '#hero', label: 'Home', icon: Home },
@@ -34,7 +23,6 @@ export const navItems = [
   { href: '#volunteer', label: 'Volunteer', icon: Heart },
   { href: '#certifications', label: 'Certifications', icon: Award },
   { href: '#contact', label: 'Contact', icon: Mail },
-  { href: '/blog/read', label: 'Blog', icon: Book },
 ]
 
 export const GoLangIcon = ({ className = 'h-16 w-16 text-blue-500 m-2' }) => (

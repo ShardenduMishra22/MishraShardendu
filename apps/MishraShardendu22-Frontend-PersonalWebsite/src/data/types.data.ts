@@ -50,23 +50,6 @@ export interface ApiResponse<T> {
   status?: number
 }
 
-export interface AuthRequest {
-  email: string
-  password: string
-  admin_pass: string
-}
-
-export interface AuthResponse {
-  token: string
-  data: {
-    _id: string
-    email: string
-    skills: string[]
-    projects: string[]
-    experiences: string[]
-  }
-}
-
 export interface User {
   email: string
   skills: string[]
@@ -91,7 +74,6 @@ export interface ProfileData {
   }
   email: string
   password: string
-  admin_pass: string
   skills: string[] | null
   projects: string[]
   experiences: string[]

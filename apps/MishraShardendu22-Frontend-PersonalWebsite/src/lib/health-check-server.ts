@@ -94,14 +94,7 @@ export const checkAllBackendsHealth = async (): Promise<BackendHealth[]> => {
 
 // API route for frontend to check backend health
 export const performHealthCheck = async (): Promise<HealthCheckResult[]> => {
-  const services = [
-    'projects',
-    'experiences',
-    'certifications',
-    'skills',
-    'admin/auth',
-    'admin/profile',
-  ]
+  const services = ['projects', 'experiences', 'certifications', 'skills']
 
   const results: HealthCheckResult[] = []
 

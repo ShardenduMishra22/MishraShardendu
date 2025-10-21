@@ -76,12 +76,6 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       if (typeof window !== 'undefined') {
         localStorage.removeItem('jwt_token')
-        const isAdminPage =
-          window.location.pathname.startsWith('/admin') &&
-          window.location.pathname !== '/admin/login'
-        if (isAdminPage) {
-          window.location.href = '/'
-        }
       }
     }
 

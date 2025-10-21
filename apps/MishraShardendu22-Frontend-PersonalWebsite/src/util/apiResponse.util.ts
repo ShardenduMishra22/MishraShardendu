@@ -17,33 +17,7 @@ import {
   ProjectDetail,
   ProjectDetailKanban,
   VolunteerExperience,
-  AuthRequest,
 } from '../data/types.data'
-
-export const authAPI = {
-  login: async (credentials: AuthRequest): Promise<any> => {
-    try {
-      const response = await fetch(
-        'https://mishrashardendu22-backend-personalwebsite.onrender.com/api/admin/auth',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(credentials),
-        }
-      )
-
-      const data = await response.json()
-
-      return data
-    } catch (error: any) {
-      console.error('authAPI.login error:', error)
-      console.error('Error message:', error?.message)
-      throw error
-    }
-  },
-}
 
 export const skillsAPI = {
   getSkills: async (): Promise<ApiResponse<SkillsResponse>> => {

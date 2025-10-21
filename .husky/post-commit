@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 # After commit, run prettier across the repo and if there are changes create a follow-up commit and push.
 echo "husky: running post-commit prettier sweep..."
 pnpm prettier --write "**/*.{ts,tsx,js,jsx,json,md}" || true

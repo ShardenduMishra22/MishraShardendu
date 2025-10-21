@@ -46,9 +46,6 @@ export default function OfflinePage() {
               <Link href="/projects" className="hover:underline">
                 Projects
               </Link>
-              <Link href="/blog" className="hover:underline">
-                Blog
-              </Link>
               <Link href="/experiences" className="hover:underline">
                 Experience
               </Link>

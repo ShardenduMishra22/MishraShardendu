@@ -91,9 +91,7 @@ This is the main portfolio application of the monorepo, serving as the primary w
 
 ### Content Management
 
-- **Blog Integration**: Seamless connection with blog application
 - **Rich Text Support**: Markdown and HTML content rendering
-- **Comment System**: Engagement through threaded discussions
 - **SEO Optimization**: Meta tags, Open Graph, and structured data
 - **Analytics Dashboard**: Performance metrics and visitor insights
 
@@ -127,8 +125,6 @@ src/
 │   │   ├── certifications/      # Certifications
 │   │   └── volunteer/           # Volunteer work
 │   ├── api/                     # API routes
-│   │   ├── auth/                # Authentication endpoints
-│   │   ├── blogs/               # Blog API
 │   │   ├── proxy/               # Backend proxy routes
 │   │   └── health/              # Health check
 │   ├── layout.tsx               # Root layout
@@ -401,15 +397,9 @@ export const certifications = pgTable('certifications', {
 
 ## API Routes
 
-### Authentication Endpoints
+## 📡 API Documentation
 
-```
-POST   /api/auth/sign-in          # User sign in
-POST   /api/auth/sign-up          # User registration
-POST   /api/auth/sign-out         # User sign out
-GET    /api/auth/session          # Get current session
-POST   /api/auth/refresh          # Refresh access token
-```
+### Proxy Endpoints (Backend Integration)
 
 ### Blog Endpoints
 
