@@ -22,10 +22,7 @@ export default function HeroSection() {
   const isTablet = windowWidth >= 640 && windowWidth < 1024
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 py-8 sm:py-12 lg:py-16">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,theme(colors.primary/6),transparent_50%)] sm:bg-[radial-gradient(circle_at_30%_40%,theme(colors.primary/8),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,theme(colors.secondary/4),transparent_50%)] sm:bg-[radial-gradient(circle_at_70%_60%,theme(colors.secondary/6),transparent_50%)]"></div>
-
+    <section className="relative overflow-hidden bg-background py-8 sm:py-12 lg:py-16">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           <div className="relative flex justify-center lg:justify-start order-1 lg:order-1">

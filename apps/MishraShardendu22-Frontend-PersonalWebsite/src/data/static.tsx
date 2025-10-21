@@ -435,6 +435,7 @@ export const footerData = {
         { label: 'Home', href: '/' },
         { label: 'Projects', href: '/projects' },
         { label: 'Experience', href: '/experiences' },
+        { label: 'Admin', href: '/admin' },
       ],
     },
     {

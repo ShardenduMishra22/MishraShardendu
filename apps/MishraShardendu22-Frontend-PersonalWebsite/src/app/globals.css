@@ -113,14 +113,14 @@ html {
   --chart-5: #8b5cf6;
 
   /* Dark sidebar */
-  --sidebar: #111111;
+  --sidebar: #0a0a0a;
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: #10b981;
+  --sidebar-primary: #00d9ff;
   --sidebar-primary-foreground: #000000;
-  --sidebar-accent: #3b82f6;
-  --sidebar-accent-foreground: #ffffff;
+  --sidebar-accent: #00ff94;
+  --sidebar-accent-foreground: #000000;
   --sidebar-border: #262626;
-  --sidebar-ring: #3b82f6;
+  --sidebar-ring: #00d9ff;
 }
 
 /* Mobile-optimized ProseMirror styles */
