@@ -1,4 +1,14 @@
-import { Github, Linkedin, Mail, Code, GraduationCap, Briefcase, Award, Phone } from 'lucide-react'
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Code,
+  GraduationCap,
+  Briefcase,
+  Award,
+  Phone,
+  User2,
+} from 'lucide-react'
 
 import {
   XProfile,
@@ -32,6 +42,12 @@ export const quickLinks: LinkItem[] = [
     label: 'Certifications',
     shortLabel: 'Certs',
     icon: <Award className="h-3 lg:h-4 w-3 lg:w-4" />,
+  },
+  {
+    href: '/admin/dashboard',
+    label: 'Admin Dashboard',
+    shortLabel: 'Admin',
+    icon: <User2 className="h-3 lg:h-4 w-3 lg:w-4" />,
   },
 ]
 
