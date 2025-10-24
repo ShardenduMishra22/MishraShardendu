@@ -104,7 +104,7 @@
     "remark-gfm": "^4.0.1",
     "simplex-noise": "^4.0.3",
     "tailwind-merge": "^3.3.1",
-    "three": "^0.178.0",
+    "three": "^0.180.0",
     "vaul": "^1.1.2",
     "zod": "^4.1.12",
     "zustand": "^5.0.8"
@@ -123,7 +123,7 @@
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@types/stats.js": "^0.17.4",
-    "@types/three": "^0.178.1",
+    "@types/three": "^0.180.0",
     "@types/unist": "^3.0.3",
     "@types/webxr": "^0.5.24",
     "esbuild": "^0.25.11",
