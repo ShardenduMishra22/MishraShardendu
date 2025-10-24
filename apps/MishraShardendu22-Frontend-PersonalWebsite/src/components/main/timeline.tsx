@@ -41,6 +41,27 @@ const CombinedTimeline = ({
   const isMobile = useIsMobile()
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
 
+  // Track current month to ensure timeline updates monthly
+  const [currentMonth, setCurrentMonth] = useState(() => {
+    const now = new Date()
+    return `${now.getFullYear()}-${now.getMonth()}`
+  })
+
+  // Update timeline monthly to extend it to current date
+  useEffect(() => {
+    const checkMonth = () => {
+      const now = new Date()
+      const monthKey = `${now.getFullYear()}-${now.getMonth()}`
+      if (monthKey !== currentMonth) {
+        setCurrentMonth(monthKey)
+      }
+    }
+
+    // Check daily if month has changed
+    const interval = setInterval(checkMonth, 24 * 60 * 60 * 1000)
+    return () => clearInterval(interval)
+  }, [currentMonth])
+
   const processedData = useMemo(() => {
     const allExperiences: ProcessedExperience[] = []
 
@@ -91,7 +112,23 @@ const CombinedTimeline = ({
         ? new Date(Math.min(...allExperiences.map((exp) => exp.startMonth.getTime())))
         : new Date()
 
-    const latestEnd = new Date()
+    // Always show at least up to current month, but don't go beyond it
+    const now = new Date()
+    const currentMonthDate = new Date(now.getFullYear(), now.getMonth() + 1, 1)
+
+    const maxExperienceEnd =
+      allExperiences.length > 0
+        ? new Date(Math.max(...allExperiences.map((exp) => exp.endMonth.getTime())))
+        : currentMonthDate
+
+    // Show whichever is greater: current month or latest experience (but cap experiences at current month)
+    const latestEnd =
+      maxExperienceEnd > currentMonthDate
+        ? currentMonthDate // If experiences go into future, cap at current month
+        : currentMonthDate // Otherwise still show current month
+
+    // Trigger recalculation when month changes
+    void currentMonth
 
     const months: Array<{
       date: Date
@@ -128,7 +165,7 @@ const CombinedTimeline = ({
     }
 
     return { allExperiences, months, earliestStart, latestEnd }
-  }, [experiences, volunteerExpProps])
+  }, [experiences, volunteerExpProps, currentMonth])
 
   const getMonthPosition = (date: Date) => {
     const monthIndex = processedData.months.findIndex(
@@ -139,7 +176,13 @@ const CombinedTimeline = ({
 
   const getExperiencePosition = (exp: ProcessedExperience) => {
     const startPos = getMonthPosition(exp.startMonth)
-    const endPos = getMonthPosition(exp.endMonth)
+
+    // Clamp end date to current month if it extends into future
+    const now = new Date()
+    const currentMonthDate = new Date(now.getFullYear(), now.getMonth(), 1)
+    const effectiveEndMonth = exp.endMonth > currentMonthDate ? currentMonthDate : exp.endMonth
+
+    const endPos = getMonthPosition(effectiveEndMonth)
     const minWidth = isMobile ? 80 : 120
 
     return {
@@ -239,7 +282,8 @@ const CombinedTimeline = ({
           </h2>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Journey through professional work and volunteer experiences
+            A comprehensive timeline of my professional journey and volunteer experiences,
+            continuously updated to reflect my current roles and contributions
           </p>
         </div>
 
@@ -284,37 +328,60 @@ const CombinedTimeline = ({
               <div className="absolute top-20 left-6 right-6 h-1 bg-gradient-to-r from-primary via-secondary to-primary rounded-full shadow-sm" />
 
               <div className="relative h-16 mb-8 overflow-visible">
-                {processedData.months.map((month, index) => (
-                  <div
-                    key={`${month.year}-${month.month}`}
-                    className="absolute flex flex-col items-center"
-                    style={{
-                      left: `${index * (isMobile ? 80 : 120)}px`,
-                      width: `${isMobile ? 80 : 120}px`,
-                    }}
-                  >
-                    <div
-                      className={`w-3 h-3 rounded-full border-2 border-card shadow-sm z-10 ${
-                        month.isYearStart ? 'bg-secondary' : 'bg-primary'
-                      }`}
-                    />
+                {processedData.months.map((month, index) => {
+                  const now = new Date()
+                  const isCurrentMonth =
+                    month.year === now.getFullYear() && month.month === now.getMonth()
 
-                    <div className="mt-2 text-center">
-                      <div
-                        className={`text-xs sm:text-sm font-medium ${
-                          month.isYearStart ? 'text-secondary' : 'text-primary'
-                        }`}
-                      >
-                        {month.monthName}
+                  return (
+                    <div
+                      key={`${month.year}-${month.month}`}
+                      className="absolute flex flex-col items-center"
+                      style={{
+                        left: `${index * (isMobile ? 80 : 120)}px`,
+                        width: `${isMobile ? 80 : 120}px`,
+                      }}
+                    >
+                      <div className="relative">
+                        <div
+                          className={`w-3 h-3 rounded-full border-2 border-card shadow-sm z-10 ${
+                            isCurrentMonth
+                              ? 'bg-accent animate-pulse ring-2 ring-accent/50'
+                              : month.isYearStart
+                                ? 'bg-secondary'
+                                : 'bg-primary'
+                          }`}
+                        />
+                        {isCurrentMonth && (
+                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                            <div className="px-2 py-1 bg-accent text-accent-foreground text-xs font-bold rounded shadow-lg">
+                              This Month
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      {month.isYearStart && (
-                        <div className="text-xs text-muted-foreground font-bold mt-1">
-                          {month.year}
+
+                      <div className="mt-2 text-center">
+                        <div
+                          className={`text-xs sm:text-sm font-medium ${
+                            isCurrentMonth
+                              ? 'text-accent font-bold'
+                              : month.isYearStart
+                                ? 'text-secondary'
+                                : 'text-primary'
+                          }`}
+                        >
+                          {month.monthName}
                         </div>
-                      )}
+                        {month.isYearStart && (
+                          <div className="text-xs text-muted-foreground font-bold mt-1">
+                            {month.year}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
 
               {workExperiences.length > 0 && (
