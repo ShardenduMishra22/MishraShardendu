@@ -74,7 +74,7 @@
     "@tiptap/extension-underline": "^3.8.0",
     "@tiptap/react": "^3.8.0",
     "@tiptap/starter-kit": "^3.8.0",
-    "@vercel/microfrontends": "^1.5.0",
+    "@vercel/microfrontends": "^2.1.0",
     "@vercel/toolbar": "^0.1.41",
     "axios": "^1.12.2",
     "class-variance-authority": "^0.7.1",
