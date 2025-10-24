@@ -1,3 +1,10 @@
 packages:
-  - 'apps/*'
-  - 'packages/*'
+  - apps/*
+  - packages/*
+
+ignoredBuiltDependencies:
+  - '@tsparticles/engine'
+  - '@vercel/speed-insights'
+  - esbuild
+  - sharp
+  - unrs-resolver

@@ -2,20 +2,11 @@ import { mount } from 'svelte'
 import './app.css'
 import App from './App.svelte'
 
-console.log('[Blog Main] Starting application...')
-console.log('[Blog Main] Current URL:', window.location.href)
-console.log('[Blog Main] Base path:', import.meta.env.BASE_URL)
-
-// Initialize theme before mounting to prevent FOUC
 function initTheme() {
   try {
-    console.log('[Blog Main] Initializing theme...')
-    // Use shared theme key across all portfolio websites for synchronized theme
     const theme =
       localStorage.getItem('portfolio-theme') ||
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-
-    console.log('[Blog Main] Theme:', theme)
 
     if (theme === 'dark') {
       document.documentElement.classList.add('dark')
@@ -38,13 +29,9 @@ try {
   if (!appElement) {
     throw new Error('App container element not found')
   }
-
-  console.log('[Blog Main] Mounting app...')
   app = mount(App, {
     target: appElement,
   })
-
-  console.log('[Blog Main] App mounted successfully')
 } catch (error) {
   console.error('[Blog Main] Failed to mount app:', error)
   // Show error message to user

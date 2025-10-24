@@ -37,7 +37,6 @@ function createAuthStore() {
 
     // Initialize auth state from localStorage
     init: async () => {
-      console.log('[Auth] Initializing auth store...')
       const token = localStorage.getItem('authToken')
       const userStr = localStorage.getItem('user')
 
@@ -53,7 +52,6 @@ function createAuthStore() {
 
         try {
           const user = JSON.parse(userStr)
-          console.log('[Auth] Restored user from localStorage:', user.email)
           update((state) => ({
             ...state,
             token,
@@ -72,7 +70,6 @@ function createAuthStore() {
             const response = (await Promise.race([authApi.getCurrentUser(), timeoutPromise])) as any
 
             if (response.success && response.data) {
-              console.log('[Auth] Token verified successfully')
               update((state) => ({
                 ...state,
                 user: response.data!.user,
@@ -95,7 +92,6 @@ function createAuthStore() {
           }))
         }
       } else {
-        console.log('[Auth] No stored auth, continuing as guest')
         update((state) => ({ ...state, isLoading: false }))
       }
     },

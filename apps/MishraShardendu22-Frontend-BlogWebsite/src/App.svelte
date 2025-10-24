@@ -21,12 +21,9 @@
   // Initialize theme and auth on mount
   onMount(async () => {
     try {
-      console.log('[Blog App] Initializing...');
-      console.log('[Blog App] Current path:', window.location.pathname);
       themeStore.init();
       await authStore.init();
       updatePageSEO();
-      console.log('[Blog App] Initialization complete');
     } catch (error) {
       console.error('[Blog App] Initialization error:', error);
     }

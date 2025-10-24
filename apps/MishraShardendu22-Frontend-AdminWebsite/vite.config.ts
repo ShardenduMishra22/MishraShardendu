@@ -78,14 +78,10 @@ export default defineConfig(({ mode }) => {
           rewrite: (path: string) => path.replace(/^\/api\/proxy/, '/api'),
           configure: (proxy: any, _options: any) => {
             proxy.on('error', (err: any, _req: any, _res: any) => {
-              console.log('proxy error', err)
+              console.error('proxy error', err)
             })
-            proxy.on('proxyReq', (_proxyReq: any, req: any, _res: any) => {
-              console.log('Sending Request to the Target:', req.method, req.url)
-            })
-            proxy.on('proxyRes', (proxyRes: any, req: any, _res: any) => {
-              console.log('Received Response from the Target:', proxyRes.statusCode, req.url)
-            })
+            proxy.on('proxyReq', (_proxyReq: any, _req: any, _res: any) => {})
+            proxy.on('proxyRes', (_proxyRes: any, _req: any, _res: any) => {})
           },
         },
       },
