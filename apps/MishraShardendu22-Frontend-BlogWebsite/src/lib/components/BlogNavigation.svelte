@@ -313,7 +313,6 @@
               className="w-full bg-gradient-to-r from-primary to-primary/90" 
               onclick={() => window.location.href = `${basePath}/login`}
             >
-              <LogIn class="w-4 h-4 mr-2" />
               Sign In
             </Button>
           </div>
