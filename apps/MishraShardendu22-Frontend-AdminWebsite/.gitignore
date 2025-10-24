@@ -26,3 +26,4 @@ dist-ssr
 Admin-Temp/
 .env
 .vercel
+.env*.local
