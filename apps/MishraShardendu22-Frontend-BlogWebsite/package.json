@@ -78,7 +78,7 @@
     "@tailwindcss/vite": "^4.1.16",
     "@vercel/microfrontends": "^1.5.0",
     "dompurify": "3.3.0",
-    "lucide-react": "^0.545.0",
+    "lucide-react": "^0.547.0",
     "marked": "16.4.0"
   }
 }
