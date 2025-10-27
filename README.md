@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/ShardenduMishra22/ShardenduMishra22/main/Gopher.gif" alt="Gopher Mishra" width="200"/>
 </div>
 
-# MishraShardendu22 TurboRepo
+# MishraShardendu22 - TurboRepo
 
 Professional portfolio ecosystem featuring a Next.js personal website, Svelte blog platform, and Preact admin dashboard. Built with TypeScript, Turborepo, and modern web standards for optimal performance and maintainability.
 
