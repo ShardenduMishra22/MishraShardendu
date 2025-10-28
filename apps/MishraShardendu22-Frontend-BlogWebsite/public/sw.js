@@ -41,6 +41,12 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url)
 
   if (url.pathname.startsWith('/api/')) {
+    // Skip caching for non-GET requests (POST, PUT, DELETE, etc.)
+    if (request.method !== 'GET') {
+      event.respondWith(fetch(request))
+      return
+    }
+
     event.respondWith(
       fetch(request).catch(() => {
         return new Response(JSON.stringify({ error: 'Offline - API not available' }), {
@@ -68,6 +74,11 @@ self.addEventListener('fetch', (event) => {
 
       return fetch(request).then((response) => {
         if (!response || response.status !== 200 || response.type !== 'basic') {
+          return response
+        }
+
+        // Only cache GET requests
+        if (request.method !== 'GET') {
           return response
         }
 
