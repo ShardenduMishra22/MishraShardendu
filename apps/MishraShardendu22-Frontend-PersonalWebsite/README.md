@@ -138,6 +138,14 @@ src/
 │   ├── db/                      # Database configuration
 │   ├── auth/                    # Authentication setup
 │   └── utils.ts                 # Helper functions
+├── util/                        # API utilities
+│   ├── api.ts                   # Axios instance for backend API
+│   └── apiResponse.util.ts      # API service methods
+├── services/                    # Service layer
+│   ├── api.ts                   # Backend API client
+│   └── types.ts                 # Service types
+├── constants/                   # App constants
+│   └── url.ts                   # API URLs and endpoints
 ├── hooks/                       # Custom React hooks
 ├── types/                       # TypeScript type definitions
 └── styles/                      # Global styles
@@ -399,33 +407,62 @@ export const certifications = pgTable('certifications', {
 
 ## 📡 API Documentation
 
-### Proxy Endpoints (Backend Integration)
+### Backend API Integration
 
-### Blog Endpoints
+The application makes direct requests to the backend API. Configure your backend URL in `.env.local`:
 
-```
-GET    /api/blogs                 # List all blogs
-GET    /api/blogs/:id             # Get blog by ID
-POST   /api/blogs                 # Create new blog
-PUT    /api/blogs/:id             # Update blog
-DELETE /api/blogs/:id             # Delete blog
-GET    /api/blogs/:id/comments    # Get blog comments
-POST   /api/blogs/:id/comments    # Add comment
-GET    /api/blogs/stats           # Get blog statistics
+```bash
+NEXT_PUBLIC_BACKEND_2="http://localhost:5000"  # or your backend URL
 ```
 
-### Proxy Endpoints (Backend Integration)
+### Available Endpoints
+
+**Projects**
 
 ```
-GET    /api/proxy/projects        # Fetch projects from backend
-GET    /api/proxy/projects/:id    # Get project details
-POST   /api/proxy/projects        # Create project
-PUT    /api/proxy/projects/:id    # Update project
-DELETE /api/proxy/projects/:id    # Delete project
+GET    /api/projects              # Fetch all projects
+GET    /api/projects/:id          # Get project details
+POST   /api/projects              # Create project
+PUT    /api/projects/:id          # Update project
+DELETE /api/projects/:id          # Delete project
+POST   /api/projects/updateOrder  # Update project order
+```
 
-GET    /api/proxy/experiences     # Fetch experiences
-GET    /api/proxy/certifications  # Fetch certifications
-GET    /api/proxy/skills          # Fetch skills
+**Experiences**
+
+```
+GET    /api/experiences           # Fetch all experiences
+GET    /api/experiences/:id       # Get experience details
+POST   /api/experiences           # Create experience
+PUT    /api/experiences/:id       # Update experience
+DELETE /api/experiences/:id       # Delete experience
+```
+
+**Certifications**
+
+```
+GET    /api/certifications        # Fetch all certifications
+GET    /api/certifications/:id    # Get certification details
+POST   /api/certifications        # Create certification
+PUT    /api/certifications/:id    # Update certification
+DELETE /api/certifications/:id    # Delete certification
+```
+
+**Volunteer Experiences**
+
+```
+GET    /api/volunteer/experiences     # Fetch all volunteer experiences
+GET    /api/volunteer/experiences/:id # Get volunteer experience details
+POST   /api/volunteer/experiences     # Create volunteer experience
+PUT    /api/volunteer/experiences/:id # Update volunteer experience
+DELETE /api/volunteer/experiences/:id # Delete volunteer experience
+```
+
+**Skills**
+
+```
+GET    /api/skills                # Fetch skills
+POST   /api/skills                # Add skills
 ```
 
 ### Health Check

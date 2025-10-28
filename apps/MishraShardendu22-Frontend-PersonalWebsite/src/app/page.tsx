@@ -98,7 +98,7 @@ export default function HomePage() {
         </section>
 
         <section id="education" className="scroll-mt-20 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-secondary/5 to-transparent opacity-50 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-r from-transparent via-secondary/5 to-transparent opacity-50 pointer-events-none" />
           <Education />
           <ShootingStars />
         </section>

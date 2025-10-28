@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
+import { API_BASE_URL } from '@/constants/url'
 
 declare module 'axios' {
   interface InternalAxiosRequestConfig {
@@ -8,11 +9,8 @@ declare module 'axios' {
   }
 }
 
-const isServer = typeof window === 'undefined'
-const baseURL = isServer ? process.env.NEXT_PUBLIC_BASE_URL + '/api/proxy' : '/api/proxy'
-
 const api = axios.create({
-  baseURL,
+  baseURL: API_BASE_URL,
   timeout: 60000,
   headers: {
     'Content-Type': 'application/json',

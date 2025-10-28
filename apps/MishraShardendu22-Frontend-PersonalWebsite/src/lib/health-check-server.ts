@@ -95,14 +95,22 @@ export const checkAllBackendsHealth = async (): Promise<BackendHealth[]> => {
 // API route for frontend to check backend health
 export const performHealthCheck = async (): Promise<HealthCheckResult[]> => {
   const services = ['projects', 'experiences', 'certifications', 'skills']
+  const backends = getBackendTargets()
 
+  if (backends.length === 0) {
+    console.warn('No backends configured for health check')
+    return []
+  }
+
+  // Use the first available backend for health checks
+  const backendUrl = backends[0]
   const results: HealthCheckResult[] = []
 
   for (const service of services) {
     const startTime = Date.now()
 
     try {
-      const response = await fetch(`/api/proxy/${service}`, {
+      const response = await fetch(`${backendUrl}/api/${service}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -110,14 +118,13 @@ export const performHealthCheck = async (): Promise<HealthCheckResult[]> => {
       })
 
       const responseTime = Date.now() - startTime
-      const backend = response.headers.get('X-Proxy-Backend')
 
       results.push({
         service,
         status: response.ok ? 'healthy' : 'unhealthy',
         responseTime,
         error: response.ok ? undefined : `HTTP ${response.status}`,
-        backend: backend || undefined,
+        backend: backendUrl,
       })
     } catch (error: any) {
       const responseTime = Date.now() - startTime

@@ -27,7 +27,7 @@ export default function NotFound() {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-background/50 via-background/80 to-background"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-background/50 via-background/80 to-background"></div>
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -57,7 +57,7 @@ export default function NotFound() {
             className={`flex justify-center transition-all duration-1000 delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
             <div className="relative group">
-              <div className="w-36 h-36 bg-gradient-to-br from-primary via-secondary to-accent rounded-full flex items-center justify-center shadow-2xl shadow-primary/20 hover:shadow-3xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105">
+              <div className="w-36 h-36 bg-linear-to-br from-primary via-secondary to-accent rounded-full flex items-center justify-center shadow-2xl shadow-primary/20 hover:shadow-3xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105">
                 <svg
                   className="w-20 h-20 text-primary-foreground group-hover:scale-110 transition-transform duration-300"
                   fill="none"
@@ -81,9 +81,9 @@ export default function NotFound() {
           >
             <button
               onClick={handleGoBack}
-              className="group relative px-8 py-4 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background overflow-hidden"
+              className="group relative px-8 py-4 bg-linear-to-r from-primary to-primary/90 text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-linear-to-r from-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative flex items-center justify-center gap-2">
                 <svg
                   className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300"
@@ -104,9 +104,9 @@ export default function NotFound() {
 
             <button
               onClick={handleGoHome}
-              className="group relative px-8 py-4 bg-gradient-to-r from-secondary to-secondary/90 text-secondary-foreground rounded-xl font-medium shadow-lg shadow-secondary/25 hover:shadow-xl hover:shadow-secondary/40 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background overflow-hidden"
+              className="group relative px-8 py-4 bg-linear-to-r from-secondary to-secondary/90 text-secondary-foreground rounded-xl font-medium shadow-lg shadow-secondary/25 hover:shadow-xl hover:shadow-secondary/40 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-linear-to-r from-secondary/80 to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative flex items-center justify-center gap-2">
                 <svg
                   className="w-5 h-5 group-hover:scale-110 transition-transform duration-300"
@@ -130,9 +130,9 @@ export default function NotFound() {
             className={`text-sm text-foreground space-y-3 transition-all duration-1000 delay-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
             <div className="flex items-center justify-center gap-2">
-              <div className="w-12 h-px bg-gradient-to-r from-transparent via-muted-foreground/50 to-transparent" />
+              <div className="w-12 h-px bg-linear-to-r from-transparent via-muted-foreground/50 to-transparent" />
               <span className="text-xs uppercase tracking-wider">Need Help?</span>
-              <div className="w-12 h-px bg-gradient-to-r from-transparent via-muted-foreground/50 to-transparent" />
+              <div className="w-12 h-px bg-linear-to-r from-transparent via-muted-foreground/50 to-transparent" />
             </div>
             <p className="max-w-sm mx-auto">
               Try double-checking the URL or use the navigation above to get back on track.
