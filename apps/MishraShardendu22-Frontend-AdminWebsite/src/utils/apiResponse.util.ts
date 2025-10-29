@@ -26,16 +26,13 @@ import type {
 export const authAPI = {
   login: async (credentials: AuthRequest): Promise<unknown> => {
     try {
-      const response = await fetch(
-        'https://mishrashardendu22-backend-personalwebsite.onrender.com/api/admin/auth',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(credentials),
-        }
-      )
+      const response = await fetch(import.meta.env.VITE_BACKEND_1 + '/api/admin/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      })
 
       const data = await response.json()
 
