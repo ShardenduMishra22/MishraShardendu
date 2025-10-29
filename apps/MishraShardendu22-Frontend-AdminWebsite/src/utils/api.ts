@@ -9,7 +9,7 @@ declare module 'axios' {
   }
 }
 
-const baseURL = '/api'
+const baseURL = import.meta.env.VITE_BACKEND_1 + '/api'
 
 const api = axios.create({
   baseURL,
