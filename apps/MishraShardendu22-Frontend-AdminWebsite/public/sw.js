@@ -71,16 +71,19 @@ self.addEventListener('fetch', (event) => {
         .then((response) => {
           // Only cache successful GET requests
           if (response && response.status === 200) {
-            // Check if this is a cacheable endpoint
-            const isCacheable = CACHEABLE_API_ENDPOINTS.some((endpoint) =>
-              url.pathname.startsWith(endpoint)
-            )
+            // Only cache http/https requests
+            if (url.protocol === 'http:' || url.protocol === 'https:') {
+              // Check if this is a cacheable endpoint
+              const isCacheable = CACHEABLE_API_ENDPOINTS.some((endpoint) =>
+                url.pathname.startsWith(endpoint)
+              )
 
-            if (isCacheable) {
-              const responseToCache = response.clone()
-              caches.open(API_CACHE_NAME).then((cache) => {
-                cache.put(request, responseToCache)
-              })
+              if (isCacheable) {
+                const responseToCache = response.clone()
+                caches.open(API_CACHE_NAME).then((cache) => {
+                  cache.put(request, responseToCache)
+                })
+              }
             }
           }
           return response
@@ -136,6 +139,11 @@ self.addEventListener('fetch', (event) => {
       }
 
       return fetch(request).then((response) => {
+        // Only cache http/https requests
+        if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+          return response
+        }
+
         // Don't cache if response is not valid
         if (!response || response.status !== 200 || response.type !== 'basic') {
           return response
@@ -143,11 +151,6 @@ self.addEventListener('fetch', (event) => {
 
         // Only cache GET requests
         if (request.method !== 'GET') {
-          return response
-        }
-
-        // Only cache http/https requests
-        if (url.protocol !== 'http:' && url.protocol !== 'https:') {
           return response
         }
 

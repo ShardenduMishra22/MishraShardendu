@@ -73,6 +73,11 @@ self.addEventListener('fetch', (event) => {
       }
 
       return fetch(request).then((response) => {
+        // Only cache http/https requests
+        if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+          return response
+        }
+
         if (!response || response.status !== 200 || response.type !== 'basic') {
           return response
         }

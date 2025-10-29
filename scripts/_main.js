@@ -1,5 +1,4 @@
 export const json = [
-  // VLSI
   {
     title: 'VLSI Hackathon – Autonomous RC Car with Object Detection',
     description:
@@ -198,7 +197,6 @@ export const json = [
     certificate_url: 'https://drive.google.com/file/d/199MoKPO2k0Wo3RDjZpngU-85r3HQ-gpo/view',
     images: [
       'https://github.com/MishraShardendu22/Dhvani',
-      'https://dhvani.mayankdev.com/user/dashboard',
       'https://www.youtube.com/watch?v=Wu40H6P1f8Y',
       'https://www.youtube.com/watch?v=QbPShjxjTx0',
       'https://www.youtube.com/watch?v=yUsVn1HPnwk',
@@ -221,11 +219,10 @@ async function uploadCerts() {
   for (const cert of json) {
     try {
       const res = await axios.post(
-        'https://portfolio-backend-i96y.onrender.com/api/certifications',
+        'https://portfolio-backend-2iw4.onrender.com/api/certifications',
         cert,
         Bear
       )
-      console.log(`Uploaded: ${cert.title}`)
     } catch (err) {
       console.error(`Failed: ${cert.title}`, err.response?.data || err.message)
     }
