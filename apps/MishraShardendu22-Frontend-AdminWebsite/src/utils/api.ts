@@ -9,8 +9,7 @@ declare module 'axios' {
   }
 }
 
-const isServer = typeof window === 'undefined'
-const baseURL = isServer ? '/api/proxy' : '/api/proxy'
+const baseURL = '/api'
 
 const api = axios.create({
   baseURL,

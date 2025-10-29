@@ -72,10 +72,9 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       proxy: {
-        '/api/proxy': {
+        '/api': {
           target: env.VITE_BACKEND_1 || 'https://portfolio-backend-1p9d.onrender.com',
           changeOrigin: true,
-          rewrite: (path: string) => path.replace(/^\/api\/proxy/, '/api'),
           configure: (proxy: any, _options: any) => {
             proxy.on('error', (err: any, _req: any, _res: any) => {
               console.error('proxy error', err)
