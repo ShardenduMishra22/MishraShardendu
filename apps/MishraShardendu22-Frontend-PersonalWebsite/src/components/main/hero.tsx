@@ -19,7 +19,6 @@ export default function HeroSection() {
   }, [])
 
   const isMobile = windowWidth < 640
-  const isTablet = windowWidth >= 640 && windowWidth < 1024
 
   return (
     <section className="relative overflow-hidden bg-background py-8 sm:py-12 lg:py-16">

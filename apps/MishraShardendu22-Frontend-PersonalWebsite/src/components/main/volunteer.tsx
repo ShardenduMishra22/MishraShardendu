@@ -126,20 +126,6 @@ export default function VolunteerExperienceSection({
 
   return (
     <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
-      <div
-        className={cn(
-          'absolute inset-0',
-          '[background-size:20px_20px]',
-          '[background-image:radial-gradient(#d4d4d4_1px,transparent_1px)]',
-          'dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]'
-        )}
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"
-        aria-hidden="true"
-      />
-
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <div className="flex justify-center mb-4 sm:mb-6">

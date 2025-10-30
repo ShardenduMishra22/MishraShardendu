@@ -98,19 +98,6 @@ export default function CertificationsSection({ certifications }: Certifications
 
   return (
     <section className="relative py-8 sm:py-12 lg:py-16 bg-background overflow-hidden">
-      <div
-        className={cn(
-          'absolute inset-0',
-          '[background-size:20px_20px]',
-          '[background-image:radial-gradient(#d4d4d4_1px,transparent_1px)]',
-          'dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]'
-        )}
-      />
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black" />
-
-      <div className="absolute top-16 sm:top-32 right-1/4 w-12 h-12 sm:w-20 sm:h-20 bg-primary/5 rounded-full blur-2xl sm:blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 sm:bottom-40 left-1/4 w-10 h-10 sm:w-16 sm:h-16 bg-secondary/5 rounded-full blur-2xl sm:blur-3xl animate-pulse delay-1000" />
-
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <Badge

@@ -14,12 +14,10 @@ import { DesktopSidebar } from '@/components/extra/sidebar'
 import FooterSection from '@/components/main/FooterSection'
 import { LazyProjectsSection } from '@/components/lazy/proj'
 import { LazyExperienceSection } from '@/components/lazy/exp'
-import { ShootingStars } from '@/components/ui/shooting-stars'
 import { MobileNavigation } from '@/components/extra/mobile-nav'
 import { LazyTimelineSection } from '@/components/lazy/timeline'
 import { LazyCertificationsSection } from '@/components/lazy/cert'
 import { HomeBreadcrumb } from '@/components/seo/BreadcrumbJsonLd'
-import { StarsBackground } from '@/components/ui/stars-background'
 import { LazyVExperienceSection } from '@/components/lazy/volunteer'
 import { PersonJsonLd, WebsiteJsonLd, OrganizationJsonLd } from '@/components/seo/StructuredData'
 
@@ -94,13 +92,11 @@ export default function HomePage() {
       <div className="md:pl-20 transition-all duration-500 ease-out">
         <section id="hero" className="relative">
           <HeroSection />
-          <ShootingStars />
         </section>
 
         <section id="education" className="scroll-mt-20 relative">
           <div className="absolute inset-0 bg-linear-to-r from-transparent via-secondary/5 to-transparent opacity-50 pointer-events-none" />
           <Education />
-          <ShootingStars />
         </section>
 
         <section id="skills" className="scroll-mt-20 relative">
@@ -129,7 +125,6 @@ export default function HomePage() {
 
         <section id="contact" className="scroll-mt-20 relative">
           <ContactSection />
-          <StarsBackground />
         </section>
 
         <section>

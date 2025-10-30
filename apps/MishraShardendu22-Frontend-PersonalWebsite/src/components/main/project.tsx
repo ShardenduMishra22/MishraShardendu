@@ -115,10 +115,6 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
 
   return (
     <>
-      <section className="relative">
-        <HeroParallax projects={heroParallaxProjects} />
-      </section>
-
       <section className="py-8 sm:py-12 lg:py-16 relative overflow-hidden">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">

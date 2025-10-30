@@ -4,7 +4,6 @@ import { LinksGrid } from '../footer/LinksGrid'
 import { ProfileInfo } from '../footer/ProfileInfo'
 import { ContactForm } from '../footer/ContactForm'
 import { QuickConnect } from '../footer/QuickConnect'
-import { StarsBackground } from '../ui/stars-background'
 import { BackToTopButton } from '../footer/BackToTopButton'
 import { useWindowWidth } from '../footer/hooks/useWindowWidth'
 
@@ -15,7 +14,6 @@ export default function FooterSection() {
 
   return (
     <footer className="relative overflow-hidden bg-gradient-to-br from-background via-background/95 to-background/90 border-t border-border/50">
-      <StarsBackground />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="py-12 lg:py-16">
           <section className="grid gap-10 lg:grid-cols-[1.5fr_1.5fr] items-stretch">
