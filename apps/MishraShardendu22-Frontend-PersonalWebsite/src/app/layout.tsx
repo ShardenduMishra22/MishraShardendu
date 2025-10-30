@@ -8,6 +8,7 @@ import { Fredoka, Poppins, Inter } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import ToasterClient from '@/components/extra/ToasterClient'
 import ThemeToggleClient from '@/components/extra/ThemeToggleClient'
+import ResourceHints from '@/components/extra/ResourceHints'
 
 const fredoka = Fredoka({
   variable: '--font-heading',
@@ -211,7 +212,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <ResourceHints />
+      </head>
       <body className={`${fredoka.variable} ${poppins.variable} ${inter.variable} antialiased `}>
         <ThemeProvider
           attribute="class"
