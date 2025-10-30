@@ -42,9 +42,11 @@ export function MobileNavigation({ activeSection }: { activeSection: string }) {
           'fixed top-4 right-4 z-50 p-3 rounded-xl transition-all duration-300',
           'bg-sidebar/95 backdrop-blur-xl border border-sidebar-border/50 shadow-lg',
           'hover:bg-sidebar-accent/20 hover:scale-105 active:scale-95',
-          'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2'
+          'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+          'touch-target' // Better touch target for mobile
         )}
         aria-label="Toggle navigation menu"
+        aria-expanded={isOpen}
       >
         {isOpen ? (
           <X className="h-6 w-6 text-sidebar-foreground" />
@@ -68,12 +70,12 @@ export function MobileNavigation({ activeSection }: { activeSection: string }) {
           isOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-sidebar-primary/10 via-transparent to-sidebar-accent/10 opacity-50 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-b from-sidebar-primary/10 via-transparent to-sidebar-accent/10 opacity-50 pointer-events-none" />
 
         <div className="p-6 pt-20 border-b border-sidebar-border/50 overflow-hidden">
           <div className="flex items-center gap-3 max-w-full">
-            <div className="relative group flex-shrink-0">
-              <div className="w-12 h-12 bg-gradient-to-br from-sidebar-primary to-sidebar-accent rounded-xl flex items-center justify-center shadow-lg shadow-sidebar-primary/25">
+            <div className="relative group shrink-0">
+              <div className="w-12 h-12 bg-linear-to-br from-sidebar-primary to-sidebar-accent rounded-xl flex items-center justify-center shadow-lg shadow-sidebar-primary/25">
                 <Dribbble className="h-6 w-6 text-sidebar-primary-foreground" />
               </div>
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-secondary rounded-full border-2 border-sidebar animate-pulse" />
@@ -83,7 +85,7 @@ export function MobileNavigation({ activeSection }: { activeSection: string }) {
               <div className="text-lg font-bold text-sidebar-foreground mb-1 truncate">
                 Shardendu Mishra
               </div>
-              <div className="text-sm font-semibold bg-gradient-to-r from-pink-500 via-yellow-400 to-green-500 bg-[length:200%_100%] bg-clip-text text-transparent animate-blast truncate">
+              <div className="text-sm font-semibold bg-linear-to-r from-pink-500 via-yellow-400 to-green-500 bg-size-[200%_100%] bg-clip-text text-transparent animate-blast truncate">
                 I Love Golang and Fedora
               </div>
             </div>

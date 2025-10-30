@@ -24,17 +24,17 @@ function NavLink({
       onClick={onClick}
       className={cn(
         'flex items-center gap-3 px-4 py-3 text-sm font-medium transition-all duration-300 rounded-xl group relative overflow-hidden',
-        'hover:bg-gradient-to-r hover:from-accent/20 hover:to-secondary/10 hover:text-accent hover:shadow-lg hover:shadow-accent/20',
+        'hover:bg-linear-to-r hover:from-accent/20 hover:to-secondary/10 hover:text-accent hover:shadow-lg hover:shadow-accent/20',
         'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background',
         'active:scale-95 transform-gpu',
         isActive &&
-          'bg-gradient-to-r from-primary/20 to-secondary/15 text-primary shadow-lg shadow-primary/30 border border-primary/30',
-        isMobile && 'w-full justify-start'
+          'bg-linear-to-r from-primary/20 to-secondary/15 text-primary shadow-lg shadow-primary/30 border border-primary/30',
+        isMobile && 'w-full justify-start max-w-full'
       )}
     >
       <Icon
         className={cn(
-          'h-5 w-5 flex-shrink-0 transition-all duration-300',
+          'h-5 w-5 shrink-0 transition-all duration-300',
           isActive ? 'text-primary' : 'text-foreground group-hover:text-accent',
           'group-hover:scale-110'
         )}
@@ -44,7 +44,8 @@ function NavLink({
         className={cn(
           'transition-all duration-300 whitespace-nowrap font-medium',
           isMobile || isExpanded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2',
-          isActive ? 'text-primary' : 'text-foreground group-hover:text-accent'
+          isActive ? 'text-primary' : 'text-foreground group-hover:text-accent',
+          isMobile && 'truncate flex-1'
         )}
       >
         {label}
