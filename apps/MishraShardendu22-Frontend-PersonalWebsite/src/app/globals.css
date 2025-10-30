@@ -3,12 +3,31 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Enhanced scroll behavior for mobile */
+/* Enhanced scroll behavior for mobile with performance optimization */
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+  /* Mobile performance optimizations */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Optimize rendering performance on mobile */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
+/* Remove on scroll elements that can cause layout shift */
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overscroll-behavior-y: none;
 }
 
 /* Mobile-first responsive font scaling */

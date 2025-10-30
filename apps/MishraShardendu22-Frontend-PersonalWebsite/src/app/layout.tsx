@@ -2,13 +2,13 @@ import './globals.css'
 import { BASE_URL } from '@/constants/url'
 import { ThemeProvider } from 'next-themes'
 import type { Metadata, Viewport } from 'next'
-import { Analytics } from '@vercel/analytics/next'
 import PWARegister from '@/components/extra/PWARegister'
 import { Fredoka, Poppins, Inter } from 'next/font/google'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import ToasterClient from '@/components/extra/ToasterClient'
 import ThemeToggleClient from '@/components/extra/ThemeToggleClient'
 import ResourceHints from '@/components/extra/ResourceHints'
+import PerformanceMonitor from '@/components/extra/PerformanceMonitor'
+import { DeferredAnalytics } from '@/components/extra/DeferredAnalytics'
 
 const fredoka = Fredoka({
   variable: '--font-heading',
@@ -17,6 +17,7 @@ const fredoka = Fredoka({
   display: 'swap',
   fallback: ['system-ui', 'Arial', 'sans-serif'],
   preload: true,
+  adjustFontFallback: true,
 })
 
 const poppins = Poppins({
@@ -26,6 +27,7 @@ const poppins = Poppins({
   display: 'swap',
   fallback: ['system-ui', 'Arial', 'sans-serif'],
   preload: true,
+  adjustFontFallback: true,
 })
 
 const inter = Inter({
@@ -35,6 +37,7 @@ const inter = Inter({
   display: 'swap',
   fallback: ['system-ui', 'Arial', 'sans-serif'],
   preload: true,
+  adjustFontFallback: true,
 })
 
 export const metadata: Metadata = {
@@ -228,10 +231,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <ThemeToggleClient />
             </div>
             {children}
-            <Analytics />
+            <PerformanceMonitor />
+            <DeferredAnalytics />
             <PWARegister />
             <ToasterClient />
-            <SpeedInsights />
           </div>
         </ThemeProvider>
       </body>

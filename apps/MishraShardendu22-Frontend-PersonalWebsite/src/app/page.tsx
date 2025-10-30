@@ -15,6 +15,7 @@ import { PersonJsonLd, WebsiteJsonLd, OrganizationJsonLd } from '@/components/se
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background scroll-smooth">
+      {/* Structured data - doesn't block rendering */}
       <PersonJsonLd />
       <WebsiteJsonLd />
       <OrganizationJsonLd />
@@ -22,11 +23,13 @@ export default function HomePage() {
 
       <ActiveSectionTracker />
 
-      <div className="md:pl-20 transition-all duration-500 ease-out">
+      <div className="md:pl-20 transition-all duration-500 ease-out will-change-auto">
+        {/* Above the fold - critical content */}
         <section id="hero" className="relative">
           <HeroSection />
         </section>
 
+        {/* Below the fold - lazy loaded with intersection observer */}
         <section id="education" className="scroll-mt-20 relative">
           <div className="absolute inset-0 bg-linear-to-r from-transparent via-secondary/5 to-transparent opacity-50 pointer-events-none" />
           <Education />

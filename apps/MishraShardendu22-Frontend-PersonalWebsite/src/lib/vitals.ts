@@ -55,6 +55,7 @@ export function sendToAnalytics(metric: Metric) {
 /**
  * Report web vitals
  * Can be imported in pages/_app.tsx or app/layout.tsx
+ * Optimized for mobile performance tracking
  */
 export function reportWebVitals(metric: Metric) {
   // Log to console in development only
@@ -63,35 +64,43 @@ export function reportWebVitals(metric: Metric) {
     switch (metric.name) {
       case 'FCP':
         // First Contentful Paint - log when first content is rendered
-        console.log(`FCP: ${metric.value}ms`)
+        console.log(`📱 FCP: ${metric.value}ms ${metric.rating ? `(${metric.rating})` : ''}`)
         break
       case 'LCP':
         // Largest Contentful Paint - main content loaded
-        console.log(`LCP: ${metric.value}ms`)
+        console.log(`📱 LCP: ${metric.value}ms ${metric.rating ? `(${metric.rating})` : ''}`)
         break
       case 'CLS':
         // Cumulative Layout Shift - visual stability
-        console.log(`CLS: ${metric.value}`)
+        console.log(
+          `📱 CLS: ${metric.value.toFixed(3)} ${metric.rating ? `(${metric.rating})` : ''}`
+        )
         break
       case 'FID':
         // First Input Delay - interactivity
-        console.log(`FID: ${metric.value}ms`)
+        console.log(`📱 FID: ${metric.value}ms ${metric.rating ? `(${metric.rating})` : ''}`)
         break
       case 'TTFB':
         // Time to First Byte - server response time
-        console.log(`TTFB: ${metric.value}ms`)
+        console.log(`📱 TTFB: ${metric.value}ms ${metric.rating ? `(${metric.rating})` : ''}`)
         break
       case 'INP':
         // Interaction to Next Paint - responsiveness
-        console.log(`INP: ${metric.value}ms`)
+        console.log(`📱 INP: ${metric.value}ms ${metric.rating ? `(${metric.rating})` : ''}`)
         break
       default:
-        console.log(metric)
+        console.log('📱', metric)
     }
   }
 
   // Send to analytics in production only
+  // Use requestIdleCallback to avoid blocking main thread on mobile
   if (process.env.NODE_ENV === 'production') {
-    sendToAnalytics(metric)
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => sendToAnalytics(metric))
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      setTimeout(() => sendToAnalytics(metric), 0)
+    }
   }
 }
