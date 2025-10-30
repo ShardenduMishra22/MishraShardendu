@@ -53,19 +53,11 @@ const nextConfig: NextConfig = {
           }
         : false,
   },
-  // Performance optimizations
+
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
 
-  // Modern JavaScript output
-  modularizeImports: {
-    'lucide-react': {
-      transform: 'lucide-react/dist/esm/icons/{{member}}',
-    },
-  },
-
-  // Headers for better caching and security
   async headers() {
     return [
       {
