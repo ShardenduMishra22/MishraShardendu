@@ -24,8 +24,8 @@ export const LazyFooterSection = () => {
       {loaded ? (
         <FooterSection />
       ) : (
-        <div className="min-h-[400px] flex items-center justify-center bg-background">
-          <div className="animate-pulse text-muted-foreground">Loading footer...</div>
+        <div className="min-h-[400px] flex items-center justify-center bg-muted">
+          <div className="animate-pulse text-foreground/70 font-medium">Loading footer...</div>
         </div>
       )}
     </div>
