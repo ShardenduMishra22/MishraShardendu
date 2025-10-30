@@ -13,7 +13,7 @@ export default function FooterSection() {
   const isMobile = windowWidth < 768
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-background via-background/95 to-background/90 border-t border-border/50">
+    <footer className="relative overflow-hidden bg-linear-to-br from-background via-background/95 to-background/90 border-t border-border/50">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="py-12 lg:py-16">
           <section className="grid gap-10 lg:grid-cols-[1.5fr_1.5fr] items-stretch">
@@ -23,7 +23,7 @@ export default function FooterSection() {
 
           <BackToTopButton isMobile={isMobile} />
 
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-border/50 to-transparent mb-12" />
+          <div className="h-px w-full bg-linear-to-r from-transparent via-border/50 to-transparent mb-12" />
 
           <LinksGrid isMobile={isMobile} />
 
@@ -31,7 +31,7 @@ export default function FooterSection() {
         </div>
 
         <div className="flex justify-center pb-8">
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary rounded-full" />
+          <div className="w-24 h-1 bg-linear-to-r from-primary to-secondary rounded-full" />
         </div>
       </div>
     </footer>

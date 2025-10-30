@@ -1,3 +1,5 @@
+'use client'
+
 import { NavLink } from './nav'
 import { cn } from '@/lib/utils'
 import { Dribbble } from 'lucide-react'

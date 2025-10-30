@@ -1,3 +1,5 @@
+'use client'
+
 import toast from 'react-hot-toast'
 import ExperienceSection from '../main/exp'
 import { Experience } from '@/data/types.data'

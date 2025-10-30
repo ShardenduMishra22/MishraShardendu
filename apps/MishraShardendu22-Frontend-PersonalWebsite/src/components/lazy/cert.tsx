@@ -1,3 +1,5 @@
+'use client'
+
 import toast from 'react-hot-toast'
 import { useIntersectionObserver } from './obs'
 import { Certification } from '@/data/types.data'
@@ -13,7 +15,7 @@ export const LazyCertificationsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const { hasBeenVisible } = useIntersectionObserver(sectionRef as React.RefObject<Element>, {
     threshold: 0.1,
-    rootMargin: '200px',
+    rootMargin: '100px',
   })
 
   const fetchCertifications = useCallback(async () => {

@@ -1,3 +1,5 @@
+'use client'
+
 import toast from 'react-hot-toast'
 import { Project } from '@/data/types.data'
 import ProjectsSection from '../main/project'

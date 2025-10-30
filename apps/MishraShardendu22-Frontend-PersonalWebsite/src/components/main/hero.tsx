@@ -1,3 +1,5 @@
+'use client'
+
 import { Briefcase, Mail, ArrowRight, Code, Coffee, LinkedinIcon, Github } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '../ui/button'

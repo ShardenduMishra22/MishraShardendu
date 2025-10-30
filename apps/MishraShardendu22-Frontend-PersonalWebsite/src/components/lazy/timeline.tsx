@@ -1,3 +1,5 @@
+'use client'
+
 import toast from 'react-hot-toast'
 import { useIntersectionObserver } from './obs'
 import { Experience, VolunteerExperience } from '@/data/types.data'

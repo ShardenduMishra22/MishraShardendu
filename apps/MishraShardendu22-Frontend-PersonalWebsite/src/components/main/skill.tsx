@@ -1,3 +1,5 @@
+'use client'
+
 import { Badge } from '../ui/badge'
 import { Code, Zap, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState, useMemo } from 'react'

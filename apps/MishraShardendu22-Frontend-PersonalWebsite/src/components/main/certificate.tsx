@@ -1,11 +1,12 @@
+'use client'
+
 import Link from 'next/link'
-import { cn } from '@/lib/utils'
 import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
 import { Card, CardContent } from '../ui/card'
 import { Certification } from '@/data/types.data'
+import { useState, useMemo, useEffect } from 'react'
 import { CertificationFocusCards } from '../ui/focus-cards'
-import React, { useState, useMemo, useEffect } from 'react'
 import { Award, ArrowRight, Star, ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface CertificationsSectionProps {

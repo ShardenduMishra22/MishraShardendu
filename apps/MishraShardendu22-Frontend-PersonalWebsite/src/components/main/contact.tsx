@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { getCachedStats } from '@/lib/cache'
 import { DashboardData } from '@/data/types.data'

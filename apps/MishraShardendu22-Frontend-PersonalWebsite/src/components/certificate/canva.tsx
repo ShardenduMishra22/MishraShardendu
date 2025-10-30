@@ -1,18 +1,18 @@
 'use client'
 
-import React, { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { Dribbble } from 'lucide-react'
+import React, { useState } from 'react'
 import CanvasRevealEffect from './CanvasRevealEffect'
+import { AnimatePresence, motion } from 'framer-motion'
 
 interface CanvasCardProps {
   title: string
+  containerClassName?: string
+  dotSize?: number
+  colors?: number[][]
+  animationSpeed?: number
   icon: React.ReactNode
   children: React.ReactNode
-  animationSpeed?: number
-  containerClassName?: string
-  colors?: number[][]
-  dotSize?: number
 }
 
 export const CanvasCard: React.FC<CanvasCardProps> = ({

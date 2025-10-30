@@ -1,3 +1,5 @@
+'use client'
+
 import { resumeLink } from '@/data/static_link'
 import {
   Award,

@@ -1,3 +1,5 @@
+'use client'
+
 import { Project } from '@/data/types.data'
 import { cn } from '@/lib/utils'
 import { Card, CardDescription, CardTitle } from '../ui/card'

@@ -1,3 +1,5 @@
+'use client'
+
 import { useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import ReactMarkdown from 'react-markdown'
