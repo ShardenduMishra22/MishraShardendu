@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { navItems } from '@/data/static_link'
 import { DesktopSidebar } from '@/components/extra/sidebar'
-import { MobileNavigation } from '@/components/extra/mobile-nav'
 
 export function ActiveSectionTracker() {
   const [activeSection, setActiveSection] = useState('hero')
@@ -29,10 +28,5 @@ export function ActiveSectionTracker() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  return (
-    <>
-      <DesktopSidebar activeSection={activeSection} />
-      <MobileNavigation activeSection={activeSection} />
-    </>
-  )
+  return <DesktopSidebar activeSection={activeSection} />
 }

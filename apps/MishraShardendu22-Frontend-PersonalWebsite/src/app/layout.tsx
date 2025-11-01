@@ -4,10 +4,9 @@ import { ThemeProvider } from 'next-themes'
 import type { Metadata, Viewport } from 'next'
 import PWARegister from '@/components/extra/PWARegister'
 import { Fredoka, Poppins, Inter } from 'next/font/google'
+import ResourceHints from '@/components/extra/ResourceHints'
 import ToasterClient from '@/components/extra/ToasterClient'
 import ThemeToggleClient from '@/components/extra/ThemeToggleClient'
-import ResourceHints from '@/components/extra/ResourceHints'
-import PerformanceMonitor from '@/components/extra/PerformanceMonitor'
 import { DeferredAnalytics } from '@/components/extra/DeferredAnalytics'
 
 const fredoka = Fredoka({
@@ -246,7 +245,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <ThemeToggleClient />
             </div>
             {children}
-            <PerformanceMonitor />
             <DeferredAnalytics />
             <PWARegister />
             <ToasterClient />

@@ -40,7 +40,8 @@
     "test": "turbo run test",
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
     "clean:turbo": "rm -rf .turbo apps/*/.turbo packages/*/.turbo",
-    "clean:all": "pnpm clean && pnpm clean:turbo"
+    "clean:all": "pnpm clean && pnpm clean:turbo",
+    "reset": "rm -rf node_modules apps/*/node_modules packages/*/node_modules apps/*/package-lock.json packages/*/package-lock.json pnpm-lock.yaml && pnpm install"
   },
   "devDependencies": {
     "husky": "^9.1.7",

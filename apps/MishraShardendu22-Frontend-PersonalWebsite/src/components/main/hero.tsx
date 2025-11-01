@@ -32,7 +32,7 @@ export default function HeroSection() {
 
               <div className="relative bg-linear-to-br from-card to-card/80 p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl border border-border/50 group-hover:border-primary/30 transition-all duration-500 aspect-square">
                 <Image
-                  src="https://raw.githubusercontent.com/MishraShardendu22/MishraShardendu22/refs/heads/main/Professional.webp"
+                  src="/Professional.webp"
                   alt="Shardendu Mishra - Software Engineer"
                   width={500}
                   height={500}
