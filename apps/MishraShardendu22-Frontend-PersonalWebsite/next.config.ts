@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
       },
     ],
     formats: ['image/avif', 'image/webp'],
-    // Optimized for mobile-first approach
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,
@@ -51,7 +50,7 @@ const nextConfig: NextConfig = {
       'next-themes',
     ],
     optimizeCss: true,
-    webpackBuildWorker: true,
+    scrollRestoration: true,
     parallelServerCompiles: true,
     parallelServerBuildTraces: true,
   },

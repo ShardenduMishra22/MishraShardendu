@@ -4,45 +4,56 @@ import { useEffect } from 'react'
 
 export default function PWARegister() {
   useEffect(() => {
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      const registerSW = async () => {
-        try {
-          const registration = await navigator.serviceWorker.register('/sw.js', {
-            scope: '/',
-          })
+    // Defer service worker registration to reduce TBT on mobile
+    const registerServiceWorker = () => {
+      if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+        const registerSW = async () => {
+          try {
+            const registration = await navigator.serviceWorker.register('/sw.js', {
+              scope: '/',
+            })
 
-          registration.addEventListener('updatefound', () => {
-            const newWorker = registration.installing
-            if (newWorker) {
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  if (window.confirm('New content available! Reload to update?')) {
-                    window.location.reload()
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing
+              if (newWorker) {
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    if (window.confirm('New content available! Reload to update?')) {
+                      window.location.reload()
+                    }
                   }
-                }
-              })
-            }
-          })
+                })
+              }
+            })
 
-          navigator.serviceWorker.addEventListener('message', (event) => {
-            if (event.data && event.data.type === 'SKIP_WAITING') {
-              window.location.reload()
-            }
-          })
-        } catch (error) {
-          console.error('Service Worker registration failed:', error)
+            navigator.serviceWorker.addEventListener('message', (event) => {
+              if (event.data && event.data.type === 'SKIP_WAITING') {
+                window.location.reload()
+              }
+            })
+          } catch (error) {
+            console.error('Service Worker registration failed:', error)
+          }
         }
+
+        registerSW()
+
+        let refreshing = false
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!refreshing) {
+            refreshing = true
+            window.location.reload()
+          }
+        })
       }
+    }
 
-      registerSW()
-
-      let refreshing = false
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (!refreshing) {
-          refreshing = true
-          window.location.reload()
-        }
-      })
+    // Use requestIdleCallback to defer execution until browser is idle
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(registerServiceWorker, { timeout: 2000 })
+    } else {
+      // Fallback to setTimeout for browsers that don't support requestIdleCallback
+      setTimeout(registerServiceWorker, 1000)
     }
   }, [])
 

@@ -37,6 +37,7 @@ export default function HeroSection() {
                   width={500}
                   height={500}
                   priority
+                  fetchPriority="high"
                   className="rounded-lg sm:rounded-xl object-cover w-full h-auto max-w-[280px] sm:max-w-[400px] lg:max-w-[500px] transition-transform duration-500 group-hover:scale-[1.02]"
                   sizes="(max-width: 640px) 280px, (max-width: 1024px) 400px, 500px"
                 />

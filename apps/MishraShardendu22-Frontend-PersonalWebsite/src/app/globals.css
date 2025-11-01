@@ -12,15 +12,7 @@ html {
   /* Mobile performance optimizations */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-/* Optimize rendering performance on mobile */
-* {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  perspective: 1000;
+  text-rendering: optimizeSpeed; /* Changed from optimizeLegibility for better performance */
 }
 
 /* Remove on scroll elements that can cause layout shift */
@@ -28,6 +20,12 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
   overscroll-behavior-y: none;
+}
+
+/* Use content-visibility for better rendering performance */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
 /* Mobile-first responsive font scaling */
@@ -634,4 +632,25 @@ h6 {
 .animate-gradient {
   background-size: 200% auto;
   animation: gradient 3s linear infinite;
+}
+
+/* Mobile Performance: Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Reduce motion for low-end devices */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
 }

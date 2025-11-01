@@ -217,6 +217,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <ResourceHints />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Apply reduced motion immediately to prevent layout shift
+              (function() {
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                const isLowEndDevice = ('deviceMemory' in navigator && navigator.deviceMemory < 4) || 
+                                      ('hardwareConcurrency' in navigator && navigator.hardwareConcurrency < 4);
+                if (prefersReducedMotion || isLowEndDevice) {
+                  document.documentElement.classList.add('reduce-motion');
+                }
+              })();
+            `,
+          }}
+        />
       </head>
       <body className={`${fredoka.variable} ${poppins.variable} ${inter.variable} antialiased `}>
         <ThemeProvider

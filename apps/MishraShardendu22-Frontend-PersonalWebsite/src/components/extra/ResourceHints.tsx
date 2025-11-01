@@ -17,13 +17,13 @@ export default function ResourceHints() {
       <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-      {/* Preload critical assets with mobile-optimized sizes */}
+      {/* Preload critical LCP image with high priority for mobile */}
       <link
         rel="preload"
         href="/Professional.webp"
         as="image"
         type="image/webp"
-        media="(min-width: 768px)"
+        fetchPriority="high"
       />
 
       {/* Mobile viewport optimization */}
