@@ -48,6 +48,10 @@ export const SkillsSkeleton = () => {
 }
 
 export const ProjectsSkeleton = () => {
+  // Show only 1 skeleton on mobile to reduce CLS, 4 on larger screens
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640
+  const skeletonCount = isMobile ? 1 : 4
+
   return (
     <div className="py-8 sm:py-12 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12">
       <div className="max-w-7xl mx-auto">
@@ -59,7 +63,7 @@ export const ProjectsSkeleton = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-          {Array.from({ length: 4 }).map((_, i) => (
+          {Array.from({ length: skeletonCount }).map((_, i) => (
             <div key={i} className="group">
               <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl sm:rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 min-h-[380px] sm:min-h-[420px]">
                 <div className="relative">
@@ -114,6 +118,10 @@ export const ProjectsSkeleton = () => {
 }
 
 export const ExperienceSkeleton = () => {
+  // Show only 1 skeleton on mobile to reduce CLS, 4 on larger screens
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640
+  const skeletonCount = isMobile ? 1 : 4
+
   return (
     <div className="py-8 sm:py-12 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12">
       <div className="max-w-7xl mx-auto">
@@ -125,7 +133,7 @@ export const ExperienceSkeleton = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-          {Array.from({ length: 4 }).map((_, i) => (
+          {Array.from({ length: skeletonCount }).map((_, i) => (
             <div key={i} className="group">
               <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 hover:shadow-xl transition-all duration-300 min-h-[380px] sm:min-h-[420px]">
                 <div className="absolute top-4 right-4">
@@ -176,6 +184,10 @@ export const ExperienceSkeleton = () => {
 }
 
 export const CertificationsSkeleton = () => {
+  // Show only 1 skeleton on mobile to reduce CLS, 4 on larger screens
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640
+  const skeletonCount = isMobile ? 1 : 4
+
   return (
     <div className="py-8 sm:py-12 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12">
       <div className="max-w-7xl mx-auto">
@@ -186,7 +198,7 @@ export const CertificationsSkeleton = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-          {Array.from({ length: 4 }).map((_, i) => (
+          {Array.from({ length: skeletonCount }).map((_, i) => (
             <div key={i} className="group">
               <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-4 sm:p-6 hover:shadow-lg transition-all duration-300 min-h-[300px] sm:min-h-[350px]">
                 <div className="absolute top-3 sm:top-4 right-3 sm:right-4">

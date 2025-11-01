@@ -86,7 +86,7 @@ export function MobileNavigation({ activeSection }: { activeSection: string }) {
                 Shardendu Mishra
               </div>
               <div className="text-sm font-semibold bg-linear-to-r from-pink-500 via-yellow-400 to-green-500 bg-size-[200%_100%] bg-clip-text text-transparent animate-blast truncate">
-                Made Linux in Kernel and Go Lang in Mind
+                Made Linux in Kernel and Golang in Mind
               </div>
             </div>
           </div>

@@ -44,16 +44,8 @@ export const LazyProjectsSection = () => {
   }, [hasBeenVisible, loaded, fetchProjects])
 
   return (
-    <div ref={sectionRef} className="scroll-mt-20 relative">
-      {loading ? (
-        <ProjectsSkeleton />
-      ) : loaded ? (
-        <ProjectsSection projects={projects} />
-      ) : (
-        <div className="min-h-[400px] flex items-center justify-center">
-          <div className="text-muted-foreground">Loading projects...</div>
-        </div>
-      )}
+    <div ref={sectionRef} className="min-h-[600px] sm:min-h-[800px]">
+      {loaded ? <ProjectsSection projects={projects} /> : <ProjectsSkeleton />}
     </div>
   )
 }

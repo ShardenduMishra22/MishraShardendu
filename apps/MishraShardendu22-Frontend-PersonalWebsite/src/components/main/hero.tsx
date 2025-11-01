@@ -27,10 +27,10 @@ export default function HeroSection() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           <div className="relative flex justify-center lg:justify-start order-1 lg:order-1">
-            <div className="relative group">
+            <div className="relative group w-full max-w-[280px] sm:max-w-[400px] lg:max-w-[500px]">
               <div className="absolute -inset-1.5 sm:-inset-2 bg-linear-to-r from-primary/15 via-secondary/15 to-accent/15 sm:from-primary/20 sm:via-secondary/20 sm:to-accent/20 rounded-xl sm:rounded-2xl blur-md sm:blur-lg opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
 
-              <div className="relative bg-linear-to-br from-card to-card/80 p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl border border-border/50 group-hover:border-primary/30 transition-all duration-500">
+              <div className="relative bg-linear-to-br from-card to-card/80 p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl border border-border/50 group-hover:border-primary/30 transition-all duration-500 aspect-square">
                 <Image
                   src="https://raw.githubusercontent.com/MishraShardendu22/MishraShardendu22/refs/heads/main/Professional.webp"
                   alt="Shardendu Mishra - Software Engineer"
@@ -38,7 +38,7 @@ export default function HeroSection() {
                   height={500}
                   priority
                   fetchPriority="high"
-                  className="rounded-lg sm:rounded-xl object-cover w-full h-auto max-w-[280px] sm:max-w-[400px] lg:max-w-[500px] transition-transform duration-500 group-hover:scale-[1.02]"
+                  className="rounded-lg sm:rounded-xl object-cover w-full h-full transition-transform duration-500 group-hover:scale-[1.02]"
                   sizes="(max-width: 640px) 280px, (max-width: 1024px) 400px, 500px"
                 />
               </div>

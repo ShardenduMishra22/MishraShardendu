@@ -28,6 +28,51 @@ section {
   contain-intrinsic-size: auto 500px;
 }
 
+/* Mobile-specific CLS fixes */
+@media (max-width: 640px) {
+  /* Reserve space for lazy-loaded sections to prevent CLS */
+  section {
+    contain-intrinsic-size: auto 400px; /* Smaller on mobile */
+  }
+
+  /* Prevent layout shifts from images */
+  img {
+    content-visibility: auto;
+  }
+
+  /* Optimize animations on mobile - reduce TBT */
+  * {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.15s !important;
+  }
+
+  /* Reduce transform operations for better performance */
+  .group:hover .group-hover\:scale-\[1\.02\] {
+    transform: scale(1.01);
+  }
+
+  /* Disable expensive animations on mobile */
+  .animate-blob,
+  .animate-gradient,
+  .animate-shimmer {
+    animation: none !important;
+  }
+
+  /* Simplify backdrop blur on mobile for better performance */
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg {
+    backdrop-filter: none;
+    background-color: rgba(var(--card), 0.95);
+  }
+
+  /* Force GPU acceleration for key transforms only */
+  .will-change-transform {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+}
+
 /* Mobile-first responsive font scaling */
 :root {
   /* Enhanced font system with better mobile readability */

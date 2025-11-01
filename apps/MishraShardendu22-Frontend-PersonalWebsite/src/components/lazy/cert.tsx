@@ -42,14 +42,14 @@ export const LazyCertificationsSection = () => {
   }, [hasBeenVisible, loaded, fetchCertifications])
 
   return (
-    <div ref={sectionRef} className="scroll-mt-20 relative">
+    <div ref={sectionRef} className="scroll-mt-20 relative min-h-[600px] sm:min-h-[800px]">
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-secondary/5 to-transparent opacity-50 pointer-events-none" />
       {loading ? (
         <CertificationsSkeleton />
       ) : loaded ? (
         <CertificationsSection certifications={certifications} />
       ) : (
-        <div className="min-h-[400px] flex items-center justify-center">
+        <div className="min-h-[600px] sm:min-h-[800px] flex items-center justify-center">
           <div className="text-muted-foreground">Loading certifications...</div>
         </div>
       )}

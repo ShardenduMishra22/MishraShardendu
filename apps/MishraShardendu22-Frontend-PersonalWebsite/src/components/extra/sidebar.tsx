@@ -46,7 +46,7 @@ export function DesktopSidebar({ activeSection }: { activeSection: string }) {
               >
                 {hasAnimated && (
                   <div className="text-sm font-semibold bg-gradient-to-r from-pink-500 via-yellow-400 to-green-500 bg-[length:200%_100%] bg-clip-text text-transparent animate-blast">
-                    Made Linux in Kernel and Go Lang in Mind
+                    Made Linux in Kernel and Golang in Mind
                   </div>
                 )}
               </div>

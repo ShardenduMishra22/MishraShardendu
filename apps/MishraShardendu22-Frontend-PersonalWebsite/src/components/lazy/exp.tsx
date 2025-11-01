@@ -66,15 +66,19 @@ export const LazyExperienceSection = () => {
   }, [hasBeenVisible, loaded, loading, fetchExperiences])
 
   return (
-    <div ref={sectionRef} className="scroll-mt-20 relative" id="experience-section">
+    <div
+      ref={sectionRef}
+      className="scroll-mt-20 relative min-h-[600px] sm:min-h-[800px]"
+      id="experience-section"
+    >
       {loading ? (
-        <div className="w-full">
+        <div className="w-full min-h-[600px] sm:min-h-[800px]">
           <ExperienceSkeleton />
         </div>
       ) : loaded ? (
         <ExperienceSection experiences={experiences} />
       ) : (
-        <div className="min-h-[300px] w-full flex items-center justify-center py-20">
+        <div className="min-h-[600px] sm:min-h-[800px] w-full flex items-center justify-center py-20">
           <LoadingState />
         </div>
       )}
