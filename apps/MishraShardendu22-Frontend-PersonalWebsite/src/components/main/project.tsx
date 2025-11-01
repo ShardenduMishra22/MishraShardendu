@@ -15,17 +15,11 @@ export interface ProjectsSectionProps {
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [currentPage, setCurrentPage] = useState(0)
-  const [windowWidth, setWindowWidth] = useState(0)
+
+  // Use CSS responsive grid instead of JS detection
+  const windowWidth = 1024 // Default to desktop
 
   const sortedProjects = useMemo(() => [...projects].sort((a, b) => a.order - b.order), [projects])
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth)
-    handleResize()
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
 
   const heroParallaxProjects = useMemo(() => {
     return sortedProjects.slice(0, 15).map((project) => ({
@@ -38,13 +32,8 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     }))
   }, [sortedProjects])
 
-  const getProjectsPerPage = () => {
-    if (windowWidth < 640) return 1
-    if (windowWidth < 1024) return 2
-    return 4
-  }
-
-  const projectsPerPage = getProjectsPerPage()
+  // Use CSS grid instead of dynamic items per page
+  const projectsPerPage = 4
   const totalPages = Math.ceil(sortedProjects.length / projectsPerPage)
 
   const { currentPageProjects, startIndex, endIndex } = useMemo(() => {

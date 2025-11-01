@@ -37,19 +37,9 @@ const EducationSection = () => {
   const [hoveredCard, setHoveredCard] = useState<
     'college' | 'school' | 'languages' | 'resume' | null
   >(null)
-  const [windowWidth, setWindowWidth] = useState(0)
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth)
-
-    if (typeof window !== 'undefined') {
-      handleResize()
-      window.addEventListener('resize', handleResize)
-      return () => window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  const isMobile = windowWidth < 768
+  // Use CSS responsive classes instead of JS detection for better mobile performance
+  const isMobile = false // Desktop-first, mobile styling via CSS
 
   return (
     <section className="py-20 relative overflow-hidden bg-gradient-to-b from-background to-background/50">

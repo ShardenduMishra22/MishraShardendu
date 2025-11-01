@@ -13,8 +13,8 @@ export const useIntersectionObserver = (
   const observerOptions = useMemo(() => {
     const mobile = typeof window !== 'undefined' && window.innerWidth < 768
     return {
-      threshold: mobile ? 0.05 : 0.1, // Lower threshold on mobile for earlier loading
-      rootMargin: mobile ? '50px' : '100px', // Smaller margin on mobile to save bandwidth
+      threshold: mobile ? 0.01 : 0.05, // Very low threshold for earlier loading
+      rootMargin: mobile ? '200px' : '400px', // Larger margin for earlier background loading
       ...options,
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

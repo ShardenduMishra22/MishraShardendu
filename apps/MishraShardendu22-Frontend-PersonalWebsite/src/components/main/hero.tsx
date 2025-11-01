@@ -28,7 +28,9 @@ export default function HeroSection() {
                   className="rounded-lg sm:rounded-xl object-cover w-full h-full"
                   sizes="(max-width: 640px) 280px, (max-width: 1024px) 400px, 500px"
                   loading="eager"
-                  quality={90}
+                  quality={85}
+                  placeholder="blur"
+                  blurDataURL="data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAACwAgCdASoQABAAPm0wlkekIqIhMAgAsBIJaQAANR9wAP78/8vf/xv/+8f/+P/+v/+v/+f/+P/+v/+P/+v/+v/+v/+v/+P/+v/+v/+v/+v/+v/+v/+v/+v/+v/+v/+v/+v/+v/+AAA="
                 />
               </div>
 

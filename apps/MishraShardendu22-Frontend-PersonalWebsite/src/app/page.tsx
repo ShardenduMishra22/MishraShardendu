@@ -24,13 +24,13 @@ export default function HomePage() {
       <ActiveSectionTracker />
 
       <div className="md:pl-20 will-change-auto">
-        {/* Above the fold - critical content */}
-        <section id="hero" className="relative">
+        {/* Above the fold - critical content with minimal height to prevent CLS */}
+        <section id="hero" className="relative min-h-[500px] sm:min-h-[600px]">
           <HeroSection />
         </section>
 
         {/* Below the fold - lazy loaded with intersection observer */}
-        <section id="education" className="scroll-mt-20 relative min-h-[400px]">
+        <section id="education" className="scroll-mt-20 relative min-h-[500px] sm:min-h-[600px]">
           <Education />
         </section>
 
