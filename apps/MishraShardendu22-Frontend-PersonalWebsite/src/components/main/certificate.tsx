@@ -7,7 +7,7 @@ import { Card, CardContent } from '../ui/card'
 import { Certification } from '@/data/types.data'
 import { useState, useMemo, useEffect } from 'react'
 import { CertificationFocusCards } from '../ui/focus-cards'
-import { Award, ArrowRight, Star, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Award, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface CertificationsSectionProps {
   certifications: Certification[]
@@ -15,22 +15,9 @@ interface CertificationsSectionProps {
 
 export default function CertificationsSection({ certifications }: CertificationsSectionProps) {
   const [currentPage, setCurrentPage] = useState(0)
-  const [windowWidth, setWindowWidth] = useState(0)
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth)
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  const getItemsPerPage = () => {
-    if (windowWidth < 640) return 1
-    if (windowWidth < 1024) return 2
-    return 2
-  }
-
-  const itemsPerPage = getItemsPerPage()
+  // Use CSS-based pagination - always show 1 item on mobile, 2 on desktop
+  const itemsPerPage = 2 // Desktop default, CSS will handle mobile
   const totalPages = Math.ceil(certifications.length / itemsPerPage)
 
   const { currentPageCertifications, startIndex, endIndex } = useMemo(() => {
@@ -54,14 +41,6 @@ export default function CertificationsSection({ certifications }: Certifications
   }
 
   const getVisiblePageNumbers = () => {
-    if (windowWidth < 640) {
-      const pages = []
-      if (currentPage > 0) pages.push(currentPage - 1)
-      pages.push(currentPage)
-      if (currentPage < totalPages - 1) pages.push(currentPage + 1)
-      return pages
-    }
-
     if (totalPages <= 5) {
       return Array.from({ length: totalPages }, (_, i) => i)
     }
@@ -95,8 +74,6 @@ export default function CertificationsSection({ certifications }: Certifications
     return rangeWithDots
   }
 
-  const isMobile = windowWidth < 640
-
   return (
     <section className="relative py-8 sm:py-12 lg:py-16 bg-background overflow-hidden">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -109,13 +86,10 @@ export default function CertificationsSection({ certifications }: Certifications
             <span className="text-xs sm:text-sm text-card-foreground">Credentials</span>
           </Badge>
           <br />
-          <div className="relative inline-block">
-            <h2 className="text-2xl sm:text-4xl lg:text-6xl font-bold tracking-tight mb-2">
-              <span className="text-foreground">Professional </span>
-              <span className="text-primary">Certifications</span>
-            </h2>
-            <Star className="absolute -top-0.5 -right-8 sm:-right-16 h-4 w-4 sm:h-6 sm:w-6 text-secondary animate-pulse" />
-          </div>
+          <h2 className="text-2xl sm:text-4xl lg:text-6xl font-bold tracking-tight mb-2">
+            <span className="text-foreground">Professional </span>
+            <span className="text-primary">Certifications</span>
+          </h2>
 
           <p className="mt-4 sm:mt-8 text-sm sm:text-lg leading-6 sm:leading-8 text-foreground max-w-xs sm:max-w-lg mx-auto px-4 sm:px-0">
             Professional certifications and credentials that validate my expertise
@@ -224,7 +198,7 @@ export default function CertificationsSection({ certifications }: Certifications
                 </Button>
               </div>
 
-              {!isMobile || totalPages <= 5 ? (
+              {totalPages <= 5 ? (
                 <div className="flex items-center justify-center gap-2 pb-2">
                   {getVisiblePageNumbers().map((pageNum, index) => {
                     if (pageNum === '...') {
@@ -288,7 +262,6 @@ export default function CertificationsSection({ certifications }: Certifications
           <CertificationFocusCards
             certifications={currentPageCertifications}
             startIndex={startIndex}
-            isMobile={isMobile}
           />
         )}
 
@@ -306,8 +279,8 @@ export default function CertificationsSection({ certifications }: Certifications
               <Link href="/certifications">
                 <Button
                   variant="outline"
-                  size={isMobile ? 'sm' : 'lg'}
-                  className="group bg-gradient-to-r from-primary/10 to-secondary/10 hover:from-primary/20 hover:to-secondary/20 border-primary/30 hover:border-primary/50 transition-all duration-300 touch-manipulation"
+                  size="lg"
+                  className="group bg-gradient-to-r from-primary/10 to-secondary/10 hover:from-primary/20 hover:to-secondary/20 border-primary/30 hover:border-primary/50 transition-all duration-300 touch-manipulation text-xs sm:text-sm h-8 sm:h-11 px-4 sm:px-8"
                 >
                   <span className="text-xs sm:text-sm">View All</span>
                   <ArrowRight className="ml-1.5 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />

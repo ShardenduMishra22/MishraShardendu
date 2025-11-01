@@ -12,10 +12,10 @@ html {
   /* Mobile performance optimizations */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeSpeed; /* Changed from optimizeLegibility for better performance */
+  text-rendering: optimizeSpeed;
 }
 
-/* Remove on scroll elements that can cause layout shift */
+/* Remove scroll elements that can cause layout shift */
 body {
   overflow-x: hidden;
   overflow-y: scroll;
@@ -28,16 +28,63 @@ section {
   contain-intrinsic-size: auto 500px;
 }
 
-/* Mobile-specific CLS fixes */
+/* Mobile-specific CLS fixes with larger intrinsic sizes */
 @media (max-width: 640px) {
   /* Reserve space for lazy-loaded sections to prevent CLS */
   section {
-    contain-intrinsic-size: auto 400px; /* Smaller on mobile */
+    contain-intrinsic-size: auto 600px;
   }
 
-  /* Prevent layout shifts from images */
+  /* Prevent layout shifts from images - reserve aspect ratio */
   img {
     content-visibility: auto;
+    aspect-ratio: attr(width) / attr(height);
+  }
+
+  /* Disable expensive animations on mobile - but keep pulse animations normal */
+  *:not(.animate-pulse):not(.animate-pulse-soft),
+  *:not(.animate-pulse):not(.animate-pulse-soft)::before,
+  *:not(.animate-pulse):not(.animate-pulse-soft)::after {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
+  }
+
+  /* Keep pulse animations at normal speed */
+  .animate-pulse,
+  .animate-pulse-soft {
+    animation-duration: 2s !important;
+  }
+
+  /* Remove blur effects on mobile - heavy performance cost */
+  .blur-md,
+  .blur-lg,
+  .blur-xl {
+    filter: none !important;
+  }
+
+  /* Disable backdrop blur on mobile - very expensive */
+  .backdrop-blur,
+  .backdrop-blur-sm,
+  .backdrop-blur-md {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Optimize transforms on mobile */
+  * {
+    will-change: auto !important;
+  }
+
+  /* Reduce shadow complexity on mobile */
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Disable hover effects on mobile */
+  *:hover {
+    transform: none !important;
   }
 }
 

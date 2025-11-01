@@ -1,7 +1,7 @@
 'use client'
 
 import { Badge } from '../ui/badge'
-import { Code, Zap, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Code, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState, useMemo } from 'react'
 
 interface SkillsSectionProps {
@@ -11,16 +11,8 @@ interface SkillsSectionProps {
 export default function SkillsSection({ skills }: SkillsSectionProps) {
   const [currentPage, setCurrentPage] = useState(1)
 
-  const getItemsPerPage = () => {
-    if (typeof window !== 'undefined') {
-      if (window.innerWidth < 640) return 8
-      if (window.innerWidth < 1024) return 12
-      return 18
-    }
-    return 12
-  }
-
-  const [itemsPerPage] = useState(getItemsPerPage())
+  // Use maximum items per page - CSS grid will handle responsive layout
+  const itemsPerPage = 18
 
   const { totalPages, currentSkills, startIndex, endIndex } = useMemo(() => {
     const totalPages = Math.ceil(skills.length / itemsPerPage)
@@ -86,13 +78,10 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
           </Badge>
           <br />
 
-          <div className="relative inline-block">
-            <h2 className="text-2xl sm:text-4xl lg:text-6xl font-bold tracking-tight mb-2">
-              <span className="text-foreground">Technical </span>
-              <span className="text-primary">Skills</span>
-            </h2>
-            <Zap className="absolute -top-0.5 -right-6 sm:-right-12 h-4 w-4 sm:h-6 sm:w-6 text-secondary animate-pulse" />
-          </div>
+          <h2 className="text-2xl sm:text-4xl lg:text-6xl font-bold tracking-tight mb-2">
+            <span className="text-foreground">Technical </span>
+            <span className="text-primary">Skills</span>
+          </h2>
 
           <p className="mt-4 sm:mt-8 text-sm sm:text-lg leading-6 sm:leading-8 text-foreground max-w-xs sm:max-w-lg mx-auto px-4 sm:px-0">
             Technologies and tools I work with to bring ideas to life

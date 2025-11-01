@@ -15,14 +15,12 @@ export const ExperienceFocusCard = React.memo(
     hovered,
     setHovered,
     startIndex,
-    isMobile,
   }: {
     exp: VolunteerExperience
     index: number
     hovered: number | null
     setHovered: React.Dispatch<React.SetStateAction<number | null>>
     startIndex: number
-    isMobile: boolean
   }) => {
     const earliestPosition = exp.volunteer_time_line?.[0]
     const latestPosition = exp.volunteer_time_line?.[exp.volunteer_time_line.length - 1]
@@ -52,11 +50,11 @@ export const ExperienceFocusCard = React.memo(
     }, [earliestPosition?.start_date, latestPosition?.end_date])
 
     const summary = useMemo(() => {
-      const limit = isMobile ? 140 : 180
+      const limit = 180
       return exp.description.length > limit
         ? `${exp.description.slice(0, limit)}…`
         : exp.description
-    }, [exp.description, isMobile])
+    }, [exp.description])
 
     const currentPosition = latestPosition?.position || earliestPosition?.position || 'Volunteer'
     const positionCount = exp.volunteer_time_line?.length || 0
@@ -174,7 +172,7 @@ export const ExperienceFocusCard = React.memo(
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-1.5">
-                  {exp.technologies.slice(0, isMobile ? 4 : 6).map((tech, idx) => (
+                  {exp.technologies.slice(0, 6).map((tech, idx) => (
                     <span
                       key={idx}
                       className="px-2.5 py-1 text-xs font-medium bg-gradient-to-r from-secondary/20 to-accent/20 text-foreground/80 rounded-full border border-secondary/30 hover:border-secondary/50 transition-colors cursor-default"
@@ -182,9 +180,9 @@ export const ExperienceFocusCard = React.memo(
                       {tech}
                     </span>
                   ))}
-                  {exp.technologies.length > (isMobile ? 4 : 6) && (
+                  {exp.technologies.length > 6 && (
                     <span className="px-2.5 py-1 text-xs font-medium bg-foreground/10 text-foreground/60 rounded-full border border-foreground/20 cursor-default">
-                      +{exp.technologies.length - (isMobile ? 4 : 6)} more
+                      +{exp.technologies.length - 6} more
                     </span>
                   )}
                 </div>
@@ -280,11 +278,9 @@ ExperienceFocusCard.displayName = 'ExperienceFocusCard'
 export function ExperienceFocusCards({
   experiences,
   startIndex,
-  isMobile,
 }: {
   experiences: VolunteerExperience[]
   startIndex: number
-  isMobile: boolean
 }) {
   const [hovered, setHovered] = useState<number | null>(null)
 
@@ -300,7 +296,6 @@ export function ExperienceFocusCards({
               hovered={hovered}
               setHovered={setHovered}
               startIndex={startIndex}
-              isMobile={isMobile}
             />
           </div>
         ))}

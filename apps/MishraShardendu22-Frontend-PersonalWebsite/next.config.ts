@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Mobile optimization
+    unoptimized: false,
+    loader: 'default',
   },
   experimental: {
     proxyTimeout: 120000,
@@ -62,6 +65,7 @@ const nextConfig: NextConfig = {
         : false,
   },
 
+  // Performance optimizations
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,

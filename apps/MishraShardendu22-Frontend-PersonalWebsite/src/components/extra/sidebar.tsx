@@ -3,10 +3,14 @@
 import { NavLink } from './nav'
 import { cn } from '@/lib/utils'
 import { Dribbble } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { navItems } from '@/data/static_link'
 
-export function DesktopSidebar({ activeSection }: { activeSection: string }) {
+export const DesktopSidebar = memo(function DesktopSidebar({
+  activeSection,
+}: {
+  activeSection: string
+}) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [hasAnimated, setHasAnimated] = useState(false)
 
@@ -75,16 +79,14 @@ export function DesktopSidebar({ activeSection }: { activeSection: string }) {
         <div className="absolute bottom-6 left-4 right-4">
           <div
             className={cn(
-              'text-xs text-foreground/60 text-center transition-all duration-300 flex items-center justify-center gap-2 bg-card/50 backdrop-blur-sm py-2 px-3 rounded-lg border border-border/40',
+              'text-xs text-foreground/60 text-center transition-all duration-300 bg-card/50 backdrop-blur-sm py-2 px-3 rounded-lg border border-border/40',
               isExpanded ? 'opacity-100' : 'opacity-0'
             )}
           >
-            <div className="w-1 h-1 bg-primary/70 rounded-full animate-pulse" />
             <span className="font-medium">Hover to expand</span>
-            <div className="w-1 h-1 bg-primary/70 rounded-full animate-pulse" />
           </div>
         </div>
       </div>
     </div>
   )
-}
+})

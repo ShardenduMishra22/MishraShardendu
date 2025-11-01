@@ -17,14 +17,12 @@ export const CertificationFocusCard = React.memo(
     hovered,
     setHovered,
     startIndex,
-    isMobile,
   }: {
     cert: Certification
     index: number
     hovered: number | null
     setHovered: React.Dispatch<React.SetStateAction<number | null>>
     startIndex: number
-    isMobile: boolean
   }) => (
     <div
       onMouseEnter={() => setHovered(index)}
@@ -62,17 +60,15 @@ export const CertificationFocusCard = React.memo(
           <div className="text-xs sm:text-sm text-foreground/90 leading-relaxed">
             <div className="prose-md">
               <ReactMarkdown>
-                {isMobile && cert.description.length > 100
-                  ? `${cert.description.substring(0, 100)}...`
-                  : cert.description.length > 120
-                    ? `${cert.description.substring(0, 120)}...`
-                    : cert.description}
+                {cert.description.length > 120
+                  ? `${cert.description.substring(0, 120)}...`
+                  : cert.description}
               </ReactMarkdown>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            {cert.skills.slice(0, isMobile ? 3 : 4).map((skill, idx) => (
+            {cert.skills.slice(0, 4).map((skill, idx) => (
               <Badge
                 key={idx}
                 variant="outline"
@@ -81,12 +77,12 @@ export const CertificationFocusCard = React.memo(
                 {skill}
               </Badge>
             ))}
-            {cert.skills.length > (isMobile ? 3 : 4) && (
+            {cert.skills.length > 4 && (
               <Badge
                 variant="outline"
                 className="text-xs px-2 py-0.5 sm:px-3 sm:py-1 bg-primary/5 border-primary/20 text-foreground"
               >
-                +{cert.skills.length - (isMobile ? 3 : 4)} more
+                +{cert.skills.length - 4} more
               </Badge>
             )}
           </div>
@@ -98,8 +94,8 @@ export const CertificationFocusCard = React.memo(
             >
               <Button
                 variant="outline"
-                size={isMobile ? 'sm' : 'default'}
-                className="group/btn hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 w-full sm:w-auto touch-manipulation"
+                size="default"
+                className="group/btn hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 w-full sm:w-auto touch-manipulation text-xs sm:text-sm h-8 sm:h-10 px-3 sm:px-4"
               >
                 <span className="text-foreground text-xs sm:text-sm">View Details</span>
                 <ArrowRight className="ml-1.5 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover/btn:translate-x-1" />
@@ -131,11 +127,9 @@ CertificationFocusCard.displayName = 'CertificationFocusCard'
 export function CertificationFocusCards({
   certifications,
   startIndex,
-  isMobile,
 }: {
   certifications: Certification[]
   startIndex: number
-  isMobile: boolean
 }) {
   const [hovered, setHovered] = useState<number | null>(null)
 
@@ -149,7 +143,6 @@ export function CertificationFocusCards({
           hovered={hovered}
           setHovered={setHovered}
           startIndex={startIndex}
-          isMobile={isMobile}
         />
       ))}
     </div>

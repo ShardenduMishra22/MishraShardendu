@@ -14,7 +14,7 @@ import { PersonJsonLd, WebsiteJsonLd, OrganizationJsonLd } from '@/components/se
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background scroll-smooth">
+    <div className="min-h-screen bg-background">
       {/* Structured data - doesn't block rendering */}
       <PersonJsonLd />
       <WebsiteJsonLd />
@@ -23,47 +23,46 @@ export default function HomePage() {
 
       <ActiveSectionTracker />
 
-      <div className="md:pl-20 transition-all duration-500 ease-out will-change-auto">
+      <div className="md:pl-20 will-change-auto">
         {/* Above the fold - critical content */}
         <section id="hero" className="relative">
           <HeroSection />
         </section>
 
         {/* Below the fold - lazy loaded with intersection observer */}
-        <section id="education" className="scroll-mt-20 relative">
-          <div className="absolute inset-0 bg-linear-to-r from-transparent via-secondary/5 to-transparent opacity-50 pointer-events-none" />
+        <section id="education" className="scroll-mt-20 relative min-h-[400px]">
           <Education />
         </section>
 
-        <section id="skills" className="scroll-mt-20 relative">
+        <section id="skills" className="scroll-mt-20 relative min-h-[400px]">
           <LazySkillsSection />
         </section>
 
-        <section id="timeline">
+        <section id="timeline" className="min-h-[400px]">
           <LazyTimelineSection />
         </section>
 
-        <section id="projects">
+        <section id="projects" className="min-h-[600px]">
           <LazyProjectsSection />
         </section>
 
-        <section id="experience">
+        <section id="experience" className="min-h-[600px]">
           <LazyExperienceSection />
         </section>
 
-        <section id="volunteer">
+        <section id="volunteer" className="min-h-[500px]">
           <LazyVExperienceSection />
         </section>
 
-        <section id="certifications">
+        <section id="certifications" className="min-h-[500px]">
           <LazyCertificationsSection />
         </section>
 
-        <section id="contact" className="scroll-mt-20 relative">
+        <section id="contact" className="scroll-mt-20 relative min-h-[400px]">
           <LazyContactSection />
         </section>
 
-        <section>
+        <section className="min-h-[300px]">
           <LazyFooterSection />
         </section>
       </div>

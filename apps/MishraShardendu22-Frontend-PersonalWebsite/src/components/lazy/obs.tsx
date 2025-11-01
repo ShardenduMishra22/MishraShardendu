@@ -2,12 +2,6 @@
 
 import { useEffect, useState, useMemo } from 'react'
 
-// Detect if user is on mobile for different thresholds
-const isMobile = () => {
-  if (typeof window === 'undefined') return false
-  return window.innerWidth < 768
-}
-
 export const useIntersectionObserver = (
   ref: React.RefObject<Element>,
   options: IntersectionObserverInit = {}
@@ -15,15 +9,16 @@ export const useIntersectionObserver = (
   const [isVisible, setIsVisible] = useState(false)
   const [hasBeenVisible, setHasBeenVisible] = useState(false)
 
-  // Mobile-optimized settings
+  // Mobile-optimized settings - detect once on mount, not on every render
   const observerOptions = useMemo(() => {
-    const mobile = isMobile()
+    const mobile = typeof window !== 'undefined' && window.innerWidth < 768
     return {
       threshold: mobile ? 0.05 : 0.1, // Lower threshold on mobile for earlier loading
       rootMargin: mobile ? '50px' : '100px', // Smaller margin on mobile to save bandwidth
       ...options,
     }
-  }, [options])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // Empty dependency array - only calculate once on mount
 
   useEffect(() => {
     const element = ref.current

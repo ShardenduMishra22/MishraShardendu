@@ -17,21 +17,9 @@ export default function VolunteerExperienceSection({
   experiences,
 }: VolunteerExperienceSectionProps) {
   const [currentPage, setCurrentPage] = useState(0)
-  const [windowWidth, setWindowWidth] = useState(0)
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth)
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  const getItemsPerPage = () => {
-    if (windowWidth < 640) return 1
-    return 2
-  }
-
-  const itemsPerPage = getItemsPerPage()
+  // Use maximum items per page - CSS will handle responsive layout
+  const itemsPerPage = 2
   const totalPages = Math.ceil(experiences.length / itemsPerPage)
 
   const { currentPageExperiences, startIndex, endIndex } = useMemo(() => {
@@ -41,10 +29,6 @@ export default function VolunteerExperienceSection({
 
     return { currentPageExperiences, startIndex, endIndex }
   }, [experiences, currentPage, itemsPerPage])
-
-  useEffect(() => {
-    setCurrentPage(0)
-  }, [itemsPerPage])
 
   const nextPage = useCallback(() => {
     if (currentPage < totalPages - 1) setCurrentPage((prev) => prev + 1)
@@ -87,8 +71,6 @@ export default function VolunteerExperienceSection({
 
     return pages
   }, [totalPages, currentPage])
-
-  const isMobile = windowWidth < 640
 
   const volunteerStats = useMemo(() => {
     const totalOrganizations = new Set(experiences.map((exp) => exp.organisation)).size
@@ -345,11 +327,7 @@ export default function VolunteerExperienceSection({
         )}
 
         <div className="mb-16 sm:mb-20 lg:mb-24">
-          <ExperienceFocusCards
-            experiences={currentPageExperiences}
-            startIndex={startIndex}
-            isMobile={isMobile}
-          />
+          <ExperienceFocusCards experiences={currentPageExperiences} startIndex={startIndex} />
         </div>
 
         {experiences.length > 2 && (
@@ -369,8 +347,8 @@ export default function VolunteerExperienceSection({
               <div className="flex-shrink-0">
                 <Link href="/volunteer" className="block">
                   <Button
-                    size={isMobile ? 'default' : 'lg'}
-                    className="group bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 min-w-[140px] sm:min-w-[160px]"
+                    size="lg"
+                    className="group bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 min-w-[140px] sm:min-w-[160px] text-sm sm:text-base h-10 sm:h-11"
                   >
                     <Users className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                     <span className="text-sm sm:text-base font-semibold">View All</span>

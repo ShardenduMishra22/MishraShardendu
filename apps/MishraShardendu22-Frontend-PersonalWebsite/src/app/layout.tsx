@@ -32,7 +32,7 @@ const poppins = Poppins({
 const inter = Inter({
   variable: '--font-body',
   subsets: ['latin'],
-  weight: ['400'],
+  weight: ['400', '500'],
   display: 'swap',
   fallback: ['system-ui', 'Arial', 'sans-serif'],
   preload: true,
@@ -241,13 +241,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           storageKey="portfolio-theme"
         >
           <div className="min-h-screen bg-background text-foreground">
-            <div className="fixed bottom-4 right-4 z-50">
-              <ThemeToggleClient />
-            </div>
             {children}
+            {/* Defer all non-critical components to after initial render */}
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  if (typeof window !== 'undefined') {
+                    // Load non-critical components after page is interactive
+                    if ('requestIdleCallback' in window) {
+                      requestIdleCallback(() => {
+                        window.__loadNonCritical = true;
+                      }, { timeout: 2000 });
+                    } else {
+                      setTimeout(() => {
+                        window.__loadNonCritical = true;
+                      }, 2000);
+                    }
+                  }
+                `,
+              }}
+            />
             <DeferredAnalytics />
             <PWARegister />
-            <ToasterClient />
           </div>
         </ThemeProvider>
       </body>

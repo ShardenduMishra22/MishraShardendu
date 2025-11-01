@@ -3,17 +3,28 @@
 import { useEffect, useState } from 'react'
 import { getCachedStats } from '@/lib/cache'
 import { DashboardData } from '@/data/types.data'
+import { GitHubProfileCard } from '../chart/github'
+import { TopRepositoriesCard } from '../chart/repo'
+import { TechnologyStackCard } from '../chart/tech'
 import { LoadingScreen } from '../chart/loader-chart'
 import { DashboardHeader } from '../chart/dash-heaed'
-import { GitHubProfileCard } from '../chart/github'
-import { LeetCodeStatsCard } from '../chart/leet-card'
 import { EnhancedCommitsChart } from '../chart/commit'
-import { TechnologyStackCard } from '../chart/tech'
-import { TopRepositoriesCard } from '../chart/repo'
+import { LeetCodeStatsCard } from '../chart/leet-card'
 
 export default function ModernDeveloperDashboard() {
   const [data, setData] = useState<DashboardData>({})
   const [loading, setLoading] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const cachedLocal = localStorage.getItem('profile_stats')
@@ -48,7 +59,7 @@ export default function ModernDeveloperDashboard() {
             <LeetCodeStatsCard leetcode={data.leetcode} />
           )}
 
-          {data.commits && data.commits.length > 0 && (
+          {!isMobile && data.commits && data.commits.length > 0 && (
             <EnhancedCommitsChart commits={data.commits} />
           )}
 

@@ -98,7 +98,7 @@ export const VolunteerTimeline = ({ experience }: VolunteerTimelineProps) => {
                     initial={{ scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.3, type: 'spring' }}
-                    className="absolute -top-3 -right-3 z-[100] px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-xl border-2 border-white dark:border-gray-800 flex items-center gap-1"
+                    className="absolute -top-3 -right-3 z-[100] px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-xl border-2 border-white dark:border-gray-800"
                     style={{
                       position: 'absolute',
                       zIndex: 100,
@@ -106,7 +106,6 @@ export const VolunteerTimeline = ({ experience }: VolunteerTimelineProps) => {
                       right: '-12px',
                     }}
                   >
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                     CURRENT
                   </motion.div>
                 )}

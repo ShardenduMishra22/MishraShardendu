@@ -10,15 +10,23 @@ export const LazySkillsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
 
   const { hasBeenVisible } = useIntersectionObserver(sectionRef as React.RefObject<Element>, {
-    threshold: 0.1,
-    rootMargin: '100px',
+    threshold: 0.05,
+    rootMargin: '200px',
   })
 
   useEffect(() => {
     if (hasBeenVisible && !loaded) {
-      setLoaded(true)
+      // Defer loading slightly to reduce blocking time
+      const timeout = setTimeout(() => {
+        setLoaded(true)
+      }, 100)
+      return () => clearTimeout(timeout)
     }
   }, [hasBeenVisible, loaded])
 
-  return <div ref={sectionRef}>{loaded ? <SkillsDataLoader /> : <SkillsSkeleton />}</div>
+  return (
+    <div ref={sectionRef} style={{ minHeight: '400px' }}>
+      {loaded ? <SkillsDataLoader /> : <SkillsSkeleton />}
+    </div>
+  )
 }
