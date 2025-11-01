@@ -1,0 +1,16 @@
+{
+  "mobile": {
+    "preload": ["/Professional.webp"],
+    "deferScripts": true,
+    "reduceMotion": true,
+    "disableBackdropBlur": true,
+    "optimizeImages": true
+  },
+  "desktop": {
+    "preload": ["/Professional.webp"],
+    "deferScripts": false,
+    "reduceMotion": false,
+    "disableBackdropBlur": false,
+    "optimizeImages": true
+  }
+}

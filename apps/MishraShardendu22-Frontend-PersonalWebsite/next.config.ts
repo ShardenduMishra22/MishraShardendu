@@ -54,6 +54,8 @@ const nextConfig: NextConfig = {
     ],
     optimizeCss: true,
     scrollRestoration: true,
+    // Aggressive code splitting for mobile
+    webpackBuildWorker: true,
   },
   outputFileTracingRoot: require('path').join(__dirname, '../../'),
   compiler: {
@@ -71,6 +73,12 @@ const nextConfig: NextConfig = {
   compress: true,
   productionBrowserSourceMaps: false,
   generateEtags: true,
+
+  // Optimize chunk sizes for mobile
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
+  },
 
   async headers() {
     return [

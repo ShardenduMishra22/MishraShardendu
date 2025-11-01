@@ -14,10 +14,10 @@ export default function HeroSection() {
           {/* Image container with fixed aspect ratio to prevent CLS */}
           <div className="relative flex justify-center lg:justify-start order-1 lg:order-1">
             <div className="relative w-full max-w-[280px] sm:max-w-[400px] lg:max-w-[500px] aspect-square">
-              {/* Reduced blur and animations on mobile */}
-              <div className="absolute -inset-1.5 sm:-inset-2 bg-linear-to-r from-primary/10 via-secondary/10 to-accent/10 sm:from-primary/20 sm:via-secondary/20 sm:to-accent/20 rounded-xl sm:rounded-2xl sm:blur-lg opacity-40 will-change-auto"></div>
+              {/* Simplified gradient on mobile - no blur */}
+              <div className="absolute -inset-1.5 sm:-inset-2 bg-linear-to-r from-primary/10 via-secondary/10 to-accent/10 sm:from-primary/20 sm:via-secondary/20 sm:to-accent/20 rounded-xl sm:rounded-2xl sm:blur-lg opacity-40"></div>
 
-              <div className="relative bg-linear-to-br from-card to-card/80 p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl border border-border/50 will-change-auto aspect-square">
+              <div className="relative bg-linear-to-br from-card to-card/80 p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl border border-border/50 aspect-square">
                 <Image
                   src="/Professional.webp"
                   alt="Shardendu Mishra - Software Engineer"
@@ -28,20 +28,19 @@ export default function HeroSection() {
                   className="rounded-lg sm:rounded-xl object-cover w-full h-full"
                   sizes="(max-width: 640px) 280px, (max-width: 1024px) 400px, 500px"
                   loading="eager"
-                  quality={85}
-                  placeholder="blur"
-                  blurDataURL="data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAACwAgCdASoQABAAPm0wlkekIqIhMAgAsBIJaQAANR9wAP78/8vf/xv/+8f/+P/+v/+v/+f/+P/+v/+P/+v/+v/+v/+v/+P/+v/+v/+v/+v/+v/+v/+v/+v/+v/+v/+v/+v/+v/+AAA="
+                  quality={90}
+                  decoding="async"
                 />
               </div>
 
               {/* Static badges on mobile, animated on desktop */}
-              <div className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 bg-primary/90 backdrop-blur-sm rounded-full p-1.5 sm:p-2.5 border border-primary/30 shadow-lg">
+              <div className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 bg-primary/90 sm:backdrop-blur-sm rounded-full p-1.5 sm:p-2.5 border border-primary/30 shadow-lg">
                 <Code
                   className="h-3 w-3 sm:h-4 sm:w-4 text-primary-foreground"
                   aria-hidden="true"
                 />
               </div>
-              <div className="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 bg-secondary/90 backdrop-blur-sm rounded-full p-1.5 sm:p-2.5 border border-secondary/30 shadow-lg">
+              <div className="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 bg-secondary/90 sm:backdrop-blur-sm rounded-full p-1.5 sm:p-2.5 border border-secondary/30 shadow-lg">
                 <Coffee
                   className="h-3 w-3 sm:h-4 sm:w-4 text-secondary-foreground"
                   aria-hidden="true"
@@ -78,7 +77,7 @@ export default function HeroSection() {
               </div>
 
               <div className="flex items-center justify-center lg:justify-start px-4 sm:px-0">
-                <div className="flex items-center space-x-2 bg-card/80 backdrop-blur-sm rounded-full px-3 py-2 sm:px-4 sm:py-2 border border-border/50 max-w-full overflow-hidden">
+                <div className="flex items-center space-x-2 bg-card/80 sm:backdrop-blur-sm rounded-full px-3 py-2 sm:px-4 sm:py-2 border border-border/50 max-w-full overflow-hidden">
                   <Mail
                     className="h-3 w-3 sm:h-4 sm:w-4 text-primary shrink-0"
                     aria-hidden="true"
@@ -116,7 +115,7 @@ export default function HeroSection() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="group border-2 border-primary/30 hover:border-primary/50 bg-background/80 backdrop-blur-sm hover:bg-primary/5 text-foreground hover:text-primary transition-all duration-200 shadow-lg w-full sm:w-auto touch-manipulation min-h-11 flex-col sm:flex-row py-2 sm:py-0"
+                    className="group border-2 border-primary/30 hover:border-primary/50 bg-background/80 sm:backdrop-blur-sm hover:bg-primary/5 text-foreground hover:text-primary transition-all duration-200 shadow-lg w-full sm:w-auto touch-manipulation min-h-11 flex-col sm:flex-row py-2 sm:py-0"
                   >
                     <div className="flex items-center justify-center w-full sm:w-auto">
                       <LinkedinIcon

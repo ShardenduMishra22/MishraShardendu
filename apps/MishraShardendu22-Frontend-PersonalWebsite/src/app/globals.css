@@ -41,12 +41,12 @@ section {
     aspect-ratio: attr(width) / attr(height);
   }
 
-  /* Disable expensive animations on mobile - but keep pulse animations normal */
+  /* Disable expensive animations on mobile - critical for TBT reduction */
   *:not(.animate-pulse):not(.animate-pulse-soft),
   *:not(.animate-pulse):not(.animate-pulse-soft)::before,
   *:not(.animate-pulse):not(.animate-pulse-soft)::after {
-    animation-duration: 0.2s !important;
-    transition-duration: 0.2s !important;
+    animation-duration: 0.01s !important;
+    transition-duration: 0.1s !important;
   }
 
   /* Keep pulse animations at normal speed */
@@ -58,14 +58,11 @@ section {
   /* Remove blur effects on mobile - heavy performance cost */
   .blur-md,
   .blur-lg,
-  .blur-xl {
-    filter: none !important;
-  }
-
-  /* Disable backdrop blur on mobile - very expensive */
+  .blur-xl,
   .backdrop-blur,
   .backdrop-blur-sm,
   .backdrop-blur-md {
+    filter: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
@@ -79,12 +76,18 @@ section {
   .shadow-lg,
   .shadow-xl,
   .shadow-2xl {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
   }
 
   /* Disable hover effects on mobile */
   *:hover {
     transform: none !important;
+  }
+  
+  /* Optimize font rendering on mobile */
+  body {
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: subpixel-antialiased;
   }
 }
 

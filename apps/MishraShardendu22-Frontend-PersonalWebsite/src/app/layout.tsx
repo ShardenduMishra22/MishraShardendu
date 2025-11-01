@@ -242,25 +242,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           <div className="min-h-screen bg-background text-foreground">
             {children}
-            {/* Defer all non-critical components to after initial render */}
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  if (typeof window !== 'undefined') {
-                    // Load non-critical components after page is interactive
-                    if ('requestIdleCallback' in window) {
-                      requestIdleCallback(() => {
-                        window.__loadNonCritical = true;
-                      }, { timeout: 2000 });
-                    } else {
-                      setTimeout(() => {
-                        window.__loadNonCritical = true;
-                      }, 2000);
-                    }
-                  }
-                `,
-              }}
-            />
+            {/* Defer all analytics to after page interactive - critical for mobile performance */}
             <DeferredAnalytics />
             <PWARegister />
           </div>

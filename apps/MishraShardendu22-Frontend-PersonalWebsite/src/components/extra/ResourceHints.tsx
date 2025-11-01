@@ -1,33 +1,35 @@
-import Script from 'next/script'
-
-/**
- * Resource hints for performance optimization
- * Preconnects to critical third-party origins
- * Optimized for mobile performance
- */
 export default function ResourceHints() {
   return (
     <>
-      {/* Preconnect to critical origins */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-      {/* DNS prefetch for analytics - deferred for mobile */}
-      <link rel="dns-prefetch" href="https://vercel.live" />
-      <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-
-      {/* Mobile viewport optimization */}
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover"
       />
 
-      {/* Reduce layout shift by defining color scheme early */}
       <meta name="color-scheme" content="dark light" />
 
-      {/* Performance hints for browser */}
       <meta httpEquiv="x-dns-prefetch-control" content="on" />
+
+      <link
+        rel="preload"
+        as="image"
+        href="/Professional.webp"
+        type="image/webp"
+        fetchPriority="high"
+        media="(max-width: 640px)"
+        imageSrcSet="/Professional.webp 280w"
+        imageSizes="280px"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="/Professional.webp"
+        type="image/webp"
+        fetchPriority="high"
+        media="(min-width: 641px) and (max-width: 1024px)"
+        imageSrcSet="/Professional.webp 400w"
+        imageSizes="400px"
+      />
     </>
   )
 }
