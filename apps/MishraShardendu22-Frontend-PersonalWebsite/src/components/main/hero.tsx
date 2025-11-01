@@ -94,19 +94,19 @@ export default function HeroSection() {
                 <Link href={GitHubProject} className="w-full sm:w-auto" prefetch={false}>
                   <Button
                     size="lg"
-                    className="group bg-linear-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground border-0 shadow-lg transition-all duration-200 w-full sm:w-auto touch-manipulation min-h-11"
+                    className="group bg-linear-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground border-0 shadow-lg transition-all duration-200 w-full sm:w-auto touch-manipulation min-h-11 flex-col sm:flex-row py-2 sm:py-0"
                   >
-                    <Github className="mr-2 h-4 w-4 sm:h-5 sm:w-5 shrink-0" aria-hidden="true" />
-                    <span className="text-sm sm:text-base truncate hidden sm:inline">
-                      GitHub - Check Out My Projects
-                    </span>
-                    <span className="text-sm truncate sm:hidden block w-full mt-1">
-                      View GitHub Projects
-                    </span>
-                    <ArrowRight
-                      className="ml-2 h-3 w-3 sm:h-4 sm:w-4 shrink-0"
-                      aria-hidden="true"
-                    />
+                    <div className="flex items-center justify-center w-full sm:w-auto">
+                      <Github className="mr-2 h-4 w-4 sm:h-5 sm:w-5 shrink-0" aria-hidden="true" />
+                      <span className="text-sm sm:text-base hidden sm:inline">
+                        GitHub - Check Out My Projects
+                      </span>
+                      <ArrowRight
+                        className="ml-2 h-3 w-3 sm:h-4 sm:w-4 shrink-0 hidden sm:inline"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <span className="text-sm sm:hidden mt-1">View GitHub Projects</span>
                   </Button>
                 </Link>
 
@@ -114,16 +114,18 @@ export default function HeroSection() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="group border-2 border-primary/30 hover:border-primary/50 bg-background/80 backdrop-blur-sm hover:bg-primary/5 text-foreground hover:text-primary transition-all duration-200 shadow-lg w-full sm:w-auto touch-manipulation min-h-11"
+                    className="group border-2 border-primary/30 hover:border-primary/50 bg-background/80 backdrop-blur-sm hover:bg-primary/5 text-foreground hover:text-primary transition-all duration-200 shadow-lg w-full sm:w-auto touch-manipulation min-h-11 flex-col sm:flex-row py-2 sm:py-0"
                   >
-                    <LinkedinIcon
-                      className="mr-2 h-4 w-4 sm:h-5 sm:w-5 shrink-0"
-                      aria-hidden="true"
-                    />
-                    <span className="text-sm sm:text-base truncate hidden sm:inline">
-                      Super Active on LinkedIn - Let&apos;s Connect
-                    </span>
-                    <span className="text-sm truncate sm:hidden">Connect on LinkedIn</span>
+                    <div className="flex items-center justify-center w-full sm:w-auto">
+                      <LinkedinIcon
+                        className="mr-2 h-4 w-4 sm:h-5 sm:w-5 shrink-0"
+                        aria-hidden="true"
+                      />
+                      <span className="text-sm sm:text-base hidden sm:inline">
+                        Super Active on LinkedIn - Let&apos;s Connect
+                      </span>
+                    </div>
+                    <span className="text-sm sm:hidden mt-1">Connect on LinkedIn</span>
                   </Button>
                 </Link>
               </div>

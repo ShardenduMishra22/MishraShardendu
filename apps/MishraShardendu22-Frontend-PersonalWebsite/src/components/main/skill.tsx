@@ -10,8 +10,6 @@ interface SkillsSectionProps {
 
 export default function SkillsSection({ skills }: SkillsSectionProps) {
   const [currentPage, setCurrentPage] = useState(1)
-
-  // Use maximum items per page - CSS grid will handle responsive layout
   const itemsPerPage = 18
 
   const { totalPages, currentSkills, startIndex, endIndex } = useMemo(() => {
@@ -93,19 +91,19 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
         </div>
 
         <div className="mx-auto mt-8 sm:mt-16 lg:mt-20 max-w-6xl">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 lg:gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-2 sm:gap-3 lg:gap-4 auto-rows-fr">
             {currentSkills.map((skill, index) => (
               <div key={startIndex + index} className="group relative">
                 <Badge
                   variant="secondary"
-                  className="relative w-full justify-center py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 cursor-default bg-secondary/10 hover:bg-secondary/20 text-secondary-foreground border border-secondary/20 hover:border-secondary/40 hover:shadow-lg hover:shadow-secondary/10 min-h-[2.5rem] sm:min-h-[3rem] flex items-center"
+                  className="relative w-full h-full justify-center py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 cursor-default bg-secondary/10 hover:bg-secondary/20 text-secondary-foreground border border-secondary/20 hover:border-secondary/40 hover:shadow-lg hover:shadow-secondary/10 min-h-10 sm:min-h-12 flex items-center"
                 >
                   <span className="relative z-10 text-foreground group-hover:text-foreground text-center leading-tight">
                     {skill}
                   </span>
                 </Badge>
 
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+                <div className="absolute inset-0 rounded-lg bg-linear-to-r from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
               </div>
             ))}
           </div>

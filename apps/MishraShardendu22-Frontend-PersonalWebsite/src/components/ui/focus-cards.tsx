@@ -28,11 +28,11 @@ export const CertificationFocusCard = React.memo(
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        'transition-all duration-300 ease-out',
+        'transition-all duration-300 ease-out h-full',
         hovered !== null && hovered !== index && 'blur-sm scale-[0.98] opacity-70'
       )}
     >
-      <Card className="group relative overflow-hidden min-h-[20rem] hover:shadow-xl sm:hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 border-border/50 hover:border-primary/30 bg-card/80 backdrop-blur-sm">
+      <Card className="group relative overflow-hidden h-full flex flex-col hover:shadow-xl sm:hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 border-border/50 hover:border-primary/30 bg-card/80 backdrop-blur-sm">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
         <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-primary-foreground text-xs sm:text-sm font-bold shadow-lg border border-primary/20">
@@ -134,7 +134,7 @@ export function CertificationFocusCards({
   const [hovered, setHovered] = useState<number | null>(null)
 
   return (
-    <div className="mx-auto mt-8 sm:mt-16 lg:mt-20 grid max-w-2xl grid-cols-1 gap-4 sm:gap-6 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+    <div className="mx-auto mt-8 sm:mt-16 lg:mt-20 grid max-w-2xl grid-cols-1 gap-4 sm:gap-6 lg:mx-0 lg:max-w-none lg:grid-cols-2 auto-rows-fr">
       {certifications.map((cert, index) => (
         <CertificationFocusCard
           key={cert.inline?.id || cert.inline.id}
