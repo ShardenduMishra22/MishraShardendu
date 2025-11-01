@@ -1,11 +1,11 @@
 'use client'
 
-import { Briefcase, Mail, ArrowRight, Code, Coffee, LinkedinIcon, Github } from 'lucide-react'
 import Link from 'next/link'
-import { Button } from '../ui/button'
 import Image from 'next/image'
-import { GitHubProject, LinkedInProfile } from '@/data/static_link'
+import { Button } from '../ui/button'
 import { useState, useEffect } from 'react'
+import { GitHubProject, LinkedInProfile } from '@/data/static_link'
+import { Mail, ArrowRight, Code, Coffee, LinkedinIcon, Github } from 'lucide-react'
 
 export default function HeroSection() {
   const [windowWidth, setWindowWidth] = useState(0)
@@ -28,11 +28,11 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           <div className="relative flex justify-center lg:justify-start order-1 lg:order-1">
             <div className="relative group">
-              <div className="absolute -inset-1.5 sm:-inset-2 bg-gradient-to-r from-primary/15 via-secondary/15 to-accent/15 sm:from-primary/20 sm:via-secondary/20 sm:to-accent/20 rounded-xl sm:rounded-2xl blur-md sm:blur-lg opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
+              <div className="absolute -inset-1.5 sm:-inset-2 bg-linear-to-r from-primary/15 via-secondary/15 to-accent/15 sm:from-primary/20 sm:via-secondary/20 sm:to-accent/20 rounded-xl sm:rounded-2xl blur-md sm:blur-lg opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
 
-              <div className="relative bg-gradient-to-br from-card to-card/80 p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl border border-border/50 group-hover:border-primary/30 transition-all duration-500">
+              <div className="relative bg-linear-to-br from-card to-card/80 p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl border border-border/50 group-hover:border-primary/30 transition-all duration-500">
                 <Image
-                  src="/Professional.webp"
+                  src="https://raw.githubusercontent.com/MishraShardendu22/MishraShardendu22/refs/heads/main/Professional.webp"
                   alt="Shardendu Mishra - Software Engineer"
                   width={500}
                   height={500}
@@ -56,13 +56,13 @@ export default function HeroSection() {
             <div className="space-y-6 sm:space-y-8">
               <div className="space-y-3 sm:space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight">
-                  <span className="bg-gradient-to-r from-foreground via-primary to-secondary bg-clip-text text-transparent block">
+                  <span className="bg-linear-to-r from-foreground via-primary to-secondary bg-clip-text text-transparent block">
                     Shardendu
                   </span>
                   <span className="text-foreground block">Mishra</span>
                 </h1>
 
-                <div className="w-12 sm:w-16 h-0.5 sm:h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto lg:mx-0"></div>
+                <div className="w-12 sm:w-16 h-0.5 sm:h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto lg:mx-0"></div>
               </div>
 
               <div className="space-y-3 sm:space-y-4 px-4 sm:px-0">
@@ -81,7 +81,7 @@ export default function HeroSection() {
 
               <div className="flex items-center justify-center lg:justify-start px-4 sm:px-0">
                 <div className="flex items-center space-x-2 bg-card/80 backdrop-blur-sm rounded-full px-3 py-2 sm:px-4 sm:py-2 border border-border/50 hover:border-primary/30 transition-all duration-300 group max-w-full overflow-hidden">
-                  <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-primary group-hover:scale-110 transition-transform flex-shrink-0" />
+                  <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-primary group-hover:scale-110 transition-transform shrink-0" />
                   <Link
                     href="mailto:mishrashardendu22@gmail.com"
                     className="text-foreground hover:text-primary transition-colors duration-300 font-medium text-xs sm:text-sm lg:text-base truncate"
@@ -95,13 +95,13 @@ export default function HeroSection() {
                 <Link href={GitHubProject} className="w-full sm:w-auto">
                   <Button
                     size={isMobile ? 'default' : 'lg'}
-                    className="group bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground border-0 shadow-lg hover:shadow-primary/25 transition-all duration-300 w-full sm:w-auto touch-manipulation"
+                    className="group bg-linear-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground border-0 shadow-lg hover:shadow-primary/25 transition-all duration-300 w-full sm:w-auto touch-manipulation"
                   >
-                    <Github className="mr-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:scale-110 flex-shrink-0" />
+                    <Github className="mr-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:scale-110 shrink-0" />
                     <span className="text-sm sm:text-base truncate">
                       {isMobile ? 'View GitHub Projects' : 'GitHub - Check Out My Projects'}
                     </span>
-                    <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1 flex-shrink-0" />
+                    <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1 shrink-0" />
                   </Button>
                 </Link>
 
@@ -111,7 +111,7 @@ export default function HeroSection() {
                     size={isMobile ? 'default' : 'lg'}
                     className="group border-2 border-primary/30 hover:border-primary/50 bg-background/80 backdrop-blur-sm hover:bg-primary/5 text-foreground hover:text-primary transition-all duration-300 shadow-lg w-full sm:w-auto touch-manipulation"
                   >
-                    <LinkedinIcon className="mr-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:scale-110 flex-shrink-0" />
+                    <LinkedinIcon className="mr-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:scale-110 shrink-0" />
                     <span className="text-sm sm:text-base truncate">
                       {isMobile
                         ? 'Connect on LinkedIn'

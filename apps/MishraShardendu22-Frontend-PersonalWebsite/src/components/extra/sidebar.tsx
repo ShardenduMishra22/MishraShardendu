@@ -36,6 +36,7 @@ export function DesktopSidebar({ activeSection }: { activeSection: string }) {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative w-10 h-10 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl flex items-center justify-center border border-border/40 shadow-lg transition-all duration-300 hover:scale-105 hover:border-primary/40">
                 <Dribbble className="h-5 w-5 text-primary" />
+                Made Linux in Kernel and Go Lang in Mind
               </div>
             </div>
 

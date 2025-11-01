@@ -65,8 +65,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
-
-  // Production optimizations
   productionBrowserSourceMaps: false,
   generateEtags: true,
 
