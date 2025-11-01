@@ -54,8 +54,6 @@ const nextConfig: NextConfig = {
     ],
     optimizeCss: true,
     scrollRestoration: true,
-    // Aggressive code splitting for mobile
-    webpackBuildWorker: true,
   },
   outputFileTracingRoot: require('path').join(__dirname, '../../'),
   compiler: {
