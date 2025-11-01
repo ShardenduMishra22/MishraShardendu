@@ -17,9 +17,22 @@ export default function VolunteerExperienceSection({
   experiences,
 }: VolunteerExperienceSectionProps) {
   const [currentPage, setCurrentPage] = useState(0)
+  const [windowWidth, setWindowWidth] = useState(0)
 
-  // Use maximum items per page - CSS will handle responsive layout
-  const itemsPerPage = 2
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Show 1 item on mobile, 2 on desktop
+  const getItemsPerPage = () => {
+    if (windowWidth < 640) return 1
+    return 2
+  }
+
+  const itemsPerPage = getItemsPerPage()
   const totalPages = Math.ceil(experiences.length / itemsPerPage)
 
   const { currentPageExperiences, startIndex, endIndex } = useMemo(() => {

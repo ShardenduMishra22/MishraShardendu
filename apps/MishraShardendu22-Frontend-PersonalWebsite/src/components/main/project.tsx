@@ -4,10 +4,9 @@ import Link from 'next/link'
 import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
 import { Project } from '@/data/types.data'
-import { HeroParallax } from '../ui/hero-parallax'
 import { useState, useMemo, useEffect } from 'react'
-import { Star, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { ProjectFocusCards } from '../ui/focus-cards-projects'
+import { Star, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 
 export interface ProjectsSectionProps {
   projects: Project[]
@@ -15,25 +14,24 @@ export interface ProjectsSectionProps {
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [currentPage, setCurrentPage] = useState(0)
+  const [windowWidth, setWindowWidth] = useState(0)
 
-  // Use CSS responsive grid instead of JS detection
-  const windowWidth = 1024 // Default to desktop
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const sortedProjects = useMemo(() => [...projects].sort((a, b) => a.order - b.order), [projects])
 
-  const heroParallaxProjects = useMemo(() => {
-    return sortedProjects.slice(0, 15).map((project) => ({
-      inline: project.inline,
-      project_name: project.project_name,
-      small_description: project.small_description,
-      skills: project.skills,
-      project_live_link: project.project_live_link,
-      project_repository: project.project_repository,
-    }))
-  }, [sortedProjects])
+  // Show 1 item on mobile, 4 on desktop
+  const getItemsPerPage = () => {
+    if (windowWidth < 640) return 1
+    return 4
+  }
 
-  // Use CSS grid instead of dynamic items per page
-  const projectsPerPage = 4
+  const projectsPerPage = getItemsPerPage()
   const totalPages = Math.ceil(sortedProjects.length / projectsPerPage)
 
   const { currentPageProjects, startIndex, endIndex } = useMemo(() => {

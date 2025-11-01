@@ -15,9 +15,22 @@ interface CertificationsSectionProps {
 
 export default function CertificationsSection({ certifications }: CertificationsSectionProps) {
   const [currentPage, setCurrentPage] = useState(0)
+  const [windowWidth, setWindowWidth] = useState(0)
 
-  // Use CSS-based pagination - always show 1 item on mobile, 2 on desktop
-  const itemsPerPage = 2 // Desktop default, CSS will handle mobile
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Show 1 item on mobile, 2 on desktop
+  const getItemsPerPage = () => {
+    if (windowWidth < 640) return 1
+    return 2
+  }
+
+  const itemsPerPage = getItemsPerPage()
   const totalPages = Math.ceil(certifications.length / itemsPerPage)
 
   const { currentPageCertifications, startIndex, endIndex } = useMemo(() => {
