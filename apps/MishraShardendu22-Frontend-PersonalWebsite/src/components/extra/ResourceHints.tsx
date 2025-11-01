@@ -10,26 +10,31 @@ export default function ResourceHints() {
 
       <meta httpEquiv="x-dns-prefetch-control" content="on" />
 
+      {/* Preload critical hero image - LCP optimization */}
       <link
         rel="preload"
         as="image"
-        href="/Professional.webp"
-        type="image/webp"
+        href="/Professional.avif"
+        type="image/avif"
         fetchPriority="high"
         media="(max-width: 640px)"
-        imageSrcSet="/Professional.webp 280w"
+        imageSrcSet="/Professional.avif 280w"
         imageSizes="280px"
       />
       <link
         rel="preload"
         as="image"
-        href="/Professional.webp"
-        type="image/webp"
+        href="/Professional.avif"
+        type="image/avif"
         fetchPriority="high"
         media="(min-width: 641px) and (max-width: 1024px)"
-        imageSrcSet="/Professional.webp 400w"
+        imageSrcSet="/Professional.avif 400w"
         imageSizes="400px"
       />
+
+      {/* Preconnect to external domains for faster third-party loading */}
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     </>
   )
 }

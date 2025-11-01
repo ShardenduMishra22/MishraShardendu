@@ -23,7 +23,7 @@ export function PersonJsonLd() {
     url: BASE_URL,
     image: {
       '@type': 'ImageObject',
-      url: `${BASE_URL}/Professional.webp`,
+      url: `${BASE_URL}/Professional.avif`,
       width: 512,
       height: 512,
     },
@@ -148,7 +148,7 @@ export const StructuredData = () => {
     url: BASE_URL,
     image: {
       '@type': 'ImageObject',
-      url: `${BASE_URL}/Professional.webp`,
+      url: `${BASE_URL}/Professional.avif`,
       width: 512,
       height: 512,
     },
@@ -267,11 +267,11 @@ export function OrganizationJsonLd() {
     url: BASE_URL,
     logo: {
       '@type': 'ImageObject',
-      url: `${BASE_URL}/Professional.webp`,
+      url: `${BASE_URL}/Professional.avif`,
     },
     image: {
       '@type': 'ImageObject',
-      url: `${BASE_URL}/Professional.webp`,
+      url: `${BASE_URL}/Professional.avif`,
     },
     sameAs: [LinkedInProfile, GitHubProject, XProfile, YouTubeChannel],
     founder: {

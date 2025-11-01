@@ -54,6 +54,12 @@ const nextConfig: NextConfig = {
     ],
     optimizeCss: true,
     scrollRestoration: true,
+    // Mobile optimization flags
+    cpus: 4,
+    webpackBuildWorker: true,
+    optimisticClientCache: true,
+    // Enhanced module optimization for better tree-shaking
+    esmExternals: true,
   },
   outputFileTracingRoot: require('path').join(__dirname, '../../'),
   compiler: {
@@ -76,6 +82,80 @@ const nextConfig: NextConfig = {
   onDemandEntries: {
     maxInactiveAge: 25 * 1000,
     pagesBufferLength: 2,
+  },
+
+  // Mobile-specific webpack configuration
+  webpack: (config, { dev, isServer }) => {
+    // Enable tree shaking
+    config.optimization = {
+      ...config.optimization,
+      usedExports: true,
+      sideEffects: false,
+      // Split chunks for better caching and mobile loading
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          // Separate framework code
+          framework: {
+            name: 'framework',
+            test: /[\\/]node_modules[\\/](react|react-dom|next)[\\/]/,
+            priority: 40,
+            enforce: true,
+          },
+          // Heavy libraries - separate chunks for better mobile loading
+          motion: {
+            name: 'framer-motion',
+            test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+            priority: 35,
+            enforce: true,
+          },
+          three: {
+            name: 'three-js',
+            test: /[\\/]node_modules[\\/](@react-three|three)[\\/]/,
+            priority: 35,
+            enforce: true,
+          },
+          particles: {
+            name: 'particles',
+            test: /[\\/]node_modules[\\/]@tsparticles[\\/]/,
+            priority: 35,
+            enforce: true,
+          },
+          charts: {
+            name: 'charts',
+            test: /[\\/]node_modules[\\/](@nivo|recharts)[\\/]/,
+            priority: 35,
+            enforce: true,
+          },
+          // UI components
+          ui: {
+            name: 'ui',
+            test: /[\\/]node_modules[\\/]@radix-ui[\\/]/,
+            priority: 30,
+            enforce: true,
+          },
+          // Common vendor code
+          vendor: {
+            name: 'vendor',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 20,
+            minChunks: 2,
+          },
+        },
+      },
+    }
+
+    // Reduce bundle size by ignoring unnecessary files
+    config.resolve.alias = {
+      ...config.resolve.alias,
+    }
+
+    if (!dev && !isServer) {
+      // Mobile-specific optimizations
+      config.optimization.minimize = true
+    }
+
+    return config
   },
 
   async headers() {

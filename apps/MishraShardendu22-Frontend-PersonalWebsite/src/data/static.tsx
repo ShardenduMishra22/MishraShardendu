@@ -53,9 +53,9 @@ export const personalInfo = {
   },
 
   image: {
-    profile: '/Professional.webp',
+    profile: '/Professional.avif',
     ogImage: '/og-image.png',
-    fallbackImage: '/Professional.webp',
+    fallbackImage: '/Professional.avif',
     width: 512,
     height: 512,
   },

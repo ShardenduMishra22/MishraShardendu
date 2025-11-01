@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useRef, useEffect, useState } from 'react'
+import { useMemo, useRef, useEffect, useState, memo, useCallback } from 'react'
 import Image from 'next/image'
 import { Experience, VolunteerExperience } from '@/data/types.data'
 import { useIsMobile } from '@/hooks/use-mobile'
@@ -33,13 +33,21 @@ interface ProcessedExperience {
   technologies?: string[]
 }
 
-const CombinedTimeline = ({
+/**
+ * Optimized Timeline Component with React.memo and useMemo
+ * Reduces re-renders and expensive calculations on mobile
+ */
+const CombinedTimeline = memo(function CombinedTimeline({
   experiences,
   volunteerExperiences: volunteerExpProps,
-}: CombinedTimelineProps) => {
+}: CombinedTimelineProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const isMobile = useIsMobile()
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
+
+  // Memoize hover handlers to prevent re-creation
+  const handleMouseEnter = useCallback((id: string) => setHoveredCard(id), [])
+  const handleMouseLeave = useCallback(() => setHoveredCard(null), [])
 
   // Track current month to ensure timeline updates monthly
   const [currentMonth, setCurrentMonth] = useState(() => {
@@ -62,6 +70,7 @@ const CombinedTimeline = ({
     return () => clearInterval(interval)
   }, [currentMonth])
 
+  // Memoize processed data to avoid expensive recalculations
   const processedData = useMemo(() => {
     const allExperiences: ProcessedExperience[] = []
 
@@ -167,29 +176,36 @@ const CombinedTimeline = ({
     return { allExperiences, months, earliestStart, latestEnd }
   }, [experiences, volunteerExpProps, currentMonth])
 
-  const getMonthPosition = (date: Date) => {
-    const monthIndex = processedData.months.findIndex(
-      (m) => m.date.getFullYear() === date.getFullYear() && m.date.getMonth() === date.getMonth()
-    )
-    return monthIndex >= 0 ? monthIndex * (isMobile ? 80 : 120) + 24 : 24
-  }
+  // Memoize position calculations
+  const getMonthPosition = useCallback(
+    (date: Date) => {
+      const monthIndex = processedData.months.findIndex(
+        (m) => m.date.getFullYear() === date.getFullYear() && m.date.getMonth() === date.getMonth()
+      )
+      return monthIndex >= 0 ? monthIndex * (isMobile ? 80 : 120) + 24 : 24
+    },
+    [processedData.months, isMobile]
+  )
 
-  const getExperiencePosition = (exp: ProcessedExperience) => {
-    const startPos = getMonthPosition(exp.startMonth)
+  const getExperiencePosition = useCallback(
+    (exp: ProcessedExperience) => {
+      const startPos = getMonthPosition(exp.startMonth)
 
-    // Clamp end date to current month if it extends into future
-    const now = new Date()
-    const currentMonthDate = new Date(now.getFullYear(), now.getMonth(), 1)
-    const effectiveEndMonth = exp.endMonth > currentMonthDate ? currentMonthDate : exp.endMonth
+      // Clamp end date to current month if it extends into future
+      const now = new Date()
+      const currentMonthDate = new Date(now.getFullYear(), now.getMonth(), 1)
+      const effectiveEndMonth = exp.endMonth > currentMonthDate ? currentMonthDate : exp.endMonth
 
-    const endPos = getMonthPosition(effectiveEndMonth)
-    const minWidth = isMobile ? 80 : 120
+      const endPos = getMonthPosition(effectiveEndMonth)
+      const minWidth = isMobile ? 80 : 120
 
-    return {
-      left: startPos,
-      width: Math.max(endPos - startPos + (isMobile ? 80 : 120), minWidth),
-    }
-  }
+      return {
+        left: startPos,
+        width: Math.max(endPos - startPos + (isMobile ? 80 : 120), minWidth),
+      }
+    },
+    [getMonthPosition, isMobile]
+  )
 
   useEffect(() => {
     if (scrollContainerRef.current) {
@@ -701,6 +717,6 @@ const CombinedTimeline = ({
       </div>
     </section>
   )
-}
+})
 
 export default CombinedTimeline

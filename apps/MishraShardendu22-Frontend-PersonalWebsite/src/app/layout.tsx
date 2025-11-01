@@ -134,7 +134,7 @@ export const metadata: Metadata = {
         alt: 'Shardendu Mishra - Software Developer Portfolio',
       },
       {
-        url: '/Professional.webp',
+        url: '/Professional.avif',
         width: 512,
         height: 512,
         alt: 'Shardendu Mishra Professional Photo',

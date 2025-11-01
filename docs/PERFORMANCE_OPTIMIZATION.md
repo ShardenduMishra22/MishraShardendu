@@ -44,7 +44,7 @@ Added `optimizePackageImports` for 20+ libraries:
 
 #### Asset Preloading
 
-- Critical images (Professional.webp)
+- Critical images (Professional.avif)
 
 **Impact**: Reduces DNS lookup time and establishes early connections
 

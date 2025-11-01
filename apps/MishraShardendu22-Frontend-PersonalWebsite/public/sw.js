@@ -9,7 +9,7 @@ const STATIC_ASSETS = [
   '/icons/icon-192.png',
   '/icons/icon-512.png',
   '/favicon.ico',
-  '/Professional.webp',
+  '/Professional.avif',
 ]
 
 self.addEventListener('install', (event) => {

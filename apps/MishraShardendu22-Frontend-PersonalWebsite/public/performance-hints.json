@@ -1,13 +1,13 @@
 {
   "mobile": {
-    "preload": ["/Professional.webp"],
+    "preload": ["/Professional.avif"],
     "deferScripts": true,
     "reduceMotion": true,
     "disableBackdropBlur": true,
     "optimizeImages": true
   },
   "desktop": {
-    "preload": ["/Professional.webp"],
+    "preload": ["/Professional.avif"],
     "deferScripts": false,
     "reduceMotion": false,
     "disableBackdropBlur": false,

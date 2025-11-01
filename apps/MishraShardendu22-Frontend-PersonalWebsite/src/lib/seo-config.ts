@@ -19,12 +19,12 @@ export const seoConfig = {
     twitter: '@Shardendu_M',
     github: 'MishraShardendu22',
     linkedin: 'shardendumishra22',
-    image: '/Professional.webp',
+    image: '/Professional.avif',
   },
 
   images: {
     ogImage: '/og-image.png',
-    fallbackImage: '/Professional.webp',
+    fallbackImage: '/Professional.avif',
     icon: '/favicon.ico',
     appleIcon: '/icons/icon-192.png',
   },
