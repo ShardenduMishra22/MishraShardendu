@@ -6,7 +6,7 @@ import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
 import { Experience } from '@/data/types.data'
 import { ExperienceFocusCards } from '../ui/focus-cards-exp'
-import React, { useState, useMemo, useEffect, useCallback } from 'react'
+import { useState, useMemo, useEffect, useCallback } from 'react'
 import { ArrowRight, ChevronLeft, ChevronRight, Briefcase } from 'lucide-react'
 
 interface ExperienceSectionProps {
@@ -16,10 +16,6 @@ interface ExperienceSectionProps {
 export default function ExperienceSection({ experiences }: ExperienceSectionProps) {
   const [currentPage, setCurrentPage] = useState(0)
   const [windowWidth, setWindowWidth] = useState(0)
-  const paginationRef = React.useRef<HTMLDivElement>(null)
-  const [isDragging, setIsDragging] = useState(false)
-  const [startX, setStartX] = useState(0)
-  const [scrollLeft, setScrollLeft] = useState(0)
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth)
@@ -138,14 +134,14 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6 sm:mb-8">
-            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
               Work
             </span>{' '}
             <span className="text-foreground">Experience</span>
           </h1>
 
           <div
-            className="mx-auto w-16 sm:w-24 lg:w-32 h-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full shadow-lg mb-6 sm:mb-8"
+            className="mx-auto w-16 sm:w-24 lg:w-32 h-1 bg-linear-to-r from-primary via-secondary to-accent rounded-full shadow-lg mb-6 sm:mb-8"
             aria-hidden="true"
           />
 
@@ -158,7 +154,7 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
 
           <div className="max-w-4xl mx-auto mb-6 sm:mb-8">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/20 rounded-xl p-4 border border-blue-200/50 dark:border-blue-800/30">
+              <div className="bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/20 rounded-xl p-4 border border-blue-200/50 dark:border-blue-800/30">
                 <div className="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">
                   {experienceStats.companies}
                 </div>
@@ -167,7 +163,7 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-900/20 rounded-xl p-4 border border-green-200/50 dark:border-green-800/30">
+              <div className="bg-linear-to-br from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-900/20 rounded-xl p-4 border border-green-200/50 dark:border-green-800/30">
                 <div className="text-2xl sm:text-3xl font-bold text-green-600 dark:text-green-400">
                   {experienceStats.positions}
                 </div>
@@ -176,7 +172,7 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-900/20 rounded-xl p-4 border border-purple-200/50 dark:border-purple-800/30">
+              <div className="bg-linear-to-br from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-900/20 rounded-xl p-4 border border-purple-200/50 dark:border-purple-800/30">
                 <div className="text-2xl sm:text-3xl font-bold text-purple-600 dark:text-purple-400">
                   {experienceStats.projects}
                 </div>
@@ -185,7 +181,7 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-950/30 dark:to-orange-900/20 rounded-xl p-4 border border-orange-200/50 dark:border-orange-800/30">
+              <div className="bg-linear-to-br from-orange-50 to-orange-100 dark:from-orange-950/30 dark:to-orange-900/20 rounded-xl p-4 border border-orange-200/50 dark:border-orange-800/30">
                 <div className="text-2xl sm:text-3xl font-bold text-orange-600 dark:text-orange-400">
                   {experienceStats.technologies}
                 </div>
@@ -245,7 +241,7 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
                           className={cn(
                             'w-10 h-10 rounded-full font-semibold transition-all duration-300 text-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2',
                             currentPage === pageNum
-                              ? 'bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-lg shadow-primary/25 scale-105'
+                              ? 'bg-linear-to-r from-primary to-secondary text-primary-foreground shadow-lg shadow-primary/25 scale-105'
                               : 'bg-card/50 hover:bg-primary/5 border border-primary/20 hover:border-primary/40 text-foreground/70 hover:text-primary hover:scale-105 backdrop-blur-sm'
                           )}
                           aria-label={`Go to page ${(pageNum as number) + 1}`}
@@ -322,7 +318,7 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
                         className={cn(
                           'w-11 h-11 rounded-full font-bold transition-all duration-300 text-base flex items-center justify-center touch-manipulation',
                           currentPage === i
-                            ? 'bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-lg scale-110'
+                            ? 'bg-linear-to-r from-primary to-secondary text-primary-foreground shadow-lg scale-110'
                             : 'bg-card/50 hover:bg-primary/5 border-2 border-primary/20 hover:border-primary/40 text-foreground/70 hover:text-primary backdrop-blur-sm hover:scale-105'
                         )}
                         aria-label={`Go to page ${i + 1}`}
@@ -348,7 +344,7 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
 
         {experiences.length > 2 && (
           <div className="text-center">
-            <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-6 sm:p-8 bg-gradient-to-r from-card/80 via-card/90 to-card/80 rounded-2xl border border-border/50 backdrop-blur-sm shadow-xl max-w-lg sm:max-w-2xl mx-auto">
+            <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-6 sm:p-8 bg-linear-to-r from-card/80 via-card/90 to-card/80 rounded-2xl border border-border/50 backdrop-blur-sm shadow-xl max-w-lg sm:max-w-2xl mx-auto">
               <div className="text-center sm:text-left flex-1">
                 <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">
                   Explore All Experiences
@@ -357,11 +353,11 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
                   View detailed information about all {experiences.length} professional experiences
                 </p>
               </div>
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <Link href="/experiences" className="block">
                   <Button
                     size={isMobile ? 'default' : 'lg'}
-                    className="group bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 min-w-[140px] sm:min-w-[160px]"
+                    className="group bg-linear-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 min-w-[140px] sm:min-w-[160px]"
                   >
                     <span className="text-sm sm:text-base font-semibold">View All</span>
                     <ArrowRight

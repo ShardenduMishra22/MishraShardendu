@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
 import { VolunteerExperience } from '@/data/types.data'
-import React, { useState, useMemo, useEffect, useCallback } from 'react'
+import { useState, useMemo, useEffect, useCallback } from 'react'
 import { ArrowRight, ChevronLeft, ChevronRight, Heart, Users, HandHeart } from 'lucide-react'
 import { ExperienceFocusCards } from '../ui/focus-cards-vol'
 

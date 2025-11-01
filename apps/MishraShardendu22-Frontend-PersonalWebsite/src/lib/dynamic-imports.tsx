@@ -86,14 +86,6 @@ export const DynamicNivoPie = dynamic(() => import('@nivo/pie').then((mod) => mo
 /**
  * Heavy UI Components - Dynamic Import
  */
-export const DynamicHeroParallax = dynamic(
-  () => import('@/components/ui/hero-parallax').then((mod) => mod.HeroParallax),
-  {
-    ssr: false,
-    loading: () => <LoadingSkeleton />,
-  }
-)
-
 export const DynamicCanvasReveal = dynamic(
   () => import('@/components/ui/canvas-reveal-effect').then((mod) => mod.CanvasRevealEffect),
   {
