@@ -51,8 +51,6 @@ const nextConfig: NextConfig = {
     ],
     optimizeCss: true,
     scrollRestoration: true,
-    parallelServerCompiles: true,
-    parallelServerBuildTraces: true,
   },
   outputFileTracingRoot: require('path').join(__dirname, '../../'),
   compiler: {
