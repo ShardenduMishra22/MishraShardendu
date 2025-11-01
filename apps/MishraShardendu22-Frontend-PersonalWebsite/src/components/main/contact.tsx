@@ -63,7 +63,7 @@ export default function ModernDeveloperDashboard() {
             <EnhancedCommitsChart commits={data.commits} />
           )}
 
-          {data.languages && Object.keys(data.languages).length > 0 && (
+          {!isMobile && data.languages && Object.keys(data.languages).length > 0 && (
             <TechnologyStackCard languages={data.languages} />
           )}
 

@@ -38,7 +38,7 @@ export default function HomePage() {
           <LazySkillsSection />
         </section>
 
-        <section id="timeline" className="min-h-[400px]">
+        <section id="timeline" className="min-h-[400px] hidden md:block">
           <LazyTimelineSection />
         </section>
 
