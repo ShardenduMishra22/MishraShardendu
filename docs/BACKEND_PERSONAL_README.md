@@ -288,7 +288,7 @@ Access full API documentation at `/api/docs` when running the server.
 
 **Shardendu Mishra**
 
-- GitHub: https://github.com/ShardenduMishra22/MishraShardendu22-Backend-PersonalWebsite
+- GitHub: https://github.com/MishraShardendu22/MishraShardendu22-Backend-PersonalWebsite
 - Email: mishrashardendu22@gmail.com
 
 ## License

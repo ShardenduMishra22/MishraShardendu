@@ -941,7 +941,7 @@ See [CONTRIBUTING.md](../../docs/CONTRIBUTING.md) for guidelines.
 
 For support:
 
-- **Issues**: [GitHub Issues](https://github.com/ShardenduMishra22/MishraShardendu/issues)
+- **Issues**: [GitHub Issues](https://github.com/MishraShardendu22/MishraShardendu/issues)
 - **Docs**: [Root Docs](../../docs)
 - **Email**: mishrashardendu22@gmail.com
 

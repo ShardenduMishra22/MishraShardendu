@@ -603,7 +603,7 @@ For contribution guidelines, please refer to the [main repository CONTRIBUTING.m
 
 For issues, questions, or contributions:
 
-- **Issues**: [GitHub Issues](https://github.com/ShardenduMishra22/MishraShardendu/issues)
+- **Issues**: [GitHub Issues](https://github.com/MishraShardendu22/MishraShardendu/issues)
 - **Documentation**: [Root Docs](../../docs)
 - **Email**: mishrashardendu22@gmail.com
 

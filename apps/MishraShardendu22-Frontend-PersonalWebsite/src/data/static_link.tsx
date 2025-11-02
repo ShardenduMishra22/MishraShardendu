@@ -1,5 +1,5 @@
 export const XProfile = 'https://x.com/Shardendu_M'
-export const GitHubProject = 'https://github.com/ShardenduMishra22'
+export const GitHubProject = 'https://github.com/MishraShardendu22'
 export const GitHubLearning = 'https://github.com/DevSmGo'
 export const GitHubOrganistaion = 'https://github.com/Team-Parashuram'
 export const LeetCodeProfile = 'https://leetcode.com/u/ShardenduMishra22'

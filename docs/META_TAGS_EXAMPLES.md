@@ -233,7 +233,7 @@ export const metadata: Metadata = {
         "image": "https://mishrashardendu22.is-a.dev/profile.jpg",
         "sameAs": [
           "https://www.linkedin.com/in/shardendumishra22/",
-          "https://github.com/ShardenduMishra22",
+          "https://github.com/MishraShardendu22",
           "https://x.com/Shardendu_M",
           "https://leetcode.com/u/ShardenduMishra22/"
         ],
@@ -255,7 +255,7 @@ export const metadata: Metadata = {
         "logo": "https://mishrashardendu22.is-a.dev/logo.png",
         "sameAs": [
           "https://www.linkedin.com/in/shardendumishra22/",
-          "https://github.com/ShardenduMishra22",
+          "https://github.com/MishraShardendu22",
           "https://x.com/Shardendu_M",
           "https://leetcode.com/u/ShardenduMishra22/"
         ],

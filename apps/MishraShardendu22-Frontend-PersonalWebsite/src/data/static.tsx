@@ -73,7 +73,7 @@ export const socialLinks = {
   },
 
   github: {
-    personal: 'https://github.com/ShardenduMishra22',
+    personal: 'https://github.com/MishraShardendu22',
     learning: 'https://github.com/DevSmGo',
     organization: 'https://github.com/Team-Parashuram',
     username: 'MishraShardendu22',

@@ -14,7 +14,7 @@ Complete development guide for the portfolio website.
 
 ```bash
 # Clone repository
-git clone https://github.com/ShardenduMishra22/MishraShardendu.git
+git clone https://github.com/MishraShardendu22/MishraShardendu.git
 
 # Install dependencies
 pnpm install
