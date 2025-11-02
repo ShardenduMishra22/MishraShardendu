@@ -49,7 +49,7 @@ export const json = [
     projects: [],
     certificate_url: 'https://www.udemy.com/certificate/UC-d81c8477-023c-4d49-a2d1-236495e6ffff/',
     images: [
-      'https://github.com/MishraShardendu22/DragonBallAPI-GoLang',
+      'https://github.com/ShardenduMishra22/DragonBallAPI-GoLang',
       'https://www.youtube.com/watch?v=lVQKG2omhYk',
       'https://ws-golang-front.onrender.com/',
     ],
@@ -104,7 +104,7 @@ export const json = [
   {
     title: 'Go Projects – Udemy',
     description:
-      '## Learning Go Projects – Udemy\n\nCompleted a project‑driven Go programming course focused on writing modular, production‑ready tools. Gained hands‑on experience with Go’s syntax, concurrency, and standard libraries through real-world projects.\n\n### Key Learning Areas:\n- **Goroutines & Channels**: concurrency primitives\n- **Error Handling**: idiomatic error wrapping and propagation\n- **OOP in Go**: struct methods and encapsulation\n- **XML/JSON Parsing**: unmarshalling from APIs and RSS feeds\n- **CLI Development**: flags, input parsing, TUI interfaces\n- **HTTP Servers**: building and consuming REST APIs\n\n### Built Projects:\n\n#### Repository Transfer Script\n- CLI tool to automate GitHub repo transfers between accounts/orgs\n- Useful for switching between Copilot and production GitHub accounts\n- Fast, minimal Go implementation\n- [Repo](https://github.com/MishraShardendu22/Go-TransferScript)\n\n#### Language Translate – Bubble Tea CLI\n- TUI language translator using **Bubble Tea** framework\n- Integrated with Google Translate API\n- [Repo](https://github.com/MishraShardendu22/Language-Translate-TUI)\n\n#### Google Trends CLI Tool\n- CLI app parsing **Google Trends RSS feeds**\n- Practiced XML unmarshalling and struct handling\n- [Repo](https://github.com/MishraShardendu22/Google-Trends)\n\n#### Nutrition Calculator API\n- Plug‑and‑play API for computing nutrition from ingredient input\n- OOP‑style methods for modular integration\n- Built for SaaS use and hackathon readiness\n- [Live API](https://nutrition-calculator-hvzj.onrender.com)\n\nThis course reinforced applied Go development skills across networking, data parsing, CLI tooling, and scalable API construction.',
+      '## Learning Go Projects – Udemy\n\nCompleted a project‑driven Go programming course focused on writing modular, production‑ready tools. Gained hands‑on experience with Go’s syntax, concurrency, and standard libraries through real-world projects.\n\n### Key Learning Areas:\n- **Goroutines & Channels**: concurrency primitives\n- **Error Handling**: idiomatic error wrapping and propagation\n- **OOP in Go**: struct methods and encapsulation\n- **XML/JSON Parsing**: unmarshalling from APIs and RSS feeds\n- **CLI Development**: flags, input parsing, TUI interfaces\n- **HTTP Servers**: building and consuming REST APIs\n\n### Built Projects:\n\n#### Repository Transfer Script\n- CLI tool to automate GitHub repo transfers between accounts/orgs\n- Useful for switching between Copilot and production GitHub accounts\n- Fast, minimal Go implementation\n- [Repo](https://github.com/ShardenduMishra22/Go-TransferScript)\n\n#### Language Translate – Bubble Tea CLI\n- TUI language translator using **Bubble Tea** framework\n- Integrated with Google Translate API\n- [Repo](https://github.com/ShardenduMishra22/Language-Translate-TUI)\n\n#### Google Trends CLI Tool\n- CLI app parsing **Google Trends RSS feeds**\n- Practiced XML unmarshalling and struct handling\n- [Repo](https://github.com/ShardenduMishra22/Google-Trends)\n\n#### Nutrition Calculator API\n- Plug‑and‑play API for computing nutrition from ingredient input\n- OOP‑style methods for modular integration\n- Built for SaaS use and hackathon readiness\n- [Live API](https://nutrition-calculator-hvzj.onrender.com)\n\nThis course reinforced applied Go development skills across networking, data parsing, CLI tooling, and scalable API construction.',
     issuer: 'Udemy',
     skills: [
       'Go',
@@ -126,8 +126,8 @@ export const json = [
     projects: [],
     certificate_url: 'https://www.udemy.com/certificate/UC-d49de173-bd2b-4326-8335-07f3bd9a2c2d/',
     images: [
-      'https://github.com/MishraShardendu22/Language-Translate-TUI',
-      'https://github.com/MishraShardendu22/Google-Trends',
+      'https://github.com/ShardenduMishra22/Language-Translate-TUI',
+      'https://github.com/ShardenduMishra22/Google-Trends',
       'https://nutrition-calculator-hvzj.onrender.com',
       'https://www.youtube.com/watch?v=0Rhfgxg6YyE',
       'https://www.youtube.com/watch?v=a3mmvskLweo',
@@ -169,7 +169,7 @@ export const json = [
   {
     title: 'Hacksagon Finalist – ABV‑IIITM Gwalior / IEEE',
     description:
-      '## Dhvani - Smart Health Management Platform\n\nModular, full‑stack health management with **role‑based access** for patients, healthcare orgs, admins. Integrated **microservices** built in **Go**, **Node.js**, **Python**. Frontend: **React**, **TypeScript**. Backend: **MongoDB**, **Redis**, Docker, Kubernetes.\n\n### Key Features:\n- **Medical image analysis** via Vision Transformer (ViT) microservice in Go + Python.\n- **Disease detection & stroke risk assessment** using LLMs (Meta’s Gemma) + AI imaging pipeline.\n- **Diet Planner & Nutrition Calculator** microservice: Go + LLM for NLU parsing → calculates nutrition score + schedules.\n- **AI‑powered chatbot** using LLM integration for patient support.\n- **Blood bank management** with inventory, requests, notifications.\n- **Scalable architecture**: containerized microservices, Go routines, Go channels for concurrent processing, Redis cache, Swift REST APIs, WebSockets for real‑time updates.\n\nLive: https://dhvani.mayankdev.com/user/dashboard | Repo: https://github.com/MishraShardendu22/Dhvani',
+      '## Dhvani - Smart Health Management Platform\n\nModular, full‑stack health management with **role‑based access** for patients, healthcare orgs, admins. Integrated **microservices** built in **Go**, **Node.js**, **Python**. Frontend: **React**, **TypeScript**. Backend: **MongoDB**, **Redis**, Docker, Kubernetes.\n\n### Key Features:\n- **Medical image analysis** via Vision Transformer (ViT) microservice in Go + Python.\n- **Disease detection & stroke risk assessment** using LLMs (Meta’s Gemma) + AI imaging pipeline.\n- **Diet Planner & Nutrition Calculator** microservice: Go + LLM for NLU parsing → calculates nutrition score + schedules.\n- **AI‑powered chatbot** using LLM integration for patient support.\n- **Blood bank management** with inventory, requests, notifications.\n- **Scalable architecture**: containerized microservices, Go routines, Go channels for concurrent processing, Redis cache, Swift REST APIs, WebSockets for real‑time updates.\n\nLive: https://dhvani.mayankdev.com/user/dashboard | Repo: https://github.com/ShardenduMishra22/Dhvani',
     issuer: 'Finalist – Top 10 @ Hacksagon 2025 (ABV‑IIITM Gwalior, IEEE)',
     skills: [
       'Go',
@@ -196,7 +196,7 @@ export const json = [
     projects: [],
     certificate_url: 'https://drive.google.com/file/d/199MoKPO2k0Wo3RDjZpngU-85r3HQ-gpo/view',
     images: [
-      'https://github.com/MishraShardendu22/Dhvani',
+      'https://github.com/ShardenduMishra22/Dhvani',
       'https://www.youtube.com/watch?v=Wu40H6P1f8Y',
       'https://www.youtube.com/watch?v=QbPShjxjTx0',
       'https://www.youtube.com/watch?v=yUsVn1HPnwk',

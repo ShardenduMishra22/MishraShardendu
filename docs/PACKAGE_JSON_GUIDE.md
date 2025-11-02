@@ -13,15 +13,15 @@ Every package in the monorepo should include the following metadata for optimal 
   "author": {
     "name": "Shardendu Mishra",
     "email": "mishrashardendu22@gmail.com",
-    "url": "https://github.com/MishraShardendu22"
+    "url": "https://github.com/ShardenduMishra22"
   },
   "homepage": "https://mishrashardendu22.is-a.dev/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MishraShardendu22/repository-name.git"
+    "url": "https://github.com/ShardenduMishra22/repository-name.git"
   },
   "bugs": {
-    "url": "https://github.com/MishraShardendu22/repository-name/issues"
+    "url": "https://github.com/ShardenduMishra22/repository-name/issues"
   },
   "license": "MIT",
   "keywords": [
@@ -42,7 +42,7 @@ Every package in the monorepo should include the following metadata for optimal 
   "social": {
     "website": "https://mishrashardendu22.is-a.dev/",
     "linkedin": "https://www.linkedin.com/in/shardendumishra22/",
-    "github": "https://github.com/MishraShardendu22",
+    "github": "https://github.com/ShardenduMishra22",
     "twitter": "https://x.com/Shardendu_M",
     "leetcode": "https://leetcode.com/u/ShardenduMishra22/"
   },
@@ -75,15 +75,15 @@ Every package in the monorepo should include the following metadata for optimal 
   "author": {
     "name": "Shardendu Mishra",
     "email": "mishrashardendu22@gmail.com",
-    "url": "https://github.com/MishraShardendu22"
+    "url": "https://github.com/ShardenduMishra22"
   },
   "homepage": "https://mishrashardendu22.is-a.dev/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MishraShardendu22/MishraShardendu.git"
+    "url": "https://github.com/ShardenduMishra22/MishraShardendu.git"
   },
   "bugs": {
-    "url": "https://github.com/MishraShardendu22/MishraShardendu/issues"
+    "url": "https://github.com/ShardenduMishra22/MishraShardendu/issues"
   },
   "license": "MIT",
   "keywords": [
@@ -100,7 +100,7 @@ Every package in the monorepo should include the following metadata for optimal 
   "social": {
     "website": "https://mishrashardendu22.is-a.dev/",
     "linkedin": "https://www.linkedin.com/in/shardendumishra22/",
-    "github": "https://github.com/MishraShardendu22",
+    "github": "https://github.com/ShardenduMishra22",
     "twitter": "https://x.com/Shardendu_M",
     "leetcode": "https://leetcode.com/u/ShardenduMishra22/"
   },
@@ -121,15 +121,15 @@ Every package in the monorepo should include the following metadata for optimal 
   "author": {
     "name": "Shardendu Mishra",
     "email": "mishrashardendu22@gmail.com",
-    "url": "https://github.com/MishraShardendu22"
+    "url": "https://github.com/ShardenduMishra22"
   },
   "homepage": "https://mishrashardendu22.is-a.dev/blog",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MishraShardendu22/MishraShardendu.git"
+    "url": "https://github.com/ShardenduMishra22/MishraShardendu.git"
   },
   "bugs": {
-    "url": "https://github.com/MishraShardendu22/MishraShardendu/issues"
+    "url": "https://github.com/ShardenduMishra22/MishraShardendu/issues"
   },
   "license": "MIT",
   "keywords": [
@@ -146,7 +146,7 @@ Every package in the monorepo should include the following metadata for optimal 
   "social": {
     "website": "https://mishrashardendu22.is-a.dev/blog",
     "linkedin": "https://www.linkedin.com/in/shardendumishra22/",
-    "github": "https://github.com/MishraShardendu22",
+    "github": "https://github.com/ShardenduMishra22",
     "twitter": "https://x.com/Shardendu_M",
     "leetcode": "https://leetcode.com/u/ShardenduMishra22/"
   },
@@ -167,21 +167,21 @@ Every package in the monorepo should include the following metadata for optimal 
   "author": {
     "name": "Shardendu Mishra",
     "email": "mishrashardendu22@gmail.com",
-    "url": "https://github.com/MishraShardendu22"
+    "url": "https://github.com/ShardenduMishra22"
   },
-  "homepage": "https://github.com/MishraShardendu22/MishraShardendu",
+  "homepage": "https://github.com/ShardenduMishra22/MishraShardendu",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MishraShardendu22/MishraShardendu.git"
+    "url": "https://github.com/ShardenduMishra22/MishraShardendu.git"
   },
   "bugs": {
-    "url": "https://github.com/MishraShardendu22/MishraShardendu/issues"
+    "url": "https://github.com/ShardenduMishra22/MishraShardendu/issues"
   },
   "license": "MIT",
   "keywords": ["admin", "dashboard", "portfolio", "cms", "preact", "vite", "typescript"],
   "social": {
     "linkedin": "https://www.linkedin.com/in/shardendumishra22/",
-    "github": "https://github.com/MishraShardendu22"
+    "github": "https://github.com/ShardenduMishra22"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -228,7 +228,7 @@ The social field is a custom addition that helps with documentation and profile 
 "social": {
   "website": "https://mishrashardendu22.is-a.dev/",
   "linkedin": "https://www.linkedin.com/in/shardendumishra22/",
-  "github": "https://github.com/MishraShardendu22",
+  "github": "https://github.com/ShardenduMishra22",
   "twitter": "https://x.com/Shardendu_M",
   "leetcode": "https://leetcode.com/u/ShardenduMishra22/"
 }

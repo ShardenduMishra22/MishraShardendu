@@ -79,7 +79,7 @@
 
 - Website: https://mishrashardendu22.is-a.dev/
 - LinkedIn: https://www.linkedin.com/in/shardendumishra22/
-- GitHub: https://github.com/MishraShardendu22
+- GitHub: https://github.com/ShardenduMishra22
 - Twitter/X: https://x.com/Shardendu_M
 - LeetCode: https://leetcode.com/u/ShardenduMishra22/
 - Email: mishrashardendu22@gmail.com

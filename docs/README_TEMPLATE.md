@@ -256,12 +256,12 @@ This project is licensed under the MIT License. See [LICENSE](./LICENSE) file fo
 
 - Website: https://mishrashardendu22.is-a.dev/
 - LinkedIn: https://www.linkedin.com/in/shardendumishra22/
-- GitHub: https://github.com/MishraShardendu22
+- GitHub: https://github.com/ShardenduMishra22
 - Twitter/X: https://x.com/Shardendu_M
 - LeetCode: https://leetcode.com/u/ShardenduMishra22/
 - Email: mishrashardendu22@gmail.com
 
-For bug reports and feature requests, please use the [GitHub issue tracker](https://github.com/MishraShardendu22/[repository-name]/issues).
+For bug reports and feature requests, please use the [GitHub issue tracker](https://github.com/ShardenduMishra22/[repository-name]/issues).
 
 ## Acknowledgments
 
@@ -271,4 +271,4 @@ For bug reports and feature requests, please use the [GitHub issue tracker](http
 
 ---
 
-Part of the [MishraShardendu22 Monorepo](https://github.com/MishraShardendu22/MishraShardendu22)
+Part of the [MishraShardendu22 Monorepo](https://github.com/ShardenduMishra22/MishraShardendu22)

@@ -190,7 +190,7 @@ pm.test('Response has projects data', function () {
     "small_description": "Personal portfolio website showcasing my work",
     "description": "A full-stack portfolio website built with React frontend and Go backend, featuring responsive design and modern UI components",
     "skills": ["React", "Go", "MongoDB", "Fiber", "JWT"],
-    "project_repository": "https://github.com/MishraShardendu22/portfolio",
+    "project_repository": "https://github.com/ShardenduMishra22/portfolio",
     "project_live_link": "https://portfolio.mishrashardendu.com",
     "project_video": "https://youtube.com/watch?v=dQw4w9WgXcQ"
   }
@@ -250,7 +250,7 @@ pm.test('Project retrieved successfully', function () {
     "small_description": "Updated personal portfolio website with new features",
     "description": "An updated full-stack portfolio website with enhanced features, built with React frontend and Go backend",
     "skills": ["React", "Go", "MongoDB", "Fiber", "JWT", "Docker"],
-    "project_repository": "https://github.com/MishraShardendu22/portfolio",
+    "project_repository": "https://github.com/ShardenduMishra22/portfolio",
     "project_live_link": "https://portfolio.mishrashardendu.com",
     "project_video": "https://youtube.com/watch?v=dQw4w9WgXcQ"
   }

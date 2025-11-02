@@ -14,12 +14,12 @@ Deliver a high-performance, accessible, and SEO-optimized portfolio platform tha
 
 | Repository                                                                                                | Purpose             | Technology       | Live URL                                 |
 | --------------------------------------------------------------------------------------------------------- | ------------------- | ---------------- | ---------------------------------------- |
-| [MishraShardendu22](https://github.com/MishraShardendu22/MishraShardendu)                                 | Root monorepo       | Turborepo + PNPM | -                                        |
-| [PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu)                                   | Main portfolio site | Next.js 15       | https://mishrashardendu22.is-a.dev       |
-| [BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu)                                       | Blog platform       | Svelte 5         | https://mishrashardendu22.is-a.dev/blog  |
-| [AdminWebsite](https://github.com/MishraShardendu22/MishraShardendu)                                      | Admin dashboard     | Preact           | https://mishrashardendu22.is-a.dev/admin |
-| [Backend-PersonalWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-PersonalWebsite) | Personal site API   | Go/Fiber         | API endpoint                             |
-| [Backend-BlogWebsite](https://github.com/MishraShardendu22/MishraShardendu22-Backend-BlogWebsite)         | Blog API            | JS/Node.js       | API endpoint                             |
+| [MishraShardendu22](https://github.com/ShardenduMishra22/MishraShardendu)                                 | Root monorepo       | Turborepo + PNPM | -                                        |
+| [PersonalWebsite](https://github.com/ShardenduMishra22/MishraShardendu)                                   | Main portfolio site | Next.js 15       | https://mishrashardendu22.is-a.dev       |
+| [BlogWebsite](https://github.com/ShardenduMishra22/MishraShardendu)                                       | Blog platform       | Svelte 5         | https://mishrashardendu22.is-a.dev/blog  |
+| [AdminWebsite](https://github.com/ShardenduMishra22/MishraShardendu)                                      | Admin dashboard     | Preact           | https://mishrashardendu22.is-a.dev/admin |
+| [Backend-PersonalWebsite](https://github.com/ShardenduMishra22/MishraShardendu22-Backend-PersonalWebsite) | Personal site API   | Go/Fiber         | API endpoint                             |
+| [Backend-BlogWebsite](https://github.com/ShardenduMishra22/MishraShardendu22-Backend-BlogWebsite)         | Blog API            | JS/Node.js       | API endpoint                             |
 
 ## Overview
 
@@ -190,7 +190,7 @@ Shared TypeScript configurations for consistent type checking across projects.
 
 ```bash
 # Clone the monorepo
-git clone https://github.com/MishraShardendu22/MishraShardendu22.git
+git clone https://github.com/ShardenduMishra22/MishraShardendu22.git
 cd MishraShardendu22
 
 # Install all dependencies
@@ -359,7 +359,7 @@ This project is licensed under the MIT License. See LICENSE file for details.
 
 - Website: https://mishrashardendu22.is-a.dev/
 - LinkedIn: https://www.linkedin.com/in/shardendumishra22/
-- GitHub: https://github.com/MishraShardendu22
+- GitHub: https://github.com/ShardenduMishra22
 - Twitter/X: https://x.com/Shardendu_M
 - LeetCode: https://leetcode.com/u/ShardenduMishra22/
 - Email: mishrashardendu22@gmail.com
