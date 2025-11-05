@@ -113,8 +113,20 @@ const getAuthToken = (): string | null => {
   return localStorage.getItem('authToken')
 }
 
-// Helper function to make API requests with comprehensive error handling
+// Request throttling to prevent rapid-fire API calls
+let lastRequestTime = 0
+const MIN_REQUEST_INTERVAL = 100 // 100ms between requests
+
+// Helper function to make API requests with comprehensive error handling and throttling
 const apiRequest = async <T>(endpoint: string, options: RequestInit = {}): Promise<T> => {
+  // Throttle requests to prevent rapid-fire API calls
+  const now = Date.now()
+  const timeSinceLastRequest = now - lastRequestTime
+  if (timeSinceLastRequest < MIN_REQUEST_INTERVAL) {
+    await new Promise((resolve) => setTimeout(resolve, MIN_REQUEST_INTERVAL - timeSinceLastRequest))
+  }
+  lastRequestTime = Date.now()
+
   const token = getAuthToken()
 
   const headers: Record<string, string> = {

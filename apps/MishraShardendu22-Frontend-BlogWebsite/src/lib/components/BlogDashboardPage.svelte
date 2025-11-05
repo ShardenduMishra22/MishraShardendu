@@ -35,12 +35,20 @@
   let deletingBlogId = $state<number | null>(null);
   let loading = $state(true);
   let error = $state("");
+  let isVisible = $state(false);
 
   onMount(async () => {
+    isVisible = true;
     await loadData();
   });
 
   const loadData = async () => {
+    // Don't load if not visible
+    if (!isVisible) {
+      loading = false;
+      return;
+    }
+
     try {
       loading = true;
       error = "";

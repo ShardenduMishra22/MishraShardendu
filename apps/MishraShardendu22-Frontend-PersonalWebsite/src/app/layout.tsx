@@ -2,7 +2,6 @@ import './globals.css'
 import { BASE_URL } from '@/constants/url'
 import { ThemeProvider } from 'next-themes'
 import type { Metadata, Viewport } from 'next'
-import PWARegister from '@/components/extra/PWARegister'
 import { Fredoka, Poppins, Inter } from 'next/font/google'
 import ResourceHints from '@/components/extra/ResourceHints'
 import ToasterClient from '@/components/extra/ToasterClient'
@@ -244,7 +243,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
             {/* Defer all analytics to after page interactive - critical for mobile performance */}
             <DeferredAnalytics />
-            <PWARegister />
           </div>
         </ThemeProvider>
       </body>

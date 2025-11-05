@@ -31,17 +31,25 @@
   let showInfoPanel = $state(false);
   let showTags = $state(false);
   let textareaRef = $state<HTMLTextAreaElement | null>(null);
+  let isVisible = $state(false);
 
   authStore.subscribe((state) => {
     currentUser = state.user;
   });
 
   onMount(async () => {
+    isVisible = true;
     await loadBlog();
     await loadComments();
   });
 
   const loadBlog = async () => {
+    // Don't load if not visible
+    if (!isVisible) {
+      loading = false;
+      return;
+    }
+
     try {
       loading = true;
       error = "";

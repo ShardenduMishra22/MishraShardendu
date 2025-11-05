@@ -14,6 +14,7 @@
   let blogs = $state<Blog[]>([]);
   let currentPage = $state(1);
   const pageSize = 4;
+  let isVisible = $state(false);
 
   const basePath = typeof window !== 'undefined' && window.location.pathname.startsWith('/blog') ? '/blog' : '';
 
@@ -22,12 +23,19 @@
     isOwner = state.user?.isOwner || false;
   });
 
-  // Fetch blogs on mount
+  // Fetch blogs on mount - only if component is actually visible
   onMount(async () => {
+    isVisible = true;
     await loadBlogs();
   });
 
   const loadBlogs = async () => {
+    // Don't load if not visible
+    if (!isVisible) {
+      loading = false;
+      return;
+    }
+
     try {
       loading = true;
       error = "";

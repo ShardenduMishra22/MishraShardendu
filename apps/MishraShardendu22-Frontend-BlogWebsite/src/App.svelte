@@ -18,8 +18,20 @@
   let isOwner = $state(false);
   let isLoading = $state(true);
 
-  // Initialize theme and auth on mount
+  // Check if we're on a blog path
+  const isBlogPath = $derived(() => {
+    const path = window.location.pathname;
+    return path.startsWith('/blog');
+  });
+
+  // Initialize theme and auth on mount - but only if on blog path
   onMount(async () => {
+    // Early return if not on blog path
+    if (!isBlogPath()) {
+      isLoading = false;
+      return;
+    }
+
     try {
       themeStore.init();
       await authStore.init();
@@ -39,6 +51,12 @@
   // Listen for navigation changes
   $effect(() => {
     const handleLocationChange = () => {
+      // Only process if on blog path
+      if (!isBlogPath()) {
+        isLoading = false;
+        return;
+      }
+
       currentPath = window.location.pathname;
       
       // Redirect /blog to /blog/read
@@ -122,6 +140,8 @@
 
   // Update SEO based on current page
   function updatePageSEO() {
+    if (!isBlogPath()) return;
+    
     const baseUrl = 'https://mishrashardendu22.is-a.dev';
     
     switch (pageComponent()) {
@@ -189,6 +209,11 @@
 </script>
 
 <div class="min-h-screen bg-background" style="min-height: 100vh;">
+  <!-- Only render if on blog path -->
+  {#if !isBlogPath()}
+    <!-- Empty render when not on blog path to prevent unnecessary API calls -->
+    <div style="display: none;"></div>
+  {:else}
   <!-- Toast Notifications -->
   <Toast />
   <!-- Confirm dialog mounted at app root -->
@@ -249,5 +274,6 @@
         {/if}
       </div>
     </main>
+  {/if}
   {/if}
 </div>
