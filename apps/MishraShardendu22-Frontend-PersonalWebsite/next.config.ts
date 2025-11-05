@@ -61,19 +61,10 @@ const nextConfig: NextConfig = {
     // Enhanced module optimization for better tree-shaking
     esmExternals: true,
   },
-  // Modularize imports for better tree-shaking
+  // Modularize imports for better tree-shaking (don't include packages already in optimizePackageImports)
   modularizeImports: {
-    'framer-motion': {
-      transform: 'framer-motion/dist/es/{{member}}',
-    },
-    'lucide-react': {
-      transform: 'lucide-react/dist/esm/icons/{{kebabCase member}}',
-    },
     '@tabler/icons-react': {
       transform: '@tabler/icons-react/dist/esm/icons/{{member}}',
-    },
-    '@radix-ui/react-icons': {
-      transform: '@radix-ui/react-icons/dist/{{member}}',
     },
   },
   outputFileTracingRoot: require('path').join(__dirname, '../../'),

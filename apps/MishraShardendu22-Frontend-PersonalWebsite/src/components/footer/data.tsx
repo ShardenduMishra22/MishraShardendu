@@ -1,27 +1,25 @@
 import {
-  Github,
-  Linkedin,
   Mail,
   Code,
-  GraduationCap,
-  Briefcase,
+  Book,
   Award,
   Phone,
-  User2,
+  Github,
+  Linkedin,
+  Briefcase,
+  GraduationCap,
 } from 'lucide-react'
-
 import {
   XProfile,
   GitHubProject,
   GitHubLearning,
-  GitHubOrganistaion,
-  LeetCodeProfile,
   YouTubeChannel,
   CodeChefProfile,
   LinkedInProfile,
+  LeetCodeProfile,
   CodeforcesProfile,
+  GitHubOrganistaion,
 } from '@/data/static_link'
-
 import { LinkItem } from './types'
 
 export const quickLinks: LinkItem[] = [
@@ -44,10 +42,10 @@ export const quickLinks: LinkItem[] = [
     icon: <Award className="h-3 lg:h-4 w-3 lg:w-4" />,
   },
   {
-    href: '/admin/dashboard',
-    label: 'Admin Dashboard',
-    shortLabel: 'Admin',
-    icon: <User2 className="h-3 lg:h-4 w-3 lg:w-4" />,
+    href: '/blog',
+    label: 'Blogs',
+    shortLabel: 'Blogs',
+    icon: <Book className="h-3 lg:h-4 w-3 lg:w-4" />,
   },
 ]
 
