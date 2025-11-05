@@ -7,6 +7,7 @@ import ResourceHints from '@/components/extra/ResourceHints'
 import ToasterClient from '@/components/extra/ToasterClient'
 import ThemeToggleClient from '@/components/extra/ThemeToggleClient'
 import { DeferredAnalytics } from '@/components/extra/DeferredAnalytics'
+import { ServiceWorkerRegistration } from '@/components/extra/ServiceWorkerRegistration'
 
 const fredoka = Fredoka({
   variable: '--font-heading',
@@ -243,6 +244,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
             {/* Defer all analytics to after page interactive - critical for mobile performance */}
             <DeferredAnalytics />
+            {/* Service worker for caching and offline support */}
+            <ServiceWorkerRegistration />
           </div>
         </ThemeProvider>
       </body>

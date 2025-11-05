@@ -61,6 +61,21 @@ const nextConfig: NextConfig = {
     // Enhanced module optimization for better tree-shaking
     esmExternals: true,
   },
+  // Modularize imports for better tree-shaking
+  modularizeImports: {
+    'framer-motion': {
+      transform: 'framer-motion/dist/es/{{member}}',
+    },
+    'lucide-react': {
+      transform: 'lucide-react/dist/esm/icons/{{kebabCase member}}',
+    },
+    '@tabler/icons-react': {
+      transform: '@tabler/icons-react/dist/esm/icons/{{member}}',
+    },
+    '@radix-ui/react-icons': {
+      transform: '@radix-ui/react-icons/dist/{{member}}',
+    },
+  },
   outputFileTracingRoot: require('path').join(__dirname, '../../'),
   compiler: {
     removeConsole:
@@ -69,6 +84,8 @@ const nextConfig: NextConfig = {
             exclude: ['error', 'warn'],
           }
         : false,
+    // Enable React compiler optimizations
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
 
   // Performance optimizations
@@ -91,6 +108,12 @@ const nextConfig: NextConfig = {
       ...config.optimization,
       usedExports: true,
       sideEffects: false,
+      // More aggressive minification for mobile
+      minimize: !dev,
+      minimizer:
+        !dev && !isServer
+          ? [...(config.optimization.minimizer || [])]
+          : config.optimization.minimizer,
       // Split chunks for better caching and mobile loading
       splitChunks: {
         chunks: 'all',
@@ -150,9 +173,9 @@ const nextConfig: NextConfig = {
       ...config.resolve.alias,
     }
 
+    // Mobile performance: lighter source maps
     if (!dev && !isServer) {
-      // Mobile-specific optimizations
-      config.optimization.minimize = true
+      config.devtool = false // Disable source maps in production for smaller bundles
     }
 
     return config
