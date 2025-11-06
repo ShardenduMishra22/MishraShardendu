@@ -5,7 +5,6 @@ import { getCachedStats } from '@/lib/cache'
 import { DashboardData } from '@/data/types.data'
 import { GitHubProfileCard } from '../chart/github'
 import { TopRepositoriesCard } from '../chart/repo'
-import { TechnologyStackCard } from '../chart/tech'
 import { LoadingScreen } from '../chart/loader-chart'
 import { DashboardHeader } from '../chart/dash-heaed'
 import { EnhancedCommitsChart } from '../chart/commit'
@@ -61,10 +60,6 @@ export default function ModernDeveloperDashboard() {
 
           {!isMobile && data.commits && data.commits.length > 0 && (
             <EnhancedCommitsChart commits={data.commits} />
-          )}
-
-          {!isMobile && data.languages && Object.keys(data.languages).length > 0 && (
-            <TechnologyStackCard languages={data.languages} />
           )}
 
           {data.topRepos && data.topRepos.length > 0 && (

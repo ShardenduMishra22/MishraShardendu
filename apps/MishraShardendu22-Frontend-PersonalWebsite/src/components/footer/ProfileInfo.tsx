@@ -10,10 +10,10 @@ export const ProfileInfo = ({ currentYear }: ProfileInfoProps) => {
   return (
     <div className="lg:col-span-1 flex flex-col h-full justify-between text-center lg:text-left">
       <div className="flex items-center justify-center lg:justify-start space-x-4 mb-6">
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg border border-primary/20">
+        <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-primary to-secondary flex items-center justify-center shadow-lg border border-primary/20">
           <Code className="h-6 w-6 text-primary-foreground" />
         </div>
-        <h3 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+        <h3 className="text-2xl lg:text-3xl font-bold bg-linear-to-r from-foreground to-primary bg-clip-text text-transparent">
           Shardendu Mishra
         </h3>
       </div>
