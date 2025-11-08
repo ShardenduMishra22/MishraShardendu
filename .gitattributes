@@ -1,1 +1,6 @@
-*.ts linguist-detectable=false
+*.tsx linguist-detectable=false
+
+/apps/MishraShardendu22-Frontend-AdminWebsite/**/*.ts linguist-detectable=false
+/apps/MishraShardendu22-Frontend-PersonalWebsite/**/*.ts linguist-detectable=false
+
+/apps/MishraShardendu22-Frontend-BlogWebsite/**/*.ts linguist-detectable=true
