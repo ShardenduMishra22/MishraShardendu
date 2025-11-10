@@ -242,9 +242,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           <div className="min-h-screen bg-background text-foreground">
             {children}
-            {/* Defer all analytics to after page interactive - critical for mobile performance */}
+            <ThemeToggleClient />
             <DeferredAnalytics />
-            {/* Service worker for caching and offline support */}
             <ServiceWorkerRegistration />
           </div>
         </ThemeProvider>
