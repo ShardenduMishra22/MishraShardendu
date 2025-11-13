@@ -447,11 +447,24 @@ h6 {
       scroll-behavior: auto !important;
     }
     
-    /* Keep interactive transitions for better UX */
-    :hover,
-    :focus,
-    :active {
+    /* Preserve transitions for all elements - Brave browser fix */
+    * {
       transition-duration: 0.2s !important;
+    }
+    
+    /* Keep interactive transitions smooth */
+    button,
+    a,
+    input,
+    textarea,
+    select,
+    *:hover,
+    *:focus,
+    *:active,
+    [role="button"],
+    .group:hover *,
+    .group-hover\\/canvas-card:hover * {
+      transition-duration: 0.3s !important;
     }
   }
 }
@@ -705,8 +718,9 @@ h6 {
 }
 
 /* Mobile Performance: Reduced Motion Support */
-/* Only apply reduced motion to animations, not hover transitions for better UX in Brave */
+/* Brave browser compatibility: Only disable animations, preserve transitions for UX */
 @media (prefers-reduced-motion: reduce) {
+  /* Disable animations only */
   *,
   *::before,
   *::after {
@@ -715,18 +729,26 @@ h6 {
     scroll-behavior: auto !important;
   }
   
-  /* Keep transitions for hover effects - prevents instant changes in Brave browser */
-  :not(:hover):not(:focus):not(:active) {
-    transition-duration: 0.01ms !important;
+  /* Preserve all transitions by resetting them */
+  * {
+    transition-duration: 0.2s !important;
   }
   
-  /* Allow smooth transitions on interactive elements */
-  :hover,
-  :focus,
-  :active,
-  [data-state="open"],
-  [data-state="checked"] {
-    transition-duration: 0.2s !important;
+  /* Specific elements that need smooth transitions */
+  *:hover,
+  *:focus,
+  *:focus-within,
+  *:active,
+  button,
+  a,
+  input,
+  textarea,
+  select,
+  [role="button"],
+  .group:hover *,
+  .group-hover\\/canvas-card:hover *,
+  [data-state] {
+    transition-duration: 0.3s !important;
   }
 }
 
