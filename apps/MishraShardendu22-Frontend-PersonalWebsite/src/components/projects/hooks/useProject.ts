@@ -2,7 +2,7 @@ import { Project } from '@/data/types.data'
 import { projectsAPI } from '@/util/apiResponse.util'
 import { useEffect, useState } from 'react'
 
-export function useProject(params: any) {
+export function useProject(params: Promise<{ id: string }>) {
   const [project, setProject] = useState<Project | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')

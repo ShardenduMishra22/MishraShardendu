@@ -1,5 +1,6 @@
 'use client'
 
+import { use } from 'react'
 import { ErrorState } from '@/components/experience/ErrorState'
 import ExperienceTimeline from '@/components/experience/timeline'
 import { LoadingState } from '@/components/experience/LoadingState'
@@ -12,8 +13,9 @@ import { ExperienceNavigation } from '@/components/experience/ExperienceNavigati
 import { useExperienceShare } from '@/components/experience/hooks/useExperienceShare'
 import { ExperienceDescription } from '@/components/experience/ExperienceDescription'
 
-export default function ExperienceDetailPage({ params }: { params: any }) {
-  const { experience, loading, error } = useExperience(params.id)
+export default function ExperienceDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
+  const { experience, loading, error } = useExperience(id)
   const { handleShare, handleCopyMarkdown, shareClicked, copyClicked } =
     useExperienceShare(experience)
 

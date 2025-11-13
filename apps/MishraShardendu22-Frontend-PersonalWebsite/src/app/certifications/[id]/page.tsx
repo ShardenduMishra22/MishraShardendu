@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Badge } from '../../../components/ui/badge'
 import { Button } from '../../../components/ui/button'
@@ -15,7 +15,8 @@ import { ErrorState, LoadingState } from '@/components/certificate/load-error'
 import { CertificationHeader } from '@/components/certificate/CertificationHeader'
 import { CertificationDetails } from '@/components/certificate/CertificationDetails'
 
-export default function CertificationDetailPage({ params }: any) {
+export default function CertificationDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const [certification, setCertification] = useState<Certification | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -25,7 +26,7 @@ export default function CertificationDetailPage({ params }: any) {
   useEffect(() => {
     const fetchCertification = async () => {
       try {
-        const response = await certificationsAPI.getCertificationById(params.id)
+        const response = await certificationsAPI.getCertificationById(id)
         setCertification(response.data)
         setError('')
       } catch (err) {
@@ -35,7 +36,7 @@ export default function CertificationDetailPage({ params }: any) {
       }
     }
     fetchCertification()
-  }, [params.id])
+  }, [id])
 
   const handleCopyMarkdown = async () => {
     if (!certification) return
@@ -88,7 +89,7 @@ ${
   }
 
   const handleShare = async () => {
-    const certificationUrl = `${window.location.origin}/certifications/${params.id}`
+    const certificationUrl = `${window.location.origin}/certifications/${id}`
     const shareData = {
       title: `${certification?.title} - ${certification?.issuer}`,
       text: `Check out my certification: ${certification?.title} from ${certification?.issuer}`,

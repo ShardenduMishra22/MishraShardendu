@@ -32,7 +32,7 @@ import { useProjectShare } from '@/components/projects/hooks/useProjectShare.ts'
 import { ProjectNavigation } from '../../../components/projects/ProjectNavigation'
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card'
 
-export default function ProjectDetailPage({ params }: any) {
+export default function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { project, loading, error } = useProject(params)
   const { handleShare, shareClicked } = useProjectShare(project)
   const skills = project?.skills || []
