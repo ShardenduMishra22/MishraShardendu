@@ -50,7 +50,7 @@ export const DesktopSidebar = memo(function DesktopSidebar({
               >
                 {hasAnimated && (
                   <div className="text-sm font-semibold bg-gradient-to-r from-pink-500 via-yellow-400 to-green-500 bg-[length:200%_100%] bg-clip-text text-transparent animate-blast">
-                    Made Linux in Kernel and Golang in Mind
+                    Made with Linux in Kernel and Golang in Mind
                   </div>
                 )}
               </div>
