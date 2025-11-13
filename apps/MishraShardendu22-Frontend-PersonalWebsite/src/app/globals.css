@@ -437,14 +437,21 @@ h6 {
     }
   }
 
-  /* Remove motion for users who prefer reduced motion */
+  /* Remove animations (not transitions) for users who prefer reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    
+    /* Keep interactive transitions for better UX */
+    :hover,
+    :focus,
+    :active {
+      transition-duration: 0.2s !important;
     }
   }
 }
@@ -698,14 +705,28 @@ h6 {
 }
 
 /* Mobile Performance: Reduced Motion Support */
+/* Only apply reduced motion to animations, not hover transitions for better UX in Brave */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  
+  /* Keep transitions for hover effects - prevents instant changes in Brave browser */
+  :not(:hover):not(:focus):not(:active) {
+    transition-duration: 0.01ms !important;
+  }
+  
+  /* Allow smooth transitions on interactive elements */
+  :hover,
+  :focus,
+  :active,
+  [data-state="open"],
+  [data-state="checked"] {
+    transition-duration: 0.2s !important;
   }
 }
 
