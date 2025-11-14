@@ -80,8 +80,10 @@ section {
   }
 
   /* Disable hover effects on mobile */
-  *:hover {
-    transform: none !important;
+  @media (hover: none) and (pointer: coarse) {
+    *:hover {
+      transform: none !important;
+    }
   }
   
   /* Optimize font rendering on mobile */
@@ -463,7 +465,7 @@ h6 {
     *:active,
     [role="button"],
     .group:hover *,
-    .group-hover\\/canvas-card:hover * {
+    .group-hover-canvas-card:hover * {
       transition-duration: 0.3s !important;
     }
   }
@@ -746,7 +748,7 @@ h6 {
   select,
   [role="button"],
   .group:hover *,
-  .group-hover\\/canvas-card:hover *,
+  .group-hover-canvas-card:hover *,
   [data-state] {
     transition-duration: 0.3s !important;
   }
